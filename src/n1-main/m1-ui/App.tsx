@@ -1,24 +1,24 @@
 import React from 'react';
-import { HashRouter } from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 
 import './App.css';
 import {Provider} from "react-redux";
+import Main from './Main';
 
-function App() {
+const App = () => {
     return (
         <div className="App">
-            <HashRouter>Hello
+            <HashRouter>
                 {/*<Provider store={ '',''}>*/}
                 <>
-                    {/*<Header />*/}
-                    {/*<Main/>*/}
+                    <Main/>
                 </>
                 {/*</Provider>*/}
             </HashRouter>
         </div>
 
-)
-    ;
+    )
+        ;
 }
 
 export default App;
