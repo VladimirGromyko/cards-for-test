@@ -2,15 +2,22 @@ import React from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import Error404 from "../pages/Error404";
 import {PATH} from "./Paths";
+import Registration from "../pages/Registration";
+import LoginPage from "../pages/LoginPage";
+import MainPage from "../pages/MainPage";
+import TestPage from "../pages/TestPage";
+import ChangePasswordPage from "../pages/ChangePasswordPage";
 
 const MainRoutes = () => {
     return (
         <div>
             <Routes>
 
-                <Route path={PATH.REGISTRATION} element={<>REG-1</>}/>
-                <Route path={PATH.LOGIN} element={<>LOG-2</>}/>
-                <Route path={PATH.PROFILE} element={<>MAIN</>}/>
+                <Route path={PATH.REGISTRATION} element={<h2 style={{textAlign: "center"}}><Registration /></h2>}/>
+                <Route path={PATH.LOGIN} element={<h2 style={{textAlign: "center"}}><LoginPage /></h2>}/>
+                <Route path={PATH.PROFILE} element={<h2 style={{textAlign: "center"}}><MainPage /></h2>}/>
+                <Route path={PATH.TEST} element={<h2 style={{textAlign: "center"}}><TestPage /></h2>}/>
+                <Route path={PATH.CHANGE_PASSWORD} element={<h2 style={{textAlign: "center"}}><ChangePasswordPage /></h2>}/>
                 <Route path={'/404'} element={<h2 style={{textAlign: "center"}}><Error404/></h2>}/>
                 <Route path='*' element={<Navigate to={'/404'} />} />
 

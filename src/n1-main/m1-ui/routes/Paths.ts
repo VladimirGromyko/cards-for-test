@@ -2,5 +2,7 @@ export const PATH = {
     REGISTRATION: '/registration',
     LOGIN: '/login',
     ERROR: '/404',
-    PROFILE: '/'
+    PROFILE: '/',
+    TEST: '/test',
+    CHANGE_PASSWORD: '/change-pass'
 }

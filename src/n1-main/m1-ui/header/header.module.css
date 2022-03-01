@@ -1,0 +1,20 @@
+
+.menu {
+    display: flex;
+    width: auto;
+    background-color: #678EFE;
+    color: white;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 20px;
+    justify-content:space-between;
+}
+
+.menu li a{
+    padding: 30px;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+
+}
+
