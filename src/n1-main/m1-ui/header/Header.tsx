@@ -29,6 +29,9 @@ function Header() {
                         <NavLink to={PATH.CHANGE_PASSWORD} className={''}>Change Password Page</NavLink>
                     </li>
                     <li className={``}>
+                        <NavLink to={PATH.PASSWORD_RECOVERY} className={''}>Password Recovery Page</NavLink>
+                    </li>
+                    <li className={``}>
                         <NavLink to={PATH.REGISTRATION} className={''}>Registration Page</NavLink>
                     </li>
 

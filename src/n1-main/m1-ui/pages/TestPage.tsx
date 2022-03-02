@@ -3,16 +3,30 @@ import SuperButton from "../common/c1-SuperButton/SuperButton";
 import SuperCheckbox from "../common/c3-SuperCheckbox/SuperCheckbox";
 import SuperInputText from "../common/c2-SuperInput/SuperInputText";
 import s from './testPage.module.css'
+import ThemeChanger from "../common/c5-ThemeChanger/ThemeChanger";
+import CardsChanger from "../common/c6-CardsChanger/CardsChanger";
 
-const TestPage =() => {
+
+const TestPage = () => {
+    const onClickHandler = (e:any) =>{
+ThemeChanger()
+
+    }
+
     return (
-        <div className={s.testing}>
+        <div>
             <h2>Test Page</h2>
-            <SuperButton onClick={()=>3}>Super Button</SuperButton>
-            <div><SuperCheckbox><h4>Something check</h4></SuperCheckbox></div>
-            <div></div>
-            <SuperInputText/>
+            <div className={s.testing}>
+
+                <CardsChanger />
+                {/*<SuperButton onClick={onClickHandler}>Super Button</SuperButton>*/}
+
+                <div><SuperCheckbox><h4>Something check</h4></SuperCheckbox></div>
+                <SuperInputText/>
+                <ThemeChanger />
+            </div>
         </div>
+
     )
 }
 
