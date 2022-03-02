@@ -1,4 +1,4 @@
-## Playing cards
+## Cards for test
 SPA for learning by cards.
 
 Technologies: CSS, JavaScript, TypeScript, React, Redux, Redux-thunk, Axios, ESLint, Prettier.
