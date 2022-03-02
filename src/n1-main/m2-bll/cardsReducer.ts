@@ -2,7 +2,7 @@ export type stateCardsType = {
     cardsName: string
 }
 const initState: stateCardsType = {
-    cardsName: '1'
+    cardsName: '0'
 };
 
 

@@ -15,7 +15,7 @@ ThemeChanger()
 
     return (
         <div>
-            <h2>Test Page</h2>
+            <h2>Test</h2>
             <div className={s.testing}>
 
                 <CardsChanger />

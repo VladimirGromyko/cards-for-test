@@ -3,7 +3,7 @@ import React from 'react'
 const ChangePasswordPage =() => {
     return (
         <div>
-            <h2>Change Password Page</h2>
+            <h2>Change Password</h2>
         </div>
     )
 }

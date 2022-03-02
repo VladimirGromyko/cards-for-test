@@ -17,22 +17,22 @@ function Header() {
                 <ul className={s.menu}>
                     <li className={``}>
                         {/* eslint-disable-next-line react/jsx-no-undef */}
-                        <NavLink to={PATH.TEST} className={''}>Test Page</NavLink>
+                        <NavLink to={PATH.TEST} className={''}>Test</NavLink>
                     </li>
                     <li className={``}>
                         <NavLink to={PATH.PROFILE} className={''}>Main Page</NavLink>
                     </li>
                     <li className={``}>
-                        <NavLink to={PATH.LOGIN} className={''}>Login Page</NavLink>
+                        <NavLink to={PATH.LOGIN} className={''}>Login</NavLink>
                     </li>
                     <li className={``}>
-                        <NavLink to={PATH.CHANGE_PASSWORD} className={''}>Change Password Page</NavLink>
+                        <NavLink to={PATH.CHANGE_PASSWORD} className={''}>Change Password</NavLink>
                     </li>
                     <li className={``}>
-                        <NavLink to={PATH.PASSWORD_RECOVERY} className={''}>Password Recovery Page</NavLink>
+                        <NavLink to={PATH.PASSWORD_RECOVERY} className={''}>Password Recovery</NavLink>
                     </li>
                     <li className={``}>
-                        <NavLink to={PATH.REGISTRATION} className={''}>Registration Page</NavLink>
+                        <NavLink to={PATH.REGISTRATION} className={''}>Registration</NavLink>
                     </li>
 
                     {/*<li className={s.item}>*/}
