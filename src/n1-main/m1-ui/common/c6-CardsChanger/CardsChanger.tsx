@@ -2,8 +2,6 @@ import React from "react";
 import s from "./CardsChanger.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
-import {changeThemeAC, stateThemeType} from "../../../m2-bll/themeReducer";
-import SuperRadio from "../c4-SuperRadio/SuperRadio";
 import {changeCardAC, stateCardsType} from "../../../m2-bll/cardsReducer";
 import SuperButton from "../c1-SuperButton/SuperButton";
 
@@ -20,20 +18,16 @@ function CardsChanger() {
     }
 
     const onClickHandler = () => {
-        // let cardIndex = Math.floor(Math.random() * cardsArray.length-1);
         let cardIndex = getRandomIntInclusive(0, cardsArray.length - 1)
         dispatch(changeCardAC(cardsArray[cardIndex]))
     }
-    // console.log(card)
     return (
 
         <div>
             <div className={s.changeCard}>
                 <SuperButton onClick={onClickHandler}>Change card</SuperButton>
-                {/*<div className={s.changeCard}>*/}
                     <div className={s.card}>Card number: </div>
                     <div className={s.card}>{card.cardsName}</div>
-                {/*</div>*/}
             </div>
         </div>
     );
