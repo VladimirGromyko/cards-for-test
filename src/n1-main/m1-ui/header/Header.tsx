@@ -20,7 +20,7 @@ function Header() {
                         <NavLink to={PATH.TEST} className={''}>Test</NavLink>
                     </li>
                     <li className={``}>
-                        <NavLink to={PATH.PROFILE} className={''}>Main Page</NavLink>
+                        <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>
                     </li>
                     <li className={``}>
                         <NavLink to={PATH.LOGIN} className={''}>Login</NavLink>
