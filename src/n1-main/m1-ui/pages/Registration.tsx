@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import SuperButton from '../common/c1-SuperButton/SuperButton'
 
 const Registration =() => {
+
+
     return (
         <div>
-            <h2>Registration</h2>
+            <span>Email</span>
+            <input />
+            <span>Password</span>
+            <input />
+            <span>Second Password</span>
+            <input />
+            <SuperButton>Register</SuperButton>
         </div>
     )
 }
