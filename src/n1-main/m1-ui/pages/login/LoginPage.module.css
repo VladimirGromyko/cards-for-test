@@ -1,0 +1,10 @@
+.loginForm {
+    display: block;
+}
+.wrapper_submit_checkbox {
+    display: flex;
+    justify-content: center;
+}
+.wrapper_submit_button {
+    display: inline-block;
+}
