@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from 'react'
+import { registerAPI } from '../../m3-dal/registerAPI'
 import SuperButton from '../common/c1-SuperButton/SuperButton'
 
 const Registration =() => {
@@ -17,7 +18,9 @@ const Registration =() => {
     }
 
     const onRegisterClick = () => {
-        alert([email, pass1, pass2])
+        registerAPI.registrationUser(email,pass1).then(res=>{
+        }).catch(e=>{
+        })
     }
 
     return (
