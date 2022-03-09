@@ -3,20 +3,17 @@ import thunkMiddleware from 'redux-thunk'
 import {themeReducer} from "./themeReducer";
 import {cardsReducer} from "./cardsReducer";
 import {loginReducer} from "../m1-ui/pages/login/loginReducer";
+import {authReducer} from "./auth-reducer";
 
 const reducers = combineReducers({
     cards: cardsReducer,
     theme: themeReducer,
-    login: loginReducer
-const rootReducer = combineReducers({
+    login: loginReducer,
     auth:authReducer,
-    theme:themeReducer,
-    cards:cardsReducer
 })
 
-export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+export const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
-export type AppStoreType = ReturnType<typeof rootReducer>
 
 export type AppStoreType = ReturnType<typeof reducers>
 

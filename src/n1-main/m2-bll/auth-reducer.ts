@@ -1,5 +1,6 @@
-import { Dispatch } from 'redux'
+import {Dispatch} from 'redux'
 import {authsAPI} from "../m3-dal/api/cards-api";
+import {AppStoreType} from "./store";
 
 
 const initialState = {
@@ -17,19 +18,31 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
     }
 }
 // actions
-export const updateUserNameAC = (name: string) =>
+export const changeUserNameAC = (name: string) =>
     ({type: 'UPDATE_USER_NAME', name} as const)
 
 // thunks
-export const updateUserNameTC = (name:string) => (dispatch: Dispatch<ActionsType>) => {
-    authsAPI.updateUser(name)
-        .then((res)=>{
-            // log
-            console.log('res updateUserNameTC: ', res)
-               // dispatch(updateUserNameAC(name))
-            })
-        }
+export const changeUserNameTC = (name: string) => (dispatch: Dispatch<ActionsType>) => {
+authsAPI.updateUser(name)
+    .then((res) => {
+        console.log('res updateUserNameTC: ', res)
+        dispatch(changeUserNameAC(name))
+
+    })
+}
+
+// export const changeTodolistTitleTC = (id: string, title: string) => {
+//     return (dispatch: Dispatch<ActionsType>) => {
+//         todolistsAPI.updateTodolist(id, title)
+//             .then((res) => {
+//                 dispatch(changeTodolistTitleAC(id, title))
+//             })
+//     }
+// }
+
+
 
 // types
-export type UpdateUseNameACType = ReturnType<typeof updateUserNameAC>
+export type UpdateUseNameACType = ReturnType<typeof changeUserNameAC>
 export type ActionsType = UpdateUseNameACType
+

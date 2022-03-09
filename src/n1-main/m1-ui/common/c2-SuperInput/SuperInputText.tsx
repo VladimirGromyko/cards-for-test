@@ -30,7 +30,6 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
 ) => {
 
     // let [editMode, setEditMode] = useState(false);
-let [inputValue, setInputValue] = useState(value);
 //
 // const activateEditMode = () => {
 //     setEditMode(true);
@@ -46,7 +45,7 @@ let [inputValue, setInputValue] = useState(value);
 
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(e)
-        onChangeText && setInputValue(e.currentTarget.value)
+        onChangeText && onChangeText(e.currentTarget.value)
     }
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
         onKeyPress && onKeyPress(e);
@@ -64,7 +63,7 @@ let [inputValue, setInputValue] = useState(value);
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
                 className={finalInputClassName}
-                value={inputValue}
+                value={value}
 
                 {...restProps}
             />

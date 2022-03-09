@@ -11,7 +11,7 @@ const initialState = {
     isLoggedIn: false
 }
 
-type UserDataType = {
+export type UserDataType = {
     _id: string,
     email: string,
     name: string,

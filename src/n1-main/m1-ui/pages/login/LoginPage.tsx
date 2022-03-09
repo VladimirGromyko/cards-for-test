@@ -13,6 +13,7 @@ const LoginPage =() => {
     const isLoggedIn = useSelector<AppStoreType, boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
     const [email, setEmail] = useState<string>('')
+    console.log('email: ', email)
     const [password, setPassword] = useState<string>('')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
     const navigate = useNavigate();
@@ -21,7 +22,10 @@ const LoginPage =() => {
     const logInHandler = () => {
         dispatch(getAuthUserDataTC(email, password, rememberMe))
     }
-
+    const changeEmail = (e: string) => {
+        console.log(e)
+        setEmail(e)
+    }
 
     const logOutHandler = () => {
         dispatch(logoutUserTC())
@@ -30,10 +34,12 @@ const LoginPage =() => {
     return (<div className={`${s.loginForm}`}>
             <h4>SIGN IN</h4>
             <SuperInputText type={'email'}
+                            value={email}
                                 placeholder={'Enter email'}
-                                onChangeText={setEmail}
+                                onChangeText={changeEmail}
             />
             <SuperInputText type={'password'}
+                            value={password}
                                 placeholder={'Password'}
                                 onChangeText={setPassword}
             />
