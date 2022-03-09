@@ -3,7 +3,7 @@ import {Navigate, Route, Routes} from 'react-router-dom';
 import Error404 from "../pages/Error404";
 import {PATH} from "./Paths";
 import Registration from "../pages/Registration";
-import LoginPage from "../pages/LoginPage";
+import LoginPage from "../pages/login/LoginPage";
 import MainPage from "../pages/MainPage";
 import TestPage from "../pages/TestPage";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
