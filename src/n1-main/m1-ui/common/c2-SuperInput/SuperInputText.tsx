@@ -1,4 +1,4 @@
-import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent} from 'react'
+import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent, useState} from 'react'
 import s from './SuperInputText.module.css'
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -6,24 +6,47 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 type SuperInputTextPropsType = DefaultInputPropsType & {
     onChangeText?: (value: string) => void
     onEnter?: () => void
+    onKeyPress?: (value: string) => void
     error?: string
     spanClassName?: string
+    value?: string
+    // onChange: (newValue: string) => void
 }
 
 const SuperInputText: React.FC<SuperInputTextPropsType> = (
-    {
-        type,
-        onChange, onChangeText,
-        onKeyPress, onEnter,
-        error,
-        className, spanClassName,
 
-        ...restProps
-    }
+
+
+
+{
+    type, value,
+    onChange, onChangeText,
+    onKeyPress, onEnter,
+    error,
+    className, spanClassName,
+
+    ...restProps
+}
 ) => {
+
+    // let [editMode, setEditMode] = useState(false);
+let [inputValue, setInputValue] = useState(value);
+//
+// const activateEditMode = () => {
+//     setEditMode(true);
+//     setTitle(props.value);
+// }
+// const activateViewMode = () => {
+//     setEditMode(false);
+//     props.onChange(title);
+// }
+// const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+//     setTitle(e.currentTarget.value)
+// }
+
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(e)
-        onChangeText && onChangeText(e.currentTarget.value)
+        onChangeText && setInputValue(e.currentTarget.value)
     }
     const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
         onKeyPress && onKeyPress(e);
@@ -41,6 +64,7 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
                 className={finalInputClassName}
+                value={inputValue}
 
                 {...restProps}
             />

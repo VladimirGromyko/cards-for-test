@@ -4,7 +4,7 @@ import {HashRouter} from 'react-router-dom';
 import './App.css';
 import {Provider} from "react-redux";
 import Main from './Main';
-import store from "../m2-bll/store";
+import {store} from "../m2-bll/store";
 
 const App = () => {
     return (

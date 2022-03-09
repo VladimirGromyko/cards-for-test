@@ -1,18 +1,16 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import {authReducer} from "./auth-reducer";
+import thunkMiddleware from 'redux-thunk'
 import {themeReducer} from "./themeReducer";
 import {cardsReducer} from "./cardsReducer";
 
-const reducers = combineReducers({
-    cards: cardsReducer,
-    theme: themeReducer,
-
+const rootReducer = combineReducers({
+    auth:authReducer,
+    theme:themeReducer,
+    cards:cardsReducer
 })
 
-const store = createStore(reducers)
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
-export default store
+export type AppStoreType = ReturnType<typeof rootReducer>
 
-export type AppStoreType = ReturnType<typeof reducers>
-
-// @ts-ignore
-window.store = store // for dev
