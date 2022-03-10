@@ -8,6 +8,7 @@ import MainPage from "../pages/MainPage";
 import TestPage from "../pages/TestPage";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
 import PasswordRecoveryPage from "../pages/PasswordRecoveryPage";
+import AlternativeRegistration from '../pages/AlternativeRegistration';
 import {ProfilePage} from "../pages/profile/ProfilePage";
 
 const MainRoutes = () => {
@@ -15,7 +16,7 @@ const MainRoutes = () => {
         <div>
             <Routes>
 
-                <Route path={PATH.REGISTRATION} element={<h2 style={{textAlign: "center"}}><Registration /></h2>}/>
+                <Route path={PATH.REGISTRATION} element={<h2 style={{textAlign: "center"}}><AlternativeRegistration /></h2>}/>
                 <Route path={PATH.LOGIN} element={<h2 style={{textAlign: "center"}}><LoginPage /></h2>}/>
                 <Route path={PATH.PROFILE} element={<h2 style={{textAlign: "center"}}><ProfilePage/></h2>}/>
                 <Route path={PATH.TEST} element={<h2 style={{textAlign: "center"}}><TestPage /></h2>}/>
