@@ -31,20 +31,29 @@ const ChangePasswordPage = () => {
     }, [dispatch, password, resetPasswordToken])
 
     return (
-        <div>
+        <div className={s.initial}>
             <div style={{width: '100%'}}>
                 {isLoading === "loading" && <div className={l.loader07}></div>}
             </div>
-            <h2>Create new password</h2>
-            <SuperInputText value={password}
-                            onChangeText={setPassword}
-                            onEnter={onKeyPressHandler}></SuperInputText>
-            <div>
-                {errorRes.isResponseError===true && errorRes.pageOfError==='changePas' && <div  style={{color:"red"}}>
-                    {'Error: ' + errorRes.errorMessage}
-                </div>}
+            <h3>Create new password</h3>
+            <div className={s.inputField}>
+                <SuperInputText value={password}
+                                onChangeText={setPassword}
+                                onEnter={onKeyPressHandler}
+                                error={
+                                    errorRes.isResponseError === true && errorRes.pageOfError === 'changePas'
+                                        ? 'Error: ' + errorRes.errorMessage
+                                        : ''
+                                }
+                                spanClassName={s.inputError}
+                />
             </div>
-            <div>Create new password and we will send you further instruction to email</div>
+            {/*<div>*/}
+            {/*    {errorRes.isResponseError===true && errorRes.pageOfError==='changePas' && <div  style={{color:"red"}}>*/}
+            {/*        {'Error: ' + errorRes.errorMessage}*/}
+            {/*    </div>}*/}
+            {/*</div>*/}
+            <div className={s.helpText}>Create new password and we will send you further instruction to email</div>
             <div>
                 <SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Send instruction</SuperButton>
             </div>

@@ -27,29 +27,35 @@ const PasswordRecoveryPage = () => {
     }, [dispatch, email])
 
     return (
-        <div>
+        <div className={s.initial}>
             <div style={{width: '100%'}}>
-                {isLoading === "loading" &&  <div className={l.loader07}></div>}
+                {isLoading === "loading" && <div className={l.loader07}></div>}
             </div>
 
-            <h2>Forgot you password ?</h2>
-            <SuperInputText value={email}
-                            onChangeText={setEmail}
-                            onEnter={onKeyPressHandler}></SuperInputText>
-            <div>
-                {errorRes.isResponseError===true && errorRes.pageOfError==='passwordRec' && <div  style={{color:"red"}}>
-                    {'Error: ' + errorRes.errorMessage}
-                </div>}
+            <h3>Forgot you password ?</h3>
+            <div className={s.inputField}>
+                <SuperInputText value={email}
+                                onChangeText={setEmail}
+                                onEnter={onKeyPressHandler}
+                                error={
+                                    errorRes.isResponseError === true && errorRes.pageOfError === 'passwordRec'
+                                        ? 'Error: ' + errorRes.errorMessage
+                                        : ''
+                                }
+                                spanClassName={s.inputError}
+
+                />
             </div>
-            <div>Enter your email address and we will send you further instruction</div>
+            <div className={s.helpText}>Enter your email address and we will send you further instruction</div>
             <div className={s.forgotEmail}>
                 {instructionStatus.isInstructionEmailed === 'succeeded' && <div>
                     <div>Check Email</div>
                     <div>We've sent Email with instruction to {email}</div>
                 </div>}
             </div>
-            <div><SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Send instruction</SuperButton></div>
-            <div>Did you remember your password ?</div>
+            <div><SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Send instruction</SuperButton>
+            </div>
+            <div className={s.helpText}>Did you remember your password ?</div>
             <NavLink to={PATH.LOGIN} className={''}>Try logging in</NavLink>
 
         </div>

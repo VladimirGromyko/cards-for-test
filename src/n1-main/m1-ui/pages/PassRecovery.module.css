@@ -1,3 +1,32 @@
+
+.initial {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 400px;
+    height: 500px;
+    border-radius: 16px;
+    margin: 2% 0 0 30%;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+}
+
+.inputField {
+display: flex;
+    flex-direction: column;
+    height: 4ch;
+    align-items: center;
+}
+.helpText {
+    font-size: 1.2rem;
+    color: grey;
+    margin-top: 5%;
+}
+
+.inputError {
+    font-size: 1rem;
+}
+
 .forgotButton {
     display: flex;
     width: auto;
@@ -5,16 +34,17 @@
     /*border: 1px solid var(--group-background-focus);*/
     /*color: #889792;*/
     /*align-items: center;*/
-    margin: 10px 0 10px 600px;
+    margin: 10px 0 10px 30%;
     font-size: 16px;
     border-radius: 14px;
     padding: 5px;
 }
+
 .forgotEmail {
     display: flex;
-    width: 800px;
-    height: 100px;
+    /*width: 800px;*/
+    /*height: 100px;*/
     align-items: center;
-    /*margin: 30px 0 20px 390px;*/
+    margin: 10% 0 0 0;
     font-size: 20px;
 }
