@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { registrationTC, setRegistredAC } from '../../m2-bll/registerReducer'
 import { AppStoreType } from '../../m2-bll/store'
 import { registerAPI } from '../../m3-dal/registerAPI'
@@ -12,6 +12,7 @@ const AlternativeRegistration =() => {
     const isRegistred = useSelector<AppStoreType>(state=> state.register.isRegistred)
     const err = useSelector<AppStoreType>(state => state.register.error)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
@@ -34,10 +35,13 @@ const AlternativeRegistration =() => {
         }
     }
 
-    if (isRegistred){
-        dispatch(setRegistredAC(false))
-        return <Navigate to={PATH.LOGIN}/>
-    }
+    useEffect(() => {
+        if (isRegistred) {
+            dispatch(setRegistredAC(false))
+            navigate(PATH.LOGIN)
+        }
+    }, [isRegistred, navigate])
+    
     return (
         <div className={s.wrapper}>
             <h1 className={s.title}>Sign up</h1>
