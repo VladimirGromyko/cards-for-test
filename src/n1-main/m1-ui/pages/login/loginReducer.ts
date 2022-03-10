@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import {authAPI} from "./api-login";
+import {authAPI} from "../../../m3-dal/api-login";
 
 type InitialStateType = {
     user: UserDataType | null,
@@ -29,14 +29,12 @@ export type UserDataType = {
 export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'SET_USER_DATA':
-            debugger
             return {
                 ...state,
                 user: action.payload,
                 isLoggedIn: true
             }
         case 'LOGOUT_USER':
-            debugger
             return {
                 ...state,
                 user: null,

@@ -3,7 +3,7 @@ import SuperInputText from "../common/c2-SuperInput/SuperInputText";
 import SuperButton from "../common/c1-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../m2-bll/store";
-import {authStateType, forgotTC} from "../../m2-bll/authReducer";
+import {authStateType, forgotTC} from "../../m2-bll/authReducer1";
 import {PATH} from "../routes/Paths";
 import {NavLink} from "react-router-dom";
 import s from './PassRecovery.module.css';
@@ -14,7 +14,7 @@ import {ResponseErrorStateType} from "../../m2-bll/errorReducer";
 
 const PasswordRecoveryPage = () => {
 
-    const instructionStatus = useSelector<AppStoreType, authStateType>(state => state.auth)
+    const instructionStatus = useSelector<AppStoreType, authStateType>(state => state.auth1)
     const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const dispatch = useDispatch()

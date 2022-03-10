@@ -8,6 +8,7 @@ import {authReducer} from "./auth-reducer";
 // import {authReducer} from "./authReducer";
 import {loadingReducer} from "./loadingReducer";
 import {errorReducer} from "./errorReducer";
+import {authReducer1} from "./authReducer1";
 
 const reducers = combineReducers({
     cards: cardsReducer,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
     register: registerReducer,
     login: loginReducer,
     auth: authReducer,
+    auth1: authReducer1,
     loading: loadingReducer,
     error: errorReducer
 })

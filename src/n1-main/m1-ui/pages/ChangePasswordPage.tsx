@@ -3,7 +3,7 @@ import SuperInputText from "../common/c2-SuperInput/SuperInputText";
 import SuperButton from "../common/c1-SuperButton/SuperButton";
 import l from "../common/c7-Loading/loader07.module.css";
 import s from './PassRecovery.module.css';
-import {resetNewPasswordTC, SendForgotPassStatusType} from "../../m2-bll/authReducer";
+import {resetNewPasswordTC, SendForgotPassStatusType} from "../../m2-bll/authReducer1";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../m2-bll/store";
 import {useNavigate, useParams} from "react-router-dom";
@@ -12,7 +12,7 @@ import {LoadingStatusType} from "../../m2-bll/loadingReducer";
 import {ResponseErrorStateType} from "../../m2-bll/errorReducer";
 
 const ChangePasswordPage = () => {
-    const newPassStatus = useSelector<AppStoreType, SendForgotPassStatusType>(state => state.auth.isNewPassSet)
+    const newPassStatus = useSelector<AppStoreType, SendForgotPassStatusType>(state => state.auth1.isNewPassSet)
     const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const dispatch = useDispatch()

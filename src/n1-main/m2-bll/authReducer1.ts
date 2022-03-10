@@ -16,8 +16,8 @@ const initState: authStateType = {
 };
 
 
-export const authReducer = (state: authStateType = initState,
-                            action: authReducerType): authStateType => {
+export const authReducer1 = (state: authStateType = initState,
+                             action: authReducerType): authStateType => {
     switch (action.type) {
         case "AUTH/FORGOT-PASS-STATUS": {
             return {...state, isInstructionEmailed: action.status}

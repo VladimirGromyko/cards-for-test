@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux'
-import {authsAPI} from "../m3-dal/api/cards-api";
+import {authsAPI} from "../m3-dal/cards-api";
 
 const initialState = {
     name: ''
