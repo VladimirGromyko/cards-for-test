@@ -29,12 +29,10 @@ const Registration =() => {
     }
     const onRegisterClick = () => {
         if (pass1 === pass2){
-            debugger
             dispatch(registrationTC(email, pass1))
         }
     }
     if (isRegistred){
-        debugger
         dispatch(setRegistredAC(false))
         return <Navigate to={PATH.LOGIN}/>
     }

@@ -1,5 +1,3 @@
-
-import { type } from "os";
 import { Dispatch } from "redux";
 import { registerAPI } from "../m3-dal/registerAPI";
 
@@ -36,10 +34,8 @@ export const setError = (error: string) => ({
 } as const);
 
 export const registrationTC = (email: string, password: string) => (dispatch: Dispatch) => {
-        debugger
         registerAPI.registrationUser(email, password)
             .then(res => {
-                debugger
                 dispatch(setRegistredAC(true))
             })
             .catch(e => {
