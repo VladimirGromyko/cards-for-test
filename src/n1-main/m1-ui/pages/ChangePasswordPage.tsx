@@ -1,19 +1,19 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import SuperInputText from "../common/c2-SuperInput/SuperInputText";
 import SuperButton from "../common/c1-SuperButton/SuperButton";
-// import l from "../common/c7-Loading/loader07.module.css";
+import l from "../common/c7-Loading/loader07.module.css";
 import s from './PassRecovery.module.css';
 import {resetNewPasswordTC, SendForgotPassStatusType} from "../../m2-bll/authReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../m2-bll/store";
 import {useNavigate, useParams} from "react-router-dom";
 import {PATH} from "../routes/Paths";
-// import {LoadingStatusType} from "../../m2-bll/loadingReducer";
+import {LoadingStatusType} from "../../m2-bll/loadingReducer";
 import {ResponseErrorStateType} from "../../m2-bll/errorReducer";
 
 const ChangePasswordPage = () => {
     const newPassStatus = useSelector<AppStoreType, SendForgotPassStatusType>(state => state.auth.isNewPassSet)
-    // const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
+    const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -32,9 +32,9 @@ const ChangePasswordPage = () => {
 
     return (
         <div>
-            {/*<div style={{width: '100%'}}>*/}
-            {/*    {isLoading === "loading" && <div className={l.loader07}></div>}*/}
-            {/*</div>*/}
+            <div style={{width: '100%'}}>
+                {isLoading === "loading" && <div className={l.loader07}></div>}
+            </div>
             <h2>Create new password</h2>
             <SuperInputText value={password}
                             onChangeText={setPassword}

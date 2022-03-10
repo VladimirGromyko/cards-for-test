@@ -7,15 +7,15 @@ import {authStateType, forgotTC} from "../../m2-bll/authReducer";
 import {PATH} from "../routes/Paths";
 import {NavLink} from "react-router-dom";
 import s from './PassRecovery.module.css';
-// import l from '../common/c7-Loading/loader07.module.css'
-// import {LoadingStatusType} from "../../m2-bll/loadingReducer";
+import l from '../common/c7-Loading/loader07.module.css'
+import {LoadingStatusType} from "../../m2-bll/loadingReducer";
 import {ResponseErrorStateType} from "../../m2-bll/errorReducer";
 
 
 const PasswordRecoveryPage = () => {
 
     const instructionStatus = useSelector<AppStoreType, authStateType>(state => state.auth)
-    // const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
+    const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const dispatch = useDispatch()
 
@@ -28,9 +28,9 @@ const PasswordRecoveryPage = () => {
 
     return (
         <div>
-            {/*<div style={{width: '100%'}}>*/}
-            {/*    {isLoading === "loading" &&  <div className={l.loader07}></div>}*/}
-            {/*</div>*/}
+            <div style={{width: '100%'}}>
+                {isLoading === "loading" &&  <div className={l.loader07}></div>}
+            </div>
 
             <h2>Forgot you password ?</h2>
             <SuperInputText value={email}

@@ -1,7 +1,7 @@
 import {AxiosError} from "axios";
 import {Dispatch} from "redux";
 import {authAPI} from "../m3-dal/auth-api";
-// import {loadingAC, LoadingACType} from "./loadingReducer";
+import {loadingAC, LoadingACType} from "./loadingReducer";
 import {responseErrorAC, ResponseErrorACType} from "./errorReducer";
 
 export type SendForgotPassStatusType = 'succeeded' | 'failed'
@@ -31,7 +31,7 @@ export const authReducer = (state: authStateType = initState,
 };
 
 export const forgotTC = (name: string) => (dispatch: Dispatch<authReducerType>) => {
-    // dispatch(loadingAC('loading'))
+    dispatch(loadingAC('loading'))
     authAPI.recoverPass(name)
         .then((res) => {
             dispatch(setForgotPassStatusAC('succeeded'))
@@ -39,14 +39,14 @@ export const forgotTC = (name: string) => (dispatch: Dispatch<authReducerType>) 
         .catch((err: AxiosError) => {
             dispatch(responseErrorAC(true, err.response?.data.error))
         })
-        // .finally(() => {
-        //     dispatch(loadingAC('succeeded'))
-        // })
+        .finally(() => {
+            dispatch(loadingAC('succeeded'))
+        })
 }
 
 export const resetNewPasswordTC = (password: string, resetPasswordToken: string | undefined) =>
     (dispatch: Dispatch<authReducerType>) => {
-        // dispatch(loadingAC('loading'))
+        dispatch(loadingAC('loading'))
         authAPI.setNewPass(password, resetPasswordToken)
             .then((res) => {
                 dispatch(resetNewPassStatusAC('succeeded'))
@@ -54,9 +54,9 @@ export const resetNewPasswordTC = (password: string, resetPasswordToken: string 
             .catch((err: AxiosError) => {
                 dispatch(responseErrorAC(true, err.response?.data.error))
             })
-            // .finally(() => {
-            //     dispatch(loadingAC('succeeded'))
-            // })
+            .finally(() => {
+                dispatch(loadingAC('succeeded'))
+            })
     }
 
 export const setForgotPassStatusAC = (status: SendForgotPassStatusType) =>
@@ -70,7 +70,7 @@ export type ResetNewPassACType = ReturnType<typeof resetNewPassStatusAC>
 
 export type authReducerType = SetForgotPassACType
     | ResetNewPassACType
-    // | LoadingACType
+    | LoadingACType
     | ResponseErrorACType
 
 
