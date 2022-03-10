@@ -40,7 +40,7 @@ const ChangePasswordPage = () => {
                             onChangeText={setPassword}
                             onEnter={onKeyPressHandler}></SuperInputText>
             <div>
-                {errorRes.isResponseError===true && <div  style={{color:"red"}}>
+                {errorRes.isResponseError===true && errorRes.pageOfError==='changePas' && <div  style={{color:"red"}}>
                     {'Error: ' + errorRes.errorMessage}
                 </div>}
             </div>

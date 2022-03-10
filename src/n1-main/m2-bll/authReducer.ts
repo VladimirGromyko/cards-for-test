@@ -37,7 +37,7 @@ export const forgotTC = (name: string) => (dispatch: Dispatch<authReducerType>) 
             dispatch(setForgotPassStatusAC('succeeded'))
         })
         .catch((err: AxiosError) => {
-            dispatch(responseErrorAC(true, err.response?.data.error))
+            dispatch(responseErrorAC(true, 'passwordRec', err.response?.data.error))
         })
         .finally(() => {
             dispatch(loadingAC('succeeded'))
@@ -52,7 +52,7 @@ export const resetNewPasswordTC = (password: string, resetPasswordToken: string 
                 dispatch(resetNewPassStatusAC('succeeded'))
             })
             .catch((err: AxiosError) => {
-                dispatch(responseErrorAC(true, err.response?.data.error))
+                dispatch(responseErrorAC(true, 'changePas', err.response?.data.error))
             })
             .finally(() => {
                 dispatch(loadingAC('succeeded'))

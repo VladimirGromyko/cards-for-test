@@ -37,7 +37,7 @@ const PasswordRecoveryPage = () => {
                             onChangeText={setEmail}
                             onEnter={onKeyPressHandler}></SuperInputText>
             <div>
-                {errorRes.isResponseError===true && <div  style={{color:"red"}}>
+                {errorRes.isResponseError===true && errorRes.pageOfError==='passwordRec' && <div  style={{color:"red"}}>
                     {'Error: ' + errorRes.errorMessage}
                 </div>}
             </div>
