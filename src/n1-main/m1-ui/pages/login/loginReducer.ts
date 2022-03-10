@@ -2,12 +2,12 @@ import { Dispatch } from "redux"
 import {authAPI} from "./api-login";
 
 type InitialStateType = {
-    user: UserDataType | {},
+    user: UserDataType | null,
     isLoggedIn: boolean
 }
 
 const initialState = {
-    user: {},
+    user: null,
     isLoggedIn: false
 }
 
@@ -39,7 +39,7 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
             debugger
             return {
                 ...state,
-                user: {},
+                user: null,
                 isLoggedIn: false
             }
 
@@ -48,38 +48,32 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
     }
 }
 
-export const setAuthUserDataAC = (payload: InitialStateType) => (
+export const setAuthUserDataAC = (payload: UserDataType) => (
     {type: 'SET_USER_DATA', payload}) as const
 export const setLogOutUserAC = () => (
     {type: 'LOGOUT_USER'}) as const
 
 
 export const getAuthUserDataTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
-    debugger
     authAPI.login(email, password, rememberMe)
         .then(response => {
                 console.log(response.data)
-                debugger
                 dispatch(setAuthUserDataAC(response.data))
             }
         ).catch((e) => {
         const error = e.response ? e.response.data.error:(e.message+", more details in the console")
-        debugger
         console.log(error)
     })
 }
 
 export const logoutUserTC = () => (dispatch: Dispatch) => {
-    debugger
     authAPI.logout()
         .then(response => {
                 console.log(response.data)
-                debugger
                 dispatch(setLogOutUserAC())
             }
         ).catch((e) => {
         const error = e.response ? e.response.data.error:(e.message+", more details in the console")
-        debugger
         console.log(error)
     })
 }

@@ -13,7 +13,6 @@ const LoginPage =() => {
     const isLoggedIn = useSelector<AppStoreType, boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
     const [email, setEmail] = useState<string>('')
-    console.log('email: ', email)
     const [password, setPassword] = useState<string>('')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
     const navigate = useNavigate();
@@ -23,7 +22,6 @@ const LoginPage =() => {
         dispatch(getAuthUserDataTC(email, password, rememberMe))
     }
     const changeEmail = (e: string) => {
-        console.log(e)
         setEmail(e)
     }
 
