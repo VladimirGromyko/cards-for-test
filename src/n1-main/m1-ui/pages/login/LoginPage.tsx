@@ -29,7 +29,7 @@ const LoginPage =() => {
         dispatch(logoutUserTC())
     }
 
-    return (<div className={`${s.loginForm}`}>
+    return (<div className={`${s.wrapper}`}>
             <h4>SIGN IN</h4>
             <SuperInputText type={'email'}
                             value={email}
@@ -44,12 +44,15 @@ const LoginPage =() => {
             <div className={s.wrapper_submit_checkbox}>
                 <SuperCheckbox onChangeChecked={setRememberMe}>Remember me</SuperCheckbox>
             </div>
-            <div className={s.wrapper_submit_button}>
-                <SuperButton onClick={logInHandler} disabled={isLoggedIn}>Submit</SuperButton>
+            <div>
+                <div className={s.wrapper_submit_button}>
+                    <SuperButton onClick={logInHandler} disabled={isLoggedIn}>Submit</SuperButton>
+                </div>
+                <div className={s.wrapper_submit_button}>
+                    <SuperButton onClick={logOutHandler} disabled={!isLoggedIn}>LogOut</SuperButton>
+                </div>
             </div>
-            <div className={s.wrapper_submit_button}>
-                <SuperButton onClick={logOutHandler} disabled={!isLoggedIn}>LogOut</SuperButton>
-            </div>
+
         </div>
     );
 }

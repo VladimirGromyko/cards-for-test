@@ -32,18 +32,18 @@ export const ProfilePage = () => {
 
     return (
         <div className={s.wrapper}>
-            <h2>Personal Information</h2>
+            <h3>Personal Information</h3>
             <img className={s.photo}
                  src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
-                 alt="Илон"/>
-            <div>Nickname</div>
+                 alt="UserPhoto"/>
+            <div className={s.inputTitle}>Nickname</div>
             <div>
                 <SuperInputText
                     value={nameFromInput}
                     onChangeText={setNameFromInput}
                 />
             </div>
-            <div>Email</div>
+            <div className={s.inputTitle}>Email</div>
             <div><SuperInputText value={userEmail}/></div>
             <div className={s.button}><SuperButton onClick={onChangeNameHandler}>SAVE</SuperButton></div>
         </div>
