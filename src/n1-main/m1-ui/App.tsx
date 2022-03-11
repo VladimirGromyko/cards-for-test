@@ -6,6 +6,7 @@ import {Provider} from "react-redux";
 import Main from './Main';
 import store from "../m2-bll/store";
 
+
 const App = () => {
     return (
         <div className="App">
