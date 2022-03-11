@@ -7,10 +7,13 @@ import { registerAPI } from '../../m3-dal/registerAPI'
 import SuperButton from '../common/c1-SuperButton/SuperButton'
 import { PATH } from '../routes/Paths'
 import s from './Registration.module.css'
+import {LoadingStatusType} from "../../m2-bll/loadingReducer";
+import l from "../common/c7-Loading/loader07.module.css";
 
 const AlternativeRegistration =() => {
     const isRegistred = useSelector<AppStoreType>(state=> state.register.isRegistred)
     const err = useSelector<AppStoreType>(state => state.register.error)
+    const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -44,6 +47,9 @@ const AlternativeRegistration =() => {
     
     return (
         <div className={s.wrapper}>
+            <div style={{width: '100%'}}>
+                {isLoading === "loading" && <div className={l.loader07}></div>}
+            </div>
             <h1 className={s.title}>Sign up</h1>
             <div className={s.textField}>
                 <label className={s.label}>Email</label>

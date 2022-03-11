@@ -1,5 +1,6 @@
 import { Dispatch } from "redux";
 import { registerAPI } from "../m3-dal/registerAPI";
+import {loadingAC} from "./loadingReducer";
 
 
 export type stateType = {
@@ -34,6 +35,7 @@ export const setError = (error: string) => ({
 } as const);
 
 export const registrationTC = (email: string, password: string) => (dispatch: Dispatch) => {
+        dispatch(loadingAC('loading'))
         registerAPI.registrationUser(email, password)
             .then(res => {
                 dispatch(setRegistredAC(true))
@@ -41,7 +43,9 @@ export const registrationTC = (email: string, password: string) => (dispatch: Di
             .catch(e => {
                 const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
                 dispatch(setError(error))
-            })
+            }).finally(()=>{
+            dispatch(loadingAC('succeeded'))
+        })
     }
 
 
