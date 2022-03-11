@@ -38,7 +38,7 @@
 
 .superInput {
 
-    width: 220px;
+    width: 60%;
     /*box-sizing: border-box;*/
 
     border: 1px solid var(--input-border);
@@ -59,12 +59,12 @@
     color: #212529;
     opacity: 0.4;
     transition: width 0.4s ease-in-out;
-    box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgb(0, 0, 0.2);
     margin-bottom: 7px;
 }
 
 .superInput:focus {
-    width: 40%;
+    width: 70%;
     border-color: rgba(103, 142, 254, 0.9);
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgba(103, 142, 254, 0.9);
