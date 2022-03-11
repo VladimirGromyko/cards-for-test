@@ -37,6 +37,7 @@ const PasswordRecoveryPage = () => {
                 <SuperInputText value={email}
                                 onChangeText={setEmail}
                                 onEnter={onKeyPressHandler}
+                                placeholder={'Email'}
                                 error={
                                     errorRes.isResponseError === true && errorRes.pageOfError === 'passwordRec'
                                         ? 'Error: ' + errorRes.errorMessage

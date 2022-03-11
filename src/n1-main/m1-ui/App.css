@@ -1,7 +1,9 @@
 .App {
 
   text-align: center;
-  background-color: #f3e6ff;
+  background: linear-gradient(180deg, #EECFBA, #C5DDE8);
+  /*background: radial-gradient(at top, #EECFBA, #C5DDE8);*/
+
   width: 1280px;
   height: 720px;
 
