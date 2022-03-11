@@ -31,7 +31,7 @@ const ChangePasswordPage = () => {
     }, [dispatch, password, resetPasswordToken])
 
     return (
-        <div className={s.initial}>
+        <div className={s.wrapper}>
             <div style={{width: '100%'}}>
                 {isLoading === "loading" && <div className={l.loader07}></div>}
             </div>
