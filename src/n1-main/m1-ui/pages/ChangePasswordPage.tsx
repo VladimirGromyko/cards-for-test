@@ -40,6 +40,7 @@ const ChangePasswordPage = () => {
                 <SuperInputText value={password}
                                 onChangeText={setPassword}
                                 onEnter={onKeyPressHandler}
+                                placeholder={'New password'}
                                 error={
                                     errorRes.isResponseError === true && errorRes.pageOfError === 'changePas'
                                         ? 'Error: ' + errorRes.errorMessage
@@ -48,14 +49,10 @@ const ChangePasswordPage = () => {
                                 spanClassName={s.inputError}
                 />
             </div>
-            {/*<div>*/}
-            {/*    {errorRes.isResponseError===true && errorRes.pageOfError==='changePas' && <div  style={{color:"red"}}>*/}
-            {/*        {'Error: ' + errorRes.errorMessage}*/}
-            {/*    </div>}*/}
-            {/*</div>*/}
             <div className={s.helpText}>Create new password and we will send you further instruction to email</div>
+            <div className={s.forgotEmail}></div>
             <div>
-                <SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Send instruction</SuperButton>
+                <SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Create new password</SuperButton>
             </div>
 
         </div>

@@ -5,8 +5,9 @@ const model1: RecoveryModelType = {
     email: '',
     from: "test-front-admin <vl-mailbox@mail.ru>",
     message: `<div style="background-color: lime; padding: 15px">
-                        password recovery link:
-                        <a href='http://localhost:3000/cards-for-test#/change-pass/$token$'>
+                        Password recovery link for project "Cards for test":
+                        <a href='https://vladimirgromyko.github.io/cards-for-test#/change-pass/$token$'>
+<!--                        <a href='http://localhost:3000/cards-for-test#/change-pass/$token$'>-->
                         link</a>
                        </div >`
 }

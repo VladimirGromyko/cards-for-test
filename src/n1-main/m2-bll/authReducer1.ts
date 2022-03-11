@@ -35,9 +35,17 @@ export const forgotTC = (name: string) => (dispatch: Dispatch<authReducerType>) 
     authAPI.recoverPass(name)
         .then((res) => {
             dispatch(setForgotPassStatusAC('succeeded'))
+            dispatch(setForgotPassStatusAC('succeeded'))
+            setTimeout(()=>{
+                dispatch(setForgotPassStatusAC('failed'))
+            },3000)
         })
         .catch((err: AxiosError) => {
             dispatch(responseErrorAC(true, 'passwordRec', err.response?.data.error))
+            setTimeout(()=>{
+                dispatch(responseErrorAC(false, 'passwordRec', ''))
+            },3000)
+
         })
         .finally(() => {
             dispatch(loadingAC('succeeded'))
@@ -50,9 +58,15 @@ export const resetNewPasswordTC = (password: string, resetPasswordToken: string 
         authAPI.setNewPass(password, resetPasswordToken)
             .then((res) => {
                 dispatch(resetNewPassStatusAC('succeeded'))
+                setTimeout(()=>{
+                    dispatch(resetNewPassStatusAC('failed'))
+                },3000)
             })
             .catch((err: AxiosError) => {
                 dispatch(responseErrorAC(true, 'changePas', err.response?.data.error))
+                setTimeout(()=>{
+                    dispatch(responseErrorAC(false, 'changePas', ''))
+                },3000)
             })
             .finally(() => {
                 dispatch(loadingAC('succeeded'))

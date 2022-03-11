@@ -7,19 +7,21 @@
     width: 300px;
     margin: 0 auto;
     padding: 20px;
-    box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgb(0, 0, 0.2);
 }
 
 .inputField {
-display: flex;
+    display: flex;
     flex-direction: column;
     height: 4ch;
     align-items: center;
 }
+
 .helpText {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: grey;
-    margin-top: 5%;
+    margin: 5% 3% 2% 3%;
+    font-weight: 400;
 }
 
 .inputError {
@@ -27,13 +29,8 @@ display: flex;
 }
 
 .forgotButton {
-    display: flex;
-    width: auto;
-    /*background: var(--input-border);*/
-    /*border: 1px solid var(--group-background-focus);*/
-    /*color: #889792;*/
-    /*align-items: center;*/
-    margin: 10px 0 10px 10px;
+    width: 60%;
+    margin: 10px 0 10px 20%;
     font-size: 16px;
     border-radius: 14px;
     padding: 5px;
@@ -41,9 +38,9 @@ display: flex;
 
 .forgotEmail {
     display: flex;
-    /*width: 800px;*/
-    /*height: 100px;*/
-    align-items: center;
-    margin: 10% 0 0 0;
-    font-size: 20px;
+    justify-content: center;
+    margin: 6% 0 1% 0;
+    height: 7ch;
+    font-size: 1rem;
+    color: darkslateblue;
 }
