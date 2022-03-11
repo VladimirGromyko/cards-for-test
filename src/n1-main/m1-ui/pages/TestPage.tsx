@@ -1,5 +1,4 @@
 import React from 'react'
-import SuperButton from "../common/c1-SuperButton/SuperButton";
 import SuperCheckbox from "../common/c3-SuperCheckbox/SuperCheckbox";
 import SuperInputText from "../common/c2-SuperInput/SuperInputText";
 import s from './testPage.module.css'
@@ -8,10 +7,10 @@ import CardsChanger from "../common/c6-CardsChanger/CardsChanger";
 
 
 const TestPage = () => {
-    const onClickHandler = (e:any) =>{
-ThemeChanger()
-
-    }
+//     const onClickHandler = (e:any) =>{
+// ThemeChanger()
+//
+//     }
 
     return (
         <div>

@@ -6,7 +6,7 @@ import s from './LoginPage.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
 import {getAuthUserDataTC, logoutUserTC} from "./loginReducer";
-import {useNavigate} from "react-router-dom";
+// import {useNavigate} from "react-router-dom";
 
 const LoginPage =() => {
 
@@ -15,7 +15,7 @@ const LoginPage =() => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
     const logInHandler = () => {

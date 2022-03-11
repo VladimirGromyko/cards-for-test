@@ -7,16 +7,8 @@ function Header() {
     return (
         <div>
             <nav>
-                {/*<input type={"checkbox"} id={"hmt"} className={"s.hiddenMenuTicker"}/>*/}
-                {/*<label className={"s.btnMenu"} htmlFor={"hmt"}>*/}
-                {/*    <span className={"s.first"}></span>*/}
-                {/*    <span className={"s.second"}></span>*/}
-                {/*    <span className={"s.third"}></span>*/}
-                {/*</label>*/}
-
                 <ul className={s.menu}>
                     <li className={``}>
-                        {/* eslint-disable-next-line react/jsx-no-undef */}
                         <NavLink to={PATH.TEST} className={''}>Test</NavLink>
                     </li>
                     <li className={``}>
@@ -34,13 +26,6 @@ function Header() {
                     <li className={``}>
                         <NavLink to={PATH.REGISTRATION} className={''}>Registration</NavLink>
                     </li>
-
-                    {/*<li className={s.item}>*/}
-                    {/*    <NavLink to={PATH.JUNIOR} activeClassName={s.activeLink}>JUNIOR</NavLink>*/}
-                    {/*</li>*/}
-                    {/*<li className={s.item}>*/}
-                    {/*    <NavLink to={PATH.JUNIOR_PLUS} activeClassName={s.activeLink}>JUNIOR_PLUS</NavLink>*/}
-                    {/*</li>*/}
                 </ul>
             </nav>
 

@@ -1,17 +1,16 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { registrationTC, setRegistredAC } from '../../m2-bll/registerReducer'
-import { AppStoreType } from '../../m2-bll/store'
-import { registerAPI } from '../../m3-dal/registerAPI'
+import React, {ChangeEvent, useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {registrationTC, setRegistredAC} from '../../m2-bll/registerReducer'
+import {AppStoreType} from '../../m2-bll/store'
 import SuperButton from '../common/c1-SuperButton/SuperButton'
-import { PATH } from '../routes/Paths'
+import {PATH} from '../routes/Paths'
 import s from './Registration.module.css'
 import {LoadingStatusType} from "../../m2-bll/loadingReducer";
 import l from "../common/c7-Loading/loader07.module.css";
 
-const AlternativeRegistration =() => {
-    const isRegistred = useSelector<AppStoreType>(state=> state.register.isRegistred)
+const AlternativeRegistration = () => {
+    const isRegistred = useSelector<AppStoreType>(state => state.register.isRegistred)
     const err = useSelector<AppStoreType>(state => state.register.error)
     const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const dispatch = useDispatch()
@@ -20,20 +19,20 @@ const AlternativeRegistration =() => {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
-    
 
-    const onEmailChange = (e:ChangeEvent<HTMLInputElement>) => {
+
+    const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
     }
-    const onPassChange = (e:ChangeEvent<HTMLInputElement>) => {
+    const onPassChange = (e: ChangeEvent<HTMLInputElement>) => {
         setPass(e.currentTarget.value)
     }
-    const onConfirmPassChange = (e:ChangeEvent<HTMLInputElement>) => {
+    const onConfirmPassChange = (e: ChangeEvent<HTMLInputElement>) => {
         setConfirmPass(e.currentTarget.value)
 
     }
     const onRegisterClick = () => {
-        if (pass === confirmPass){
+        if (pass === confirmPass) {
             dispatch(registrationTC(email, pass))
         }
     }
@@ -43,8 +42,8 @@ const AlternativeRegistration =() => {
             dispatch(setRegistredAC(false))
             navigate(PATH.LOGIN)
         }
-    }, [isRegistred, navigate])
-    
+    }, [dispatch, isRegistred, navigate])
+
     return (
         <div className={s.wrapper}>
             <div style={{width: '100%'}}>
@@ -53,7 +52,7 @@ const AlternativeRegistration =() => {
             <h1 className={s.title}>Sign up</h1>
             <div className={s.textField}>
                 <label className={s.label}>Email</label>
-                <input className={s.input} type="text"  placeholder="Email" onChange={onEmailChange}/>
+                <input className={s.input} type="text" placeholder="Email" onChange={onEmailChange}/>
             </div>
             <div className={s.textField}>
                 <label className={s.label}>Password</label>

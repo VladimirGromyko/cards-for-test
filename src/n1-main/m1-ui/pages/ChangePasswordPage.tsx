@@ -42,7 +42,7 @@ const ChangePasswordPage = () => {
                                 onEnter={onKeyPressHandler}
                                 placeholder={'New password'}
                                 error={
-                                    errorRes.isResponseError === true && errorRes.pageOfError === 'changePas'
+                                    errorRes.isResponseError && errorRes.pageOfError === 'changePas'
                                         ? 'Error: ' + errorRes.errorMessage
                                         : ''
                                 }
@@ -50,7 +50,7 @@ const ChangePasswordPage = () => {
                 />
             </div>
             <div className={s.helpText}>Create new password and we will send you further instruction to email</div>
-            <div className={s.forgotEmail}></div>
+            <div className={s.forgotEmail}><br/></div>
             <div>
                 <SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Create new password</SuperButton>
             </div>
@@ -58,5 +58,4 @@ const ChangePasswordPage = () => {
         </div>
     )
 }
-
 export default ChangePasswordPage
