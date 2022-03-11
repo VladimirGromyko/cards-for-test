@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { registrationTC, setRegistredAC } from '../../m2-bll/registerReducer'
 import { AppStoreType } from '../../m2-bll/store'
-import { registerAPI } from '../../m3-dal/registerAPI'
 import SuperButton from '../common/c1-SuperButton/SuperButton'
 import { PATH } from '../routes/Paths'
 

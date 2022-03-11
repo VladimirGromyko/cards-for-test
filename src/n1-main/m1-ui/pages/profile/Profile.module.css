@@ -10,18 +10,31 @@
     justify-content: center;
 
 }
-.wrapper{
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #bdbdbd;
+    border-radius: 20px;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
 }
-.photo{
-  border-radius: 50%;
+
+.photo {
+    border-radius: 50%;
     margin-bottom: 40px;
 }
-.button{
-margin-top: 30px;
+
+.button {
+    margin-top: 30px;
     display: inline-block;
     vertical-align: middle;
 }
-.wrapper{
 
+.inputTitle {
+    font-size: 19px;
+    text-align: start;
 }
