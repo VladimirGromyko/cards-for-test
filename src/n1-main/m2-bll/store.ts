@@ -5,10 +5,10 @@ import {themeReducer} from "./themeReducer";
 import {cardsReducer} from "./cardsReducer";
 import {loginReducer} from "./loginReducer";
 import {authReducer} from "./auth-reducer";
-// import {authReducer} from "./authReducer";
 import {loadingReducer} from "./loadingReducer";
 import {errorReducer} from "./errorReducer";
 import {authReducer1} from "./authReducer1";
+import {packsReducer} from "./packsReducer";
 
 const reducers = combineReducers({
     cards: cardsReducer,
@@ -18,7 +18,8 @@ const reducers = combineReducers({
     auth: authReducer,
     auth1: authReducer1,
     loading: loadingReducer,
-    error: errorReducer
+    error: errorReducer,
+    packs: packsReducer,
 })
 const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 export default store
