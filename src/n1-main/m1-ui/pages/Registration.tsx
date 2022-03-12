@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { registrationTC, setRegistredAC } from '../../m2-bll/registerReducer'
+import { useNavigate } from 'react-router-dom'
+import { registrationTC, setRegisteredAC } from '../../m2-bll/registerReducer'
 import { AppStoreType } from '../../m2-bll/store'
 import SuperButton from '../common/c1-SuperButton/SuperButton'
 import { PATH } from '../routes/Paths'
 
 const Registration =() => {
-    const isRegistred = useSelector<AppStoreType>(state=> state.register.isRegistred)
+    const isRegistered = useSelector<AppStoreType>(state=> state.register.isRegistered)
     const err = useSelector<AppStoreType>(state => state.register.error)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -32,16 +32,16 @@ const Registration =() => {
             dispatch(registrationTC(email, pass1))
         }
     }
-    // if (isRegistred){
+    // if (isRegistered){
     //     dispatch(setRegistredAC(false))
     //     return <Navigate to={PATH.LOGIN}/>
     // }
     useEffect(() => {
-        if (isRegistred) {
-            dispatch(setRegistredAC(false))
+        if (isRegistered) {
+            dispatch(setRegisteredAC(false))
             navigate(PATH.LOGIN)
         }
-    }, [isRegistred, navigate])
+    }, [isRegistered, navigate])
     return (
         <div>
             <span>Email</span>

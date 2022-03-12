@@ -5,7 +5,7 @@ import SuperCheckbox from "../../common/c3-SuperCheckbox/SuperCheckbox";
 import s from './LoginPage.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
-import {getAuthUserDataTC, logoutUserTC} from "./loginReducer";
+import {getAuthUserDataTC, logoutUserTC} from "../../../m2-bll/loginReducer";
 // import {useNavigate} from "react-router-dom";
 
 const LoginPage =() => {

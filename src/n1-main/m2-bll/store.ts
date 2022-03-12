@@ -3,7 +3,7 @@ import {registerReducer} from './registerReducer';
 import thunkMiddleware from 'redux-thunk'
 import {themeReducer} from "./themeReducer";
 import {cardsReducer} from "./cardsReducer";
-import {loginReducer} from "../m1-ui/pages/login/loginReducer";
+import {loginReducer} from "./loginReducer";
 import {authReducer} from "./auth-reducer";
 // import {authReducer} from "./authReducer";
 import {loadingReducer} from "./loadingReducer";

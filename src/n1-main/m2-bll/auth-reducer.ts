@@ -1,5 +1,7 @@
 import {Dispatch} from 'redux'
-import {authsAPI} from "../m3-dal/cards-api";
+import { authAPI } from '../m3-dal/auth-api'
+// import {authsAPI} from "../m3-dal/cards-api";
+// import {authAPI} from "../m3-dal/auth-api";
 
 const initialState = {
     name: ''
@@ -21,7 +23,7 @@ export const changeUserNameAC = (name: string) =>
 
 // thunks
 export const changeUserNameTC = (name: string) => (dispatch: Dispatch<ActionsType>) => {
-authsAPI.updateUser(name)
+authAPI.updateUser(name)
     .then((res) => {
         console.log('res updateUserNameTC: ', res.data)
         dispatch(changeUserNameAC(name))
