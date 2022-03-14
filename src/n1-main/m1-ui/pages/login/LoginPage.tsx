@@ -1,13 +1,22 @@
+<<<<<<< HEAD
 import React, {useEffect, useState} from 'react'
+=======
+import React, { useState } from 'react'
+>>>>>>> a9f7a81205c803184cb21de70578ed6f5d7e06d3
 import SuperButton from "../../common/c1-SuperButton/SuperButton";
 import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
 import SuperCheckbox from "../../common/c3-SuperCheckbox/SuperCheckbox";
 import s from './LoginPage.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
+<<<<<<< HEAD
 import {getAuthUserDataTC} from "../../../m2-bll/loginReducer";
 import {PATH} from "../../routes/Paths";
 import { useNavigate } from 'react-router-dom';
+=======
+import {getAuthUserDataTC, logoutUserTC} from "./loginReducer";
+// import {useNavigate} from "react-router-dom";
+>>>>>>> a9f7a81205c803184cb21de70578ed6f5d7e06d3
 
 const LoginPage =() => {
 
@@ -16,7 +25,11 @@ const LoginPage =() => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
+<<<<<<< HEAD
     const navigate = useNavigate()
+=======
+    // const navigate = useNavigate();
+>>>>>>> a9f7a81205c803184cb21de70578ed6f5d7e06d3
 
 
     const logInHandler = () => {
@@ -26,6 +39,7 @@ const LoginPage =() => {
         setEmail(e)
     }
 
+<<<<<<< HEAD
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -33,6 +47,11 @@ const LoginPage =() => {
         }
     }, [isLoggedIn])
 
+=======
+    const logOutHandler = () => {
+        dispatch(logoutUserTC())
+    }
+>>>>>>> a9f7a81205c803184cb21de70578ed6f5d7e06d3
 
     return (<div className={`${s.wrapper}`}>
             <h4>SIGN IN</h4>
@@ -53,6 +72,12 @@ const LoginPage =() => {
                 <div className={s.wrapper_submit_button}>
                     <SuperButton onClick={logInHandler} disabled={isLoggedIn}>Submit</SuperButton>
                 </div>
+<<<<<<< HEAD
+=======
+                <div className={s.wrapper_submit_button}>
+                    <SuperButton onClick={logOutHandler} disabled={!isLoggedIn}>LogOut</SuperButton>
+                </div>
+>>>>>>> a9f7a81205c803184cb21de70578ed6f5d7e06d3
             </div>
 
         </div>
