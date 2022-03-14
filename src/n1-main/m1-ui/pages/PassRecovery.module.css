@@ -1,0 +1,46 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #bdbdbd;
+    border-radius: 20px;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(0, 0, 0.2);
+}
+
+.inputField {
+    display: flex;
+    flex-direction: column;
+    height: 4ch;
+    align-items: center;
+}
+
+.helpText {
+    font-size: 1.1rem;
+    color: grey;
+    margin: 10% 3% 2% 3%;
+    font-weight: 400;
+}
+
+.inputError {
+    font-size: 1rem;
+}
+
+.forgotButton {
+    width: 110%;
+    margin: 10px 0 10px 0;
+    font-size: 18px;
+    border-radius: 14px;
+    padding: 5px;
+}
+
+.forgotEmail {
+    display: flex;
+    justify-content: center;
+    margin: 6% 0 1% 0;
+    height: 7ch;
+    font-size: 1rem;
+    color: darkslateblue;
+}

@@ -1,0 +1,21 @@
+.loginForm {
+    display: block;
+}
+.wrapper_submit_checkbox {
+    display: flex;
+    justify-content: center;
+}
+.wrapper_submit_button {
+    display: inline-block;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #bdbdbd;
+    border-radius: 20px;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgb(0, 0, 0.2);
+}

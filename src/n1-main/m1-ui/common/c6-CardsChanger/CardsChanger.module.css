@@ -1,0 +1,10 @@
+.changeCard{
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+
+    /*justify-content:space-between;*/
+}
+.card {
+    padding: 0 20px;
+}
