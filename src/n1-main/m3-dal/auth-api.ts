@@ -12,6 +12,18 @@ const model1: RecoveryModelType = {
                        </div >`
 }
 export const authAPI = {
+    getAuth() {
+        return instance.post(`auth/me`)
+    },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post('auth/login', {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete('auth/me')
+    },
+    updateUser(name: string) {
+        return instance.put<{ name: string },AxiosResponse<ResponseType>>('auth/me', {name});
+    },
     recoverPass(email: string) {
         return instance.post <{ model: RecoveryModelType, }, AxiosResponse<RecoverPassResponseType>>
         (`/auth/forgot`, {...model1, email: email})
@@ -20,7 +32,10 @@ export const authAPI = {
         return instance.post <{ password: string, resetPasswordToken: string | undefined},
             AxiosResponse<RecoverPassResponseType>>
         (`/auth/set-new-password`, {password, resetPasswordToken})
-    }
+    },
+    registrationUser(email:string, password: string) {
+        return instance.post(`auth/register`, {email, password});
+    },
 }
 export type RecoverPassResponseType = {
     info: string

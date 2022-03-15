@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {registrationTC, setRegistredAC} from '../../m2-bll/registerReducer'
+import {registrationTC, setRegisteredAC} from '../../m2-bll/registerReducer'
 import {AppStoreType} from '../../m2-bll/store'
 import SuperButton from '../common/c1-SuperButton/SuperButton'
 import {PATH} from '../routes/Paths'
@@ -10,7 +10,7 @@ import {LoadingStatusType} from "../../m2-bll/loadingReducer";
 import l from "../common/c7-Loading/loader07.module.css";
 
 const AlternativeRegistration = () => {
-    const isRegistred = useSelector<AppStoreType>(state => state.register.isRegistred)
+    const isRegistred = useSelector<AppStoreType>(state => state.register.isRegistered)
     const err = useSelector<AppStoreType>(state => state.register.error)
     const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const dispatch = useDispatch()
@@ -39,7 +39,7 @@ const AlternativeRegistration = () => {
 
     useEffect(() => {
         if (isRegistred) {
-            dispatch(setRegistredAC(false))
+            dispatch(setRegisteredAC(false))
             navigate(PATH.LOGIN)
         }
     }, [dispatch, isRegistred, navigate])

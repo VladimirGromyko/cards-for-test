@@ -35,7 +35,7 @@ export const forgotTC = (name: string) => (dispatch: Dispatch<authReducerType>) 
     authAPI.recoverPass(name)
         .then((res) => {
             dispatch(setForgotPassStatusAC('succeeded'))
-            dispatch(setForgotPassStatusAC('succeeded'))
+            // dispatch(setForgotPassStatusAC('succeeded'))
             setTimeout(()=>{
                 dispatch(setForgotPassStatusAC('failed'))
             },3000)

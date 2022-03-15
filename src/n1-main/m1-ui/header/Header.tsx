@@ -2,8 +2,15 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import {PATH} from "../routes/Paths";
 import s from '../header/header.module.css'
+import {logoutUserTC} from "../../m2-bll/loginReducer";
+import {useDispatch} from "react-redux";
 
 function Header() {
+    const dispatch = useDispatch()
+    const logOutHandler = () => {
+        dispatch(logoutUserTC())
+    }
+
     return (
         <div>
             <nav>
@@ -13,6 +20,9 @@ function Header() {
                     </li>
                     <li className={``}>
                         <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>
+                    </li>
+                    <li className={``}>
+                        <NavLink to={PATH.MAIN} className={''}>Main</NavLink>
                     </li>
                     <li className={``}>
                         <NavLink to={PATH.LOGIN} className={''}>Login</NavLink>
@@ -26,12 +36,14 @@ function Header() {
                     <li className={``}>
                         <NavLink to={PATH.REGISTRATION} className={''}>Registration</NavLink>
                     </li>
+                    <li className={``}>
+                        <NavLink to={''} className={''} onClick={logOutHandler}>LogOut</NavLink>
+                    </li>
+                    <li className={``}>
+                        <NavLink to={PATH.PACKS} className={''}>Packs</NavLink>
+                    </li>
                 </ul>
             </nav>
-
-
-
-
         </div>
     )
 }

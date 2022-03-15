@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import SuperButton from "../../common/c1-SuperButton/SuperButton";
 import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
 import SuperCheckbox from "../../common/c3-SuperCheckbox/SuperCheckbox";
 import s from './LoginPage.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
-import {getAuthUserDataTC, logoutUserTC} from "./loginReducer";
+import {PATH} from "../../routes/Paths";
+import { useNavigate } from 'react-router-dom';
+import {getAuthUserDataTC} from "../../../m2-bll/loginReducer";
+
 // import {useNavigate} from "react-router-dom";
 
 const LoginPage =() => {
@@ -15,7 +18,9 @@ const LoginPage =() => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
-    // const navigate = useNavigate();
+
+    const navigate = useNavigate()
+
 
 
     const logInHandler = () => {
@@ -25,9 +30,13 @@ const LoginPage =() => {
         setEmail(e)
     }
 
-    const logOutHandler = () => {
-        dispatch(logoutUserTC())
-    }
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate(PATH.PROFILE)
+        }
+    }, [isLoggedIn])
+
+
 
     return (<div className={`${s.wrapper}`}>
             <h4>SIGN IN</h4>
@@ -47,9 +56,6 @@ const LoginPage =() => {
             <div>
                 <div className={s.wrapper_submit_button}>
                     <SuperButton onClick={logInHandler} disabled={isLoggedIn}>Submit</SuperButton>
-                </div>
-                <div className={s.wrapper_submit_button}>
-                    <SuperButton onClick={logOutHandler} disabled={!isLoggedIn}>LogOut</SuperButton>
                 </div>
             </div>
 
