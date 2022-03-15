@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import s from './Profile.module.css';
-import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
-import SuperButton from "../../common/c1-SuperButton/SuperButton";
+import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
+import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStoreType} from "../../../m2-bll/store";
-import {changeUserNameTC} from "../../../m2-bll/auth-reducer";
+import {AppStoreType} from "../../../../m2-bll/store";
+import {changeUserNameTC} from "../../../../m2-bll/auth-reducer";
 import { Navigate } from 'react-router-dom';
-import {PATH} from "../../routes/Paths";
+import {PATH} from "../../../routes/Paths";
 
 
 export const ProfilePage = () => {
