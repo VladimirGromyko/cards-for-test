@@ -8,3 +8,10 @@ export const authsAPI = {
     }
 }
 
+export const cardsAPI = {
+
+    getAllCards(cardsPackId?: string, pageCount?:string) {
+        return instance.get(`/cards/card?cardsPack_id=${cardsPackId}&pageCount=${pageCount}`, );
+    }
+}
+
