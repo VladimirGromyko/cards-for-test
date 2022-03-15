@@ -7,7 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
 import {PATH} from "../../routes/Paths";
 import { useNavigate } from 'react-router-dom';
-import {getAuthUserDataTC, logoutUserTC} from "./loginReducer";
+import {getAuthUserDataTC} from "../../../m2-bll/loginReducer";
+
 // import {useNavigate} from "react-router-dom";
 
 const LoginPage =() => {

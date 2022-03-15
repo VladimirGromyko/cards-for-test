@@ -50,6 +50,15 @@ export type PacksGetResponseDataType = {
     page: number // выбранная страница
     pageCount: number     // количество элементов на странице
 }
+export type CardPacksType={
+    _id: string
+    user_id: string
+    name: string
+    cardsCount: number
+    created: string
+    updated: string
+}
+
 export type PacksPostRequestType = {
     name?: string
     deckCover?: string

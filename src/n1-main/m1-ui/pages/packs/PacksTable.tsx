@@ -1,15 +1,16 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
-import {cardPacksType} from "./packsReducer";
+// import {cardPacksType} from "./packsReducer";
 import { PackItem } from "./PackItem";
+import {CardPacksType, PacksGetResponseDataType} from "../../../m3-dal/packs-api";
 
 
 
 
 export const PacksTable = () => {
 
-    const pack = useSelector<AppStoreType, cardPacksType[]>(state => state.packs.cardPacks)
+    const pack = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     console.log(pack)
     return (
         <div>
