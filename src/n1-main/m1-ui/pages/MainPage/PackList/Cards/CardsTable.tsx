@@ -1,5 +1,5 @@
 import React from 'react'
-import cardsStyle from '../packs/cardsTable.module.css'
+import cardsStyle from './/cardsTable.module.css'
 
 
 

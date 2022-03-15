@@ -25,7 +25,7 @@ const MainPage = () => {
     const onSetPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
 
-            // briefly hardcoded 1 packs request
+            // briefly hardcoded 1 Cards request
             params: {packName: 'english', pageCount: 15}
         }))
     }, [dispatch, setPacksDataTC])
@@ -60,7 +60,7 @@ const MainPage = () => {
                         </div>
                     </div>
                 )
-                : (<Navigate to={PATH.PACK_LIST}/>)
+                : (<Navigate to={PATH.PACKS}/>)
             }
         </div>
     )

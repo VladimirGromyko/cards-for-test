@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { registrationTC, setRegisteredAC } from '../../m2-bll/registerReducer'
-import { AppStoreType } from '../../m2-bll/store'
-import SuperButton from '../common/c1-SuperButton/SuperButton'
-import { PATH } from '../routes/Paths'
+import { registrationTC, setRegisteredAC } from '../../../m2-bll/registerReducer'
+import { AppStoreType } from '../../../m2-bll/store'
+import SuperButton from '../../common/c1-SuperButton/SuperButton'
+import { PATH } from '../../routes/Paths'
 
 const Registration =() => {
     const isRegistered = useSelector<AppStoreType>(state=> state.register.isRegistered)

@@ -14,6 +14,7 @@ import s from "../../../header/header.module.css";
 const PackList = () => {
     const isShownMainPage = useSelector<AppStoreType, boolean>(state => state.packs.isShownMainPage)
     const packsData = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+
     const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -25,7 +26,7 @@ const PackList = () => {
     const onSetAllPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
 
-            // briefly hardcoded 1 packs request
+            // briefly hardcoded 1 Cards request
             params: {
                 packName: 'english',
                 pageCount: 15
@@ -36,7 +37,7 @@ const PackList = () => {
     const onSetMyPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
 
-            // briefly hardcoded 1 packs request
+            // briefly hardcoded 1 Cards request
             params: {
                 packName: 'english',
                 pageCount: 15,
@@ -63,7 +64,7 @@ const PackList = () => {
         <nav>
             <ul className={s.menu}>
                 <li className={``}>
-                    <NavLink to={PATH.PACK_LIST} className={''}> PackList </NavLink>
+                    <NavLink to={PATH.PACKS} className={''}> PackList </NavLink>
                 </li>
                 <li className={``}>
                     <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>

@@ -1,4 +1,4 @@
-export type PageOfResponseError = 'changePas' | 'passwordRec' | ''
+export type PageOfResponseError = 'changePas' | 'passwordRec' | 'setPacks' | 'editPack' | ''
 
 const initState = {
     isResponseError: false,
@@ -11,9 +11,11 @@ export const errorReducer = (state = initState,
                              action: ResponseErrorACType): ResponseErrorStateType => {
     switch (action.type) {
         case "RESPONSE-ERROR": {
-            return {...state, isResponseError: action.isResponseError,
+            return {
+                ...state, isResponseError: action.isResponseError,
                 pageOfError: action.pageOfError,
-                errorMessage: action.errorMessage}
+                errorMessage: action.errorMessage
+            }
         }
         default:
             return state
