@@ -31,10 +31,6 @@ function Header() {
                     </li>
                 </ul>
             </nav>
-
-
-
-
         </div>
     )
 }
