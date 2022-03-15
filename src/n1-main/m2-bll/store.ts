@@ -9,9 +9,11 @@ import {authReducer} from "./auth-reducer";
 import {loadingReducer} from "./loadingReducer";
 import {errorReducer} from "./errorReducer";
 import {authReducer1} from "./authReducer1";
+import {cardsReducer1} from "./cardsReducer1";
 
 const reducers = combineReducers({
     cards: cardsReducer,
+    cards1:cardsReducer1,
     theme: themeReducer,
     register: registerReducer,
     login: loginReducer,
