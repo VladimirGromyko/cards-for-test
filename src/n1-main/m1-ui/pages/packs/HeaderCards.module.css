@@ -10,6 +10,7 @@
     height: 48px;
     text-decoration: none;
     margin-top: 20px;
+    justify-content: center;
 }
 
 .header_tableItem {

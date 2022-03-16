@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import packsStyle from './cardsTable.module.css'
+import packsStyle from './CardsTable.module.css'
 import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
 import CardsTable from './CardsTable';
 import { HeaderCards } from "./HeaderCards";

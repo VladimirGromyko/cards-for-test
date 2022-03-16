@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import cardsStyle from '../packs/cardsTable.module.css'
+import cardsStyle from '../packs/CardsTable.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
 import {CardType, getAllCardAC} from "../../../m2-bll/cardsReducer1";
@@ -8,6 +8,7 @@ import {cardsAPI, SortNameType, SortNumberType} from "../../../m3-dal/cards-api"
 import packsStyle from "./PacksTable.module.css";
 import SuperButton from "../../common/c1-SuperButton/SuperButton";
 import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
+import { CardItem } from './CardItem';
 
 export type CardsTablePropsType = {
     getCards: (packId:string, sortNumber?:SortNumberType, sortName?: SortNameType)=> void
@@ -64,13 +65,8 @@ const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
         <div className={cardsStyle.container}>
             {
                 cardsIsGot.map(card => {
-                    return <div className={packsStyle.items}>
-                        <div>{card.question}</div>
-                        <div>{card.answer}</div>
-                        <div>{card.updated}</div>
-                        <div>{card.grade}</div>
-                        <SuperButton onClick={() => onClickDeleteCards(card._id)}>delete card</SuperButton>
-                    </div>
+                    return <CardItem card={card} 
+                    onClickDeleteCards={onClickDeleteCards}/>
                 })
             }
             <SuperInputText type='text' onChange={onQuestionInputChange}/>
