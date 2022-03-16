@@ -1,21 +1,23 @@
 import {cardsAPI} from "../../../m3-dal/cards-api";
 import {Route, Routes, useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
-import {CardType, getAllCardAC, getPackUserIdAC} from "../../../m2-bll/cardsReducer1";
+import {addCardAC, CardType, deleteCardAC, getAllCardAC, getPackUserIdAC} from "../../../m2-bll/cardsReducer1";
 
 export const TestCardPage = () => {
     const cardsIsGot = useSelector<AppStoreType, CardType[]>(state => state.cards1.cards)
-    const packUserId = useSelector<AppStoreType>(state => state.cards1.packUserId)
     const dispatch = useDispatch()
 
+    const [quest, setQuest] = useState('')
+    const [answ, setAnsw] = useState('')
+
     const params = useParams()
-    const cardId = params.id
+    const packId = params.id
 
     useEffect(()=> {
-        if (cardId){
-            cardsAPI.getAllCards(cardId, '1000').then(res=> {
+        if (packId){
+            cardsAPI.getAllCards(packId, '1000').then(res=> {
                 dispatch(getAllCardAC(res.data.cards))
                 dispatch(getPackUserIdAC(res.data.packUserId))
             })
@@ -23,20 +25,45 @@ export const TestCardPage = () => {
     }, [])
 
     const onClickGetCards = ()=> {
-        if (cardId){
-            cardsAPI.getAllCards(cardId, '1000').then(res=> {
+        if (packId){
+            cardsAPI.getAllCards(packId, '1000').then(res=> {
                 dispatch(getAllCardAC(res.data.cards))
             })
         }
 
     }
     const onClickAddCards = ()=> {
-        debugger
-            if (cardId){
-            cardsAPI.addCard(cardId, 'why', 'yes').then(res=> {
-                debugger
+            if (packId){
+            cardsAPI.addCard(packId, quest, answ).then(res=> {
+                // dispatch(addCardAC(res.data.newCard))
+                if (packId){
+                    cardsAPI.getAllCards(packId, '1000').then(res=> {
+                        dispatch(getAllCardAC(res.data.cards))
+                    })
+                }
             }
             )}
+    }
+
+    const onClickDeleteCards = (cardId: string)=> {
+        if (cardId){
+            cardsAPI.deleteCard(cardId).then(res=>{
+                // dispatch(deleteCardAC(cardId))
+                if (packId){
+                    cardsAPI.getAllCards(packId, '1000').then(res=> {
+                        dispatch(getAllCardAC(res.data.cards))
+                    })
+                }
+            })
+        }
+}
+
+
+    const onQuestionInputChange = (e:ChangeEvent<HTMLInputElement>) => {
+        setQuest(e.currentTarget.value)
+    }
+    const onAnswerInputChange = (e:ChangeEvent<HTMLInputElement>) => {
+        setAnsw(e.currentTarget.value)
     }
 
     return (
@@ -52,11 +79,13 @@ export const TestCardPage = () => {
                     <span style={{margin:'10px'}}>{card.answer}</span>
                     <span style={{margin:'10px'}}>{card.updated}</span>
                     <span style={{margin:'10px'}}>{card.grade}</span>
+                    <button onClick={()=> onClickDeleteCards(card._id)}>delete card</button>
                 </div>
             })}
+            <input type='text' onChange={onQuestionInputChange}/>
+            <input type='text' onChange={onAnswerInputChange}/>
             <button onClick={onClickGetCards}>get card</button>
-            <button onClick={onClickAddCards}>add card</button>
-            <button onClick={onClickGetCards}>delete card</button>
+            <button onClick={onClickAddCards}>add card</button>    
             </div>
 
 

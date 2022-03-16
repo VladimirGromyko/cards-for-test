@@ -1,4 +1,5 @@
 export type CardType  = {
+    _id: string,
     question: string,
     answer: string,
     updated: string,
@@ -8,7 +9,6 @@ export type CardType  = {
 
 export type CardsStateType = {
     cards: CardType[];
-    packUserId?: string,
 }
 const initState: CardsStateType = {cards:[]};
 
@@ -22,9 +22,8 @@ export const cardsReducer1 = (state = initState,
         case "ADD-CARD": {
             return {...state, cards: [...state.cards, action.card] }
         }
-        case "GET-PACK-USER-ID":{
-            return {...state, packUserId: action.packUserId}
-        }
+        case 'DELETE-CARD':
+            return {...state, cards: state.cards.filter(t => t._id !== action.cardId)}
         default:
             return state;
     }
@@ -42,8 +41,12 @@ export const addCardAC = (card: CardType) => ({
     type: 'ADD-CARD', card
 } as const);
 
+export const deleteCardAC = (cardId: string) => ({
+    type: 'DELETE-CARD', cardId
+} as const);
+
 type GetAllCardActionType = ReturnType<typeof getAllCardAC>
 type AddCardActionType = ReturnType<typeof addCardAC>
-type GetPackUserIdACActionType = ReturnType<typeof getPackUserIdAC>
+type DeleteCardACActionType = ReturnType<typeof deleteCardAC>
 
-type ActionType = GetAllCardActionType | AddCardActionType | GetPackUserIdACActionType
+type ActionType = GetAllCardActionType | AddCardActionType | DeleteCardACActionType
