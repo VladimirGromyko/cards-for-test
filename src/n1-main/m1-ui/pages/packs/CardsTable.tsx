@@ -4,13 +4,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
 import {CardType, getAllCardAC} from "../../../m2-bll/cardsReducer1";
 import {useParams} from "react-router-dom";
-import {cardsAPI} from "../../../m3-dal/cards-api";
+import {cardsAPI, SortNameType, SortNumberType} from "../../../m3-dal/cards-api";
 import packsStyle from "./PacksTable.module.css";
 import SuperButton from "../../common/c1-SuperButton/SuperButton";
 import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
 
+export type CardsTablePropsType = {
+    getCards: (packId:string, sortNumber?:SortNumberType, sortName?: SortNameType)=> void
+    packId:string | undefined
+}
 
-const CardsTable = () => {
+
+const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
 
     const cardsIsGot = useSelector<AppStoreType, CardType[]>(state => state.cards1.cards)
     const dispatch = useDispatch()
@@ -18,14 +23,9 @@ const CardsTable = () => {
     const [quest, setQuest] = useState('')
     const [answer, setAnswerer] = useState('')
 
-    const params = useParams()
-    const packId = params.id
-
-    const getCards = () => {
+    const getCards = (sortNumber?:SortNumberType, sortName?: SortNameType) => {
         if (packId) {
-            cardsAPI.getAllCards(packId, '1000').then(res => {
-                dispatch(getAllCardAC(res.data.cards))
-            })
+            props.getCards(packId, sortNumber, sortName)
         }
     }
 
