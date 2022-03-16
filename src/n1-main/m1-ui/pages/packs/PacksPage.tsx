@@ -40,7 +40,7 @@ export const PacksPage = () => {
                     <div className={commonPacksStyle.content}>
                         <div>Packs</div>
                         <SuperInputText placeholder='Enter packs name for searching'/>
-                        <div>ПАГИНАЦИЯ</div>
+
                         <div>
                             <Pagination/>
                         </div>

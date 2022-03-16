@@ -27,7 +27,7 @@ const PackList = () => {
 
             // briefly hardcoded 1 packs request
             params: {
-                packName: 'english',
+                //packName: 'english',
                 pageCount: 15
             }
         }))

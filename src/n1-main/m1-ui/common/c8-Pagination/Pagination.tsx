@@ -13,11 +13,14 @@ export const Pagination = () => {
     const items = useSelector((state: AppStoreType) => state.packs.packsData.cardPacks);
     const pageCountAmount = Math.ceil(cardPacksTotalCount / pageCount)
 
+    const[selected,setSelectes] = useState(false)
+
     //console.log('items',items)
 
-
     const handlePageClick = ({selected}: {selected: number}) => {
+        setSelectes(true)
         dispatch(setPacksDataTC({params: {page: selected + 1}}))
+
     };
 
     return (
@@ -28,13 +31,12 @@ export const Pagination = () => {
                 breakLabel={"..."}
                 breakClassName={s.breakMe}
                 pageCount={pageCountAmount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={10}
                 onPageChange={handlePageClick}
                 containerClassName={s.pagination}
                 //subContainerClassName={s.pages}
                 activeClassName={s.active}
-
             />
 
         </>
