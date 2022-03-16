@@ -1,14 +1,14 @@
-import { Dispatch } from "redux";
-import { registerAPI } from "../m3-dal/registerAPI";
+import {Dispatch} from "redux";
 import {loadingAC} from "./loadingReducer";
+import {authAPI} from "../m3-dal/auth-api";
 
 
 export type stateType = {
-    isRegistred: boolean
+    isRegistered: boolean
     error: string
 }
 const initState: stateType = {
-    isRegistred: false,
+    isRegistered: false,
     error: ''
 };
 
@@ -16,7 +16,7 @@ const initState: stateType = {
 export const registerReducer = (state: stateType = initState, action: RegisterActionType): stateType => {
     switch (action.type) {
         case 'IS-REGISTRED': {
-            return { ...state, isRegistred: action.isRegistred }
+            return {...state, isRegistered: action.isRegistered}
         }
         case 'SET-ERROR': {
             return {...state, error: action.error}
@@ -26,8 +26,8 @@ export const registerReducer = (state: stateType = initState, action: RegisterAc
     }
 };
 
-export const setRegistredAC = (isRegistred: boolean) => ({
-    type: 'IS-REGISTRED', isRegistred
+export const setRegisteredAC = (isRegistered: boolean) => ({
+    type: 'IS-REGISTRED', isRegistered
 } as const);
 
 export const setError = (error: string) => ({
@@ -35,20 +35,20 @@ export const setError = (error: string) => ({
 } as const);
 
 export const registrationTC = (email: string, password: string) => (dispatch: Dispatch) => {
-        dispatch(loadingAC('loading'))
-        registerAPI.registrationUser(email, password)
-            .then(res => {
-                dispatch(setRegistredAC(true))
-            })
-            .catch(e => {
-                const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
-                dispatch(setError(error))
-            }).finally(()=>{
-            dispatch(loadingAC('succeeded'))
+    dispatch(loadingAC('loading'))
+    authAPI.registrationUser(email, password)
+        .then(res => {
+            dispatch(setRegisteredAC(true))
         })
-    }
+        .catch(e => {
+            const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
+            dispatch(setError(error))
+        }).finally(() => {
+        dispatch(loadingAC('succeeded'))
+    })
+}
 
 
 type RegisterActionType = setRegistredACType | setErrorACType
-type setRegistredACType = ReturnType<typeof setRegistredAC>
+type setRegistredACType = ReturnType<typeof setRegisteredAC>
 type setErrorACType = ReturnType<typeof setError>

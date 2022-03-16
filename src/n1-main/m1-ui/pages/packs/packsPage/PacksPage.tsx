@@ -2,8 +2,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import React, {useEffect} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
-import {fetchPacksTC} from "../../../../m2-bll/packsReducer";
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
+
+
 import {PacksTable} from "./PacksTable";
 import {AppStoreType} from "../../../../m2-bll/store";
 import Sidebar from "./Sidebar";

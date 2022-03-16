@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import {authAPI} from "../m3-dal/login-api";
+import {authAPI} from "../m3-dal/auth-api";
 
 type InitialStateType = {
     user: UserDataType | null,

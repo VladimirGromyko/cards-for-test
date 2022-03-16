@@ -22,6 +22,9 @@ function Header() {
                         <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>
                     </li>
                     <li className={``}>
+                        <NavLink to={PATH.MAIN} className={''}>Main</NavLink>
+                    </li>
+                    <li className={``}>
                         <NavLink to={PATH.LOGIN} className={''}>Login</NavLink>
                     </li>
                     <li className={``}>
@@ -41,10 +44,6 @@ function Header() {
                     </li>
                 </ul>
             </nav>
-
-
-
-
         </div>
     )
 }
