@@ -2,13 +2,14 @@ import {Dispatch} from "redux";
 import {loadingAC, LoadingACType} from "./loadingReducer";
 import {packsAPI, PacksGetResponseDataType, PacksGetRequestType, PacksPutRequestType} from "../m3-dal/packs-api";
 import {responseErrorAC, ResponseErrorACType} from "./errorReducer";
-import {errorResponse} from "../../n2-features/f0-test/errorResponse";
+
 
 export type statePacksType = {
     packsData: PacksGetResponseDataType
     updatedCardsPack: {}
     isShownMainPage: boolean
     isShownEditPack: boolean
+    pickedEditPack: { packName: string, packId: string }
 }
 
 const initState = {
@@ -16,6 +17,7 @@ const initState = {
     updatedCardsPack: {},
     isShownMainPage: true,
     isShownEditPack: false,
+    pickedEditPack: {packName: '', packId: ''}
 } as statePacksType
 
 export const packsReducer = (state: statePacksType = initState,
@@ -33,6 +35,9 @@ export const packsReducer = (state: statePacksType = initState,
         case "SHOW_EDIT_PACK": {
             return {...state, isShownEditPack: action.isShownEditPack}
         }
+        case "PICK_EDIT_PACK": {
+            return {...state, pickedEditPack: {packName: action.packName, packId: action.packId}}
+        }
         default:
             return state;
     }
@@ -42,6 +47,10 @@ export const setPacksDataAC = (packsData: PacksGetResponseDataType) => (
     {type: 'SET_PACKS_DATA', packsData}) as const
 export const editPackAC = (updatedCardsPack: {}) => (
     {type: 'EDIT_PACK', updatedCardsPack}) as const
+
+
+export const pickEditPackAC = (packName: string, packId: string) => (
+    {type: 'PICK_EDIT_PACK', packName, packId}) as const
 
 export const showMainPageAC = (isShownMainPage: boolean) => (
     {type: 'SHOW_MAIN_PAGE', isShownMainPage}) as const
@@ -73,6 +82,7 @@ export const editPackTC = (param: PacksPutRequestType) => (dispatch: Dispatch<Pa
         .then((res) => {
             dispatch(showEditPackAC(true))
             dispatch(editPackAC(res.data.updatedCardsPack))
+            // dispatch(setPacksDataTC())
         })
         .catch((err) => {
             dispatch(showEditPackAC(true))
@@ -94,6 +104,7 @@ type SetPacksDataACType = ReturnType<typeof setPacksDataAC>
 type editPackACType = ReturnType<typeof editPackAC>
 type showMainPageACType = ReturnType<typeof showMainPageAC>
 type showEditPackACType = ReturnType<typeof showEditPackAC>
+type pickEditPackACType = ReturnType<typeof pickEditPackAC>
 
 export type PacksReducerType = SetPacksDataACType
     | LoadingACType
@@ -101,3 +112,4 @@ export type PacksReducerType = SetPacksDataACType
     | editPackACType
     | showEditPackACType
     | ResponseErrorACType
+    | pickEditPackACType

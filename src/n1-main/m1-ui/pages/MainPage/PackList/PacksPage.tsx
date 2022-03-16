@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {Navigate, NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import React, {useCallback} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
@@ -10,7 +10,7 @@ import {HeaderPacks} from "./HeaderPacks";
 import {PATH} from "../../../routes/Paths";
 import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
-import {editPackTC, setPacksDataTC} from "../../../../m2-bll/packsReducer";
+import {editPackTC, pickEditPackAC, setPacksDataTC, showEditPackAC} from "../../../../m2-bll/packsReducer";
 import {CardPacksType} from "../../../../m3-dal/packs-api";
 import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
@@ -21,15 +21,16 @@ export const PacksPage = () => {
 
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
-    const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
+    // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
-    const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-
+    // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
     const isShownEditPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
         state.packs.isShownEditPack)
+    const pickedEditPack = useSelector<AppStoreType, { packName: string, packId: string }>
+    ((state: AppStoreType) => state.packs.pickedEditPack)
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const onSetAllPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
@@ -58,70 +59,67 @@ export const PacksPage = () => {
         // console.log("Удалить у самурая : ", userId, "колоду с Id: ", packId)
         // dispatch()
     }, [])
-    const editPack = useCallback((userId: string, packId: string) => {
-        // console.log("Исправить у самурая : ", userId, "колоду с Id: ", packId)
+    const pickEditPack = useCallback((packName: string, packId: string) => {
 
-        dispatch(editPackTC({cardsPack: {_id: packId}}))
+        dispatch(pickEditPackAC(packName, packId))
+        dispatch(showEditPackAC(true))
+    }, [dispatch, pickEditPackAC, showEditPackAC])
 
-        // isLoading === 'succeeded' && navigate(PATH.EDIT_PACK)
+    const editPack = useCallback((packId: string, namePack: string) => {
+        dispatch(editPackTC({cardsPack: {_id: packId, name: namePack}}))
+        // dispatch(showEditPackAC(true))
+    }, [dispatch, pickEditPackAC, showEditPackAC])
 
+    const hideEditPack= () => {
+        dispatch(showEditPackAC(false))
+    }
 
-    }, [])
-    // dispatch()
     const learnPack = useCallback((packId: string) => {
-        // console.log("Изучить колоду с Id: ", packId)
         navigate(PATH.CARDS)
-        // dispatch()
     }, [])
 
     return (
-        <>
-            {!isShownEditPack
-                ? (
-
-                    <div className={commonPacksStyle.wrapper}>
-                        <div style={{width: '100%'}}>
-                            {isLoading === "loading" && <div className={l.loader07}></div>}
-                        </div>
-                        <nav>
-                            <ul className={s.menu}>
-                                <li className={``}>
-                                    <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
-                                </li>
-                                <li className={``}>
-                                    <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div className={commonPacksStyle.content}>Show cardPacks card
-                            <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
-                            <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
-                            <div style={{color: 'red'}}>
-                                {errorResponse(errorRes, 'setPacks')}
-                                {/*{errorRes.isResponseError && errorRes.pageOfError === 'changePas'*/}
-                                {/*    ? 'Error: ' + errorRes.errorMessage*/}
-                                {/*    : ''}*/}
-                            </div>
-                        </div>
-                        <div className={commonPacksStyle.content}>Number of cards
-                            <Sidebar/>
-                        </div>
-                        <div className={commonPacksStyle.content}>
-                            <div>Packs</div>
-                            <SuperInputText placeholder='Enter cardPacks name for searching'/>
-                            <HeaderPacks/>
-                            {cardPacks && <PacksTable
-                                deletePack={deletePack}
-                                editPack={editPack}
-                                learnPack={learnPack}
-                                cardPacks={cardPacks}
-                            />}
-                        </div>
+            <div className={commonPacksStyle.wrapper}>
+                <div style={{width: '100%'}}>
+                    {isLoading === "loading" && <div className={l.loader07}></div>}
+                </div>
+                <nav>
+                    <ul className={s.menu}>
+                        <li className={``}>
+                            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
+                        </li>
+                        <li className={``}>
+                            <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
+                        </li>
+                    </ul>
+                </nav>
+                <div className={commonPacksStyle.content}>Show cardPacks card
+                    <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
+                    <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
+                    <div style={{color: 'red'}}>
+                        {errorResponse(errorRes, 'setPacks')}
                     </div>
-                )
-                : <Navigate to={PATH.EDIT_PACK}/>
-            }
-
-        </>
+                </div>
+                <div className={commonPacksStyle.content}>Number of cards
+                    <Sidebar/>
+                </div>
+                <div className={commonPacksStyle.content}>
+                    <div>Packs</div>
+                    <SuperInputText placeholder='Enter cardPacks name for searching'/>
+                    <HeaderPacks/>
+                    {cardPacks && <PacksTable
+                        deletePack={deletePack}
+                        editPack={editPack}
+                        pickEditPack={pickEditPack}
+                        packId={pickedEditPack.packId}
+                        packName={pickedEditPack.packName}
+                        learnPack={learnPack}
+                        cardPacks={cardPacks}
+                        isLoading={isLoading}
+                        isShownEditPack={isShownEditPack}
+                        hideEditPack = {hideEditPack}
+                    />}
+                </div>
+            </div>
     )
 }

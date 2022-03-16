@@ -26,7 +26,7 @@ const MainRoutes = () => {
                 <Route path={PATH.LOGIN} element={<h2 style={{textAlign: "center"}}><LoginPage/></h2>}/>
                 <Route path={PATH.PROFILE} element={<h2 style={{textAlign: "center"}}><ProfilePage/></h2>}/>
                 <Route path={PATH.MAIN} element={<h2 style={{textAlign: "center"}}><MainPage/></h2>}/>
-                <Route path={PATH.EDIT_PACK} element={<h2 style={{textAlign: "center"}}><EditPack/></h2>}/>
+                {/*<Route path={PATH.EDIT_PACK} element={<h2 style={{textAlign: "center"}}><EditPack/></h2>}/>*/}
                 <Route path={PATH.TEST} element={<h2 style={{textAlign: "center"}}><TestPage/></h2>}/>
                 <Route path={PATH.CHANGE_PASSWORD}
                        element={<h2 style={{textAlign: "center"}}><ChangePasswordPage/></h2>}/>

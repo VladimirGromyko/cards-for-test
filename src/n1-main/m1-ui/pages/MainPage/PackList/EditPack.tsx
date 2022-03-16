@@ -1,67 +1,57 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
-import s from "../../../header/header.module.css";
-import {Navigate, NavLink} from "react-router-dom";
-import {PATH} from "../../../routes/Paths";
 import {useSelector} from "react-redux";
 import {AppStoreType} from "../../../../m2-bll/store";
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
-import {log} from "util";
+import s from '../../p3-pass-recovery/PassRecovery.module.css';
+import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
+import l from "../../../common/c7-Loading/loader07.module.css";
+import {LoadingStatusType} from "../../../../m2-bll/loadingReducer";
+import {editPackTC} from "../../../../m2-bll/packsReducer";
 
-const EditPack = () => {
+type EditPackType = {
+    editPack: (packId: string, namePack: string) => void
+    packId: string
+    packName:string
+    hideEditPack : () => void
+}
+
+const EditPack = ({editPack, packId, packName, hideEditPack}: EditPackType) => {
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
-    // debugger
-    const isShownEditPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
-        state.packs.isShownEditPack)
+    const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
+
+    const [newPackName, setNewPackName] = useState<string>('')
+
+    const onKeyPressHandler = useCallback(() => {
+        editPack(packId, newPackName)
+    }, [editPackTC, packId])
 
     const OnCancelClick = useCallback(() => {
-    }, [])
-    // dispatch()
-    const OnSaveClick = useCallback(() => {
-        // dispatch()
-    }, [])
+        hideEditPack()
+    }, [hideEditPack])
 
-    // errorRes.isResponseError && console.log(errorRes.errorMessage)
-    // errorRes.isResponseError && console.log(errorResponse(errorRes, ''))
-
-    return <div>
-        {isShownEditPack
-            ? (
-                <>
-                    <nav>
-                        <ul className={s.menu}>
-                            <li className={``}>
-                                <NavLink to={PATH.PACKS} className={''}>Pack List</NavLink>
-                            </li>
-                            <li className={``}>
-                                <NavLink to={PATH.PROFILE} className={''}>Profile Page</NavLink>
-                            </li>
-                        </ul>
-                    </nav>
-
-
-                    <h2>Packs info</h2>
-                    {errorRes.isResponseError
-                        ? (
-                            <div>
-                                <span style={{color: 'red'}}>{errorResponse(errorRes, 'editPack')}</span>
-                            </div>)
-                        :
-                        (<div>
-                            <span>Question</span>
-                            <div>What ...?</div>
-                            <span>Answer</span>
-                            <div>Bla, bla...</div>
-                            <SuperButton onClick={OnCancelClick}>Cancel </SuperButton>
-                            <SuperButton onClick={OnSaveClick}>Save</SuperButton>
-                        </div>)
-                    }
-                </>
-            )
-            : <Navigate to={PATH.PACKS}/>
-        }
-    </div>
+    return (
+        <div className={s.wrapper}>
+            <div style={{width: '100%'}}>
+                {isLoading === "loading" && <div className={l.loader07}></div>}
+            </div>
+            <h3>Packs info</h3>
+            <div>
+                Edit name of pack {packName}?
+            </div>
+            <br/>
+            <SuperInputText value={newPackName}
+                            onChangeText={setNewPackName}
+                            onEnter={onKeyPressHandler}
+                            placeholder={'Enter new pack name'}
+                            error={errorResponse(errorRes, 'editPack')}
+                            spanClassName={s.inputError}
+            />
+            <SuperButton onClick={OnCancelClick}>Cancel</SuperButton>
+            <SuperButton onClick={onKeyPressHandler}>Save</SuperButton>
+        </div>
+    )
 }
 
 export default EditPack
