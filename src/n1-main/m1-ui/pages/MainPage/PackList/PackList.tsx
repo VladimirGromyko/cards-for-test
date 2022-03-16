@@ -38,9 +38,9 @@ const PackList = () => {
 
             // briefly hardcoded 1 packs request
             params: {
-                packName: 'english',
+                packName: '',
                 pageCount: 15,
-                user_id: ''
+                user_id: '622af9b229bee90004696543'
             }
         }))
     }, [dispatch, setPacksDataTC])
@@ -50,7 +50,7 @@ const PackList = () => {
         // dispatch()
     }, [])
     const onEditPressHandler = useCallback(() => {
-        navigate(PATH.EDIT_PACK)
+        navigate(PATH.CARDS)
         // dispatch()
     }, [])
     // dispatch()
@@ -96,6 +96,9 @@ const PackList = () => {
             </div>
             <div>
                 <button onClick={onLearnPressHandler}>Learn</button>
+            </div>
+            <div>
+                <NavLink to={'/packs/623056734348a50004eb4dc3'}>cards</NavLink>
             </div>
         </div>
 

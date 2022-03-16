@@ -10,5 +10,5 @@ export const PATH = {
     CHANGE_PASSWORD: '/change-pass/:token',
     PASSWORD_RECOVERY: '/pass-recovery',
     PACKS: '/packs',
-    CARDS: '/cards',
+    CARDS: '/packs/:id',
 }
