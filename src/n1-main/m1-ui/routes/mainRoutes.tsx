@@ -7,7 +7,7 @@ import MainPage from "../pages/MainPage/MainPage";
 import TestPage from "../pages/TestPage";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
 import PasswordRecoveryPage from "../pages/PasswordRecoveryPage";
-import AlternativeRegistration from '../pages/AlternativeRegistration';
+import Registration from '../pages/Registration';
 
 import PackList from "../pages/MainPage/PackList/PackList";
 import {ProfilePage} from "../pages/MainPage/profile/ProfilePage";
@@ -24,13 +24,13 @@ const MainRoutes = () => {
             <Routes>
 
                 <Route path={PATH.REGISTRATION}
-                       element={<h2 style={{textAlign: "center"}}><AlternativeRegistration/></h2>}/>
+                       element={<h2 style={{textAlign: "center"}}><Registration/></h2>}/>
                 <Route path={PATH.LOGIN} element={<h2 style={{textAlign: "center"}}><LoginPage/></h2>}/>
                 <Route path={PATH.PROFILE} element={<h2 style={{textAlign: "center"}}><ProfilePage/></h2>}/>
                 <Route path={PATH.MAIN} element={<h2 style={{textAlign: "center"}}><MainPage/></h2>}/>
                 <Route path={PATH.PACK_LIST} element={<h2 style={{textAlign: "center"}}><PackList/></h2>}/>
                 <Route path={PATH.EDIT_PACK} element={<h2 style={{textAlign: "center"}}><EditPack/></h2>}/>
-                {/* <Route path={PATH.TEST} element={<h2 style={{textAlign: "center"}}><TestPage/></h2>}/> */}
+                {/*<Route path={PATH.TEST} element={<h2 style={{textAlign: "center"}}><TestPage/></h2>}/>*/}
                 <Route path={PATH.CHANGE_PASSWORD}
                        element={<h2 style={{textAlign: "center"}}><ChangePasswordPage/></h2>}/>
                 <Route path={PATH.PASSWORD_RECOVERY}

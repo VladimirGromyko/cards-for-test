@@ -33,9 +33,6 @@ export const getAllCardAC = (cards: CardType[]) => ({
     type: 'GET-ALL-CARD', cards
 } as const);
 
-export const getPackUserIdAC = (packUserId: string) => ({
-    type: 'GET-PACK-USER-ID', packUserId
-} as const);
 
 export const addCardAC = (card: CardType) => ({
     type: 'ADD-CARD', card
