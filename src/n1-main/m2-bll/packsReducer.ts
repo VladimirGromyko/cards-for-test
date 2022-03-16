@@ -21,6 +21,8 @@ export const packsReducer = (state: statePacksType = initState,
         case "SHOW_MAIN_PAGE": {
             return {...state, isShownMainPage: action.isShownMainPage}
         }
+        // case "PACKS/CHANGE_CURRENT_PAGE":
+        //     return {...state, page: action.page}
         default:
             return state;
     }
@@ -30,6 +32,9 @@ export const setPacksDataAC = (packsData: PacksGetResponseDataType) => (
     {type: 'SET_PACKS_DATA', packsData}) as const
 export const showMainPageAC = (isShownMainPage: boolean) => (
     {type: 'SHOW_MAIN_PAGE', isShownMainPage}) as const
+export const changeCurrentPageAC = (page: number) =>
+    ({type: 'PACKS/CHANGE_CURRENT_PAGE', page} as const)
+type ChangeCurrentPageACType = ReturnType<typeof changeCurrentPageAC>
 
 export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: Dispatch<PacksReducerType>) => {
     dispatch(loadingAC('loading'))
@@ -54,3 +59,4 @@ type showMainPageACType = ReturnType<typeof showMainPageAC>
 export type PacksReducerType = SetPacksDataACType
     | LoadingACType
     | showMainPageACType
+    | ChangeCurrentPageACType

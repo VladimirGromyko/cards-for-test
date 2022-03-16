@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 // import {fetchPacksTC} from "./packsReducer";
 import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
@@ -8,7 +8,8 @@ import {PacksTable} from "./PacksTable";
 import {AppStoreType} from "../../../m2-bll/store";
 import Sidebar from "./Sidebar";
 import {HeaderPacks} from "./HeaderPacks";
-import { PATH } from "../../routes/Paths";
+import {PATH} from "../../routes/Paths";
+import {Pagination} from "../../common/c8-Pagination/Pagination";
 
 
 export const PacksPage = () => {
@@ -32,16 +33,22 @@ export const PacksPage = () => {
                 <div>Loading...</div>
             ) : (
                 <div className={commonPacksStyle.wrapper}>
+
                     <div className={commonPacksStyle.content}>
                         <Sidebar/>
                     </div>
                     <div className={commonPacksStyle.content}>
                         <div>Packs</div>
                         <SuperInputText placeholder='Enter packs name for searching'/>
+                        <div>ПАГИНАЦИЯ</div>
+                        <div>
+                            <Pagination/>
+                        </div>
+
                         <HeaderPacks/>
                         <PacksTable/>
                     </div>
-
+                    <div>ПАГИНАЦИЯ</div>
                 </div>
             )}
         </>

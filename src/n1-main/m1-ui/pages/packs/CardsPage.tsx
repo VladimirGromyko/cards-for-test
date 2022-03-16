@@ -5,6 +5,7 @@ import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
 import CardsTable from './CardsTable';
 
 const CardsPage = () => {
+
     return (
         <div className={packsStyle.content}>
                 <div className={packsStyle.wrapper}>
