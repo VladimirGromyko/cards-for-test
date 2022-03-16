@@ -8,8 +8,8 @@ import ChangePasswordPage from "../pages/ChangePasswordPage";
 import PasswordRecoveryPage from "../pages/PasswordRecoveryPage";
 import AlternativeRegistration from '../pages/AlternativeRegistration';
 import {ProfilePage} from "../pages/profile/ProfilePage";
-import {PacksPage} from "../pages/packs/PacksPage";
-import CardsPage from '../pages/packs/CardsPage';
+import {PacksPage} from "../pages/packs/packsPage/PacksPage";
+import CardsPage from '../pages/packs/cardsPage/CardsPage';
 
 
 const MainRoutes = () => {

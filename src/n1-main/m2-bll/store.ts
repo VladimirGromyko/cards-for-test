@@ -9,7 +9,7 @@ import {authReducer} from "./auth-reducer";
 import {loadingReducer} from "./loadingReducer";
 import {errorReducer} from "./errorReducer";
 import {authReducer1} from "./authReducer1";
-import {packsReducer} from "../m1-ui/pages/packs/packsReducer";
+import {packsReducer} from "./packsReducer";
 
 
 const reducers = combineReducers({

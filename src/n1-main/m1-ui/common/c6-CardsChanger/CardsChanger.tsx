@@ -27,7 +27,7 @@ function CardsChanger() {
             <div className={s.changeCard}>
                 <SuperButton onClick={onClickHandler}>Change card</SuperButton>
                     <div className={s.card}>Card number: </div>
-                    <div className={s.card}>{card.cardsName}</div>
+                    <div className={s.card}>{card.cards}</div>
             </div>
         </div>
     );

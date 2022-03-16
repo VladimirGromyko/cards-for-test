@@ -9,7 +9,7 @@ export const packsApi = {
                 ...payload,
             },
         });
-    }
+    },
 }
 
 export type FetchPacksType = {

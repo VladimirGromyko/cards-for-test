@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {AppStoreType} from "../../../m2-bll/store";
-import {cardPacksType} from "./packsReducer";
+import {AppStoreType} from "../../../../m2-bll/store";
+import {cardPacksType} from "../../../../m2-bll/packsReducer";
 import { PackItem } from "./PackItem";
 
 

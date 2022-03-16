@@ -1,9 +1,9 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import packsStyle from '../packs/PacksTable.module.css'
-import {cardPacksType} from './packsReducer'
-import SuperButton from '../../../m1-ui/common/c1-SuperButton/SuperButton'
-import {PATH} from '../../routes/Paths'
+import packsStyle from './PacksTable.module.css'
+import {cardPacksType} from '../../../../m2-bll/packsReducer'
+import SuperButton from '../../../common/c1-SuperButton/SuperButton'
+import {PATH} from '../../../routes/Paths'
 
 
 type TableItemPropsType = {

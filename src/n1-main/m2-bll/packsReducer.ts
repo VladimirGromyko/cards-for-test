@@ -1,7 +1,7 @@
 import { Dispatch } from "redux"
 import { ThunkDispatch } from "redux-thunk"
-import {AppStoreType} from "../../../m2-bll/store";
-import {packsApi} from "../../../m3-dal/packs-api";
+import {AppStoreType} from "./store";
+import {packsApi} from "../m3-dal/packs-api";
 
 
 
@@ -16,7 +16,7 @@ const initialState: initialStateType = {
     tokenDeathTime: 0,
     packName: "",
     sortedPackBtn: false,
-    min: 0,
+    min: 2,
     max: 200,
     id: "",
     name: "",
@@ -25,20 +25,20 @@ const initialState: initialStateType = {
 
 export const packsReducer = (state = initialState, action: ActionTypes): initialStateType => {
     switch (action.type) {
-        case "CARDS/PACKS":
+        case "SET-PACKS":
             return {
                 ...state,
                 ...action.data,
                 maxCardsCount: 200,
                 minCardsCount: 60,
-            };
+            }
         default:
-            return state;
+            return state
     }
 }
 
 export const setPacksAC = (data: initialStateType) => {
-    return { type: "CARDS/PACKS", data } as const
+    return { type: "SET-PACKS", data } as const
 }
 
 export const fetchPacksTC =
