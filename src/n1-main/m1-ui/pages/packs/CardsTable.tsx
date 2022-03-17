@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import cardsStyle from '../packs/CardsTable.module.css'
+import cardsStyle from './СardsTable.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
 import {CardType, getAllCardAC} from "../../../m2-bll/cardsReducer1";

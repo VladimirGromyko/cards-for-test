@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import s from '../packs/CardsTable.module.css'
+import s from './СardsTable.module.css'
 import SuperButton from '../../common/c1-SuperButton/SuperButton'
 import {PATH} from '../../routes/Paths'
 import {CardPacksType} from "../../../m3-dal/packs-api";

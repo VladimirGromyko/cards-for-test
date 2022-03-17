@@ -18,7 +18,7 @@ export const TestCardPage = () => {
 
     const getCards = () => {
         if (packId){
-            cardsAPI.getAllCards(packId, '1000').then(res=> {
+            cardsAPI.getAllCards({cardsPackId: packId,pageCount: '1000'}).then(res=> {
                 dispatch(getAllCardAC(res.data.cards))
             })
         }
