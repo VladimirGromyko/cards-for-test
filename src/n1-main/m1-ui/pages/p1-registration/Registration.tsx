@@ -9,6 +9,7 @@ import s from './Registration.module.css'
 import {LoadingStatusType} from "../../m2-bll/loadingReducer";
 import l from "../common/c7-Loading/loader07.module.css";
 
+
 const Registration = () => {
     const isRegistred = useSelector<AppStoreType>(state => state.register.isRegistered)
     const err = useSelector<AppStoreType>(state => state.register.error)

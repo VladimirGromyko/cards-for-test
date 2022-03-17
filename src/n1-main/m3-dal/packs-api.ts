@@ -7,17 +7,17 @@ export const packsAPI = {
         return instance.get <PacksGetRequestType, AxiosResponse<PacksGetResponseDataType>>(`cards/pack`,
             param);
     },
-    postPacks(cardsPack: PacksPostRequestType) {
+    postPacks(pack: PacksPostRequestType) {
         return instance.post <PacksPostRequestType, AxiosResponse<PacksPostResponseType>>('cards/pack',
-            cardsPack);
+            pack);
     },
     deletePacks(param: PacksDeleteRequestType) {
         return instance.delete <PacksDeleteRequestType, AxiosResponse<PacksDeleteResponseType>>('cards/pack',
             param);
     },
-    putPacks(cardsPack: PacksPutRequestType) {
+    putPacks(param: PacksPutRequestType) {
         return instance.put <PacksPutRequestType, AxiosResponse<PacksPutResponseType>>('cards/pack',
-            cardsPack);
+            param);
     },
 }
 export type PacksGetRequestType = {
@@ -50,7 +50,7 @@ export type PacksGetResponseDataType = {
     page: number // выбранная страница
     pageCount: number     // количество элементов на странице
 }
-export type CardPacksType={
+export type CardPacksType = {
     _id: string
     user_id: string
 
@@ -61,9 +61,11 @@ export type CardPacksType={
 }
 
 export type PacksPostRequestType = {
-    name?: string
-    deckCover?: string
-    private?: boolean
+    cardsPack: {
+        name?: string
+        deckCover?: string
+        private?: boolean
+    }
 }
 export type PacksPostResponseType = {
     newCardsPack: {}
@@ -75,8 +77,10 @@ export type PacksDeleteResponseType = {
     deletedCardsPack: {}
 }
 export type PacksPutRequestType = {
-    _id: string
-    name?: string
+    cardsPack: {
+        _id: string
+        name?: string
+    }
 }
 export type PacksPutResponseType = {
     updatedCardsPack: {}

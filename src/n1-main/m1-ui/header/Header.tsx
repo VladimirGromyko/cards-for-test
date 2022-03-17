@@ -39,9 +39,9 @@ function Header() {
                     <li className={``}>
                         <NavLink to={''} className={''} onClick={logOutHandler}>LogOut</NavLink>
                     </li>
-                    <li className={``}>
-                        <NavLink to={PATH.PACKS} className={''}>Packs</NavLink>
-                    </li>
+                    {/*<li className={``}>*/}
+                    {/*    <NavLink to={PATH.PACKS} className={''}>Packs</NavLink>*/}
+                    {/*</li>*/}
                 </ul>
             </nav>
         </div>

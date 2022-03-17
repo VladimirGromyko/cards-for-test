@@ -53,4 +53,3 @@ const CardsPage = () => {
 };
 
 export default CardsPage;
-
