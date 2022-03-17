@@ -43,7 +43,12 @@ export const PacksPage = () => {
                         </div>
 
                         <HeaderPacks/>
+
                         <PacksTable/>
+                        <div>
+                            <Pagination/>
+                        </div>
+
                     </div>
                 </div>
             )}
