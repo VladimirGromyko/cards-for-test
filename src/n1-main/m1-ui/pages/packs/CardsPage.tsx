@@ -1,14 +1,14 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import packsStyle from './СardsTable.module.css'
 import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
-import CardsTable from './CardsTable';
-import { HeaderCards } from "./HeaderCards";
-import { useDispatch, useSelector } from "react-redux";
-import { AppStoreType } from "../../../m2-bll/store";
-import { CardType, getAllCardAC } from "../../../m2-bll/cardsReducer1";
+
+import { useDispatch } from "react-redux";
+import { getAllCardAC } from "../../../m2-bll/cardsReducer1";
 import { useParams } from "react-router-dom";
 import { cardsAPI, SortNameType, SortNumberType } from "../../../m3-dal/cards-api";
 import SuperButton from "../../common/c1-SuperButton/SuperButton";
+import {HeaderCards} from "../MainPage/PackList/HeaderCards";
+import CardsTable from "../MainPage/PackList/Cards/CardsTable";
 
 const CardsPage = () => {
 

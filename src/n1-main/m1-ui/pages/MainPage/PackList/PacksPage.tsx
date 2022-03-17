@@ -61,7 +61,7 @@ export const PacksPage = () => {
                 pageCount: 15
             }
         }))
-    }, [dispatch, setPacksDataTC])
+    }, [dispatch])
 
     const onSetMyPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
@@ -72,11 +72,11 @@ export const PacksPage = () => {
                 user_id: ""
             }
         }))
-    }, [dispatch, setPacksDataTC])
+    }, [dispatch,])
 
     const addPackList = useCallback(() => {
         dispatch(showAddPackAC(true))
-    },[dispatch, showAddPackAC])
+    },[dispatch])
 
     const addPack = useCallback((pack: string) => {
         dispatch(addPacksTC({cardsPack:{name:pack}}))
@@ -92,7 +92,7 @@ export const PacksPage = () => {
         dispatch(showDeletePackAC(true))
         // console.log("Удалить у самурая : ", userId, "колоду с Id: ", packId)
         // dispatch()
-    }, [])
+    }, [dispatch])
     const deletePack = useCallback((packName: string, packId: string) => {
         console.log("Удалить колоду:", packName," с Id: ", packId)
         // dispatch()
@@ -103,20 +103,21 @@ export const PacksPage = () => {
     const editPackList = useCallback((packName: string, packId: string) => {
         dispatch(pickEditPackAC(packName, packId))
         dispatch(showEditPackAC(true))
-    }, [dispatch, pickEditPackAC, showEditPackAC])
+    }, [dispatch])
 
     const editPack = useCallback((packId: string, namePack: string) => {
         dispatch(editPackTC({cardsPack: {_id: packId, name: namePack}}))
         // dispatch(showEditPackAC(true))
-    }, [dispatch, pickEditPackAC, showEditPackAC])
+    }, [dispatch])
 
-    const hideEditPack= () => {
+    const hideEditPack= useCallback(() => {
         dispatch(showEditPackAC(false))
-    }
+    },[dispatch])
 
     const learnPack = useCallback((packId: string) => {
-        navigate(PATH.CARDS)
-    }, [])
+        navigate('/packs/'+packId)
+        // navigate(PATH.CARDS+packId)
+    }, [navigate])
 
     return (
             <div className={commonPacksStyle.wrapper}>

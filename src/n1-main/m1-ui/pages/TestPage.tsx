@@ -4,7 +4,7 @@ import SuperInputText from "../common/c2-SuperInput/SuperInputText";
 import s from './testPage.module.css'
 import ThemeChanger from "../common/c5-ThemeChanger/ThemeChanger";
 import CardsChanger from "../common/c6-CardsChanger/CardsChanger";
-import { cardsAPI } from '../../m3-dal/cards-api';
+
 
 
 const TestPage = () => {

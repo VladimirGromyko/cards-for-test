@@ -25,7 +25,7 @@ export const DeletePack = ({
 
     const onDeleteClick = useCallback(() => {
         deletePack(deletePackName, deletePackId)
-    }, [deletePack, deletePackId])
+    }, [deletePack, deletePackId, deletePackName])
 
     const OnCancelClick = useCallback(() => {
         hideDeletePack()

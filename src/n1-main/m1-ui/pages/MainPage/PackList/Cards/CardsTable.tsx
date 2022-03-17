@@ -1,25 +1,21 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
-import cardsStyle from './СardsTable.module.css'
-import {useDispatch, useSelector} from "react-redux";
-import {AppStoreType} from "../../../m2-bll/store";
-import {CardType, getAllCardAC} from "../../../m2-bll/cardsReducer1";
-import {useParams} from "react-router-dom";
-import {cardsAPI, SortNameType, SortNumberType} from "../../../m3-dal/cards-api";
-import packsStyle from "./PacksTable.module.css";
-import SuperButton from "../../common/c1-SuperButton/SuperButton";
-import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
-import { CardItem } from './CardItem';
+import cardsStyle from './CardsTable.module.css'
+import {useSelector} from "react-redux";
+import {cardsAPI, SortNameType, SortNumberType} from "../../../../../m3-dal/cards-api";
+import {AppStoreType} from "../../../../../m2-bll/store";
+import {CardType} from "../../../../../m2-bll/cardsReducer1";
+import {CardItem} from "../CardItem";
+import SuperInputText from "../../../../common/c2-SuperInput/SuperInputText";
+import SuperButton from "../../../../common/c1-SuperButton/SuperButton";
 
 export type CardsTablePropsType = {
     getCards: (packId:string, sortNumber?:SortNumberType, sortName?: SortNameType)=> void
     packId:string | undefined
 }
 
-
 const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
 
     const cardsIsGot = useSelector<AppStoreType, CardType[]>(state => state.cards1.cards)
-    const dispatch = useDispatch()
 
     const [quest, setQuest] = useState('')
     const [answer, setAnswerer] = useState('')
@@ -32,7 +28,7 @@ const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
 
     useEffect(() => {
         getCards()
-    }, [])
+    }, [getCards])
 
     const onClickGetCards = () => {
         getCards()
@@ -52,14 +48,12 @@ const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
             })
     }
 
-
     const onQuestionInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuest(e.currentTarget.value)
     }
     const onAnswerInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setAnswerer(e.currentTarget.value)
     }
-
 
     return (
         <div className={cardsStyle.container}>

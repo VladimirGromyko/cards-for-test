@@ -2,20 +2,15 @@ import React from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import Error404 from "../pages/Error404";
 import {PATH} from "./Paths";
-import LoginPage from "../pages/login/LoginPage";
 import MainPage from "../pages/MainPage/MainPage";
 import TestPage from "../pages/TestPage";
-import Registration from '../pages/Registration';
 import ChangePasswordPage from "../pages/p3-pass-recovery/ChangePasswordPage";
 import PasswordRecoveryPage from "../pages/p3-pass-recovery/PasswordRecoveryPage";
-
-
-import PackList from "../pages/MainPage/PackList/PackList";
 import {ProfilePage} from "../pages/MainPage/profile/ProfilePage";
-import EditPack from "../pages/MainPage/PackList/EditPack";
 import {PacksPage} from "../pages/MainPage/PackList/PacksPage";
 import CardsPage from '../pages/MainPage/PackList/Cards/CardsPage';
-
+import Registration from "../pages/p1-registration/Registration";
+import LoginPage from "../pages/p2-login/LoginPage";
 
 const MainRoutes = () => {
     return (
@@ -27,7 +22,6 @@ const MainRoutes = () => {
                 <Route path={PATH.LOGIN} element={<h2 style={{textAlign: "center"}}><LoginPage/></h2>}/>
                 <Route path={PATH.PROFILE} element={<h2 style={{textAlign: "center"}}><ProfilePage/></h2>}/>
                 <Route path={PATH.MAIN} element={<h2 style={{textAlign: "center"}}><MainPage/></h2>}/>
-                {/*<Route path={PATH.EDIT_PACK} element={<h2 style={{textAlign: "center"}}><EditPack/></h2>}/>*/}
                 <Route path={PATH.TEST} element={<h2 style={{textAlign: "center"}}><TestPage/></h2>}/>
                 <Route path={PATH.CHANGE_PASSWORD}
                        element={<h2 style={{textAlign: "center"}}><ChangePasswordPage/></h2>}/>

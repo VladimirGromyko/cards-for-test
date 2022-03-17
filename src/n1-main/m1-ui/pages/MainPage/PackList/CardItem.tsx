@@ -1,11 +1,7 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
-import s from './СardsTable.module.css'
-import SuperButton from '../../common/c1-SuperButton/SuperButton'
-import {PATH} from '../../routes/Paths'
-import {CardPacksType} from "../../../m3-dal/packs-api";
-import {CardType} from "../../../m2-bll/cardsReducer1"
-
+import s from '../PackList/Cards/CardsTable.module.css'
+import {CardType} from "../../../../m2-bll/cardsReducer1";
+import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 
 type CardItemPropsType = {
     card: CardType
@@ -13,8 +9,6 @@ type CardItemPropsType = {
 }
 
 export const CardItem  = ({onClickDeleteCards, card}:CardItemPropsType) => {
-
-
     return (
         <div className={s.items}>
                         <div>{card.question}</div>
@@ -23,6 +17,5 @@ export const CardItem  = ({onClickDeleteCards, card}:CardItemPropsType) => {
                         <div>{card.grade}</div>
                         <SuperButton onClick={() => onClickDeleteCards(card._id)}>delete card</SuperButton>
                     </div>
-
     )
 }

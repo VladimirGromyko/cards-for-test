@@ -1,8 +1,8 @@
-import s from '../packs/HeaderCards.module.css'
+import s from './HeaderCards.module.css'
 import React from 'react'
-import { SortNameType, SortNumberType } from '../../../m3-dal/cards-api'
-import { useParams } from 'react-router-dom'
-import { CardsTablePropsType } from './CardsTable'
+import {CardsTablePropsType} from "./Cards/CardsTable";
+import {SortNameType, SortNumberType} from "../../../../m3-dal/cards-api";
+
 
 export const HeaderCards = ({ getCards, packId, ...props }: CardsTablePropsType) => {
 

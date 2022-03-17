@@ -7,8 +7,6 @@ import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import s from '../../p3-pass-recovery/PassRecovery.module.css';
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import l from "../../../common/c7-Loading/loader07.module.css";
-
-import {editPackTC} from "../../../../m2-bll/packsReducer";
 import { LoadingStatusType } from '../../../../m2-bll/loadingReducer';
 
 type EditPackType = {
@@ -27,7 +25,7 @@ const EditPack = ({editPack, packId, packName, hideEditPack, isLoading}: EditPac
     const onKeyPressHandler = useCallback(() => {
         let trimNewPackName = newPackName.trim()
         editPack(packId, trimNewPackName)
-    }, [editPackTC, packId, newPackName])
+    }, [editPack, packId, newPackName])
 
     const OnCancelClick = useCallback(() => {
         hideEditPack()

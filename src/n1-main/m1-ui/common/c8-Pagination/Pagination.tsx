@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+// import Pagination from '@mui/material/Pagination';
+// import Stack from '@mui/material/Stack';
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
 import {setPacksDataTC} from "../../../m2-bll/packsReducer";
@@ -18,10 +18,10 @@ export default function PaginationRounded() {
 
     return (
         <div className={s.pagination}>
-        <Stack spacing={2}>
-            <Pagination count={portionCount} onChange={getCurentPage} shape="rounded" />
+        {/*<Stack spacing={2}>*/}
+        {/*    <Pagination count={portionCount} onChange={getCurentPage} shape="rounded" />*/}
 
-        </Stack>
+        {/*</Stack>*/}
         </div>
     );
 }

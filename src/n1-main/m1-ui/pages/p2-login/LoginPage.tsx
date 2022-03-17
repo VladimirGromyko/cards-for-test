@@ -34,7 +34,7 @@ const LoginPage =() => {
         if (isLoggedIn) {
             navigate(PATH.PROFILE)
         }
-    }, [isLoggedIn])
+    }, [isLoggedIn,navigate])
 
 
 

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react'
+import React, {useCallback} from 'react'
 import packsStyle from './PacksTable.module.css'
 import SuperButton from '../../../common/c1-SuperButton/SuperButton'
 import {CardPacksType} from "../../../../m3-dal/packs-api";

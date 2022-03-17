@@ -1,4 +1,4 @@
-import s from './HeaderPacks.module.css'
+import s from './HeaderCards.module.css'
 import React from 'react'
 
 export const HeaderPacks = () => {
