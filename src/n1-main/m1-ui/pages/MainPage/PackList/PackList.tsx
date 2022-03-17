@@ -28,7 +28,7 @@ const PackList = () => {
             // briefly hardcoded 1 packs request
             params: {
                 //packName: 'english',
-                pageCount: 15
+                pageCount: 10
             }
         }))
     }, [dispatch, setPacksDataTC])
@@ -39,7 +39,7 @@ const PackList = () => {
             // briefly hardcoded 1 packs request
             params: {
                 packName: '',
-                pageCount: 15,
+                pageCount: 10,
                 user_id: '622af9b229bee90004696543'
             }
         }))
