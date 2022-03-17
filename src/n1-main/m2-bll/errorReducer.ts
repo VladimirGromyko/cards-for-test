@@ -1,4 +1,5 @@
-export type PageOfResponseError = 'changePas' | 'passwordRec' | 'setPacks' | 'editPack' | ''
+export type PageOfResponseError = 'changePas' | 'passwordRec' | 'setPacks'
+    | 'editPack' | 'addPack' | 'deletePack' |''
 
 const initState = {
     isResponseError: false,

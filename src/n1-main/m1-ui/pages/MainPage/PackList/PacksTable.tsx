@@ -4,24 +4,32 @@ import {CardPacksType} from "../../../../m3-dal/packs-api";
 import l from "../../../common/c7-Loading/loader07.module.css";
 import EditPack from "./EditPack";
 import {LoadingStatusType} from "../../../../m2-bll/loadingReducer";
+import {DeletePack} from "./DeletePack";
 
 type PacksTableType = {
-    deletePack: (userId: string, packId: string) => void
+    deletePack: (packName: string, pack: string) => void
+    deletePackList: (packName: string, packId: string) => void
+    hideDeletePack: () => void
+    deletePackId: string
+    deletePackName: string
     editPack: (packId: string, namePack: string) => void
-    pickEditPack: (packName: string, packId: string) => void
+    editPackList: (packName: string, packId: string) => void
+    hideEditPack: () => void
     packId: string
     packName: string
     learnPack: (packId: string) => void
     cardPacks: CardPacksType[]
     isLoading: LoadingStatusType
     isShownEditPack: boolean
-    hideEditPack: () => void
+    isShownDeletePack: boolean
 }
 
 
 export const PacksTable = ({
-                               deletePack, editPack, pickEditPack, packId, packName, learnPack,
-                               cardPacks, isLoading, isShownEditPack, hideEditPack
+                               deletePack, deletePackList, hideDeletePack, deletePackId,
+                               deletePackName, editPack, editPackList, hideEditPack,
+                               packId, packName, learnPack, cardPacks, isLoading,
+                               isShownEditPack, isShownDeletePack
                            }: PacksTableType) => {
 
     return (
@@ -33,15 +41,23 @@ export const PacksTable = ({
                         packId={packId}
                         packName={packName}
                         hideEditPack={hideEditPack}
+                        isLoading={isLoading}
                     />)
-                : (cardPacks.map((pack) => {
-                    return <PackItem key={pack._id}
-                                     deletePack={deletePack}
-                                     pickEditPack={pickEditPack}
-                                     learnPack={learnPack}
-                                     pack={pack}
-                    />
-                }))
+                : isShownDeletePack ?
+                    (<DeletePack
+                        deletePack={deletePack}
+                        hideDeletePack={hideDeletePack}
+                        deletePackId={deletePackId}
+                        deletePackName={deletePackName}
+                        isLoading={isLoading}/>)
+                    : (cardPacks.map((pack) => {
+                        return <PackItem key={pack._id}
+                                         deletePackList={deletePackList}
+                                         editPackList={editPackList}
+                                         learnPack={learnPack}
+                                         pack={pack}
+                        />
+                    }))
             }
         </div>
     )

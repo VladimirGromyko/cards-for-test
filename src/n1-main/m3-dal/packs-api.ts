@@ -7,9 +7,9 @@ export const packsAPI = {
         return instance.get <PacksGetRequestType, AxiosResponse<PacksGetResponseDataType>>('cards/pack',
             param);
     },
-    postPacks(cardsPack: PacksPostRequestType) {
+    postPacks(pack: PacksPostRequestType) {
         return instance.post <PacksPostRequestType, AxiosResponse<PacksPostResponseType>>('cards/pack',
-            cardsPack);
+            pack);
     },
     deletePacks(param: PacksDeleteRequestType) {
         return instance.delete <PacksDeleteRequestType, AxiosResponse<PacksDeleteResponseType>>('cards/pack',
@@ -60,9 +60,11 @@ export type CardPacksType = {
 }
 
 export type PacksPostRequestType = {
-    name?: string
-    deckCover?: string
-    private?: boolean
+    cardsPack: {
+        name?: string
+        deckCover?: string
+        private?: boolean
+    }
 }
 export type PacksPostResponseType = {
     newCardsPack: {}

@@ -4,21 +4,21 @@ import SuperButton from '../../../common/c1-SuperButton/SuperButton'
 import {CardPacksType} from "../../../../m3-dal/packs-api";
 
 type TableItemPropsType = {
-    deletePack: (userId: string, packId: string) => void
-    pickEditPack: (packName: string, packId: string) => void
+    deletePackList: (packName: string, packId: string) => void
+    editPackList: (packName: string, packId: string) => void
     learnPack: (packId: string) => void
     pack: CardPacksType
 }
 
-export const PackItem = ({deletePack, pickEditPack, learnPack, pack}: TableItemPropsType) => {
+export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableItemPropsType) => {
 
     const onDeletePressHandler = useCallback(() => {
-        deletePack(pack.user_id, pack._id)
-    }, [deletePack, pack.user_id, pack._id])
+        deletePackList(pack.name, pack._id)
+    }, [deletePackList, pack.name, pack._id])
 
     const onEditPressHandler = useCallback(() => {
-        pickEditPack(pack.name, pack._id)
-    }, [pickEditPack, pack.name, pack._id])
+        editPackList(pack.name, pack._id)
+    }, [editPackList, pack.name, pack._id])
 
     const onLearnPressHandler = useCallback(() => {
         learnPack(pack._id)
