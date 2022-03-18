@@ -16,14 +16,14 @@ export const cardsAPI = {
     getCardBySearch(params:{cardsPackId: string, pageCount?:string, search?:string}){
         return instance.get(`/cards/card?cardsPack_id=${params.cardsPackId}&pageCount=${params.pageCount}&cardQuestion=${params.search}`)
     },
-    addCard(cardsPack_id: string, question: string, answer:string){
-        return instance.post(`/cards/card`, {card: {cardsPack_id, question, answer}})
+    addCard(params:{cardsPack_id: string, question: string, answer:string}){
+        return instance.post(`/cards/card`, {card: {cardsPack_id:params.cardsPack_id, question:params.question, answer:params.answer}})
     },
-    deleteCard(cardId: string){
-        return instance.delete(`/cards/card?id=${cardId}`)
+    deleteCard(params:{cardId: string}){
+        return instance.delete(`/cards/card?id=${params.cardId}`)
     },
-    updateCard(cardId: string, newQuestion?: string){
-        return instance.put(`/cards/card`, {card: {_id:cardId, question:newQuestion}})
+    updateCard(params:{cardId: string, newQuestion?: string}){
+        return instance.put(`/cards/card`, {card: {_id:params.cardId, question:params.newQuestion}})
     },
 }
 

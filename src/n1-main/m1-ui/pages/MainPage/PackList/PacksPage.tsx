@@ -20,6 +20,7 @@ import {
     showEditPackAC
 } from "../../../../m2-bll/packsReducer";
 import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
+import {CardPacksType} from "../../../../m3-dal/packs-api";
 import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
@@ -33,6 +34,8 @@ export const PacksPage = () => {
     // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
+    const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
+    const user = useSelector<AppStoreType>(state => state.login.user)
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
@@ -66,13 +69,16 @@ export const PacksPage = () => {
 
     const onSetMyPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
-            // briefly hardcoded 1 Cards request
-            params: {
-                // packName: 'english',
-                // pageCount: 5,
-                user_id: ""
-            }
-        }))
+                // briefly hardcoded 1 Cards request
+                params: {
+                    // packName: 'english',
+                    // pageCount: 5,
+                    // user_id: "622af9b229bee90004696543"
+                    // @ts-ignore
+                    user_id: user._id
+                }
+            }))
+
     }, [dispatch,])
 
     const addPackList = useCallback(() => {
@@ -138,10 +144,11 @@ export const PacksPage = () => {
                         <li className={``}>
                             <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
                         </li>
+                        {/*<li>*/}
+                        {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
+                        {/*</li>*/}
                     </ul>
-                    <div>
-                        <NavLink to={'/packs/623056734348a50004eb4dc3'}>cards</NavLink>
-                    </div>
+
                 </nav>
                 <div className={commonPacksStyle.content}>Show cardPacks card
                     <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
