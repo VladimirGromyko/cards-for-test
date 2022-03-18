@@ -50,7 +50,6 @@ export const deleteCardAC = (cardId: string) => ({
 
 export const getCardsTC = (params:{packId:string,sortNumber?: SortNumberType, sortName?: SortNameType }) => (dispatch: Dispatch) => {
     dispatch(loadingAC('loading'))
-    debugger
     cardsAPI.getAllCards({
         cardsPackId: params.packId,
         pageCount: '1000',
