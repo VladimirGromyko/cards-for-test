@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
 import cardsStyle from './CardsTable.module.css'
 import {useSelector} from "react-redux";
 import {cardsAPI, SortNameType, SortNumberType} from "../../../../../m3-dal/cards-api";
@@ -20,15 +20,15 @@ const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
     const [quest, setQuest] = useState('')
     const [answer, setAnswerer] = useState('')
 
-    const getCards = (sortNumber?:SortNumberType, sortName?: SortNameType) => {
+    const getCards = useCallback((sortNumber?:SortNumberType, sortName?: SortNameType) => {
         if (packId) {
             props.getCards(packId, sortNumber, sortName)
         }
-    }
+    }, [packId, props])
 
     useEffect(() => {
         getCards()
-    }, [])
+    }, [getCards])
 
     const onClickGetCards = () => {
         getCards()

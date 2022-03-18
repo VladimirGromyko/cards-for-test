@@ -14,12 +14,12 @@ import {
     addPacksTC,
     editPackTC,
     pickDeletePackAC,
-    pickEditPackAC,
+    pickEditPackAC, setCurrentPage,
     setPacksDataTC,
     showAddPackAC, showDeletePackAC,
     showEditPackAC
 } from "../../../../m2-bll/packsReducer";
-import {CardPacksType} from "../../../../m3-dal/packs-api";
+import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
 import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
@@ -31,7 +31,8 @@ export const PacksPage = () => {
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
-    const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
+    const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+    const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
@@ -58,7 +59,7 @@ export const PacksPage = () => {
             // briefly hardcoded 1 Cards request
             params: {
                 packName: '',
-                pageCount: 15
+                pageCount: 100
             }
         }))
     }, [dispatch])
@@ -119,6 +120,11 @@ export const PacksPage = () => {
         // navigate(PATH.CARDS+packId)
     }, [navigate])
 
+    const onPageChanged = (pageNumber: number) => {
+        console.log("pageNumber: ", pageNumber)
+        dispatch(setCurrentPage(pageNumber))
+    }
+
     return (
             <div className={commonPacksStyle.wrapper}>
                 <div style={{width: '100%'}}>
@@ -156,7 +162,7 @@ export const PacksPage = () => {
                         hideAddPack={hideAddPack}
                         isLoading={isLoading}/>}
                     <HeaderPacks/>
-                    {cardPacks && <PacksTable
+                    {packs && !isShownAddPack && <PacksTable
                         deletePack={deletePack}
                         deletePackList={deletePackList}
                         hideDeletePack={hideDeletePack}
@@ -168,11 +174,12 @@ export const PacksPage = () => {
                         packId={pickedEditPack.packId}
                         packName={pickedEditPack.packName}
                         learnPack={learnPack}
-                        cardPacks={cardPacks}
+                        packs={packs}
                         isLoading={isLoading}
                         isShownEditPack={isShownEditPack}
                         isShownDeletePack={isShownDeletePack}
-
+                        currentPage={currentPage}
+                        onPageChanged={onPageChanged}
                     />}
                 </div>
             </div>
