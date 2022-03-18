@@ -10,7 +10,7 @@ import SuperButton from "../../common/c1-SuperButton/SuperButton";
 import {HeaderCards} from "../MainPage/PackList/HeaderCards";
 import CardsTable from "../MainPage/PackList/Cards/CardsTable";
 
-const CardsPage = () => {
+const CardsPageEX = () => {
 
     const dispatch = useDispatch()
     const params = useParams()
@@ -52,4 +52,4 @@ const CardsPage = () => {
     );
 };
 
-export default CardsPage;
+export default CardsPageEX;

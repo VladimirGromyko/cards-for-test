@@ -133,6 +133,9 @@ export const PacksPage = () => {
                             <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
                         </li>
                     </ul>
+                    <div>
+                        <NavLink to={'/packs/623056734348a50004eb4dc3'}>cards</NavLink>
+                    </div>
                 </nav>
                 <div className={commonPacksStyle.content}>Show cardPacks card
                     <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>

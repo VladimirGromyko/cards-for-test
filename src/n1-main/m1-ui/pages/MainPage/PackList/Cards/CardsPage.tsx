@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import packsStyle from './CardsTable.module.css'
 import CardsTable from './CardsTable';
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {useParams} from "react-router-dom";
 import {cardsAPI, SortNameType, SortNumberType} from "../../../../../m3-dal/cards-api";
 import {getAllCardAC} from "../../../../../m2-bll/cardsReducer1";
 import SuperInputText from "../../../../common/c2-SuperInput/SuperInputText";
@@ -16,8 +16,8 @@ const CardsPage = () => {
     const packId = params.id
     const [searchValue, setSearchValue] = useState('')
 
-    const getCards = (packId: string, sortNumber?: SortNumberType, sortName?: SortNameType,search?:string) => {
-        cardsAPI.getAllCards({cardsPackId:packId, pageCount:'1000', sortNumber, sortName}).then(res => {
+    const getCards = (packId: string, sortNumber?: SortNumberType, sortName?: SortNameType, search?: string) => {
+        cardsAPI.getAllCards({cardsPackId: packId, pageCount: '1000', sortNumber, sortName}).then(res => {
             dispatch(getAllCardAC(res.data.cards))
         })
     }
@@ -27,9 +27,9 @@ const CardsPage = () => {
     }
 
     const onSearchClick = () => {
-        if(packId){
-            cardsAPI.getCardBySearch({cardsPackId:packId,pageCount:'1000', search:searchValue}).then(res => {
-                debugger
+        if (packId) {
+            cardsAPI.getCardBySearch({cardsPackId: packId, pageCount: '1000', search: searchValue}).then(res => {
+                dispatch(getAllCardAC(res.data.cards))
             })
         }
 
@@ -40,10 +40,11 @@ const CardsPage = () => {
         <div className={packsStyle.content}>
             <div className={packsStyle.wrapper}>
                 <h3>Pack name</h3>
-                <SuperInputText onChange={onSearchInputChange} placeholder='Enter cards name for searching' />
-                <SuperButton onClick={onSearchClick}>Search</SuperButton>
-                <HeaderCards getCards={getCards} packId={packId} />
-                <CardsTable getCards={getCards} packId={packId} />
+                <div className={packsStyle.search}>
+                    <SuperInputText onChange={onSearchInputChange} placeholder='Enter cards name for searching'/>
+                    <SuperButton onClick={onSearchClick}>Search</SuperButton></div>
+                <HeaderCards getCards={getCards} packId={packId}/>
+                <CardsTable getCards={getCards} packId={packId}/>
 
             </div>
 
