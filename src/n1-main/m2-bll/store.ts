@@ -1,15 +1,15 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {registerReducer} from './registerReducer';
-import thunkMiddleware from 'redux-thunk'
+import {RegisterActionType, registerReducer} from './registerReducer';
+import thunkMiddleware, { ThunkAction } from 'redux-thunk'
 import {themeReducer} from "./themeReducer";
 import {cardsReducer} from "./cardsReducer";
-import {loginReducer} from "./loginReducer";
-import {authReducer} from "./auth-reducer";
-import {loadingReducer} from "./loadingReducer";
-import {errorReducer} from "./errorReducer";
-import {authReducer1} from "./authReducer1";
-import {cardsReducer1} from "./cardsReducer1";
-import {packsReducer} from "./packsReducer";
+import {LoginActionsType, loginReducer} from "./loginReducer";
+import {authReducer, NewPassActionsType} from "./auth-reducer";
+import {LoadingACType, loadingReducer} from "./loadingReducer";
+import {errorReducer, ResponseErrorACType} from "./errorReducer";
+import {authReducer1, authReducerType} from "./authReducer1";
+import {CardsActionType, cardsReducer1} from "./cardsReducer1";
+import {packsReducer, PacksReducerType} from "./packsReducer";
 
 const reducers = combineReducers({
     cards: cardsReducer,
@@ -27,6 +27,9 @@ const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 export default store
 
 export type AppStoreType = ReturnType<typeof reducers>
+export type AppActionType = CardsActionType | RegisterActionType | PacksReducerType | LoginActionsType | LoadingACType | ResponseErrorACType | authReducerType | NewPassActionsType
+
+export type ThunkType = ThunkAction<void, AppStoreType, unknown, AppActionType>
 
 // @ts-ignore
 window.store = store // for dev

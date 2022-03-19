@@ -1,13 +1,13 @@
-import {useDispatch, useSelector} from "react-redux";
-import {NavLink, useNavigate} from "react-router-dom";
-import React, {useCallback} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import React, { useCallback } from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
-import {PacksTable} from "./PacksTable";
-import {AppStoreType} from "../../../../m2-bll/store";
+import { PacksTable } from "./PacksTable";
+import { AppStoreType } from "../../../../m2-bll/store";
 import Sidebar from "./Sidebar";
-import {HeaderPacks} from "./HeaderPacks";
-import {PATH} from "../../../routes/Paths";
+import { HeaderPacks } from "./HeaderPacks";
+import { PATH } from "../../../routes/Paths";
 import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {
@@ -20,11 +20,11 @@ import {
     showEditPackAC
 } from "../../../../m2-bll/packsReducer";
 import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
-import {CardPacksType} from "../../../../m3-dal/packs-api";
+import { CardPacksType } from "../../../../m3-dal/packs-api";
 import s from '../../../header/header.module.css';
-import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
-import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
-import {AddPack} from "./AddPack";
+import { ResponseErrorStateType } from "../../../../m2-bll/errorReducer";
+import { errorResponse } from "../../../../../n2-features/f0-test/errorResponse";
+import { AddPack } from "./AddPack";
 
 
 export const PacksPage = () => {
@@ -48,11 +48,11 @@ export const PacksPage = () => {
         state.packs.isShownDeletePack)
 
     const pickedEditPack = useSelector<AppStoreType, { packName: string, packId: string }>
-    ((state: AppStoreType) => state.packs.pickedEditPack)
+        ((state: AppStoreType) => state.packs.pickedEditPack)
 
-    const pickedDeletePack = useSelector<AppStoreType, {packName: string, packId: string }>
-    ((state: AppStoreType) => state.packs.pickedDeletePack)
-        // pickedDeletePack)
+    const pickedDeletePack = useSelector<AppStoreType, { packName: string, packId: string }>
+        ((state: AppStoreType) => state.packs.pickedDeletePack)
+    // pickedDeletePack)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -69,15 +69,15 @@ export const PacksPage = () => {
 
     const onSetMyPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
-                // briefly hardcoded 1 Cards request
-                params: {
-                    // packName: 'english',
-                    // pageCount: 5,
-                    // user_id: "622af9b229bee90004696543"
-                    // @ts-ignore
-                    user_id: user._id
-                }
-            }))
+            // briefly hardcoded 1 Cards request
+            params: {
+                // packName: 'english',
+                // pageCount: 5,
+                // user_id: "622af9b229bee90004696543"
+                // @ts-ignore
+                user_id: user._id
+            }
+        }))
 
     }, [dispatch,])
 
@@ -86,25 +86,25 @@ export const PacksPage = () => {
     },[dispatch])
 
     const addPack = useCallback((pack: string) => {
-        dispatch(addPacksTC({cardsPack:{name:pack}}))
+        dispatch(addPacksTC({ cardsPack: { name: pack } }))
         // dispatch(showEditPackAC(true))
         // console.log('New pack: ', pack)
-    }, [dispatch, ])
+    }, [dispatch,])
 
-    const hideAddPack= () => {
+    const hideAddPack = () => {
         dispatch(showAddPackAC(false))
     }
-    const deletePackList = useCallback((packName: string,packId: string) => {
+    const deletePackList = useCallback((packName: string, packId: string) => {
         dispatch(pickDeletePackAC(packName, packId))
         dispatch(showDeletePackAC(true))
         // console.log("Удалить у самурая : ", userId, "колоду с Id: ", packId)
         // dispatch()
     }, [dispatch])
     const deletePack = useCallback((packName: string, packId: string) => {
-        console.log("Удалить колоду:", packName," с Id: ", packId)
+        console.log("Удалить колоду:", packName, " с Id: ", packId)
         // dispatch()
     }, [])
-    const hideDeletePack= () => {
+    const hideDeletePack = () => {
         dispatch(showDeletePackAC(false))
     }
     const editPackList = useCallback((packName: string, packId: string) => {
@@ -113,16 +113,16 @@ export const PacksPage = () => {
     }, [dispatch])
 
     const editPack = useCallback((packId: string, namePack: string) => {
-        dispatch(editPackTC({cardsPack: {_id: packId, name: namePack}}))
+        dispatch(editPackTC({ cardsPack: { _id: packId, name: namePack } }))
         // dispatch(showEditPackAC(true))
     }, [dispatch])
 
-    const hideEditPack= useCallback(() => {
+    const hideEditPack = useCallback(() => {
         dispatch(showEditPackAC(false))
-    },[dispatch])
+    }, [dispatch])
 
     const learnPack = useCallback((packId: string) => {
-        navigate('/packs/'+packId)
+        navigate('/packs/' + packId)
         // navigate(PATH.CARDS+packId)
     }, [navigate])
 
@@ -132,33 +132,36 @@ export const PacksPage = () => {
     }
 
     return (
-            <div className={commonPacksStyle.wrapper}>
-                <div style={{width: '100%'}}>
-                    {isLoading === "loading" && <div className={l.loader07}></div>}
-                </div>
-                <nav>
-                    <ul className={s.menu}>
-                        <li className={``}>
-                            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
-                        </li>
-                        <li className={``}>
-                            <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
-                        </li>
-                        {/*<li>*/}
-                        {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
-                        {/*</li>*/}
-                    </ul>
+        <div className={commonPacksStyle.wrapper}>
+            <div style={{ width: '100%' }}>
+                {isLoading === "loading" && <div className={l.loader07}></div>}
+            </div>
+            <nav>
+                <ul className={s.menu}>
+                    <li className={``}>
+                        <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
+                    </li>
+                    <li className={``}>
+                        <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
+                    </li>
+                    {/*<li>*/}
+                    {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
+                    {/*</li>*/}
+                </ul>
 
-                </nav>
-                <div className={commonPacksStyle.content}>Show cardPacks card
-                    <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
-                    <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
-                    <div style={{color: 'red'}}>
+            </nav>
+            <div>
+                <div className={commonPacksStyle.content}>Show Packs
+                    <div>
+                        <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
+                        <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
+                    </div>
+                    <div style={{ color: 'red' }}>
                         {errorResponse(errorRes, 'setPacks')}
                     </div>
                 </div>
-                <div className={commonPacksStyle.content}>Number of cards
-                    <Sidebar/>
+                <div className={commonPacksStyle.content}>
+                    <Sidebar />
                 </div>
                 <div className={commonPacksStyle.content}>
                     <div>Packs</div>

@@ -27,31 +27,17 @@ const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
         }
     }, [packId, props])
 
-    useEffect(() => {
-        getCards()
-    }, [])
-
     const onClickGetCards = () => {
         getCards()
     }
     const onClickAddCards = () => {
         if (packId) {
-            // cardsAPI.addCard(packId, quest, answer).then(res => {
-            //         getCards()
-            //     }
-            // )
             dispatch(addCardTC({packId, quest, answer}))
         }
     }
 
     const onClickDeleteCards = (cardId: string) => {
-            // cardsAPI.deleteCard(cardId).then(res => {
-            //     getCards()
-            // })
-        if(packId){
-            dispatch(deleteCardTC({packId, cardId}))
-        }
-
+            dispatch(deleteCardTC(cardId))
     }
 
     const onQuestionInputChange = (e: ChangeEvent<HTMLInputElement>) => {
