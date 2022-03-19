@@ -11,13 +11,11 @@ import {instance} from "./instance";
 export const cardsAPI = {
 
     getAllCards(params:{cardsPackId: string, pageCount?:string, sortNumber?:SortNumberType, sortName?: SortNameType , search?:string}) {
-        return instance.get(`/cards/card?cardsPack_id=${params.cardsPackId}&pageCount=${params.pageCount}&sortCards=${params.sortNumber}${params.sortName}`);
-    },
-    getCardBySearch(params:{cardsPackId: string, pageCount?:string, search?:string}){
-        return instance.get(`/cards/card?cardsPack_id=${params.cardsPackId}&pageCount=${params.pageCount}&cardQuestion=${params.search}`)
+        return instance.get(`/cards/card?cardsPack_id=${params.cardsPackId}&pageCount=${params.pageCount}&sortCards=${params.sortNumber}${params.sortName}&cardQuestion=${params.search}`);
     },
     addCard(params:{cardsPack_id: string, question: string, answer:string}){
-        return instance.post(`/cards/card`, {card: {cardsPack_id:params.cardsPack_id, question:params.question, answer:params.answer}})
+        debugger
+        return  instance.post(`/cards/card`, {card: {cardsPack_id:params.cardsPack_id, question:params.question, answer:params.answer}})
     },
     deleteCard(params:{cardId: string}){
         return instance.delete(`/cards/card?id=${params.cardId}`)
