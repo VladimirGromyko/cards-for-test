@@ -8,6 +8,7 @@
     margin: 0 auto;
     padding: 20px;
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
+    background: rgb(245 246 250);
 }
 .title {
     font-size: 25px;
