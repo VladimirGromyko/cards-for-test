@@ -1,0 +1,23 @@
+.paginator {
+    margin: 10px;
+    cursor: pointer;
+}
+.pageNumber {
+    padding: 2px;
+    border: 1px solid grey;
+}
+
+.selectedPage {
+    font-weight: bold;
+    font-size: large;
+}
+
+.pageNumber.selectedPage {
+    font-weight: bold;
+    color: aqua;
+    border-color: black;
+}
+/*
+.unselectedPage {
+    font-weight: normal;
+}*/

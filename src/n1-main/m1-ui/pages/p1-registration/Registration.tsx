@@ -1,15 +1,16 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {registrationTC, setRegisteredAC} from '../../m2-bll/registerReducer'
-import {AppStoreType} from '../../m2-bll/store'
-import SuperButton from '../common/c1-SuperButton/SuperButton'
-import {PATH} from '../routes/Paths'
 import s from './Registration.module.css'
-import {LoadingStatusType} from "../../m2-bll/loadingReducer";
-import l from "../common/c7-Loading/loader07.module.css";
+import l from "../../common/c7-Loading/loader07.module.css";
+import {AppStoreType} from "../../../m2-bll/store";
+import {LoadingStatusType} from "../../../m2-bll/loadingReducer";
+import {registrationTC, setRegisteredAC} from "../../../m2-bll/registerReducer";
+import {PATH} from "../../routes/Paths";
+import SuperButton from "../../common/c1-SuperButton/SuperButton";
 
-const AlternativeRegistration = () => {
+
+const Registration = () => {
     const isRegistred = useSelector<AppStoreType>(state => state.register.isRegistered)
     const err = useSelector<AppStoreType>(state => state.register.error)
     const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
@@ -68,4 +69,4 @@ const AlternativeRegistration = () => {
     )
 }
 
-export default AlternativeRegistration
+export default Registration

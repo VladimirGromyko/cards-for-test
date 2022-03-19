@@ -1,15 +1,17 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import SuperInputText from "../common/c2-SuperInput/SuperInputText";
-import SuperButton from "../common/c1-SuperButton/SuperButton";
-import l from "../common/c7-Loading/loader07.module.css";
+import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
+import SuperButton from "../../common/c1-SuperButton/SuperButton";
+import l from "../../common/c7-Loading/loader07.module.css";
 import s from './PassRecovery.module.css';
-import {resetNewPasswordTC, SendForgotPassStatusType} from "../../m2-bll/authReducer1";
+import {resetNewPasswordTC, SendForgotPassStatusType} from "../../../m2-bll/authReducer1";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStoreType} from "../../m2-bll/store";
+import {AppStoreType} from "../../../m2-bll/store";
 import {useNavigate, useParams} from "react-router-dom";
-import {PATH} from "../routes/Paths";
-import {LoadingStatusType} from "../../m2-bll/loadingReducer";
-import {ResponseErrorStateType} from "../../m2-bll/errorReducer";
+import {PATH} from "../../routes/Paths";
+import {LoadingStatusType} from "../../../m2-bll/loadingReducer";
+import {ResponseErrorStateType} from "../../../m2-bll/errorReducer";
+import {errorResponse} from "../../../../n2-features/f0-test/errorResponse";
+
 
 const ChangePasswordPage = () => {
     const newPassStatus = useSelector<AppStoreType, SendForgotPassStatusType>(state => state.auth1.isNewPassSet)
@@ -30,6 +32,7 @@ const ChangePasswordPage = () => {
         dispatch(resetNewPasswordTC(password, resetPasswordToken))
     }, [dispatch, password, resetPasswordToken])
 
+
     return (
         <div className={s.wrapper}>
             <div style={{width: '100%'}}>
@@ -41,11 +44,8 @@ const ChangePasswordPage = () => {
                                 onChangeText={setPassword}
                                 onEnter={onKeyPressHandler}
                                 placeholder={'New password'}
-                                error={
-                                    errorRes.isResponseError && errorRes.pageOfError === 'changePas'
-                                        ? 'Error: ' + errorRes.errorMessage
-                                        : ''
-                                }
+                                error={errorResponse(errorRes,'changePas')}
+
                                 spanClassName={s.inputError}
                 />
             </div>

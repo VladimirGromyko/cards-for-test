@@ -20,15 +20,15 @@ const MainPage = () => {
 
     useEffect(() => {
         packsData.cardPacks && dispatch(showMainPageAC(true))
-    }, [isShownMainPage, navigate])
+    }, [packsData, dispatch])
 
     const onSetPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
 
-            // briefly hardcoded 1 packs request
+            // briefly hardcoded 1 Cards request
             params: {packName: 'english', pageCount: 15}
         }))
-    }, [dispatch, setPacksDataTC])
+    }, [dispatch])
 
     const onProfilePressHandler = useCallback(() => {
             navigate(PATH.PROFILE)
@@ -60,7 +60,7 @@ const MainPage = () => {
                         </div>
                     </div>
                 )
-                : (<Navigate to={PATH.PACK_LIST}/>)
+                : (<Navigate to={PATH.PACKS}/>)
             }
         </div>
     )

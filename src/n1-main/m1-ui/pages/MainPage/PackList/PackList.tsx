@@ -14,6 +14,7 @@ import s from "../../../header/header.module.css";
 const PackList = () => {
     const isShownMainPage = useSelector<AppStoreType, boolean>(state => state.packs.isShownMainPage)
     const packsData = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+
     const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -25,10 +26,10 @@ const PackList = () => {
     const onSetAllPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
 
-            // briefly hardcoded 1 packs request
+            // briefly hardcoded 1 Cards request
             params: {
-                packName: 'english',
-                pageCount: 15
+                //packName: 'english',
+                pageCount: 10
             }
         }))
     }, [dispatch, setPacksDataTC])
@@ -36,11 +37,11 @@ const PackList = () => {
     const onSetMyPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
 
-            // briefly hardcoded 1 packs request
+            // briefly hardcoded 1 Cards request
             params: {
-                packName: 'english',
-                pageCount: 15,
-                user_id: ''
+                packName: '',
+                pageCount: 10,
+                user_id: '622af9b229bee90004696543'
             }
         }))
     }, [dispatch, setPacksDataTC])
@@ -50,7 +51,7 @@ const PackList = () => {
         // dispatch()
     }, [])
     const onEditPressHandler = useCallback(() => {
-        navigate(PATH.EDIT_PACK)
+        navigate(PATH.CARDS)
         // dispatch()
     }, [])
     // dispatch()
@@ -63,7 +64,7 @@ const PackList = () => {
         <nav>
             <ul className={s.menu}>
                 <li className={``}>
-                    <NavLink to={PATH.PACK_LIST} className={''}> PackList </NavLink>
+                    <NavLink to={PATH.PACKS} className={''}> PackList </NavLink>
                 </li>
                 <li className={``}>
                     <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>
@@ -96,6 +97,9 @@ const PackList = () => {
             </div>
             <div>
                 <button onClick={onLearnPressHandler}>Learn</button>
+            </div>
+            <div>
+                <NavLink to={'/packs/623056734348a50004eb4dc3'}>cards</NavLink>
             </div>
         </div>
 

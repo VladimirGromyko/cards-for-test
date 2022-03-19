@@ -8,11 +8,13 @@ import {AppStoreType} from "../../../m2-bll/store";
 import {PATH} from "../../routes/Paths";
 import { useNavigate } from 'react-router-dom';
 import {getAuthUserDataTC} from "../../../m2-bll/loginReducer";
+import l from "../../common/c7-Loading/loader07.module.css";
 
 // import {useNavigate} from "react-router-dom";
 
 const LoginPage =() => {
 
+    const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const isLoggedIn = useSelector<AppStoreType, boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
     const [email, setEmail] = useState<string>('')
@@ -34,11 +36,14 @@ const LoginPage =() => {
         if (isLoggedIn) {
             navigate(PATH.PROFILE)
         }
-    }, [isLoggedIn])
+    }, [isLoggedIn,navigate])
 
 
 
     return (<div className={`${s.wrapper}`}>
+            <div style={{width: '100%'}}>
+                {isLoading === "loading" && <div className={l.loader07}></div>}
+            </div>
             <h4>SIGN IN</h4>
             <SuperInputText type={'email'}
                             value={email}

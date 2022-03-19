@@ -1,0 +1,19 @@
+.items {
+    display: grid;
+    grid-template-areas: "1 2 3 4 5";
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    color: black;
+    background-color: #ffffff;
+    padding: 10px;
+    margin: 0 auto;
+    font-size: 20px;
+    align-items: center;
+    justify-items: center;
+}
+
+.search{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: start;
+    padding: 0 0 0 140px;
+}

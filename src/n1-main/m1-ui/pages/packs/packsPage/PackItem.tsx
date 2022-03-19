@@ -14,7 +14,7 @@ export const PackItem = ({pack}: TableItemPropsType) => {
 
     return (
         <div className={packsStyle.items}>
-            <NavLink to={PATH.CARDS}>
+            <NavLink to={`${pack._id}`}>
                 {pack.name}
             </NavLink>
             <div>{pack.cardsCount}</div>
