@@ -9,8 +9,6 @@ const Sidebar = () => {
     const [value2, setValue2] = useState(100)
     return (
         <div>
-            Owner packs
-            {/*<input type='range'/>*/}
             <p>Cards in pack</p>
             <div className={s.mainWrapper}>
                 <span>{value1}</span>
