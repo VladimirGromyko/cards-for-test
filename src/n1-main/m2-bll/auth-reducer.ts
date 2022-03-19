@@ -8,7 +8,7 @@ const initialState = {
 }
 type InitialStateType = typeof initialState
 
-export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const authReducer = (state: InitialStateType = initialState, action: NewPassActionsType): InitialStateType => {
     switch (action.type) {
 
         case "CHANGE_USER_NAME":
@@ -22,7 +22,7 @@ export const changeUserNameAC = (name: string) =>
     ({type: 'CHANGE_USER_NAME', name} as const)
 
 // thunks
-export const changeUserNameTC = (name: string) => (dispatch: Dispatch<ActionsType>) => {
+export const changeUserNameTC = (name: string) => (dispatch: Dispatch<NewPassActionsType>) => {
 authAPI.updateUser(name)
     .then((res) => {
         console.log('res updateUserNameTC: ', res.data)
@@ -33,5 +33,4 @@ authAPI.updateUser(name)
 
 // types
 export type UpdateUseNameACType = ReturnType<typeof changeUserNameAC>
-export type ActionsType = UpdateUseNameACType
-
+export type NewPassActionsType = UpdateUseNameACType

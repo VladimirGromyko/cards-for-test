@@ -14,11 +14,12 @@ import {
     addPacksTC,
     editPackTC,
     pickDeletePackAC,
-    pickEditPackAC,
+    pickEditPackAC, setCurrentPage,
     setPacksDataTC,
     showAddPackAC, showDeletePackAC,
     showEditPackAC
 } from "../../../../m2-bll/packsReducer";
+import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
 import {CardPacksType} from "../../../../m3-dal/packs-api";
 import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
@@ -31,7 +32,10 @@ export const PacksPage = () => {
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
+    const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+    const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
+    const user = useSelector<AppStoreType>(state => state.login.user)
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
@@ -46,9 +50,9 @@ export const PacksPage = () => {
     const pickedEditPack = useSelector<AppStoreType, { packName: string, packId: string }>
     ((state: AppStoreType) => state.packs.pickedEditPack)
 
-    const pickedDeletePack = useSelector<AppStoreType, {packName: string, packId: string }>
+    const pickedDeletePack = useSelector<AppStoreType, { packName: string, packId: string }>
     ((state: AppStoreType) => state.packs.pickedDeletePack)
-        // pickedDeletePack)
+    // pickedDeletePack)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -58,7 +62,7 @@ export const PacksPage = () => {
             // briefly hardcoded 1 Cards request
             params: {
                 packName: '',
-                pageCount: 15
+                pageCount: 100
             }
         }))
     }, [dispatch])
@@ -69,35 +73,38 @@ export const PacksPage = () => {
             params: {
                 // packName: 'english',
                 // pageCount: 5,
-                user_id: ""
+                // user_id: "622af9b229bee90004696543"
+                // @ts-ignore
+                user_id: user._id
             }
         }))
+
     }, [dispatch,])
 
     const addPackList = useCallback(() => {
         dispatch(showAddPackAC(true))
-    },[dispatch])
+    }, [dispatch])
 
     const addPack = useCallback((pack: string) => {
-        dispatch(addPacksTC({cardsPack:{name:pack}}))
+        dispatch(addPacksTC({cardsPack: {name: pack}}))
         // dispatch(showEditPackAC(true))
         // console.log('New pack: ', pack)
-    }, [dispatch, ])
+    }, [dispatch,])
 
-    const hideAddPack= () => {
+    const hideAddPack = () => {
         dispatch(showAddPackAC(false))
     }
-    const deletePackList = useCallback((packName: string,packId: string) => {
+    const deletePackList = useCallback((packName: string, packId: string) => {
         dispatch(pickDeletePackAC(packName, packId))
         dispatch(showDeletePackAC(true))
         // console.log("Удалить у самурая : ", userId, "колоду с Id: ", packId)
         // dispatch()
     }, [dispatch])
     const deletePack = useCallback((packName: string, packId: string) => {
-        console.log("Удалить колоду:", packName," с Id: ", packId)
+        console.log("Удалить колоду:", packName, " с Id: ", packId)
         // dispatch()
     }, [])
-    const hideDeletePack= () => {
+    const hideDeletePack = () => {
         dispatch(showDeletePackAC(false))
     }
     const editPackList = useCallback((packName: string, packId: string) => {
@@ -110,71 +117,83 @@ export const PacksPage = () => {
         // dispatch(showEditPackAC(true))
     }, [dispatch])
 
-    const hideEditPack= useCallback(() => {
+    const hideEditPack = useCallback(() => {
         dispatch(showEditPackAC(false))
-    },[dispatch])
+    }, [dispatch])
 
     const learnPack = useCallback((packId: string) => {
-        navigate('/packs/'+packId)
+        navigate('/packs/' + packId)
         // navigate(PATH.CARDS+packId)
     }, [navigate])
 
+    const onPageChanged = (pageNumber: number) => {
+        console.log("pageNumber: ", pageNumber)
+        dispatch(setCurrentPage(pageNumber))
+    }
+
     return (
-            <div className={commonPacksStyle.wrapper}>
-                <div style={{width: '100%'}}>
-                    {isLoading === "loading" && <div className={l.loader07}></div>}
-                </div>
-                <nav>
-                    <ul className={s.menu}>
-                        <li className={``}>
-                            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
-                        </li>
-                        <li className={``}>
-                            <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
-                        </li>
-                    </ul>
+        <div className={commonPacksStyle.wrapper}>
+            <div style={{width: '100%'}}>
+                {isLoading === "loading" && <div className={l.loader07}></div>}
+            </div>
+            <nav>
+                <ul className={s.menu}>
+                    <li className={``}>
+                        <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
+                    </li>
+                    <li className={``}>
+                        <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
+                    </li>
+                    {/*<li>*/}
+                    {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
+                    {/*</li>*/}
+                </ul>
+
+            </nav>
+            <div>
+                <div className={commonPacksStyle.content}>Show Packs
                     <div>
-                        <NavLink to={'/packs/623056734348a50004eb4dc3'}>cards</NavLink>
+                        <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
+                        <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
                     </div>
-                </nav>
-                <div className={commonPacksStyle.content}>Show cardPacks card
-                    <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
-                    <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
                     <div style={{color: 'red'}}>
                         {errorResponse(errorRes, 'setPacks')}
                     </div>
                 </div>
-                <div className={commonPacksStyle.content}>Number of cards
+                <div className={commonPacksStyle.content}>
                     <Sidebar/>
                 </div>
-                <div className={commonPacksStyle.content}>
-                    <div>Packs</div>
-                    <SuperInputText placeholder='Enter cardPacks name for searching'/>
-                    <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
-                    {isShownAddPack && <AddPack
-                        addPack={addPack}
-                        hideAddPack={hideAddPack}
-                        isLoading={isLoading}/>}
-                    <HeaderPacks/>
-                    {cardPacks && <PacksTable
-                        deletePack={deletePack}
-                        deletePackList={deletePackList}
-                        hideDeletePack={hideDeletePack}
-                        deletePackId={pickedDeletePack.packId}
-                        deletePackName={pickedDeletePack.packName}
-                        editPack={editPack}
-                        editPackList={editPackList}
-                        hideEditPack = {hideEditPack}
-                        packId={pickedEditPack.packId}
-                        packName={pickedEditPack.packName}
-                        learnPack={learnPack}
-                        cardPacks={cardPacks}
-                        isLoading={isLoading}
-                        isShownEditPack={isShownEditPack}
-                        isShownDeletePack={isShownDeletePack}
-
-                    />}
-                </div>
             </div>
+            <div className={commonPacksStyle.content}>
+                <div>Packs</div>
+                <SuperInputText placeholder='Enter cardPacks name for searching'/>
+                <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
+                {isShownAddPack && <AddPack
+                    addPack={addPack}
+                    hideAddPack={hideAddPack}
+                    isLoading={isLoading}/>}
+                <HeaderPacks/>
+                {packs && !isShownAddPack && <PacksTable
+                    deletePack={deletePack}
+                    deletePackList={deletePackList}
+                    hideDeletePack={hideDeletePack}
+                    deletePackId={pickedDeletePack.packId}
+                    deletePackName={pickedDeletePack.packName}
+                    editPack={editPack}
+                    editPackList={editPackList}
+                    hideEditPack={hideEditPack}
+                    packId={pickedEditPack.packId}
+                    packName={pickedEditPack.packName}
+                    learnPack={learnPack}
+                    packs={packs}
+                    isLoading={isLoading}
+                    isShownEditPack={isShownEditPack}
+                    isShownDeletePack={isShownDeletePack}
+                    currentPage={currentPage}
+                    onPageChanged={onPageChanged}
+                />}
+            </div>
+        </div>
+
     )
 }

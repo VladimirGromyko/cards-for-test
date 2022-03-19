@@ -1,5 +1,6 @@
 import { Dispatch } from "redux"
 import {authAPI} from "../m3-dal/auth-api";
+import {loadingAC} from "./loadingReducer";
 
 type InitialStateType = {
     user: UserDataType | null,
@@ -26,7 +27,7 @@ export type UserDataType = {
     error?: string
 }
 
-export const loginReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const loginReducer = (state: InitialStateType = initialState, action: LoginActionsType): InitialStateType => {
     switch (action.type) {
         case 'SET_USER_DATA':
             return {
@@ -53,6 +54,7 @@ export const setLogOutUserAC = () => (
 
 
 export const getAuthUserDataTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+    dispatch(loadingAC('loading'))
     authAPI.login(email, password, rememberMe)
         .then(response => {
                 console.log(response.data)
@@ -61,6 +63,8 @@ export const getAuthUserDataTC = (email: string, password: string, rememberMe: b
         ).catch((e) => {
         const error = e.response ? e.response.data.error:(e.message+", more details in the console")
         console.log(error)
+    }).finally(()=>{
+        dispatch(loadingAC('succeeded'))
     })
 }
 
@@ -78,6 +82,6 @@ export const logoutUserTC = () => (dispatch: Dispatch) => {
 
 export type setAuthUserDataType = ReturnType<typeof setAuthUserDataAC>
 export type setLogOutDataType = ReturnType<typeof setLogOutUserAC>
-type ActionsType =
+export type LoginActionsType =
     | setAuthUserDataType
     | setLogOutDataType

@@ -1,4 +1,6 @@
 .wrapper {
+    display: grid;
+    grid-template-columns: 3fr 8fr;
     /*display: grid;*/
     /*grid-template-columns: 2fr 8fr;*/
     width: 100%;
@@ -6,9 +8,9 @@
 }
 
 .content {
-    padding: 25px 35px;
+    padding: 15px 15px;
     background-color: white;
-    margin: 20px;
+    margin: 15px;
 }
 .pagination {
     margin: 15px auto;
