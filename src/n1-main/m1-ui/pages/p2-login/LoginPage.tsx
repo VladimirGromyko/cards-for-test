@@ -34,7 +34,7 @@ const LoginPage =() => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate(PATH.PROFILE)
+            navigate(PATH.MAIN)
         }
     }, [isLoggedIn,navigate])
 
