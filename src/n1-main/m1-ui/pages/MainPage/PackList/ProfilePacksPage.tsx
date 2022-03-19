@@ -27,8 +27,9 @@ import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
 
 
-export const PacksPage = () => {
+export const ProfilePacksPage = () => {
 
+    const [isMyPacks, setIsMyPacks] = useState<boolean>(false)
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
@@ -68,6 +69,7 @@ export const PacksPage = () => {
     }, [dispatch])
 
     const onSetMyPressHandler = useCallback(() => {
+        setIsMyPacks(true)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -151,15 +153,23 @@ export const PacksPage = () => {
 
             </nav>
             <div>
-                <div className={commonPacksStyle.content}>Show Packs
-                    <div>
-                        <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
-                        <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
+                {!isMyPacks
+                    ?<div className={commonPacksStyle.content}>Show Packs
+                        <div>
+                            <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
+                            <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
+                        </div>
+                        <div style={{color: 'red'}}>
+                            {errorResponse(errorRes, 'setPacks')}
+                        </div>
                     </div>
-                    <div style={{color: 'red'}}>
-                        {errorResponse(errorRes, 'setPacks')}
+                    : <div className={commonPacksStyle.content}>
+                        <img className={s.photo}
+                             src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
+                             alt="UserPhoto"/>
+                        <div className={s.inputTitle}>Nickname</div>
                     </div>
-                </div>
+                }
                 <div className={commonPacksStyle.content}>
                     <Sidebar/>
                 </div>
