@@ -27,10 +27,6 @@ const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
         }
     }
 
-    useEffect(() => {
-        getCards()
-    }, [])
-
     const onClickGetCards = () => {
         getCards()
     }

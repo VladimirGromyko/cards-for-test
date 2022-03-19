@@ -142,6 +142,7 @@ export const PacksPage = () => {
                     </ul>
 
                 </nav>
+                <div>
                 <div className={commonPacksStyle.content}>Show cardPacks card
                     <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
                     <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
@@ -151,6 +152,7 @@ export const PacksPage = () => {
                 </div>
                 <div className={commonPacksStyle.content}>Number of cards
                     <Sidebar/>
+                </div>
                 </div>
                 <div className={commonPacksStyle.content}>
                     <div>Packs</div>

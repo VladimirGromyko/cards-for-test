@@ -10,10 +10,3 @@
     align-items: center;
     justify-items: center;
 }
-
-.search{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: start;
-    padding: 0 0 0 140px;
-}
