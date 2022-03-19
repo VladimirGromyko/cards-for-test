@@ -41,7 +41,7 @@ const PasswordRecoveryPage = () => {
             </div>
 
             <h3>Forgot you password ?</h3>
-            <div className={s.inputField}>
+            <div /*className={s.inputField}*/>
                 <SuperInputText value={email}
                                 onChangeText={setEmail}
                                 onEnter={onKeyPressHandler}

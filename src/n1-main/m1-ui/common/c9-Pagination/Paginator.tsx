@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./Paginator.module.css";
-import cn from "classnames"
+//import cn from "classnames"
 
 export type PaginatorPropsType = {
     cardPacksTotalCount: number,
@@ -11,7 +11,7 @@ export type PaginatorPropsType = {
 }
 
 let paginatorSpan = (currentPage: number, selectedPage: number, onPageChanged: (page: number) => void) => {
-    return <span className={cn({[styles.selectedPage]: currentPage === selectedPage}, styles.pageNumber)}
+    return <span /*className={cn({[styles.selectedPage]: currentPage === selectedPage}, styles.pageNumber)}*/
                  key={selectedPage}
                  onClick={() => {
                      onPageChanged(selectedPage)
