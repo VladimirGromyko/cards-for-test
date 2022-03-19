@@ -61,8 +61,7 @@ const PasswordRecoveryPage = () => {
             <div><SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Send instruction</SuperButton>
             </div>
             <div className={s.helpText}>Did you remember your password ?</div>
-            <NavLink to={PATH.LOGIN} className={''}>Try logging in</NavLink>
-
+            <NavLink to={PATH.REGISTRATION} className={s.helpTextBold}>Try logging in</NavLink>
         </div>
     )
 }
