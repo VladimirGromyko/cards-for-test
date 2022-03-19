@@ -49,6 +49,6 @@ export const registrationTC = (email: string, password: string) => (dispatch: Di
 }
 
 
-type RegisterActionType = setRegistredACType | setErrorACType
+export type RegisterActionType = setRegistredACType | setErrorACType
 type setRegistredACType = ReturnType<typeof setRegisteredAC>
 type setErrorACType = ReturnType<typeof setError>

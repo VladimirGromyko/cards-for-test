@@ -3,6 +3,7 @@ import {cardsAPI, SortNameType, SortNumberType} from "../m3-dal/cards-api";
 import {loadingAC} from "./loadingReducer";
 import {responseErrorAC} from "./errorReducer";
 import {showMainPageAC} from "./packsReducer";
+import { ThunkType } from "./store";
 
 export type CardType  = {
     _id: string,
@@ -10,6 +11,7 @@ export type CardType  = {
     answer: string,
     updated: string,
     grade: number,
+    cardsPack_id:string
 
 }
 
@@ -20,7 +22,7 @@ const initState: CardsStateType = {cards:[]};
 
 
 export const cardsReducer1 = (state = initState,
-                             action: ActionType): CardsStateType => {
+                             action: CardsActionType): CardsStateType => {
     switch (action.type) {
         case "GET-ALL-CARD":{
             return  {...state, cards: action.cards}
@@ -85,38 +87,21 @@ export const getCardsBySearchTC = (params:{packId:string,search:string }) => (di
         })
 }
 
-export const addCardTC = (params:{packId:string, quest:string, answer:string}) => (dispatch: Dispatch) => {
+export const addCardTC = (params:{packId:string, quest:string, answer:string}):ThunkType => (dispatch, getState) => {
     dispatch(loadingAC('loading'))
     cardsAPI.addCard({cardsPack_id:params.packId, question: params.quest, answer:params.answer}).then(res => {
-        //@ts-ignore
         dispatch(getCardsTC({packId:params.packId}))
         }
     ).catch((err) => {
-        dispatch(responseErrorAC(true, 'setPacks', err.response?.data.error))
-        setTimeout(() => {
-            dispatch(responseErrorAC(false, 'setPacks', err.response?.data.error))
-        }, 3000)
     })
-        .finally(() => {
-            dispatch(loadingAC('succeeded'))
-
-        })
 }
-export const deleteCardTC = (params:{packId:string, cardId:string}) => (dispatch: Dispatch) => {
+export const deleteCardTC = (cardId:string):ThunkType => (dispatch, getState) => {
     dispatch(loadingAC('loading'))
-    cardsAPI.deleteCard({cardId: params.cardId}).then(res=>{
-        //@ts-ignore
-        dispatch(getCardsTC({packId:params.packId}))
+    cardsAPI.deleteCard({cardId}).then(res=>{
+        dispatch(getCardsTC({packId:getState().cards1.cards[0].cardsPack_id}))
     }).catch((err) => {
-        dispatch(responseErrorAC(true, 'setPacks', err.response?.data.error))
-        setTimeout(() => {
-            dispatch(responseErrorAC(false, 'setPacks', err.response?.data.error))
-        }, 3000)
+        
     })
-        .finally(() => {
-            dispatch(loadingAC('succeeded'))
-
-        })
 }
 
 
@@ -124,4 +109,4 @@ type GetAllCardActionType = ReturnType<typeof getAllCardAC>
 type AddCardActionType = ReturnType<typeof addCardAC>
 type DeleteCardACActionType = ReturnType<typeof deleteCardAC>
 
-type ActionType = GetAllCardActionType | AddCardActionType | DeleteCardACActionType
+export type CardsActionType = GetAllCardActionType | AddCardActionType | DeleteCardACActionType
