@@ -11,14 +11,19 @@ export type CardType  = {
     answer: string,
     updated: string,
     grade: number,
-    cardsPack_id:string
+    cardsPack_id:string,
+    user_id:string
 
 }
 
 export type CardsStateType = {
     cards: CardType[];
+    packUserId: string
 }
-const initState: CardsStateType = {cards:[]};
+const initState: CardsStateType = {
+    cards:[],
+    packUserId: ''
+};
 
 
 export const cardsReducer1 = (state = initState,
@@ -52,7 +57,6 @@ export const deleteCardAC = (cardId: string) => ({
 
 export const getCardsTC = (params:{packId:string,sortNumber?: SortNumberType, sortName?: SortNameType }) => (dispatch: Dispatch) => {
     dispatch(loadingAC('loading'))
-    debugger
     cardsAPI.getAllCards({
         cardsPackId: params.packId,
         pageCount: '1000',
@@ -60,10 +64,6 @@ export const getCardsTC = (params:{packId:string,sortNumber?: SortNumberType, so
         sortName: params.sortName}).then(res => {
         dispatch(getAllCardAC(res.data.cards))
     }).catch((err) => {
-        dispatch(responseErrorAC(true, 'setPacks', err.response?.data.error))
-        setTimeout(() => {
-            dispatch(responseErrorAC(false, 'setPacks', err.response?.data.error))
-        }, 3000)
     })
         .finally(() => {
             dispatch(loadingAC('succeeded'))
@@ -76,10 +76,7 @@ export const getCardsBySearchTC = (params:{packId:string,search:string }) => (di
     cardsAPI.getCardBySearch({cardsPackId: params.packId, pageCount: '1000', search: params.search}).then(res => {
         dispatch(getAllCardAC(res.data.cards))
     }).catch((err) => {
-        dispatch(responseErrorAC(true, 'setPacks', err.response?.data.error))
-        setTimeout(() => {
-            dispatch(responseErrorAC(false, 'setPacks', err.response?.data.error))
-        }, 3000)
+        dispatch(loadingAC('succeeded'))
     })
         .finally(() => {
             dispatch(loadingAC('succeeded'))
@@ -93,6 +90,8 @@ export const addCardTC = (params:{packId:string, quest:string, answer:string}):T
         dispatch(getCardsTC({packId:params.packId}))
         }
     ).catch((err) => {
+        dispatch(loadingAC('succeeded'))
+        
     })
 }
 export const deleteCardTC = (cardId:string):ThunkType => (dispatch, getState) => {
@@ -100,6 +99,7 @@ export const deleteCardTC = (cardId:string):ThunkType => (dispatch, getState) =>
     cardsAPI.deleteCard({cardId}).then(res=>{
         dispatch(getCardsTC({packId:getState().cards1.cards[0].cardsPack_id}))
     }).catch((err) => {
+        dispatch(loadingAC('succeeded'))
         
     })
 }
