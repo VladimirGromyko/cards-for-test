@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import s from './Profile.module.css';
+import s from './EditProfile.module.css';
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom';
 import {PATH} from "../../../routes/Paths";
 
 
-export const ProfilePage = () => {
+export const EditProfilePage = () => {
     const userName = useSelector<AppStoreType, string | undefined>((state) => state.login.user?.name)
     const userEmail = useSelector<AppStoreType, string | undefined>((state) => state.login.user?.email)
     const isLoggedIn = useSelector<AppStoreType, boolean>(state => state.login.isLoggedIn)

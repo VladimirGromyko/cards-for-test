@@ -29,7 +29,6 @@ import {AddPack} from "./AddPack";
 
 export const ProfilePacksPage = () => {
 
-    const [isMyPacks, setIsMyPacks] = useState<boolean>(false)
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
@@ -58,18 +57,17 @@ export const ProfilePacksPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const onSetAllPressHandler = useCallback(() => {
-        dispatch(setPacksDataTC({
-            // briefly hardcoded 1 Cards request
-            params: {
-                packName: '',
-                pageCount: 100
-            }
-        }))
-    }, [dispatch])
+    // const onSetAllPressHandler = useCallback(() => {
+    //     dispatch(setPacksDataTC({
+    //         // briefly hardcoded 1 Cards request
+    //         params: {
+    //             packName: '',
+    //             pageCount: 100
+    //         }
+    //     }))
+    // }, [dispatch])
 
     const onSetMyPressHandler = useCallback(() => {
-        setIsMyPacks(true)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -128,6 +126,10 @@ export const ProfilePacksPage = () => {
         // navigate(PATH.CARDS+packId)
     }, [navigate])
 
+    const OnGoToEditPageOnClickHandler = () => {
+        // navigate('/edit')
+    }
+
     const onPageChanged = (pageNumber: number) => {
         console.log("pageNumber: ", pageNumber)
         dispatch(setCurrentPage(pageNumber))
@@ -153,23 +155,14 @@ export const ProfilePacksPage = () => {
 
             </nav>
             <div>
-                {!isMyPacks
-                    ?<div className={commonPacksStyle.content}>Show Packs
-                        <div>
-                            <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
-                            <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
-                        </div>
-                        <div style={{color: 'red'}}>
-                            {errorResponse(errorRes, 'setPacks')}
-                        </div>
-                    </div>
-                    : <div className={commonPacksStyle.content}>
-                        <img className={s.photo}
-                             src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
-                             alt="UserPhoto"/>
-                        <div className={s.inputTitle}>Nickname</div>
-                    </div>
-                }
+                <div className={commonPacksStyle.content}>
+                    <img className={s.photo}
+                         src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
+                         alt="UserPhoto"/>
+                    <div className={s.inputTitle}>Nickname</div>
+                    <SuperButton onClick={OnGoToEditPageOnClickHandler} >Edit profile</SuperButton>
+                </div>
+
                 <div className={commonPacksStyle.content}>
                     <Sidebar/>
                 </div>
