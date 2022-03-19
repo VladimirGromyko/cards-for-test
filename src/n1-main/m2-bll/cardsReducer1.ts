@@ -18,11 +18,17 @@ export type CardType  = {
 
 export type CardsStateType = {
     cards: CardType[];
+    sortNumber?: SortNumberType,
+    sortName?: SortNameType
+    search?:string
     packUserId: string
 }
 const initState: CardsStateType = {
     cards:[],
-    packUserId: ''
+    sortNumber: 0,
+    sortName: 'answer',
+    search: '',
+    packUserId: '',
 };
 
 
@@ -31,6 +37,12 @@ export const cardsReducer1 = (state = initState,
     switch (action.type) {
         case "GET-ALL-CARD":{
             return  {...state, cards: action.cards}
+        }
+        case "SORT-CARDS" : {
+            return {...state, sortName: action.sortName, sortNumber: action.sortNumber}
+        }
+        case 'SEARCH-CARDS': {
+            return {...state, search: action.search}
         }
         case "ADD-CARD": {
             return {...state, cards: [...state.cards, action.card] }
@@ -45,7 +57,13 @@ export const cardsReducer1 = (state = initState,
 export const getAllCardAC = (cards: CardType[]) => ({
     type: 'GET-ALL-CARD', cards
 } as const);
+export const sortCardsAC = (sortNumber?: SortNumberType, sortName?: SortNameType) => ({
+    type: 'SORT-CARDS', sortNumber,sortName
+} as const);
 
+export const searchCardsAC = (search?: string) => ({
+    type: 'SEARCH-CARDS', search
+} as const);
 
 export const addCardAC = (card: CardType) => ({
     type: 'ADD-CARD', card
@@ -55,13 +73,16 @@ export const deleteCardAC = (cardId: string) => ({
     type: 'DELETE-CARD', cardId
 } as const);
 
-export const getCardsTC = (params:{packId:string,sortNumber?: SortNumberType, sortName?: SortNameType }) => (dispatch: Dispatch) => {
+export const getCardsTC = (params:{packId:string,sortNumber?: SortNumberType, sortName?: SortNameType }):ThunkType => (dispatch, getState) => {
     dispatch(loadingAC('loading'))
     cardsAPI.getAllCards({
         cardsPackId: params.packId,
         pageCount: '1000',
         sortNumber: params.sortNumber,
-        sortName: params.sortName}).then(res => {
+        sortName: params.sortName,
+        search: getState().cards1.search
+    }).then(res => {
+        dispatch(sortCardsAC(params.sortNumber, params.sortName))
         dispatch(getAllCardAC(res.data.cards))
     }).catch((err) => {
     })
@@ -71,9 +92,16 @@ export const getCardsTC = (params:{packId:string,sortNumber?: SortNumberType, so
         })
 }
 
-export const getCardsBySearchTC = (params:{packId:string,search:string }) => (dispatch: Dispatch) => {
+export const getCardsBySearchTC = (params:{packId:string,search:string }):ThunkType => (dispatch, getState) => {
     dispatch(loadingAC('loading'))
-    cardsAPI.getCardBySearch({cardsPackId: params.packId, pageCount: '1000', search: params.search}).then(res => {
+    cardsAPI.getAllCards({
+        cardsPackId: params.packId,
+        pageCount: '1000', 
+        search: params.search,
+        sortNumber: getState().cards1.sortNumber,
+        sortName: getState().cards1.sortName
+    }).then(res => {
+        dispatch(searchCardsAC(params.search))
         dispatch(getAllCardAC(res.data.cards))
     }).catch((err) => {
         dispatch(loadingAC('succeeded'))
@@ -106,7 +134,13 @@ export const deleteCardTC = (cardId:string):ThunkType => (dispatch, getState) =>
 
 
 type GetAllCardActionType = ReturnType<typeof getAllCardAC>
+type SortCardsActionType = ReturnType<typeof sortCardsAC>
+type SearchCardsActionType = ReturnType<typeof searchCardsAC>
 type AddCardActionType = ReturnType<typeof addCardAC>
 type DeleteCardACActionType = ReturnType<typeof deleteCardAC>
 
-export type CardsActionType = GetAllCardActionType | AddCardActionType | DeleteCardACActionType
+export type CardsActionType = GetAllCardActionType 
+| AddCardActionType 
+| DeleteCardACActionType 
+| SortCardsActionType 
+| SearchCardsActionType
