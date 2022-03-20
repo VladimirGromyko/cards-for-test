@@ -12,6 +12,13 @@
     border-radius: 5px;
 
 }
+.contentAllMy{
+    padding: 25px 35px;
+    margin: 20px;
+    border-radius: 5px;
+    align-items: center;
+    background-color: #e5ecff;;
+}
 .pagination {
     margin: 15px auto;
     display: flex;
@@ -47,4 +54,29 @@
 .inputPlusButton{
     display:flex;
     text-align:start;
+}
+.allMyWrapper{
+    display: inline-flex;
+
+}
+.all{
+    width: 97px;
+    height: 36px;
+    background-color: #a1b9ff ;
+    text-align: center;
+    cursor: pointer;
+    font-size: 22px;
+}
+.all:hover,.my:hover{
+    border: #212529 1px solid;
+    align-items: center;
+}
+.my{
+    width: 97px;
+    height: 36px;
+    text-align: center;
+    color:black;
+    background-color: white ;
+    cursor: pointer;
+    font-size: 22px;
 }

@@ -147,7 +147,7 @@ export const ProfilePacksPage = () => {
                         <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
                     </li>
                     <li className={``}>
-                        <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
+                        <NavLink to={PATH.TEST} className={''}>Profile</NavLink>
                     </li>
                     {/*<li>*/}
                     {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
@@ -171,9 +171,10 @@ export const ProfilePacksPage = () => {
                 </div>
             </div>
             <div className={commonPacksStyle.content}>
-                <div>Packs</div>
-                <SuperInputText placeholder='Enter cardPacks name for searching'/>
-                <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
+                <div style={{textAlign: 'start',marginBottom:'7px'}}>Packs list</div>
+                <div className={commonPacksStyle.inputPlusButton}>
+                    <SuperInputText style={{width:'100%'}} placeholder='Enter cardPacks name for searching'/>
+                </div>
                 {isShownAddPack && <AddPack
                     addPack={addPack}
                     hideAddPack={hideAddPack}

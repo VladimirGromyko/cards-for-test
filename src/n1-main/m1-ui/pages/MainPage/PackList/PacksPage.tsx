@@ -151,10 +151,10 @@ export const PacksPage = () => {
 
             </nav>
             <div>
-                <div style={{textAlign: 'start',marginBottom:'7px'}} className={commonPacksStyle.content}>Show Packs cards
-                    <div>
-                        <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
-                        <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
+                <div style={{textAlign: 'start',marginBottom:'7px'}} className={commonPacksStyle.contentAllMy}>Show Packs cards
+                    <div className={commonPacksStyle.allMyWrapper}>
+                        <div className={commonPacksStyle.my}  onClick={onSetMyPressHandler}>My</div>
+                        <div className={commonPacksStyle.all} onClick={onSetAllPressHandler}>All </div>
                     </div>
                     <div style={{color: 'red'}}>
                         {errorResponse(errorRes, 'setPacks')}
@@ -167,9 +167,9 @@ export const PacksPage = () => {
             <div className={commonPacksStyle.content}>
                 <div style={{textAlign: 'start',marginBottom:'7px'}}>Packs list</div>
                 <div className={commonPacksStyle.inputPlusButton}>
-                    <SuperInputText placeholder='Enter cardPacks name for searching'/>
+                    <SuperInputText style={{width:'82%'}} placeholder='Enter cardPacks name for searching'/>
                     <span>
-                                    <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
+                                    <div><SuperButton  onClick={addPackList}>Add new pack</SuperButton></div>
 
                 </span>
                 </div>
