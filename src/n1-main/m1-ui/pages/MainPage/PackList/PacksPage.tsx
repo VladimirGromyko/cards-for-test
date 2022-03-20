@@ -1,29 +1,30 @@
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import React, { useCallback } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {NavLink, useNavigate} from "react-router-dom";
+import React, {useCallback} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
-import { PacksTable } from "./PacksTable";
-import { AppStoreType } from "../../../../m2-bll/store";
+import {PacksTable} from "./PacksTable";
+import {AppStoreType} from "../../../../m2-bll/store";
 import Sidebar from "./Sidebar";
-import { HeaderPacks } from "./HeaderPacks";
-import { PATH } from "../../../routes/Paths";
+import {HeaderPacks} from "./HeaderPacks";
+import {PATH} from "../../../routes/Paths";
 import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {
     addPacksTC,
     editPackTC,
     pickDeletePackAC,
-    pickEditPackAC,
+    pickEditPackAC, setCurrentPage,
     setPacksDataTC,
     showAddPackAC, showDeletePackAC,
     showEditPackAC
 } from "../../../../m2-bll/packsReducer";
-import { CardPacksType } from "../../../../m3-dal/packs-api";
+import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
+import {CardPacksType} from "../../../../m3-dal/packs-api";
 import s from '../../../header/header.module.css';
-import { ResponseErrorStateType } from "../../../../m2-bll/errorReducer";
-import { errorResponse } from "../../../../../n2-features/f0-test/errorResponse";
-import { AddPack } from "./AddPack";
+import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
+import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
+import {AddPack} from "./AddPack";
 
 
 export const PacksPage = () => {
@@ -31,6 +32,8 @@ export const PacksPage = () => {
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
+    const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+    const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     const user = useSelector<AppStoreType>(state => state.login.user)
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
@@ -45,10 +48,10 @@ export const PacksPage = () => {
         state.packs.isShownDeletePack)
 
     const pickedEditPack = useSelector<AppStoreType, { packName: string, packId: string }>
-        ((state: AppStoreType) => state.packs.pickedEditPack)
+    ((state: AppStoreType) => state.packs.pickedEditPack)
 
     const pickedDeletePack = useSelector<AppStoreType, { packName: string, packId: string }>
-        ((state: AppStoreType) => state.packs.pickedDeletePack)
+    ((state: AppStoreType) => state.packs.pickedDeletePack)
     // pickedDeletePack)
 
     const dispatch = useDispatch()
@@ -59,7 +62,7 @@ export const PacksPage = () => {
             // briefly hardcoded 1 Cards request
             params: {
                 packName: '',
-                pageCount: 15
+                pageCount: 100
             }
         }))
     }, [dispatch])
@@ -83,7 +86,7 @@ export const PacksPage = () => {
     }, [dispatch])
 
     const addPack = useCallback((pack: string) => {
-        dispatch(addPacksTC({ cardsPack: { name: pack } }))
+        dispatch(addPacksTC({cardsPack: {name: pack}}))
         // dispatch(showEditPackAC(true))
         // console.log('New pack: ', pack)
     }, [dispatch,])
@@ -110,7 +113,7 @@ export const PacksPage = () => {
     }, [dispatch])
 
     const editPack = useCallback((packId: string, namePack: string) => {
-        dispatch(editPackTC({ cardsPack: { _id: packId, name: namePack } }))
+        dispatch(editPackTC({cardsPack: {_id: packId, name: namePack}}))
         // dispatch(showEditPackAC(true))
     }, [dispatch])
 
@@ -123,9 +126,14 @@ export const PacksPage = () => {
         // navigate(PATH.CARDS+packId)
     }, [navigate])
 
+    const onPageChanged = (pageNumber: number) => {
+        console.log("pageNumber: ", pageNumber)
+        dispatch(setCurrentPage(pageNumber))
+    }
+
     return (
         <div className={commonPacksStyle.wrapper}>
-            <div style={{ width: '100%' }}>
+            <div style={{width: '100%'}}>
                 {isLoading === "loading" && <div className={l.loader07}></div>}
             </div>
             <nav>
@@ -148,25 +156,24 @@ export const PacksPage = () => {
                         <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
                         <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
                     </div>
-                    <div style={{ color: 'red' }}>
+                    <div style={{color: 'red'}}>
                         {errorResponse(errorRes, 'setPacks')}
                     </div>
                 </div>
                 <div className={commonPacksStyle.content}>
-                    <Sidebar />
+                    <Sidebar/>
                 </div>
             </div>
             <div className={commonPacksStyle.content}>
                 <div>Packs</div>
-                <div>
-                    <SuperInputText placeholder='Enter cardPacks name for searching' />
-                    <SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
+                <SuperInputText placeholder='Enter cardPacks name for searching'/>
+                <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
                 {isShownAddPack && <AddPack
                     addPack={addPack}
                     hideAddPack={hideAddPack}
-                    isLoading={isLoading} />}
-                <HeaderPacks />
-                {cardPacks && <PacksTable
+                    isLoading={isLoading}/>}
+                <HeaderPacks/>
+                {packs && !isShownAddPack && <PacksTable
                     deletePack={deletePack}
                     deletePackList={deletePackList}
                     hideDeletePack={hideDeletePack}
@@ -178,13 +185,15 @@ export const PacksPage = () => {
                     packId={pickedEditPack.packId}
                     packName={pickedEditPack.packName}
                     learnPack={learnPack}
-                    cardPacks={cardPacks}
+                    packs={packs}
                     isLoading={isLoading}
                     isShownEditPack={isShownEditPack}
                     isShownDeletePack={isShownDeletePack}
-
+                    currentPage={currentPage}
+                    onPageChanged={onPageChanged}
                 />}
             </div>
         </div>
+
     )
 }

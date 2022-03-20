@@ -19,6 +19,7 @@ export type statePacksType = {
     isShownDeletePack: boolean
     pickedEditPack: { packName: string, packId: string }
     pickedDeletePack: { packName: string, packId: string }
+    currentPage: number
 }
 
 const initState = {
@@ -29,7 +30,8 @@ const initState = {
     isShownAddPack: false,
     isShownDeletePack: false,
     pickedEditPack: {packName: '', packId: ''},
-    pickedDeletePack: {packName: '', packId: ''}
+    pickedDeletePack: {packName: '', packId: ''},
+    currentPage: 1
 } as statePacksType
 
 export const packsReducer = (state: statePacksType = initState,
@@ -50,7 +52,7 @@ export const packsReducer = (state: statePacksType = initState,
         case "PICK_EDIT_PACK": {
             return {...state, pickedEditPack: {packName: action.packName, packId: action.packId}}
         }
-        case "PICK_DELETE_PACK":{
+        case "PICK_DELETE_PACK": {
             return {...state, pickedDeletePack: {packName: action.packName, packId: action.packId}}
         }
         case "SHOW_ADD_PACK": {
@@ -58,6 +60,9 @@ export const packsReducer = (state: statePacksType = initState,
         }
         case "SHOW_DELETE_PACK": {
             return {...state, isShownDeletePack: action.isShownDeletePack}
+        }
+        case "SET_CURRENT_PAGE": {
+            return {...state, currentPage: action.currentPage}
         }
         default:
             return state;
@@ -86,6 +91,9 @@ export const showAddPackAC = (isShownAddPack: boolean) => (
 
 export const showDeletePackAC = (isShownDeletePack: boolean) => (
     {type: 'SHOW_DELETE_PACK', isShownDeletePack}) as const
+
+export const setCurrentPage = (currentPage: number) => (
+    {type: 'SET_CURRENT_PAGE', currentPage}) as const
 
 export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: Dispatch<PacksReducerType>) => {
     dispatch(loadingAC('loading'))
@@ -160,6 +168,7 @@ type showAddPackACType = ReturnType<typeof showAddPackAC>
 type showDeletePackACType = ReturnType<typeof showDeletePackAC>
 type pickEditPackACType = ReturnType<typeof pickEditPackAC>
 type pickDeletePackACType = ReturnType<typeof pickDeletePackAC>
+type setCurrentPageACType = ReturnType<typeof setCurrentPage>
 
 export type PacksReducerType = SetPacksDataACType
     | LoadingACType
@@ -171,3 +180,4 @@ export type PacksReducerType = SetPacksDataACType
     | showAddPackACType
     | showDeletePackACType
     | pickDeletePackACType
+    | setCurrentPageACType
