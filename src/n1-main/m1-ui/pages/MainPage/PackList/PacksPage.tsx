@@ -142,7 +142,7 @@ export const PacksPage = () => {
                         <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
                     </li>
                     <li className={``}>
-                        <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
+                        <NavLink to={PATH.TEST} className={''}>Profile</NavLink>
                     </li>
                     {/*<li>*/}
                     {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
@@ -151,7 +151,7 @@ export const PacksPage = () => {
 
             </nav>
             <div>
-                <div className={commonPacksStyle.content}>Show Packs
+                <div style={{textAlign: 'start',marginBottom:'7px'}} className={commonPacksStyle.content}>Show Packs cards
                     <div>
                         <SuperButton onClick={onSetAllPressHandler}>All cardPacks</SuperButton>
                         <SuperButton onClick={onSetMyPressHandler}>My cardPacks</SuperButton>
@@ -165,9 +165,14 @@ export const PacksPage = () => {
                 </div>
             </div>
             <div className={commonPacksStyle.content}>
-                <div>Packs</div>
-                <SuperInputText placeholder='Enter cardPacks name for searching'/>
-                <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
+                <div style={{textAlign: 'start',marginBottom:'7px'}}>Packs list</div>
+                <div className={commonPacksStyle.inputPlusButton}>
+                    <SuperInputText placeholder='Enter cardPacks name for searching'/>
+                    <span>
+                                    <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
+
+                </span>
+                </div>
                 {isShownAddPack && <AddPack
                     addPack={addPack}
                     hideAddPack={hideAddPack}

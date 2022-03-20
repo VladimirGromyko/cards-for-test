@@ -15,27 +15,27 @@ function Header() {
         <div>
             <nav>
                 <ul className={s.menu}>
-                    <li className={``}>
-                        <NavLink to={PATH.TEST} className={''}>Test</NavLink>
-                    </li>
-                    <li className={``}>
-                        <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>
-                    </li>
+                    {/*<li className={``}>*/}
+                    {/*    <NavLink to={PATH.TEST} className={''}>Test</NavLink>*/}
+                    {/*</li>*/}
+                    {/*<li className={``}>*/}
+                    {/*    <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>*/}
+                    {/*</li>*/}
                     <li className={``}>
                         <NavLink to={PATH.MAIN} className={''}>Main</NavLink>
                     </li>
                     <li className={``}>
                         <NavLink to={PATH.LOGIN} className={''}>Login</NavLink>
                     </li>
-                    <li className={``}>
-                        <NavLink to={PATH.CHANGE_PASSWORD} className={''}>Change Password</NavLink>
-                    </li>
-                    <li className={``}>
-                        <NavLink to={PATH.PASSWORD_RECOVERY} className={''}>Password Recovery</NavLink>
-                    </li>
-                    <li className={``}>
-                        <NavLink to={PATH.REGISTRATION} className={''}>Registration</NavLink>
-                    </li>
+                    {/*<li className={``}>*/}
+                    {/*    <NavLink to={PATH.CHANGE_PASSWORD} className={''}>Change Password</NavLink>*/}
+                    {/*</li>*/}
+                    {/*<li className={``}>*/}
+                    {/*    <NavLink to={PATH.PASSWORD_RECOVERY} className={''}>Password Recovery</NavLink>*/}
+                    {/*</li>*/}
+                    {/*<li className={``}>*/}
+                    {/*    <NavLink to={PATH.REGISTRATION} className={''}>Registration</NavLink>*/}
+                    {/*</li>*/}
                     <li className={``}>
                         <NavLink to={''} className={''} onClick={logOutHandler}>LogOut</NavLink>
                     </li>

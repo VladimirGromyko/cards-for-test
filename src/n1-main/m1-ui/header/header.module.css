@@ -1,19 +1,18 @@
-
 .menu {
     display: flex;
     width: auto;
-    background-color: #678EFE;
+    /*background: linear-gradient(180deg, #678efe0a, #678efe8f);*/
     color: white;
     flex-direction: row;
     list-style-type: none;
     padding: 20px;
-    justify-content:space-between;
+    justify-content:center;
 }
 
 .menu a{
     padding: 30px;
     font-size: 20px;
-    color: white;
+    color: black;
     text-decoration: none;
 
 }

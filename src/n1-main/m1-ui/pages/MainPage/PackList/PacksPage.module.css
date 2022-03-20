@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 3fr 8fr;
     width: 100%;
-    background-color: #678EFE;
+    background: linear-gradient(180deg, #678efe0a, #678efe8f);/*изменила фон таблицы*/
 }
 
 .content {
@@ -43,4 +43,8 @@
 .photo {
     border-radius: 50%;
     margin-bottom: 40px;
+}
+.inputPlusButton{
+    display:flex;
+    text-align:start;
 }

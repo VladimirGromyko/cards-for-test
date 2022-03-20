@@ -52,7 +52,7 @@
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition-duration: 0.5s;
-    margin-bottom: 7px;
+    margin-bottom: 0px;
 }
 
 .superInput::placeholder {
