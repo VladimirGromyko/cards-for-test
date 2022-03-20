@@ -35,7 +35,13 @@ const Sidebar = () => {
           setIsDebouncing(true);
           console.log(debouncedValue)
           console.log(debouncedValue2)
-          
+          packsAPI.setPacks({params: {
+            min: debouncedValue,
+            max: debouncedValue2,
+            pageCount: 20,
+        }}).then((res) =>
+        dispatch(setPacksDataAC(res.data))
+        )
         } 
         else {
           console.log('Else')
