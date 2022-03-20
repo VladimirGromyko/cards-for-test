@@ -1,57 +1,50 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import SuperDoubleRange from "../../../common/c9-SuperDoubleRange/SuperDoubleRange";
 import s from '../../../common/c9-SuperDoubleRange/superDoubleStyles.module.css'
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import useDebounce from '../../../../../n2-features/f1-hooks/useDebounce';
-import { packsAPI} from '../../../../m3-dal/packs-api';
+import { packsAPI } from '../../../../m3-dal/packs-api';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStoreType } from '../../../../m2-bll/store';
-import {setPacksDataAC} from '../../../../m2-bll/packsReducer'
+import { setPacksDataAC, setPacksDataTC } from '../../../../m2-bll/packsReducer'
 
 const Sidebar = () => {
     const user = useSelector<AppStoreType>(state => state.login.user)
 
     const dispatch = useDispatch()
-    
-    const [value1, setValue1] = useState(0)
-    const [value2, setValue2] = useState(100)
+
+    // const [value1, setValue1] = useState(0)
+    // const [value2, setValue2] = useState(100)
+    const [value, setValue] = useState([0, 100])
     const [isDebouncing, setIsDebouncing] = useState(false);
 
-    const debouncedValue = useDebounce(value1, 1500);
-    const debouncedValue2 = useDebounce(value2, 1500);
-
-    const onCheckClick = () => {
-        packsAPI.setPacks({params: {
-            min: debouncedValue,
-            max: debouncedValue2,
-            pageCount: 20,
-        }}).then((res) =>
-        dispatch(setPacksDataAC(res.data))
-        )
-    }
+    const debouncedValue = useDebounce(value, 1500);
 
     useEffect(() => {
-        if (debouncedValue || debouncedValue2) {
-          setIsDebouncing(true);
-          console.log(debouncedValue)
-          console.log(debouncedValue2)
-          
-        } 
-        else {
-          console.log('Else')
+        if (debouncedValue) {
+            setIsDebouncing(true);
+            dispatch(setPacksDataTC({
+                params: {
+                    min: debouncedValue[0],
+                    max: debouncedValue[1],
+                    pageCount: 20,
+                }
+            }))
         }
-      },
-      [debouncedValue, debouncedValue2]
+        else {
+            alert('Something has gone wrong with double range')
+        }
+    },
+        [debouncedValue]
     );
     return (
         <div>
             <p>Cards in pack</p>
             <div className={s.mainWrapper}>
-                <span>{value1}</span>
-                <SuperDoubleRange setValue={setValue2} setValue2={setValue1} min={value1} max={value2}/>
-                <span>{value2}</span>
+                <span>{value[0]}</span>
+                <SuperDoubleRange setValue={setValue} min={value[0]} max={value[1]} />
+                <span>{value[1]}</span>
             </div>
-            <SuperButton onClick={onCheckClick}>Check</SuperButton>
         </div>
     );
 };
