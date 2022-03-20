@@ -35,7 +35,8 @@ export const ProfilePacksPage = () => {
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
-    const user = useSelector<AppStoreType>(state => state.login.user)
+    const user = useSelector<AppStoreType,string|undefined>(state => state.login.user?.name)
+
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
@@ -127,7 +128,7 @@ export const ProfilePacksPage = () => {
     }, [navigate])
 
     const OnGoToEditPageOnClickHandler = () => {
-        // navigate('/edit')
+        navigate('/edit')
     }
 
     const onPageChanged = (pageNumber: number) => {
@@ -158,8 +159,10 @@ export const ProfilePacksPage = () => {
                 <div className={commonPacksStyle.content}>
                     <img className={s.photo}
                          src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
-                         alt="UserPhoto"/>
-                    <div className={s.inputTitle}>Nickname</div>
+                         alt="UserPhoto"
+                         style={{borderRadius: '50%'}}
+                    />
+                    <div className={s.inputTitle}>{user}</div>
                     <SuperButton onClick={OnGoToEditPageOnClickHandler} >Edit profile</SuperButton>
                 </div>
 
