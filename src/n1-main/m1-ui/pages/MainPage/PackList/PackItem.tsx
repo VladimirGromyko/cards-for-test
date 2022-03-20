@@ -30,7 +30,7 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
 
             <div>{pack.cardsCount}</div>
             <div>{pack.created}</div>
-            <div>{pack.user_id}</div>
+            <div>{pack.user_name}</div>
             <div>
                 <SuperButton onClick={onDeletePressHandler}>Delete</SuperButton>
                 <SuperButton onClick={onEditPressHandler}>Edit</SuperButton>
