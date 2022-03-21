@@ -6,12 +6,14 @@
 .wrapper_header_table {
     display: grid;
     grid-template-areas: "1 2 3 4 5";
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 125px 73px 101px 90px 221px;
     gap: 1%;
     height: 48px;
     text-decoration: none;
     margin-top: 20px;
-    justify-content: center;
+    align-self : center;
+    font-weight: 700;
+    font-size: 13px;
 }
 
 .header_tableItem {
