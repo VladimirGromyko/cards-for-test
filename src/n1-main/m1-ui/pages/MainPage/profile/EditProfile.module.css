@@ -1,15 +1,15 @@
-.testing {
-    display: flex;
-    width: auto;
-    /*background-color: #678EFE;*/
-    /*color: white;*/
-    flex-direction: column;
-    /*list-style-type: none;*/
-    padding: 0 20px;
-    /*justify-content:space-between;*/
-    justify-content: center;
+/*.testing {*/
+/*    display: flex;*/
+/*    width: auto;*/
+/*    !*background-color: #678EFE;*!*/
+/*    !*color: white;*!*/
+/*    flex-direction: column;*/
+/*    !*list-style-type: none;*!*/
+/*    padding: 0 20px;*/
+/*    !*justify-content:space-between;*!*/
+/*    justify-content: center;*/
 
-}
+/*}*/
 
 .wrapper {
     display: flex;
@@ -22,15 +22,36 @@
     padding: 20px;
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
     background: rgb(245 246 250);
+    height: 540px;
+    width: 413px;
+}
+
+.container{
+    margin: 36px 13px 37px 13px;
+}
+.containerForEmail{
+    margin-top: 38px;
+}
+.containerForPassword{
+    margin-top: 24px;
+}
+.textField {
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    color: #737171;
 }
 
 .photo {
     border-radius: 50%;
-    margin-bottom: 40px;
+    margin-top: 14px;
+    height: 96px;
+    width: 96px;
 }
 
 .button {
-    margin-top: 30px;
+    margin-top: 70px;
+    margin-bottom: 60px;
     display: inline-block;
     vertical-align: middle;
 }
