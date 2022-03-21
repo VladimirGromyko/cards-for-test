@@ -23,7 +23,7 @@ type PacksTableType = {
     isLoading: LoadingStatusType
     isShownEditPack: boolean
     isShownDeletePack: boolean
-    // currentPage: number
+    currentPage: number
     onPageChanged: (pageNumber: number) => void
 }
 
@@ -32,7 +32,7 @@ export const PacksTable = ({
                                deletePack, deletePackList, hideDeletePack, deletePackId,
                                deletePackName, editPack, editPackList, hideEditPack,
                                packId, packName, learnPack, packs, isLoading,
-                               isShownEditPack, isShownDeletePack, //currentPage,
+                               isShownEditPack, isShownDeletePack, currentPage,
                                onPageChanged
                            }: PacksTableType) => {
 
