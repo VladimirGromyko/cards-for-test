@@ -1,11 +1,14 @@
 .items {
     display: grid;
     grid-template-areas: "1 2 3 4 5";
-    grid-template-columns: 24% 13% 14% 35% 10%;
+    grid-template-columns: 145px 80px 121px 100px 221px;
     align-items: start;
     color: black;
     background-color: #ffffff;
     padding: 10px;
     margin: 0 auto;
-    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
 }

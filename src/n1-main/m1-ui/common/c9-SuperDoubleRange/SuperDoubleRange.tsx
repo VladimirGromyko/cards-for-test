@@ -10,41 +10,36 @@ type SuperDoubleRangePropsType = DefaultInputPropsType & {
     value?: [number, number]
     min: number
     max: number
-    setValue: (num: number) => void
-    setValue2: (num: number) => void
-    // min, max, step, disable, ...
+    setValue: (value:number[]) => void
 }
 
 const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
     {
         onChangeRange, value,
-        // min, max, step, disable, ...
         min, max, onChange,
-        setValue, setValue2
+        setValue
     }
 ) => {
-    // сделать самому, можно подключать библиотеки
 
     const fillColor = `linear-gradient(to right, #dadae5 ${min}% , #3264fe ${min}% , #3264fe ${max}%, #dadae5 ${max}%)`;
     const leftInput = `${s.range} ${s.left}`
     const rightInput = `${s.range} ${s.right}`
 
-    const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e) // сохраняем старую функциональность
+    const onMinChange = (e: ChangeEvent<HTMLInputElement>) => {
+        onChange && onChange(e) 
 
-        onChangeRange && onChangeRange([min, +e.currentTarget.value])
-        if (+e.currentTarget.value >= min) {
-            setValue(+e.currentTarget.value)
-
+        onChangeRange && onChangeRange([+e.currentTarget.value, max])
+        if (+e.currentTarget.value < max) {
+            setValue([+e.currentTarget.value, max])
         }
 
     }
-    const onChangeCallback2 = (e: ChangeEvent<HTMLInputElement>) => {
+    const onMaxChange = (e: ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(e) // сохраняем старую функциональность
 
-        onChangeRange && onChangeRange([+e.currentTarget.value, max])
-        if (+e.currentTarget.value <= max) {
-            setValue2(+e.currentTarget.value)
+        onChangeRange && onChangeRange([min, +e.currentTarget.value])
+        if (+e.currentTarget.value > min) {
+            setValue([min,+e.currentTarget.value])
 
         }
 
@@ -57,8 +52,8 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
             <div className={s.wrapper}>
                 <div className={s.container}>
                     <div className={s.sliderTrack} style={{background:fillColor}}></div>
-                    <input type="range" min="0" max="100" value={min < max ? min : max} id="slider-1" className={leftInput} onChange={onChangeCallback2} />
-                    <input type="range" min="0" max="100" value={max > min ? max : min} id="slider-2" className={rightInput} onChange={onChangeCallback} />
+                    <input type="range" min="0" max="100" value={min < max ? min : max} id="slider-1" className={leftInput} onChange={onMinChange} />
+                    <input type="range" min="0" max="100" value={max > min ? max : min} id="slider-2" className={rightInput} onChange={onMaxChange} />
                 </div>
             </div>
 

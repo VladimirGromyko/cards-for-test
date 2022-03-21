@@ -1,16 +1,19 @@
 .wrapper_header {
-    background-color: #678EFE;
+    background-color: #e5ecff;
+    border-radius: 5px;
 }
 
 .wrapper_header_table {
     display: grid;
     grid-template-areas: "1 2 3 4 5";
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns:145px 80px 121px 100px 221px;
     gap: 1%;
     height: 48px;
     text-decoration: none;
     margin-top: 20px;
-    justify-content: center;
+    align-self : center;
+    font-weight: 700;
+    font-size: 13px;
 }
 
 .header_tableItem {
