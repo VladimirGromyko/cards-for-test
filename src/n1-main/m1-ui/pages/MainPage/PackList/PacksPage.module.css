@@ -10,6 +10,7 @@
     align-content: center;
     text-align: center;
     margin-left: 250px; /*надо заменить на нормальное центрование*/
+
 }
 
 .TableWrapper {
@@ -17,28 +18,29 @@
     grid-template-areas:
             'A  B B B B B B '
             'A  B B B B B B';
-    /*width: 100%;*/
     background: linear-gradient(180deg, #678efe0a, #678efe8f); /*изменила фон таблицы*/
     justify-content: center;
     align-items: center;
-    width: 1008px;
-    height: 636px;
+    width: 100%;
+    height: 100%;
+
 }
 
 .ariaA {
     grid-area: A;
     align-content: start;
-    width: 308px;
+    width: 243px;
     align-self: start;
     height: 636px;
+    padding: 25px 25px;
 }
 
 .content {
     grid-area: B;
-    padding: 25px 35px;
+    padding: 25px 48px;
     background-color: white;
     border-radius: 5px;
-    width: 700px;
+    width: 765px;
     height: 636px;
 }
 

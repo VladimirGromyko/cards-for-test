@@ -1,7 +1,7 @@
 .items {
     display: grid;
     grid-template-areas: "1 2 3 4 5";
-    grid-template-columns: 125px 73px 101px 90px 221px;
+    grid-template-columns: 145px 80px 121px 100px 221px;
     align-items: start;
     color: black;
     background-color: #ffffff;
