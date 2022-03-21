@@ -14,7 +14,7 @@ import {
     addPacksTC,
     editPackTC,
     pickDeletePackAC,
-    pickEditPackAC, setCurrentPage,
+    pickEditPackAC, setCurrentPageAC, setCurrentPageTC,
     setPacksDataTC,
     showAddPackAC, showDeletePackAC,
     showEditPackAC
@@ -101,7 +101,7 @@ export const PacksPage = () => {
         // dispatch()
     }, [dispatch])
     const deletePack = useCallback((packName: string, packId: string) => {
-        console.log("Удалить колоду:", packName, " с Id: ", packId)
+        // console.log("Удалить колоду:", packName, " с Id: ", packId)
         // dispatch()
     }, [])
     const hideDeletePack = () => {
@@ -127,8 +127,7 @@ export const PacksPage = () => {
     }, [navigate])
 
     const onPageChanged = (pageNumber: number) => {
-        console.log("pageNumber: ", pageNumber)
-        dispatch(setCurrentPage(pageNumber))
+        dispatch(setCurrentPageTC(pageNumber))
     }
 
     return (
@@ -189,7 +188,7 @@ export const PacksPage = () => {
                     isLoading={isLoading}
                     isShownEditPack={isShownEditPack}
                     isShownDeletePack={isShownDeletePack}
-                    currentPage={currentPage}
+                    // currentPage={currentPage}
                     onPageChanged={onPageChanged}
                 />}
             </div>
