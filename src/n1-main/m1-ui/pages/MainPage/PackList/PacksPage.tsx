@@ -134,19 +134,19 @@ export const PacksPage = () => {
     return (
         <div className={commonPacksStyle.wrapper}>
 
-            <nav>
-                <ul className={s.menu}>
-                    <li className={``}>
-                        <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
-                    </li>
-                    <li className={``}>
-                        <NavLink to={PATH.TEST} className={''}>Profile</NavLink>
-                    </li>
-                    {/*<li>*/}
-                    {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
-                    {/*</li>*/}
-                </ul>
-            </nav>
+            {/*<nav>*/}
+            {/*    <ul className={s.menu}>*/}
+            {/*        <li className={``}>*/}
+            {/*            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
+            {/*        </li>*/}
+            {/*        <li className={``}>*/}
+            {/*            <NavLink to={PATH.TEST} className={''}>Profile</NavLink>*/}
+            {/*        </li>*/}
+            {/*        /!*<li>*!/*/}
+            {/*        /!*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*!/*/}
+            {/*        /!*</li>*!/*/}
+            {/*    </ul>*/}
+            {/*</nav>*/}
 
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>
@@ -155,7 +155,8 @@ export const PacksPage = () => {
                 {/*ЛЕВАЯ СТОРОНА*/}
                 <div className={commonPacksStyle.ariaA}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}
-                         className={commonPacksStyle.contentAllMy}>Show Packs cards
+                         className={commonPacksStyle.contentAllMy}>
+                       <p>Show Packs cards</p>
                         <div className={commonPacksStyle.allMyWrapper}>
                             <div className={commonPacksStyle.my} onClick={onSetMyPressHandler}>My</div>
                             <div className={commonPacksStyle.all} onClick={onSetAllPressHandler}>All</div>

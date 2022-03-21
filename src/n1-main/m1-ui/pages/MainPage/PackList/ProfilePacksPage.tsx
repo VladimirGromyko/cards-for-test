@@ -138,19 +138,19 @@ export const ProfilePacksPage = () => {
 
     return (
         <div className={commonPacksStyle.wrapper}>
-            <nav>
-                <ul className={s.menu}>
-                    <li className={``}>
-                        <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
-                    </li>
-                    <li className={``}>
-                        <NavLink to={PATH.TEST} className={''}>Profile</NavLink>
-                    </li>
-                    {/*<li>*/}
-                    {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
-                    {/*</li>*/}
-                </ul>
-            </nav>
+            {/*<nav>*/}
+            {/*    <ul className={s.menu}>*/}
+            {/*        <li className={``}>*/}
+            {/*            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
+            {/*        </li>*/}
+            {/*        <li className={``}>*/}
+            {/*            <NavLink to={PATH.TEST} className={''}>Profile</NavLink>*/}
+            {/*        </li>*/}
+            {/*        /!*<li>*!/*/}
+            {/*        /!*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*!/*/}
+            {/*        /!*</li>*!/*/}
+            {/*    </ul>*/}
+            {/*</nav>*/}
 
             {/*ПРАВАЯ СТОРОНА*/}
             {/*ЛЕВАЯ СТОРОНА*/}
@@ -159,15 +159,18 @@ export const ProfilePacksPage = () => {
                     {isLoading === "loading" && <div className={l.loader07}></div>}
                 </div>
 
-                <div className={commonPacksStyle.ariaA}>
-                    <div className={s.photo}>
-                        <img className={s.photo}
-                             src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
-                             alt="UserPhoto"
-                        />
+                <div className={commonPacksStyle.ariaAForProfile}>
+                    <div className={commonPacksStyle.editProfileWrapper}>
+                        <div className={s.photo}>
+                            <img
+                                 src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
+                                 alt="UserPhoto"
+                            />
                     </div>
-                    <div className={s.inputTitle}>{user}</div>
-                    <SuperButton onClick={OnGoToEditPageOnClickHandler}>Edit profile</SuperButton>
+                        <div className={s.inputTitle}>{user}</div>
+                        <SuperButton onClick={OnGoToEditPageOnClickHandler}>Edit profile</SuperButton>
+                </div>
+
 
                     <div>
                         <Sidebar/>

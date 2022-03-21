@@ -18,7 +18,8 @@
     grid-template-areas:
             'A  B B B B B B '
             'A  B B B B B B';
-    background: linear-gradient(180deg, #678efe0a, #678efe8f); /*изменила фон таблицы*/
+    /*background: linear-gradient(180deg, #678efe0a, #678efe8f); !*изменила фон таблицы*!*/
+    background: #678efe0a;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -33,6 +34,16 @@
     align-self: start;
     height: 636px;
     padding: 25px 25px;
+    background: #e5ecff;
+}
+.ariaAForProfile{
+    grid-area: A;
+    align-content: start;
+    width: 243px;
+    align-self: start;
+    height: 636px;
+    background: #e5ecff;
+
 }
 
 .content {
@@ -45,10 +56,13 @@
 }
 
 .contentAllMy {
-    padding: 25px 35px;
     border-radius: 5px;
     align-items: center;
     background-color: #e5ecff;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
 }
 
 .pagination {
@@ -84,8 +98,13 @@
 .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span {
     border-radius: unset
 }
-
-.photo {
+.ariaA .editProfileWrapper{
+    background: #e5ecff;
+    height: 216px;
+    padding-top:24px;
+    padding-top:24px;
+}
+img {
     border-radius: 50%;
     margin-bottom: 40px;
     width: 96px;
@@ -109,6 +128,7 @@
     text-align: center;
     cursor: pointer;
     font-size: 22px;
+    justify-content: center;
 }
 
 .all:hover, .my:hover {
@@ -124,4 +144,5 @@
     background-color: white;
     cursor: pointer;
     font-size: 22px;
+
 }
