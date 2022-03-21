@@ -2,6 +2,7 @@ export const PATH = {
     REGISTRATION: '/registration',
     LOGIN: '/login',
     ERROR: '/404',
+    EDIT_PROFILE:'/edit',
     PROFILE: '/',
     MAIN: '/main',
     // PACK_LIST: '/main/pack-list',

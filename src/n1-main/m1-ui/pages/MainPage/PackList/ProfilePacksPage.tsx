@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, useNavigate} from "react-router-dom";
-import React, {useCallback} from "react";
+import React, {useCallback, useState} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import {PacksTable} from "./PacksTable";
@@ -14,7 +14,7 @@ import {
     addPacksTC,
     editPackTC,
     pickDeletePackAC,
-    pickEditPackAC, setCurrentPageTC,
+    pickEditPackAC, setCurrentPage,
     setPacksDataTC,
     showAddPackAC, showDeletePackAC,
     showEditPackAC
@@ -27,7 +27,7 @@ import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
 
 
-export const PacksPage = () => {
+export const ProfilePacksPage = () => {
 
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
@@ -35,7 +35,8 @@ export const PacksPage = () => {
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
-    const user = useSelector<AppStoreType>(state => state.login.user)
+    const user = useSelector<AppStoreType, string | undefined>(state => state.login.user?.name)
+
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
@@ -57,15 +58,15 @@ export const PacksPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const onSetAllPressHandler = useCallback(() => {
-        dispatch(setPacksDataTC({
-            // briefly hardcoded 1 Cards request
-            params: {
-                packName: '',
-                pageCount: 100
-            }
-        }))
-    }, [dispatch])
+    // const onSetAllPressHandler = useCallback(() => {
+    //     dispatch(setPacksDataTC({
+    //         // briefly hardcoded 1 Cards request
+    //         params: {
+    //             packName: '',
+    //             pageCount: 100
+    //         }
+    //     }))
+    // }, [dispatch])
 
     const onSetMyPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
@@ -101,7 +102,7 @@ export const PacksPage = () => {
         // dispatch()
     }, [dispatch])
     const deletePack = useCallback((packName: string, packId: string) => {
-        // console.log("Удалить колоду:", packName, " с Id: ", packId)
+        console.log("Удалить колоду:", packName, " с Id: ", packId)
         // dispatch()
     }, [])
     const hideDeletePack = () => {
@@ -126,13 +127,17 @@ export const PacksPage = () => {
         // navigate(PATH.CARDS+packId)
     }, [navigate])
 
+    const OnGoToEditPageOnClickHandler = () => {
+        navigate('/edit')
+    }
+
     const onPageChanged = (pageNumber: number) => {
-        dispatch(setCurrentPageTC(pageNumber))
+        console.log("pageNumber: ", pageNumber)
+        dispatch(setCurrentPage(pageNumber))
     }
 
     return (
         <div className={commonPacksStyle.wrapper}>
-
             {/*<nav>*/}
             {/*    <ul className={s.menu}>*/}
             {/*        <li className={``}>*/}
@@ -147,37 +152,37 @@ export const PacksPage = () => {
             {/*    </ul>*/}
             {/*</nav>*/}
 
+            {/*ПРАВАЯ СТОРОНА*/}
+            {/*ЛЕВАЯ СТОРОНА*/}
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>
                     {isLoading === "loading" && <div className={l.loader07}></div>}
                 </div>
-                {/*ЛЕВАЯ СТОРОНА*/}
-                <div className={commonPacksStyle.ariaA}>
-                    <div style={{textAlign: 'start', marginBottom: '7px'}}
-                         className={commonPacksStyle.contentAllMy}>
-                       <p>Show Packs cards</p>
-                        <div className={commonPacksStyle.allMyWrapper}>
-                            <div className={commonPacksStyle.my} onClick={onSetMyPressHandler}>My</div>
-                            <div className={commonPacksStyle.all} onClick={onSetAllPressHandler}>All</div>
-                        </div>
-                        <div style={{color: 'red'}}>
-                            {errorResponse(errorRes, 'setPacks')}
-                        </div>
+
+                <div className={commonPacksStyle.ariaAForProfile}>
+                    <div className={commonPacksStyle.editProfileWrapper}>
+                        <div className={s.photo}>
+                            <img
+                                 src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
+                                 alt="UserPhoto"
+                            />
                     </div>
+                        <div className={s.inputTitle}>{user}</div>
+                        <SuperButton onClick={OnGoToEditPageOnClickHandler}>Edit profile</SuperButton>
+                </div>
+
+
                     <div>
                         <Sidebar/>
                     </div>
                 </div>
+
                 {/*ПРАВАЯ СТОРОНА*/}
 
                 <span className={commonPacksStyle.content}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}>Packs list</div>
                     <div className={commonPacksStyle.inputPlusButton}>
-                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching'/>
-                        <span>
-                                    <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
-
-                </span>
+                        <SuperInputText style={{width: '100%'}} placeholder='Enter cardPacks name for searching'/>
                     </div>
                     {isShownAddPack && <AddPack
                         addPack={addPack}
@@ -200,7 +205,7 @@ export const PacksPage = () => {
                         isLoading={isLoading}
                         isShownEditPack={isShownEditPack}
                         isShownDeletePack={isShownDeletePack}
-                        //currentPage={currentPage}
+                        currentPage={currentPage}
                         onPageChanged={onPageChanged}
                     />}
                 </span>

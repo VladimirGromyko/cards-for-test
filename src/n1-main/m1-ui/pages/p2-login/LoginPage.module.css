@@ -1,21 +1,74 @@
 .loginForm {
-    display: block;
-}
-.wrapper_submit_checkbox {
     display: flex;
-    justify-content: center;
-}
-.wrapper_submit_button {
-    display: inline-block;
 }
 .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid #bdbdbd;
-    border-radius: 20px;
-    width: 300px;
+    border-radius: 8px;
+    /*width: 300px;*/
     margin: 0 auto;
     padding: 20px;
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
+    background: rgb(245 246 250);
+    height: 600px;
+    width: 413px;
+    /*margin-top: 60px;*/
+}
+.container{
+    margin: 78px 13px 37px 13px;
+}
+.containerForEmail{
+    margin-top: 38px;
+}
+.containerForPassword{
+    margin-top: 24px;
+}
+.textField {
+    align-items:start;
+}
+.helpText {
+    font-size: 14px;
+    color: #737171;
+    margin: 10% 3% 2% 3%;
+    font-weight: 400;
+    text-decoration: none;
+}
+.helpTextForgotPasswordContainer{
+    margin: 28px 0px 0px 0px;
+    /*width :101px;*/
+    /*height: 17px;*/
+    text-align: end
+}
+.helpTextForgotPassword{
+    font-size: 14px;
+    color: #737171;
+    font-weight: 400;
+    text-decoration: none;
+}
+.helpTextBold {
+    font-size: 1.5rem;
+    color: #2c2cd2;
+    margin: 2% 3% 2% 3%;
+    font-weight: 400;
+    text-decoration: none;
+}
+.label {
+    display: block;
+    /*margin-bottom: 0.25rem;*/
+    text-align: left;
+    font-weight: 300;
+    font-size: 14px;
+    color: #737171;
+    /*margin: 43% 3% 9% 7%;*/
+}
+
+.wrapper_submit_checkbox {
+    display: flex;
+    justify-content: center;
+}
+.wrapper_submit_button {
+    display: inline-block;
+    margin-top: 40px;
 }
