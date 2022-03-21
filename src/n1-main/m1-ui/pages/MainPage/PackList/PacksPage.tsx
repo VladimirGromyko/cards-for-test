@@ -133,9 +133,7 @@ export const PacksPage = () => {
 
     return (
         <div className={commonPacksStyle.wrapper}>
-            <div style={{width: '100%'}}>
-                {isLoading === "loading" && <div className={l.loader07}></div>}
-            </div>
+
             <nav>
                 <ul className={s.menu}>
                     <li className={``}>
@@ -148,55 +146,64 @@ export const PacksPage = () => {
                     {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
                     {/*</li>*/}
                 </ul>
-
             </nav>
-            <div>
-                <div style={{textAlign: 'start',marginBottom:'7px'}} className={commonPacksStyle.contentAllMy}>Show Packs cards
-                    <div className={commonPacksStyle.allMyWrapper}>
-                        <div className={commonPacksStyle.my}  onClick={onSetMyPressHandler}>My</div>
-                        <div className={commonPacksStyle.all} onClick={onSetAllPressHandler}>All </div>
+
+            <div className={commonPacksStyle.TableWrapper}>
+                <div style={{width: '100%'}}>
+                    {isLoading === "loading" && <div className={l.loader07}></div>}
+                </div>
+                {/*ЛЕВАЯ СТОРОНА*/}
+                <div className={commonPacksStyle.ariaA}>
+                    <div style={{textAlign: 'start', marginBottom: '7px'}}
+                         className={commonPacksStyle.contentAllMy}>Show Packs cards
+                        <div className={commonPacksStyle.allMyWrapper}>
+                            <div className={commonPacksStyle.my} onClick={onSetMyPressHandler}>My</div>
+                            <div className={commonPacksStyle.all} onClick={onSetAllPressHandler}>All</div>
+                        </div>
+                        <div style={{color: 'red'}}>
+                            {errorResponse(errorRes, 'setPacks')}
+                        </div>
                     </div>
-                    <div style={{color: 'red'}}>
-                        {errorResponse(errorRes, 'setPacks')}
+                    <div>
+                        <Sidebar/>
                     </div>
                 </div>
-                <div className={commonPacksStyle.content}>
-                    <Sidebar/>
-                </div>
-            </div>
-            <div className={commonPacksStyle.content}>
-                <div style={{textAlign: 'start',marginBottom:'7px'}}>Packs list</div>
-                <div className={commonPacksStyle.inputPlusButton}>
-                    <SuperInputText style={{width:'82%'}} placeholder='Enter cardPacks name for searching'/>
-                    <span>
-                                    <div><SuperButton  onClick={addPackList}>Add new pack</SuperButton></div>
+                {/*ПРАВАЯ СТОРОНА*/}
+
+                <span className={commonPacksStyle.content}>
+                    <div style={{textAlign: 'start', marginBottom: '7px'}}>Packs list</div>
+                    <div className={commonPacksStyle.inputPlusButton}>
+                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching'/>
+                        <span>
+                                    <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
 
                 </span>
-                </div>
-                {isShownAddPack && <AddPack
-                    addPack={addPack}
-                    hideAddPack={hideAddPack}
-                    isLoading={isLoading}/>}
-                <HeaderPacks/>
-                {packs && !isShownAddPack && <PacksTable
-                    deletePack={deletePack}
-                    deletePackList={deletePackList}
-                    hideDeletePack={hideDeletePack}
-                    deletePackId={pickedDeletePack.packId}
-                    deletePackName={pickedDeletePack.packName}
-                    editPack={editPack}
-                    editPackList={editPackList}
-                    hideEditPack={hideEditPack}
-                    packId={pickedEditPack.packId}
-                    packName={pickedEditPack.packName}
-                    learnPack={learnPack}
-                    packs={packs}
-                    isLoading={isLoading}
-                    isShownEditPack={isShownEditPack}
-                    isShownDeletePack={isShownDeletePack}
-                    currentPage={currentPage}
-                    onPageChanged={onPageChanged}
-                />}
+                    </div>
+                    {isShownAddPack && <AddPack
+                        addPack={addPack}
+                        hideAddPack={hideAddPack}
+                        isLoading={isLoading}/>}
+                    <HeaderPacks/>
+                    {packs && !isShownAddPack && <PacksTable
+                        deletePack={deletePack}
+                        deletePackList={deletePackList}
+                        hideDeletePack={hideDeletePack}
+                        deletePackId={pickedDeletePack.packId}
+                        deletePackName={pickedDeletePack.packName}
+                        editPack={editPack}
+                        editPackList={editPackList}
+                        hideEditPack={hideEditPack}
+                        packId={pickedEditPack.packId}
+                        packName={pickedEditPack.packName}
+                        learnPack={learnPack}
+                        packs={packs}
+                        isLoading={isLoading}
+                        isShownEditPack={isShownEditPack}
+                        isShownDeletePack={isShownDeletePack}
+                        currentPage={currentPage}
+                        onPageChanged={onPageChanged}
+                    />}
+                </span>
             </div>
         </div>
 

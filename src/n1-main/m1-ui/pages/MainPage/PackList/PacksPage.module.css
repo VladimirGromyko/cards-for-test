@@ -1,82 +1,125 @@
 .wrapper {
+    display: flex;
+    position: absolute;
+    width: 1008px;
+    height: 636px;
+    top: 84px;
+    background: #FEFEFF;
+    border-radius: 8px;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    margin-left: 250px; /*надо заменить на нормальное центрование*/
+}
+
+.TableWrapper {
     display: grid;
-    grid-template-columns: 3fr 8fr;
-    width: 100%;
-    background: linear-gradient(180deg, #678efe0a, #678efe8f);/*изменила фон таблицы*/
+    grid-template-areas:
+            'A  B B B B B B '
+            'A  B B B B B B';
+    /*width: 100%;*/
+    background: linear-gradient(180deg, #678efe0a, #678efe8f); /*изменила фон таблицы*/
+    justify-content: center;
+    align-items: center;
+    width: 1008px;
+    height: 636px;
+}
+
+.ariaA {
+    grid-area: A;
+    align-content: start;
+    width: 308px;
+    align-self: start;
+    height: 636px;
 }
 
 .content {
+    grid-area: B;
     padding: 25px 35px;
     background-color: white;
-    margin: 20px;
     border-radius: 5px;
-
+    width: 700px;
+    height: 636px;
 }
-.contentAllMy{
+
+.contentAllMy {
     padding: 25px 35px;
-    margin: 20px;
     border-radius: 5px;
     align-items: center;
-    background-color: #e5ecff;;
+    background-color: #e5ecff;
 }
+
 .pagination {
     margin: 15px auto;
     display: flex;
     list-style: none;
     outline: none;
 }
-.pagination > .active > a{
-    background-color: #47ccde ;
-    border-color: #47ccde ;
+
+.pagination > .active > a {
+    background-color: #47ccde;
+    border-color: #47ccde;
     color: #fff;
 }
-.pagination > li > a{
-    border: 1px solid #47ccde ;
+
+.pagination > li > a {
+    border: 1px solid #47ccde;
     padding: 5px 10px;
     outline: none;
     cursor: pointer;
 }
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-    background-color: #47ccde ;
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #47ccde;
     border-color: #47ccde;
-    outline: none ;
+    outline: none;
 }
-.pagination > li > a, .pagination > li > span{
+
+.pagination > li > a, .pagination > li > span {
     color: #47ccde
 }
-.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+
+.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span {
     border-radius: unset
 }
+
 .photo {
     border-radius: 50%;
     margin-bottom: 40px;
+    width: 96px;
+    height: 96px;
 }
-.inputPlusButton{
-    display:flex;
-    text-align:start;
+
+.inputPlusButton {
+    display: flex;
+    text-align: start;
 }
-.allMyWrapper{
+
+.allMyWrapper {
     display: inline-flex;
 
 }
-.all{
+
+.all {
     width: 97px;
     height: 36px;
-    background-color: #a1b9ff ;
+    background-color: #a1b9ff;
     text-align: center;
     cursor: pointer;
     font-size: 22px;
 }
-.all:hover,.my:hover{
+
+.all:hover, .my:hover {
     border: #212529 1px solid;
     align-items: center;
 }
-.my{
+
+.my {
     width: 97px;
     height: 36px;
     text-align: center;
-    color:black;
-    background-color: white ;
+    color: black;
+    background-color: white;
     cursor: pointer;
     font-size: 22px;
 }

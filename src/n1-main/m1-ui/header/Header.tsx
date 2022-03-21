@@ -16,9 +16,6 @@ function Header() {
             <nav>
                 <ul className={s.menu}>
                     {/*<li className={``}>*/}
-                    {/*    <NavLink to={PATH.TEST} className={''}>Test</NavLink>*/}
-                    {/*</li>*/}
-                    {/*<li className={``}>*/}
                     {/*    <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>*/}
                     {/*</li>*/}
                     <li className={``}>

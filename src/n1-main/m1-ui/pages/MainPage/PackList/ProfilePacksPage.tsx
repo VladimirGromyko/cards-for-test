@@ -35,7 +35,7 @@ export const ProfilePacksPage = () => {
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
-    const user = useSelector<AppStoreType,string|undefined>(state => state.login.user?.name)
+    const user = useSelector<AppStoreType, string | undefined>(state => state.login.user?.name)
 
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
 
@@ -138,9 +138,6 @@ export const ProfilePacksPage = () => {
 
     return (
         <div className={commonPacksStyle.wrapper}>
-            <div style={{width: '100%'}}>
-                {isLoading === "loading" && <div className={l.loader07}></div>}
-            </div>
             <nav>
                 <ul className={s.menu}>
                     <li className={``}>
@@ -153,52 +150,62 @@ export const ProfilePacksPage = () => {
                     {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
                     {/*</li>*/}
                 </ul>
-
             </nav>
-            <div>
-                <div className={commonPacksStyle.content}>
-                    <img className={s.photo}
-                         src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
-                         alt="UserPhoto"
-                         style={{borderRadius: '50%'}}
-                    />
-                    <div className={s.inputTitle}>{user}</div>
-                    <SuperButton onClick={OnGoToEditPageOnClickHandler} >Edit profile</SuperButton>
+
+            {/*ПРАВАЯ СТОРОНА*/}
+            {/*ЛЕВАЯ СТОРОНА*/}
+            <div className={commonPacksStyle.TableWrapper}>
+                <div style={{width: '100%'}}>
+                    {isLoading === "loading" && <div className={l.loader07}></div>}
                 </div>
 
-                <div className={commonPacksStyle.content}>
-                    <Sidebar/>
+                <div className={commonPacksStyle.ariaA}>
+                    <div className={s.photo}>
+                        <img className={s.photo}
+                             src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
+                             alt="UserPhoto"
+                        />
+                    </div>
+                    <div className={s.inputTitle}>{user}</div>
+                    <SuperButton onClick={OnGoToEditPageOnClickHandler}>Edit profile</SuperButton>
+
+                    <div>
+                        <Sidebar/>
+                    </div>
                 </div>
-            </div>
-            <div className={commonPacksStyle.content}>
-                <div style={{textAlign: 'start',marginBottom:'7px'}}>Packs list</div>
-                <div className={commonPacksStyle.inputPlusButton}>
-                    <SuperInputText style={{width:'100%'}} placeholder='Enter cardPacks name for searching'/>
-                </div>
-                {isShownAddPack && <AddPack
-                    addPack={addPack}
-                    hideAddPack={hideAddPack}
-                    isLoading={isLoading}/>}
-                <HeaderPacks/>
-                {packs && !isShownAddPack && <PacksTable
-                    deletePack={deletePack}
-                    deletePackList={deletePackList}
-                    hideDeletePack={hideDeletePack}
-                    deletePackId={pickedDeletePack.packId}
-                    deletePackName={pickedDeletePack.packName}
-                    editPack={editPack}
-                    editPackList={editPackList}
-                    hideEditPack={hideEditPack}
-                    packId={pickedEditPack.packId}
-                    packName={pickedEditPack.packName}
-                    learnPack={learnPack}
-                    packs={packs}
-                    isLoading={isLoading}
-                    isShownEditPack={isShownEditPack}
-                    isShownDeletePack={isShownDeletePack}
-                    currentPage={currentPage}
-                    onPageChanged={onPageChanged}
-                />}
+
+                {/*ПРАВАЯ СТОРОНА*/}
+
+                <span className={commonPacksStyle.content}>
+                    <div style={{textAlign: 'start', marginBottom: '7px'}}>Packs list</div>
+                    <div className={commonPacksStyle.inputPlusButton}>
+                        <SuperInputText style={{width: '100%'}} placeholder='Enter cardPacks name for searching'/>
+                    </div>
+                    {isShownAddPack && <AddPack
+                        addPack={addPack}
+                        hideAddPack={hideAddPack}
+                        isLoading={isLoading}/>}
+                    <HeaderPacks/>
+                    {packs && !isShownAddPack && <PacksTable
+                        deletePack={deletePack}
+                        deletePackList={deletePackList}
+                        hideDeletePack={hideDeletePack}
+                        deletePackId={pickedDeletePack.packId}
+                        deletePackName={pickedDeletePack.packName}
+                        editPack={editPack}
+                        editPackList={editPackList}
+                        hideEditPack={hideEditPack}
+                        packId={pickedEditPack.packId}
+                        packName={pickedEditPack.packName}
+                        learnPack={learnPack}
+                        packs={packs}
+                        isLoading={isLoading}
+                        isShownEditPack={isShownEditPack}
+                        isShownDeletePack={isShownDeletePack}
+                        currentPage={currentPage}
+                        onPageChanged={onPageChanged}
+                    />}
+                </span>
             </div>
         </div>
 

@@ -1,8 +1,8 @@
 .wrapper{
     position: relative;
     width: 90%;
-    background-color: #ffffff;
-    padding: 10px 0;
+    background-color: #e5ecff;
+    padding: 10px;
     border-radius: 10px;
 }
 .container{
@@ -108,4 +108,9 @@ input.range:active::-webkit-slider-thumb{
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     justify-items: center;
+    padding: 10px;
+}
+.title{
+    font-size: 20px;
+    margin-bottom: 10px;
 }
