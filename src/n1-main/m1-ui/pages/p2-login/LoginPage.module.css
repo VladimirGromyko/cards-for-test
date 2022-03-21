@@ -12,7 +12,6 @@
     padding: 20px;
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
     background: rgb(245 246 250);
-
     height: 600px;
     width: 413px;
     /*margin-top: 60px;*/
@@ -52,7 +51,7 @@
     font-size: 1.5rem;
     color: #2c2cd2;
     margin: 2% 3% 2% 3%;
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: none;
 }
 .label {

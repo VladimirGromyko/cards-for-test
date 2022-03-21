@@ -9,6 +9,14 @@
     padding: 20px;
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
     background: rgb(245 246 250);
+    height: 540px;
+    width: 413px;
+}
+.container{
+    margin: 78px 13px 37px 13px;
+}
+.containerForEmail{
+    margin-top: 50px;
 }
 
 .inputField {
@@ -24,31 +32,29 @@
     margin: 10% 3% 2% 3%;
     font-weight: 400;
 }
+.helpEmailText {
+    font-size: 14px;
+    color: grey;
+    margin: 10% 3% 2% 3%;
+    font-weight: 400;
+    text-align: start;
+}
 
 .inputError {
     font-size: 1rem;
 }
 
 .forgotButton {
-    width: 110%;
-    margin: 10px 0 10px 0;
+    margin: 60px 0 10px 0;
     font-size: 18px;
     border-radius: 5px;
     padding: 5px;
 }
 
-.forgotEmail {
-    display: flex;
-    justify-content: center;
-    margin: 6% 0 1% 0;
-    height: 7ch;
-    font-size: 1rem;
-    color: darkslateblue;
-}
 .helpTextBold{
     font-size: 1.3rem;
     color: #2c2cd2;
     margin: 2% 3% 2% 3%;
-    font-weight: 500;
+    font-weight: 400;
     text-decoration: none;
 }

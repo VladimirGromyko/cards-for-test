@@ -39,29 +39,32 @@ const PasswordRecoveryPage = () => {
             <div style={{width: '100%'}}>
                 {isLoading === "loading" && <div className={l.loader07}></div>}
             </div>
+            <div className={s.container}>
+                <h3>Forgot you password ?</h3>
+                <div className={s.containerForEmail}>
+                    <SuperInputText value={email}
+                                    onChangeText={setEmail}
+                                    onEnter={onKeyPressHandler}
+                                    placeholder={'Email'}
+                                    error={errorResponse(errorRes, 'passwordRec')}
+                                    spanClassName={s.inputError}
 
-            <h3>Forgot you password ?</h3>
-            <div /*className={s.inputField}*/>
-                <SuperInputText value={email}
-                                onChangeText={setEmail}
-                                onEnter={onKeyPressHandler}
-                                placeholder={'Email'}
-                                error={errorResponse(errorRes, 'passwordRec')}
-                                spanClassName={s.inputError}
-
-                />
+                    />
+                </div>
+                <div className={s.containerForPassword}>
+                <div className={s.helpEmailText}>Enter your email address and we will send you further instruction</div>
+                </div>
+                    <div className={s.forgotEmail}>
+                    {instructionStatus.isInstructionEmailed === 'succeeded' && <div>
+                        <div>Check Email</div>
+                        <div>We've sent Email with instruction to {email}</div>
+                    </div>}
+                </div>
+                <div><SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Send instruction</SuperButton>
+                </div>
+                <div className={s.helpText}>Did you remember your password ?</div>
+                <NavLink to={PATH.LOGIN} className={s.helpTextBold}>Try logging in</NavLink>
             </div>
-            <div className={s.helpText}>Enter your email address and we will send you further instruction</div>
-            <div className={s.forgotEmail}>
-                {instructionStatus.isInstructionEmailed === 'succeeded' && <div>
-                    <div>Check Email</div>
-                    <div>We've sent Email with instruction to {email}</div>
-                </div>}
-            </div>
-            <div><SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Send instruction</SuperButton>
-            </div>
-            <div className={s.helpText}>Did you remember your password ?</div>
-            <NavLink to={PATH.LOGIN} className={s.helpTextBold}>Try logging in</NavLink>
         </div>
     )
 }
