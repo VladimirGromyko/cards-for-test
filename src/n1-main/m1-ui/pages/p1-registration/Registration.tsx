@@ -51,21 +51,26 @@ const Registration = () => {
             <div style={{width: '100%'}}>
                 {isLoading === "loading" && <div className={l.loader07}></div>}
             </div>
-            <h1 className={s.title}>Sign up</h1>
-            <div className={s.textField}>
-                <label className={s.label}>Email</label>
-                <SuperInputText className={s.input} type="text" placeholder="Email" onChange={onEmailChange}/>
+            <div className={s.container}>
+                <h1 className={s.title}>Sign up</h1>
+                <div className={s.containerForEmail}>
+                    <div className={s.textField}>
+                        <label className={s.label}>Email</label>
+                        <SuperInputText className={s.input} type="text" placeholder="Email" onChange={onEmailChange}/>
+                    </div>
+                </div>
+                <div className={s.textField}>
+                    <label className={s.label}>Password</label>
+                    <SuperInputText className={s.input} type="text" placeholder="Password" onChange={onPassChange}/>
+                </div>
+                <div className={s.textField}>
+                    <label className={s.label}>Confirm password</label>
+                    <SuperInputText className={s.input} type="text" placeholder="Confirm password"
+                                    onChange={onConfirmPassChange}/>
+                </div>
+                <SuperButton onClick={onRegisterClick} className={s.button}>Register</SuperButton>
+                {err}
             </div>
-            <div className={s.textField}>
-                <label className={s.label}>Password</label>
-                <SuperInputText className={s.input} type="text" placeholder="Password" onChange={onPassChange}/>
-            </div>
-            <div className={s.textField}>
-                <label className={s.label}>Confirm password</label>
-                <SuperInputText className={s.input} type="text" placeholder="Confirm password" onChange={onConfirmPassChange}/>
-            </div>
-            <SuperButton onClick={onRegisterClick} className={s.button}>Register</SuperButton>
-            {err}
         </div>
     )
 }
