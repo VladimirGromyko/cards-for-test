@@ -23,7 +23,7 @@ type PacksTableType = {
     isLoading: LoadingStatusType
     isShownEditPack: boolean
     isShownDeletePack: boolean
-    // currentPage: number
+    currentPage: number
     onPageChanged: (pageNumber: number) => void
 }
 
