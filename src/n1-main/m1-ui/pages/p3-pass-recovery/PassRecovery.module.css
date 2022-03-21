@@ -39,6 +39,20 @@
     font-weight: 400;
     text-align: start;
 }
+.helpEmailText1 {
+    font-size: 16px;
+    color: grey;
+    margin: 10px 3% 2% 3%;
+    font-weight: 400;
+    text-align: center;
+}
+.helpEmailTextBold {
+    color: black;
+    margin: 10px 3% 2% 3%;
+    font-weight: 600;
+    text-align: center;
+    font-size: 22px;
+}
 
 .inputError {
     font-size: 1rem;
@@ -57,4 +71,10 @@
     margin: 2% 3% 2% 3%;
     font-weight: 400;
     text-decoration: none;
+}
+.photo {
+    border-radius: 50%;
+    margin-top: 5px;
+    height: 50px;
+    width: 50px;
 }

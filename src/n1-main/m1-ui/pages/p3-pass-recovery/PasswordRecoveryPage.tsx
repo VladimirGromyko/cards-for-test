@@ -41,6 +41,8 @@ const PasswordRecoveryPage = () => {
             </div>
             <div className={s.container}>
                 <h3>Forgot you password ?</h3>
+                {instructionStatus.isInstructionEmailed === 'failed' &&
+                <div>
                 <div className={s.containerForEmail}>
                     <SuperInputText value={email}
                                     onChangeText={setEmail}
@@ -52,12 +54,18 @@ const PasswordRecoveryPage = () => {
                     />
                 </div>
                 <div className={s.containerForPassword}>
-                <div className={s.helpEmailText}>Enter your email address and we will send you further instruction</div>
+                    <div className={s.helpEmailText}>Enter your email address and we will send you further instruction
+                    </div>
                 </div>
-                    <div className={s.forgotEmail}>
-                    {instructionStatus.isInstructionEmailed === 'succeeded' && <div>
-                        <div>Check Email</div>
-                        <div>We've sent Email with instruction to {email}</div>
+                    </div>}
+                <div className={s.forgotEmail}>
+                    {instructionStatus.isInstructionEmailed === 'succeeded' &&
+                    <div>
+                        <img className={s.photo}
+                             src="https://bio-holding.ru/images/stages-1.png"
+                             alt="UserPhoto"/>
+                        <div className={s.helpEmailTextBold}>Check Email</div>
+                        <div className={s.helpEmailText1}>We've sent Email with instruction to {email}</div>
                     </div>}
                 </div>
                 <div><SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Send instruction</SuperButton>
