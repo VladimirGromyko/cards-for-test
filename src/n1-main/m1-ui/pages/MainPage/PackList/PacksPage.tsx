@@ -200,7 +200,7 @@ export const PacksPage = () => {
                         isLoading={isLoading}
                         isShownEditPack={isShownEditPack}
                         isShownDeletePack={isShownDeletePack}
-                        //currentPage={currentPage}
+                        currentPage={currentPage}
                         onPageChanged={onPageChanged}
                     />}
                 </span>
