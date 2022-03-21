@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, useNavigate} from "react-router-dom";
-import React, {ChangeEvent, useCallback, useState} from "react";
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import {PacksTable} from "./PacksTable";
@@ -25,6 +25,7 @@ import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
+import useDebounce from "../../../../../n2-features/f1-hooks/useDebounce";
 
 
 export const PacksPage = () => {
@@ -58,13 +59,28 @@ export const PacksPage = () => {
     const navigate = useNavigate()
 
     const [search, setSearch] = useState('')
+    const [isSearching, setIsSearching] = useState(false);
+
+    const debouncedValue = useDebounce(search, 1500);
+
+    useEffect(() => {
+
+          if (debouncedValue) {
+            setIsSearching(true);
+                dispatch(getSearchPackByNameTC(search))
+          
+          } 
+          else {
+        
+                dispatch(getSearchPackByNameTC(search))
+            
+          }
+        },
+        [debouncedValue]
+      );
 
     const onSearchHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setSearch(e.currentTarget.value)
-    }
-
-    const onSearchClick = () => {
-        dispatch(getSearchPackByNameTC(search))
     }
 
     const onSetAllPressHandler = useCallback(() => {
@@ -154,9 +170,6 @@ export const PacksPage = () => {
                     <li className={``}>
                         <NavLink to={PATH.PROFILE} className={''}>Profile</NavLink>
                     </li>
-                    {/*<li>*/}
-                    {/*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*/}
-                    {/*</li>*/}
                 </ul>
 
             </nav>
@@ -177,7 +190,6 @@ export const PacksPage = () => {
             <div className={commonPacksStyle.content}>
                 <div>Packs</div>
                 <SuperInputText placeholder='Enter cardPacks name for searching' onChange={onSearchHandler}/>
-                <SuperButton onClick={onSearchClick}>Search</SuperButton>
                 <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
                 {isShownAddPack && <AddPack
                     addPack={addPack}
