@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, useNavigate} from "react-router-dom";
-import React, {useCallback} from "react";
+import React, {ChangeEvent, useCallback, useState} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import {PacksTable} from "./PacksTable";
@@ -12,7 +12,7 @@ import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {
     addPacksTC,
-    editPackTC,
+    editPackTC, getSearchPackByNameTC,
     pickDeletePackAC,
     pickEditPackAC, setCurrentPage,
     setPacksDataTC,
@@ -56,6 +56,16 @@ export const PacksPage = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const [search, setSearch] = useState('')
+
+    const onSearchHandler = (e:ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.currentTarget.value)
+    }
+
+    const onSearchClick = () => {
+        dispatch(getSearchPackByNameTC(search))
+    }
 
     const onSetAllPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
@@ -166,7 +176,8 @@ export const PacksPage = () => {
             </div>
             <div className={commonPacksStyle.content}>
                 <div>Packs</div>
-                <SuperInputText placeholder='Enter cardPacks name for searching'/>
+                <SuperInputText placeholder='Enter cardPacks name for searching' onChange={onSearchHandler}/>
+                <SuperButton onClick={onSearchClick}>Search</SuperButton>
                 <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
                 {isShownAddPack && <AddPack
                     addPack={addPack}

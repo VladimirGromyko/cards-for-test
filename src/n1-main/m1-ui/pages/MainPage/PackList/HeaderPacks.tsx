@@ -2,7 +2,7 @@ import s from './HeaderCards.module.css'
 import React, { useState } from 'react'
 import { packsAPI, SortPackNameType, SortPackNumberType } from '../../../../m3-dal/packs-api'
 import { useDispatch } from 'react-redux'
-import { setPacksDataAC } from '../../../../m2-bll/packsReducer'
+import {setPacksDataAC, setPacksDataTC} from '../../../../m2-bll/packsReducer'
 
 export const HeaderPacks = () => {
 
@@ -11,16 +11,26 @@ export const HeaderPacks = () => {
 
     const sortingPack = (sortPackName: SortPackNameType) => {
         if (!isSorting) {
-            packsAPI.setSortPacks(0, sortPackName).then(res => {
-                dispatch(setPacksDataAC(res.data))
-                setIsSorting(!isSorting)
-            })
+            dispatch(setPacksDataTC(
+                {
+                    params:{
+                        pageCount: 20,
+                        sortPacks:`0${sortPackName}`,
+                    }
+                }
+            ))
+            setIsSorting(!isSorting)
         }
         if (isSorting) {
-            packsAPI.setSortPacks(1, sortPackName).then(res => {
-                dispatch(setPacksDataAC(res.data))
-                setIsSorting(!isSorting)
-            })
+            dispatch(setPacksDataTC(
+                {
+                    params:{
+                        pageCount: 20,
+                        sortPacks:`1${sortPackName}`,
+                    }
+                }
+            ))
+            setIsSorting(!isSorting)
         }
     }
 
@@ -29,14 +39,14 @@ export const HeaderPacks = () => {
 
             <div className={s.wrapper_header_table} >
                 <div className={s.header_tableItem} onClick={() => sortingPack('name')}>Card name
-                    {/* {isSorting ? 
+                    {isSorting ?
                     <button className={s.button}>
                         <div className={s.triangle_up}></div>
                     </button>
-                    : 
+                    :
                     <button className={s.button}>
                         <div className={s.triangle_down}></div>
-                    </button>} */}
+                    </button>}
                 </div>
                 <div className={s.header_tableItem} onClick={() => sortingPack('cardsCount')}>Cards</div>
                 <div className={s.header_tableItem} onClick={() => sortingPack('updated')}>Updated</div>

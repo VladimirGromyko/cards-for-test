@@ -30,10 +30,7 @@ type PacksGetRequestDataType = {
     packName?: string, // не обязательно
     min?: number, // не обязательно
     max?: number,  // не обязательно
-    sortPacks?: {
-        sortPackNumber: SortPackNumberType,
-        sortPackName: SortPackNameType,
-    }, // не обязательно
+    sortPacks?: string, // не обязательно
     page?: number, // не обязательно
     pageCount?: number, // не обязательно
     user_id?: string  // не обязательно

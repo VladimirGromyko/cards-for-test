@@ -6,15 +6,13 @@ import useDebounce from '../../../../../n2-features/f1-hooks/useDebounce';
 import { packsAPI } from '../../../../m3-dal/packs-api';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStoreType } from '../../../../m2-bll/store';
-import { setPacksDataAC, setPacksDataTC } from '../../../../m2-bll/packsReducer'
+import {getPacksByMinMaxTC, setPacksDataAC, setPacksDataTC} from '../../../../m2-bll/packsReducer'
 
 const Sidebar = () => {
     const user = useSelector<AppStoreType>(state => state.login.user)
 
     const dispatch = useDispatch()
 
-    // const [value1, setValue1] = useState(0)
-    // const [value2, setValue2] = useState(100)
     const [value, setValue] = useState([0, 100])
     const [isDebouncing, setIsDebouncing] = useState(false);
 
@@ -23,13 +21,8 @@ const Sidebar = () => {
     useEffect(() => {
         if (debouncedValue) {
             setIsDebouncing(true);
-            dispatch(setPacksDataTC({
-                params: {
-                    min: debouncedValue[0],
-                    max: debouncedValue[1],
-                    pageCount: 20,
-                }
-            }))
+            dispatch(getPacksByMinMaxTC(debouncedValue[0],debouncedValue[1] )
+            )
         }
         else {
             alert('Something has gone wrong with double range')
