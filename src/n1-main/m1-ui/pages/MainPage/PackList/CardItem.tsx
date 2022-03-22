@@ -5,6 +5,7 @@ import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import { useSelector } from 'react-redux';
 import { AppStoreType } from '../../../../m2-bll/store';
 import { UserDataType } from '../../../../m2-bll/loginReducer';
+import {changeDateView} from "../../../../../n2-features/f3-utils/changeDateView";
 
 type CardItemPropsType = {
     card: CardType
@@ -18,7 +19,7 @@ export const CardItem  = ({onClickDeleteCards, card}:CardItemPropsType) => {
         <div className={s.items}>
                         <div>{card.question}</div>
                         <div>{card.answer}</div>
-                        <div>{card.updated}</div>
+                        <div>{changeDateView(card.updated)}</div>
                         <div>{card.grade}</div>
                         {card.user_id === user?._id && <SuperButton onClick={() => onClickDeleteCards(card._id)}>delete card</SuperButton>}
                     </div>

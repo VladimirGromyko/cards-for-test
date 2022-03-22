@@ -116,7 +116,6 @@ export const PacksPage = () => {
 
     const editPack = useCallback((packId: string, namePack: string) => {
         dispatch(editPackTC({cardsPack: {_id: packId, name: namePack}}))
-        // dispatch(showEditPackAC(true))
     }, [dispatch])
 
     const hideEditPack = useCallback(() => {

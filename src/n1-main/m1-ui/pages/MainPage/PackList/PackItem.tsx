@@ -2,6 +2,7 @@ import React, {useCallback} from 'react'
 import packsStyle from './PacksTable.module.css'
 import SuperButton from '../../../common/c1-SuperButton/SuperButton'
 import {CardPacksType} from "../../../../m3-dal/packs-api";
+import {changeDateView} from "../../../../../n2-features/f3-utils/changeDateView";
 
 type TableItemPropsType = {
     deletePackList: (packName: string, packId: string) => void
@@ -29,7 +30,7 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
             <div style={{cursor: "pointer"}} onClick={onLearnPressHandler}>{pack.name}</div>
 
             <div>{pack.cardsCount}</div>
-            <div>{pack.created}</div>
+            <div>{changeDateView(pack.created)}</div>
             <div>{pack.user_id}</div>
             <div>
                 <SuperButton style={{minWidth: "47px"}}onClick={onDeletePressHandler}>Delete</SuperButton>
