@@ -82,7 +82,7 @@ export const PacksPage = () => {
             // briefly hardcoded 1 Cards request
             params: {
                 packName: '',
-                pageCount: 100
+                pageCount: 20,
             }
         }))
     }, [dispatch])
@@ -153,20 +153,6 @@ export const PacksPage = () => {
     return (
         <div className={commonPacksStyle.wrapper}>
 
-            {/*<nav>*/}
-            {/*    <ul className={s.menu}>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
-            {/*        </li>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.TEST} className={''}>Profile</NavLink>*/}
-            {/*        </li>*/}
-            {/*        /!*<li>*!/*/}
-            {/*        /!*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*!/*/}
-            {/*        /!*</li>*!/*/}
-            {/*    </ul>*/}
-            {/*</nav>*/}
-
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>
                     {isLoading === "loading" && <div className={l.loader07}></div>}
@@ -193,7 +179,7 @@ export const PacksPage = () => {
                 <span className={commonPacksStyle.content}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}>Packs list</div>
                     <div className={commonPacksStyle.inputPlusButton}>
-                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching'/>
+                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching' onChange={onSearchHandler}/>
                         <span>
                                     <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
 

@@ -40,6 +40,9 @@ const initState = {
     pickedEditPack: {packName: '', packId: ''},
     pickedDeletePack: {packName: '', packId: ''},
     currentPage: 1,
+    max: 100,
+    min: 0,
+    packName: '',
 } as statePacksType
 
 export const packsReducer = (state: statePacksType = initState,
