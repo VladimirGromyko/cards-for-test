@@ -121,7 +121,7 @@ img {
 .all {
     width: 97px;
     height: 36px;
-    background-color: #a1b9ff;
+    background-color: white;
     text-align: center;
     cursor: pointer;
     font-size: 22px;
@@ -136,10 +136,10 @@ img {
 .my {
     width: 97px;
     height: 36px;
+   background-color: #a1b9ff;
     text-align: center;
-    color: black;
-    background-color: white;
     cursor: pointer;
+    color: black;
     font-size: 22px;
-
+    justify-content: center;
 }
