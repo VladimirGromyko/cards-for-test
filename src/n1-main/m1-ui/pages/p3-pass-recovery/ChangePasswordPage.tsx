@@ -38,21 +38,23 @@ const ChangePasswordPage = () => {
             <div style={{width: '100%'}}>
                 {isLoading === "loading" && <div className={l.loader07}></div>}
             </div>
-            <h3>Create new password</h3>
-            <div className={s.inputField}>
-                <SuperInputText value={password}
-                                onChangeText={setPassword}
-                                onEnter={onKeyPressHandler}
-                                placeholder={'New password'}
-                                error={errorResponse(errorRes,'changePas')}
+            <div className={s.container}>
+                <h3>Create new password</h3>
+                <div className={s.inputField}>
+                    <SuperInputText value={password}
+                                    onChangeText={setPassword}
+                                    onEnter={onKeyPressHandler}
+                                    placeholder={'New password'}
+                                    error={errorResponse(errorRes,'changePas')}
 
-                                spanClassName={s.inputError}
-                />
-            </div>
-            <div className={s.helpText}>Create new password and we will send you further instruction to email</div>
-            <div className={s.forgotEmail}><br/></div>
-            <div>
-                <SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Create new password</SuperButton>
+                                    spanClassName={s.inputError}
+                    />
+                </div>
+                <div className={s.helpText}>Create new password and we will send you further instruction to email</div>
+                <div className={s.forgotEmail}><br/></div>
+                <div>
+                    <SuperButton onClick={onKeyPressHandler} className={s.forgotButton}>Create new password</SuperButton>
+                </div>
             </div>
 
         </div>

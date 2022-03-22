@@ -31,11 +31,11 @@ const Sidebar = () => {
     );
     return (
         <div>
-            <p>Cards in pack</p>
+            <p className={s.title}>Number of cards</p>
             <div className={s.mainWrapper}>
-                <span>{value[0]}</span>
-                <SuperDoubleRange setValue={setValue} min={value[0]} max={value[1]} />
-                <span>{value[1]}</span>
+                <span className={s.title}>{value[0]}</span>
+                <SuperDoubleRange  setValue={setValue} min={value[0]} max={value[1]} />
+                <span className={s.title}>{value[1]}</span>
             </div>
         </div>
     );

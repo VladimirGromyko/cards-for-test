@@ -38,7 +38,7 @@
 
 .superInput {
 
-    width: 60%;
+    width: 347px;
     /*box-sizing: border-box;*/
 
     border: 1px solid var(--input-border);
@@ -48,18 +48,18 @@
     /*background-image: url('./pen.png');*/
     background-position: 0 3px;
     background-repeat: no-repeat;
-    padding: 5px 20px 5px 20px;
+    padding: 5px 15px 5px 15px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition-duration: 0.5s;
-    margin-bottom: 7px;
+    margin-bottom: 0px;
 }
 
 .superInput::placeholder {
     color: #212529;
     opacity: 0.4;
     transition: width 0.4s ease-in-out;
-    box-shadow: 0 0 10px rgb(0, 0, 0.2);
+    //box-shadow: 0 0 10px rgb(0, 0, 0.2);
     margin-bottom: 7px;
 }
 
