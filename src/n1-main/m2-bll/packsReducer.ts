@@ -5,11 +5,11 @@ import {
     PacksGetResponseDataType,
     PacksGetRequestType,
     PacksPutRequestType,
-    PacksPostRequestType
+    PacksPostRequestType, PacksDeleteRequestType
 } from "../m3-dal/packs-api";
 import {responseErrorAC, ResponseErrorACType} from "./errorReducer";
 import {ThunkType} from "./store";
-
+import {responseConfirmAC, ResponseConfirmACType} from "./answeredReducer";
 
 export type statePacksType = {
     packsData: PacksGetResponseDataType
@@ -101,7 +101,6 @@ export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: 
     packsAPI.setPacks(packsRequest)
         .then((res) => {
             dispatch(setPacksDataAC(res.data))
-            console.log(res.data)
         })
         .catch((err) => {
             dispatch(responseErrorAC(true, 'setPacks', err.response?.data.error))
@@ -113,65 +112,110 @@ export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: 
             dispatch(loadingAC('succeeded'))
             dispatch(showMainPageAC(false))
         })
-
 }
 
 export const setCurrentPageTC = (pageNumber: number): ThunkType =>
     (dispatch, getState) => {
-    dispatch(setCurrentPageAC(pageNumber))
-    dispatch(setPacksDataTC({
-        params: {
-            page: pageNumber,
-            pageCount: getState().packs.packsData.pageCount
-        }
-    }))
-}
+        dispatch(setCurrentPageAC(pageNumber))
+        dispatch(setPacksDataTC({
+            params: {
+                page: pageNumber,
+                pageCount: getState().packs.packsData.pageCount
+            }
+        }))
+    }
 
-export const addPacksTC = (pack: PacksPostRequestType) => (dispatch: Dispatch<PacksReducerType>) => {
-    dispatch(loadingAC('loading'))
-    // console.log(pack)
-    packsAPI.postPacks(pack)
-        .then((res) => {
-            console.log(res)
-            // dispatch(setPacksDataAC(res))
-        })
-        .catch((err) => {
-            dispatch(responseErrorAC(true, 'addPack', err.response?.data.error))
-            console.log(err)
-            setTimeout(() => {
-                dispatch(responseErrorAC(false, 'addPack', err.response?.data.error))
-            }, 3000)
-        })
-        .finally(() => {
-            dispatch(loadingAC('succeeded'))
-            // dispatch(showMainPageAC(false))
-        })
+export const addPacksTC = (pack: PacksPostRequestType): ThunkType =>
+    (dispatch, getState) => {
+        dispatch(loadingAC('loading'))
+        packsAPI.postPacks(pack)
+            .then((res) => {
+                dispatch(responseConfirmAC(true,
+                    'addPack', 'Pack has been successfully added!'))
+                dispatch(setPacksDataTC({
+                    params: {
+                        page: getState().packs.packsData.page,
+                        pageCount: getState().packs.packsData.pageCount,
+                        user_id: getState().packs.packsData.cardPacks[0]?.user_id // исправить ссылку на user_id
+                    }
+                }))
+            })
+            .catch((err) => {
+                dispatch(responseErrorAC(true, 'addPack', err.response?.data.error))
+            })
+            .finally(() => {
+                dispatch(loadingAC('succeeded'))
+                setTimeout(() => {
+                    dispatch(showAddPackAC(false))
+                    dispatch(responseConfirmAC(false,
+                        'addPack', ''))
+                    dispatch(responseErrorAC(false, 'addPack', ''))
+                }, 3000)
+            })
+    }
 
-}
-
-export const editPackTC = (param: PacksPutRequestType) => (dispatch: Dispatch<PacksReducerType>) => {
+export const editPackTC = (param: PacksPutRequestType):ThunkType =>
+    (dispatch, getState) => {
     dispatch(loadingAC('loading'))
     packsAPI.putPacks(param)
         .then((res) => {
             dispatch(showEditPackAC(true))
-            dispatch(editPackAC(res.data.updatedCardsPack))
-            // dispatch(setPacksDataTC())
+            // dispatch(editPackAC(res.data.updatedCardsPack))
+            dispatch(setPacksDataTC({
+                params: {
+                    page: getState().packs.packsData.page,
+                    pageCount: getState().packs.packsData.pageCount,
+                    user_id: getState().packs.packsData.cardPacks[0]?.user_id // исправить ссылку на user_id
+                }
+            }))
+            dispatch(responseConfirmAC(true,
+                'editPack', 'Pack name has been successfully changed!'))
         })
         .catch((err) => {
             dispatch(showEditPackAC(true))
             dispatch(responseErrorAC(true, 'editPack', err.response?.data.error))
             setTimeout(() => {
-                dispatch(showEditPackAC(false))
-                dispatch(responseErrorAC(false, 'editPack', err.response?.data.error))
-            }, 4000)
+            }, 3000)
         })
         .finally(() => {
             dispatch(loadingAC('succeeded'))
-            // dispatch(showMainPageAC(false))
+            setTimeout(() => {
+                dispatch(responseConfirmAC(false, 'editPack', ''))
+                dispatch(showEditPackAC(false))
+                dispatch(responseErrorAC(false, 'editPack', ''))
+            }, 3000)
         })
-
 }
 
+export const deletePackTC = (param: PacksDeleteRequestType): ThunkType =>
+    (dispatch, getState) => {
+
+        dispatch(loadingAC('loading'))
+        packsAPI.deletePacks(param)
+            .then((res) => {
+                dispatch(responseConfirmAC(true,
+                    'deletePack', 'Pack has been successfully removed!'))
+                dispatch(setPacksDataTC({
+                    params: {
+                        page: getState().packs.packsData.page,
+                        pageCount: getState().packs.packsData.pageCount,
+                        user_id: getState().packs.packsData.cardPacks[0]?.user_id // исправить ссылку на user_id
+                    }
+                }))
+            })
+            .catch((err) => {
+                dispatch(responseErrorAC(true, 'deletePack', err.response?.data.error))
+            })
+            .finally(() => {
+                dispatch(loadingAC('succeeded'))
+                setTimeout(() => {
+                    dispatch(showDeletePackAC(false))
+                    dispatch(responseConfirmAC(false, 'deletePack', ''))
+                    dispatch(responseErrorAC(false, 'deletePack', ''))
+                }, 3000)
+            })
+
+    }
 
 type SetPacksDataACType = ReturnType<typeof setPacksDataAC>
 type editPackACType = ReturnType<typeof editPackAC>
@@ -189,6 +233,7 @@ export type PacksReducerType = SetPacksDataACType
     | editPackACType
     | showEditPackACType
     | ResponseErrorACType
+    | ResponseConfirmACType
     | pickEditPackACType
     | showAddPackACType
     | showDeletePackACType

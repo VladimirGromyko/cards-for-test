@@ -11,7 +11,7 @@ import {PATH} from "../../../routes/Paths";
 import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {
-    addPacksTC,
+    addPacksTC, deletePackTC,
     editPackTC,
     pickDeletePackAC,
     pickEditPackAC, setCurrentPageTC,
@@ -25,6 +25,7 @@ import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
+import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
 
 
 export const PacksPage = () => {
@@ -103,6 +104,7 @@ export const PacksPage = () => {
     const deletePack = useCallback((packName: string, packId: string) => {
         // console.log("Удалить колоду:", packName, " с Id: ", packId)
         // dispatch()
+        dispatch(deletePackTC({params:{id: packId}}))
     }, [])
     const hideDeletePack = () => {
         dispatch(showDeletePackAC(false))

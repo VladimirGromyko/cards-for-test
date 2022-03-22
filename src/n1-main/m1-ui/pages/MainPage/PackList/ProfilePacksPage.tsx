@@ -132,7 +132,7 @@ export const ProfilePacksPage = () => {
     }
 
     const onPageChanged = (pageNumber: number) => {
-        console.log("pageNumber: ", pageNumber)
+        // console.log("pageNumber: ", pageNumber)
         dispatch(setCurrentPageTC(pageNumber))
     }
 

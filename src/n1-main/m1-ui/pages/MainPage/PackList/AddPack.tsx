@@ -8,6 +8,8 @@ import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {useSelector} from "react-redux";
 import {AppStoreType} from "../../../../m2-bll/store";
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
+import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
+import {confirmResponse} from "../../../../../n2-features/f0-test/confirmResponse";
 
 
 
@@ -19,6 +21,7 @@ type AddPackType = {
 export const AddPack = ({addPack, hideAddPack, isLoading}: AddPackType) => {
 
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
+    const confirmRes = useSelector<AppStoreType, ResponseConfirmStateType>(state => state.confirm)
 
     const [newPack, setNewPack] = useState<string>('')
 
@@ -48,6 +51,12 @@ export const AddPack = ({addPack, hideAddPack, isLoading}: AddPackType) => {
             />
             <SuperButton onClick={OnCancelClick}>Cancel</SuperButton>
             <SuperButton onClick={onSaveClick}>Save</SuperButton>
+            {confirmRes.isResponseConfirm && <div style={{color: 'blue'}}>
+                {confirmResponse(confirmRes, 'addPack')}
+            </div>}
+            {/*{errorRes.isResponseError && <div style={{color: 'red'}}>*/}
+            {/*    {errorResponse(errorRes, 'addPack')}*/}
+            {/*</div>}*/}
         </div>
     )
 }
