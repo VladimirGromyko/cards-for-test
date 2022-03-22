@@ -32,9 +32,9 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
             <div>{pack.created}</div>
             <div>{pack.user_id}</div>
             <div>
-                <SuperButton onClick={onDeletePressHandler}>Delete</SuperButton>
-                <SuperButton onClick={onEditPressHandler}>Edit</SuperButton>
-                <SuperButton onClick={onLearnPressHandler}>Learn</SuperButton>
+                <SuperButton style={{minWidth: "47px"}}onClick={onDeletePressHandler}>Delete</SuperButton>
+                <SuperButton style={{minWidth: "47px"}} onClick={onEditPressHandler}>Edit</SuperButton>
+                <SuperButton style={{minWidth: "47px"}} onClick={onLearnPressHandler}>Learn</SuperButton>
             </div>
 
         </div>

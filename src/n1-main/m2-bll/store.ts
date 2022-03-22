@@ -28,7 +28,16 @@ const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 export default store
 
 export type AppStoreType = ReturnType<typeof reducers>
-export type AppActionType = CardsActionType | RegisterActionType | PacksReducerType | LoginActionsType | LoadingACType | ResponseErrorACType | authReducerType | NewPassActionsType
+export type AppActionType = CardsActionType
+    | RegisterActionType
+    | PacksReducerType
+    | LoginActionsType
+    | LoadingACType
+    | ResponseErrorACType
+    | authReducerType
+    | NewPassActionsType
+
+
 
 export type ThunkType = ThunkAction<void, AppStoreType, unknown, AppActionType>
 
