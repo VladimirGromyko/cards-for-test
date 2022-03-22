@@ -10,6 +10,8 @@ import {getPacksByMinMaxTC, setPacksDataAC, setPacksDataTC} from '../../../../m2
 
 const Sidebar = () => {
     const user = useSelector<AppStoreType>(state => state.login.user)
+    const maxRX = useSelector<AppStoreType>(state => state.packs.max)
+    const minRX = useSelector<AppStoreType>(state => state.packs.min)
 
     const dispatch = useDispatch()
 
@@ -19,7 +21,7 @@ const Sidebar = () => {
     const debouncedValue = useDebounce(value, 1500);
 
     useEffect(() => {
-        if (debouncedValue[0] !== 0 || debouncedValue[1] !== 100) {
+        if (debouncedValue[0] !== minRX || debouncedValue[1] !== maxRX) {
             setIsDebouncing(true);
             dispatch(getPacksByMinMaxTC(debouncedValue[0],debouncedValue[1] )
             )

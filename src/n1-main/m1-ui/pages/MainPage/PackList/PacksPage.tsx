@@ -34,6 +34,7 @@ export const PacksPage = () => {
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+    const searchRX = useSelector<AppStoreType, string | undefined>(state => state.packs.packName)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     const user = useSelector<AppStoreType>(state => state.login.user)
@@ -64,11 +65,9 @@ export const PacksPage = () => {
     const debouncedValue = useDebounce(search, 1500);
 
     useEffect(() => {
-
-          if (debouncedValue) {
+          if (debouncedValue !== searchRX) {
             setIsSearching(true);
                 dispatch(getSearchPackByNameTC(search))
-          
           } 
         },
         [debouncedValue]
