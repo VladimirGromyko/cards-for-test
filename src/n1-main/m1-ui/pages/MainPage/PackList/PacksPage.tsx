@@ -70,11 +70,6 @@ export const PacksPage = () => {
                 dispatch(getSearchPackByNameTC(search))
           
           } 
-          else {
-        
-                dispatch(getSearchPackByNameTC(search))
-            
-          }
         },
         [debouncedValue]
       );

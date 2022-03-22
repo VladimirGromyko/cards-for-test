@@ -40,10 +40,6 @@ const initState = {
     pickedEditPack: {packName: '', packId: ''},
     pickedDeletePack: {packName: '', packId: ''},
     currentPage: 1,
-    sort:'',
-    packName: '',
-    max: 103,
-    min: 0,
 } as statePacksType
 
 export const packsReducer = (state: statePacksType = initState,
@@ -162,7 +158,7 @@ export const getPacksByMinMaxTC = (min:number, max:number):ThunkType =>
     dispatch(loadingAC('loading'))
         packsAPI.setPacks({
             params:{
-                pageCount:20,
+                pageCount:getState().packs.packsData.pageCount,
                 sortPacks: getState().packs.sort,
                 packName: getState().packs.packName,
                 max: max,
@@ -185,7 +181,7 @@ export const getSearchPackByNameTC = (packName:string):ThunkType =>
         dispatch(loadingAC('loading'))
         packsAPI.setPacks({
             params:{
-                pageCount:20,
+                pageCount:getState().packs.packsData.pageCount,
                 sortPacks: getState().packs.sort,
                 max: getState().packs.max,
                 min: getState().packs.min,

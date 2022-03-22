@@ -1,10 +1,15 @@
 import s from './HeaderCards.module.css'
 import React, { useState } from 'react'
 import { packsAPI, SortPackNameType, SortPackNumberType } from '../../../../m3-dal/packs-api'
-import { useDispatch } from 'react-redux'
-import {setPacksDataAC, setPacksDataTC} from '../../../../m2-bll/packsReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPacksDataAC, setPacksDataTC } from '../../../../m2-bll/packsReducer'
+import { AppStoreType } from '../../../../m2-bll/store'
+import SuperSorting from '../../../common/c10-SuperSorting/SuperSorting'
 
 export const HeaderPacks = () => {
+
+    const sort = useSelector<AppStoreType, string | undefined>(state => state.packs.sort)
+
 
     const dispatch = useDispatch()
     const [isSorting, setIsSorting] = useState(false)
@@ -13,9 +18,9 @@ export const HeaderPacks = () => {
         if (!isSorting) {
             dispatch(setPacksDataTC(
                 {
-                    params:{
+                    params: {
                         pageCount: 20,
-                        sortPacks:`0${sortPackName}`,
+                        sortPacks: `0${sortPackName}`,
                     }
                 }
             ))
@@ -24,9 +29,9 @@ export const HeaderPacks = () => {
         if (isSorting) {
             dispatch(setPacksDataTC(
                 {
-                    params:{
+                    params: {
                         pageCount: 20,
-                        sortPacks:`1${sortPackName}`,
+                        sortPacks: `1${sortPackName}`,
                     }
                 }
             ))
@@ -34,23 +39,23 @@ export const HeaderPacks = () => {
         }
     }
 
+
     return (
         <div className={s.wrapper_header}>
 
             <div className={s.wrapper_header_table} >
                 <div className={s.header_tableItem} onClick={() => sortingPack('name')}>Card name
-                    {isSorting ?
-                    <button className={s.button}>
-                        <div className={s.triangle_up}></div>
-                    </button>
-                    :
-                    <button className={s.button}>
-                        <div className={s.triangle_down}></div>
-                    </button>}
+                    <SuperSorting sort={sort} sorting={'name'}/>
                 </div>
-                <div className={s.header_tableItem} onClick={() => sortingPack('cardsCount')}>Cards</div>
-                <div className={s.header_tableItem} onClick={() => sortingPack('updated')}>Updated</div>
-                <div className={s.header_tableItem} onClick={() => sortingPack('user_name')}>Creator</div>
+                <div className={s.header_tableItem} onClick={() => sortingPack('cardsCount')}>Cards
+                <SuperSorting sort={sort} sorting={'cardsCount'}/>
+                </div>
+                <div className={s.header_tableItem} onClick={() => sortingPack('updated')}>Updated
+                <SuperSorting sort={sort} sorting={'updated'}/>
+                </div>
+                <div className={s.header_tableItem} onClick={() => sortingPack('user_name')}>Creator
+                <SuperSorting sort={sort} sorting={'user_name'}/>
+                </div>
                 <div className={s.header_tableItem}>Actions</div>
             </div>
         </div>

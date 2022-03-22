@@ -19,13 +19,10 @@ const Sidebar = () => {
     const debouncedValue = useDebounce(value, 1500);
 
     useEffect(() => {
-        if (debouncedValue) {
+        if (debouncedValue[0] !== 0 || debouncedValue[1] !== 100) {
             setIsDebouncing(true);
             dispatch(getPacksByMinMaxTC(debouncedValue[0],debouncedValue[1] )
             )
-        }
-        else {
-            alert('Something has gone wrong with double range')
         }
     },
         [debouncedValue]
