@@ -23,7 +23,16 @@ export const cardsAPI = {
     updateCard(params:{cardId: string, newQuestion?: string}){
         return instance.put(`/cards/card`, {card: {_id:params.cardId, question:params.newQuestion}})
     },
+    gradeCard: (payload: GradeCardPayload) => {
+        return instance.put("cards/grade", { ...payload });
+    },
 }
 
 export type SortNumberType = 0 | 1 
 export type SortNameType = 'question' | 'answer' | 'updated' | 'grade'
+
+
+export type GradeCardPayload = {
+    grade: number;
+    cardId: string;
+};

@@ -2,6 +2,8 @@ import React, {useCallback} from 'react'
 import packsStyle from './PacksTable.module.css'
 import SuperButton from '../../../common/c1-SuperButton/SuperButton'
 import {CardPacksType} from "../../../../m3-dal/packs-api";
+import {PATH} from "../../../routes/Paths";
+import {useNavigate} from "react-router-dom";
 
 type TableItemPropsType = {
     deletePackList: (packName: string, packId: string) => void
@@ -11,7 +13,7 @@ type TableItemPropsType = {
 }
 
 export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableItemPropsType) => {
-
+    const navigate = useNavigate()
     const onDeletePressHandler = useCallback(() => {
         deletePackList(pack.name, pack._id)
     }, [deletePackList, pack.name, pack._id])
@@ -26,7 +28,7 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
 
     return (
         <div className={packsStyle.items}>
-            <div style={{cursor: "pointer"}} onClick={onLearnPressHandler}>{pack.name}</div>
+            <div style={{cursor: "pointer"}} onClick={() => navigate(PATH.CARDS)}>{pack.name}</div>
 
             <div>{pack.cardsCount}</div>
             <div>{pack.created}</div>

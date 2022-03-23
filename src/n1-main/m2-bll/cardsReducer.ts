@@ -1,6 +1,5 @@
-import {initialStateType, setPacksAC} from "./packsReducer";
+import {statePacksType} from "./packsReducer";
 import {Dispatch} from "redux";
-import {AppStoreType} from "./store";
 import {cardsAPI, GetCardsPayload} from "../m3-dal/cards-api";
 
 const initState: stateCardsType = {
@@ -48,7 +47,7 @@ export const cardsReducer = (state: stateCardsType = initState,
     }
 };
 
-export const setCardsAC = (data: initialStateType) => {
+export const setCardsAC = (data: statePacksType) => {
     return { type: "SET-CARDS", data } as const
 }
 
@@ -86,7 +85,7 @@ export const fetchCardsTC =
         };
 
         cardsAPI
-            .getCards(payload)
+            .getAllCards(payload)
             .then((res) => {
                 dispatch(setCardsAC(res.data));
                 console.log(res.data)
@@ -113,16 +112,16 @@ export type stateCardsType = {
 }
 
 export type cardsType = {
-    answer: string,
-    question: string,
-    cardsPack_id: string,
-    grade: number,
-    rating: number,
-    shots: number,
-    type: string,
-    user_id: string,
-    created: string,
-    updated: string,
-    __v: number
-    _id: string,
+    answer?: string
+    question?: string
+    cardsPack_id?: string
+    grade?: number
+    rating?: number
+    shots?: number
+    type?: string
+    user_id?: string
+    created?: string
+    updated?: string
+    __v?: number
+    _id?: string
 }

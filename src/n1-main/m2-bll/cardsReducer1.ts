@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {cardsAPI, SortNameType, SortNumberType} from "../m3-dal/cards-api";
+import {cardsAPI, GradeCardPayload, SortNameType, SortNumberType} from "../m3-dal/cards-api";
 import {loadingAC} from "./loadingReducer";
 import {responseErrorAC} from "./errorReducer";
 import {showMainPageAC} from "./packsReducer";
@@ -49,6 +49,14 @@ export const cardsReducer1 = (state = initState,
         }
         case 'DELETE-CARD':
             return {...state, cards: state.cards.filter(t => t._id !== action.cardId)}
+        case 'SET-CARD-GRADE': {
+            return {
+                ...state,
+                cards: state.cards.map((card) =>
+                    card._id === action.cardId ? { ...card, grade: action.grade } : card
+                ),
+            };
+        }
         default:
             return state;
     }
@@ -72,6 +80,9 @@ export const addCardAC = (card: CardType) => ({
 export const deleteCardAC = (cardId: string) => ({
     type: 'DELETE-CARD', cardId
 } as const);
+export const setCardGradeAC = (grade: number, cardId: string) => {
+    return { type: 'SET-CARD-GRADE', grade, cardId } as const;
+};
 
 export const getCardsTC = (params:{packId:string,sortNumber?: SortNumberType, sortName?: SortNameType }):ThunkType => (dispatch, getState) => {
     dispatch(loadingAC('loading'))
@@ -132,15 +143,37 @@ export const deleteCardTC = (cardId:string):ThunkType => (dispatch, getState) =>
     })
 }
 
+export const gradeCardTC =
+    (grade: number, cardId: string) => (dispatch: Dispatch) => {
+        dispatch(loadingAC('loading'));
+
+        const payload: GradeCardPayload = {
+            grade,
+            cardId: cardId,
+        };
+
+        cardsAPI
+            .gradeCard(payload)
+            .then(() => {
+                dispatch(loadingAC('succeeded'));
+                dispatch(setCardGradeAC(grade, cardId));
+            })
+            .catch((err) => {
+                dispatch(loadingAC('succeeded'))
+            })
+    };
+
 
 type GetAllCardActionType = ReturnType<typeof getAllCardAC>
 type SortCardsActionType = ReturnType<typeof sortCardsAC>
 type SearchCardsActionType = ReturnType<typeof searchCardsAC>
 type AddCardActionType = ReturnType<typeof addCardAC>
 type DeleteCardACActionType = ReturnType<typeof deleteCardAC>
+type setCardGradeType = ReturnType<typeof setCardGradeAC>
 
 export type CardsActionType = GetAllCardActionType 
 | AddCardActionType 
 | DeleteCardACActionType 
 | SortCardsActionType 
 | SearchCardsActionType
+| setCardGradeType
