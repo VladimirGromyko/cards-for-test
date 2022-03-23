@@ -15,18 +15,24 @@ const MainPage = () => {
     const packsData = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
     const isShownMainPage = useSelector<AppStoreType, boolean>(state => state.packs.isShownMainPage)
     const isLoading = useSelector<AppStoreType, LoadingStatusType>(state => state.loading.isLoading)
+    const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    // useEffect(() => {
+    //     packsData.cardPacks.length &&
+    //     dispatch(showMainPageAC(true))
+    // }, [])
     useEffect(() => {
-        packsData.cardPacks && dispatch(showMainPageAC(true))
-    }, [packsData, dispatch])
-
+        if (!isLoggedIn) {
+            navigate(PATH.LOGIN)
+        } else return
+    }, [])
     const onSetPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
 
             // briefly hardcoded 1 Cards request
-            params: {packName: 'english', pageCount: 15}
+            params: {packName: '', pageCount: 15}
         }))
     }, [dispatch])
 
@@ -36,9 +42,8 @@ const MainPage = () => {
         , [navigate])
 
 
-    // what came from server
-    // packsData.cardPacks && console.log(packsData.cardPacks[0].name)
-
+// what came from server
+// packsData.cardPacks && console.log(packsData.cardPacks[0].name)
     return (
         <div>
             <div style={{width: '100%'}}>

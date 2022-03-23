@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, useNavigate} from "react-router-dom";
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import {PacksTable} from "./PacksTable";
@@ -26,13 +26,14 @@ import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
 import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
+import {initializeMainTC} from "../../../../m2-bll/loginReducer";
 
 
 export const PacksPage = () => {
 
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
-    // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
+    const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
@@ -58,17 +59,32 @@ export const PacksPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    // useEffect(()=>{
+    //     dispatch(initializeMainTC())
+    // },[])
+    // useEffect(()=>{
+        if (!isLoggedIn) {
+            navigate(PATH.LOGIN)
+        }
+    // },[])
+
     const onSetAllPressHandler = useCallback(() => {
+        if (!isLoggedIn) {
+            navigate(PATH.LOGIN)
+        }
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
                 packName: '',
-                pageCount: 100
+                pageCount: 15
             }
         }))
     }, [dispatch])
 
     const onSetMyPressHandler = useCallback(() => {
+        if (!isLoggedIn) {
+            navigate(PATH.LOGIN)
+        }
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {

@@ -31,13 +31,14 @@ export const ProfilePacksPage = () => {
 
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
-    // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
+    const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     const user = useSelector<AppStoreType, string | undefined>(state => state.login.user?.name)
 
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
+
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
         state.packs.isShownAddPack)
@@ -57,6 +58,7 @@ export const ProfilePacksPage = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
 
     // const onSetAllPressHandler = useCallback(() => {
     //     dispatch(setPacksDataTC({

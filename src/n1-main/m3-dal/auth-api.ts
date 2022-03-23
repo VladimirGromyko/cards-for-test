@@ -1,5 +1,6 @@
 import {AxiosResponse} from "axios";
 import {instance} from "./instance";
+import {UserDataType} from "../m2-bll/loginReducer";
 
 const model1: RecoveryModelType = {
     email: '',
@@ -21,19 +22,22 @@ export const authAPI = {
     logout() {
         return instance.delete('auth/me')
     },
+    me() {
+        return instance.post<{}, AxiosResponse<UserDataType>>(`/auth/me`, {})
+    },
     updateUser(name: string) {
-        return instance.put<{ name: string },AxiosResponse<ResponseType>>('auth/me', {name});
+        return instance.put<{ name: string }, AxiosResponse<ResponseType>>('auth/me', {name});
     },
     recoverPass(email: string) {
         return instance.post <{ model: RecoveryModelType, }, AxiosResponse<RecoverPassResponseType>>
         (`/auth/forgot`, {...model1, email: email})
     },
     setNewPass(password: string, resetPasswordToken: string | undefined) {
-        return instance.post <{ password: string, resetPasswordToken: string | undefined},
+        return instance.post <{ password: string, resetPasswordToken: string | undefined },
             AxiosResponse<RecoverPassResponseType>>
         (`/auth/set-new-password`, {password, resetPasswordToken})
     },
-    registrationUser(email:string, password: string) {
+    registrationUser(email: string, password: string) {
         return instance.post(`auth/register`, {email, password});
     },
 }
@@ -46,3 +50,16 @@ type RecoveryModelType = {
     from: string,
     message: string
 }
+// type MeResponseType = {
+//     _id: string;
+//     email: string;
+//     name: string;
+//     avatar?: string;
+//     publicCardPacksCount: number; // количество колод
+//     created: Date;
+//     updated: Date;
+//     isAdmin: boolean;
+//     verified: boolean; // подтвердил ли почту
+//     rememberMe: boolean;
+//     error?: string;
+// }

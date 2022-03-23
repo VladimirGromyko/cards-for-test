@@ -101,6 +101,7 @@ export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: 
     packsAPI.setPacks(packsRequest)
         .then((res) => {
             dispatch(setPacksDataAC(res.data))
+
         })
         .catch((err) => {
             dispatch(responseErrorAC(true, 'setPacks', err.response?.data.error))
@@ -150,7 +151,7 @@ export const addPacksTC = (pack: PacksPostRequestType): ThunkType =>
                     dispatch(responseConfirmAC(false,
                         'addPack', ''))
                     dispatch(responseErrorAC(false, 'addPack', ''))
-                }, 3000)
+                }, 1000)
             })
     }
 
@@ -175,7 +176,7 @@ export const editPackTC = (param: PacksPutRequestType):ThunkType =>
             dispatch(showEditPackAC(true))
             dispatch(responseErrorAC(true, 'editPack', err.response?.data.error))
             setTimeout(() => {
-            }, 3000)
+            }, 1000)
         })
         .finally(() => {
             dispatch(loadingAC('succeeded'))
@@ -183,7 +184,7 @@ export const editPackTC = (param: PacksPutRequestType):ThunkType =>
                 dispatch(responseConfirmAC(false, 'editPack', ''))
                 dispatch(showEditPackAC(false))
                 dispatch(responseErrorAC(false, 'editPack', ''))
-            }, 3000)
+            }, 1000)
         })
 }
 
