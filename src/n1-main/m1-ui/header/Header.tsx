@@ -18,7 +18,8 @@ function Header() {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
-    }, [])
+    }, [isLoggedIn, navigate])
+
     const onPackListHandler = () => {
         if (!isLoggedIn) {
             return PATH.LOGIN
