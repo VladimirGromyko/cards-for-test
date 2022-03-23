@@ -39,10 +39,10 @@ const LoginPage = () => {
 
 
     return (<div className={`${s.wrapper}`}>
-            <div style={{width: '100%'}}>
-                {isLoading === "loading" && <div className={l.loader07}></div>}
-            </div>
             <div className={s.container}>
+                <div style={{width: '100%'}}>
+                    {isLoading === "loading" && <div className={l.loader07}></div>}
+                </div>
                 <h4>SIGN IN</h4>
                 <div className={s.containerForEmail}>
                     <div className={s.textField}>
