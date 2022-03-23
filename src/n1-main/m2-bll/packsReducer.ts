@@ -132,7 +132,7 @@ export const setPacksDataTC = (packsRequest: PacksGetRequestType):ThunkType =>
         params:{
             pageCount:packsRequest.params.pageCount,
             packName: getState().packs.packName,
-            page:packsRequest.params.page,
+            page:getState().packs.currentPage,
             sortPacks: packsRequest.params.sortPacks,
             max: getState().packs.max,
             min: getState().packs.min,
@@ -164,6 +164,7 @@ export const getPacksByMinMaxTC = (min:number, max:number):ThunkType =>
                 pageCount:getState().packs.packsData.pageCount,
                 sortPacks: getState().packs.sort,
                 packName: getState().packs.packName,
+                page:getState().packs.currentPage,
                 max: max,
                 min: min,
             }
@@ -188,6 +189,7 @@ export const getSearchPackByNameTC = (packName:string):ThunkType =>
                 sortPacks: getState().packs.sort,
                 max: getState().packs.max,
                 min: getState().packs.min,
+                page:getState().packs.currentPage,
                 packName: packName,
             }
         }).then(res => {
@@ -208,7 +210,11 @@ export const setCurrentPageTC = (pageNumber: number): ThunkType =>
     dispatch(setPacksDataTC({
         params: {
             page: pageNumber,
-            pageCount: getState().packs.packsData.pageCount
+            pageCount: getState().packs.packsData.pageCount,
+            sortPacks: getState().packs.sort,
+            max: getState().packs.max,
+            min: getState().packs.min,
+            packName: getState().packs.packName,
         }
     }))
 }
