@@ -2,13 +2,14 @@
     display: flex;
     position: relative;
     width: 1008px;
-    height: 100%;
+    /*height: 100%;*/
     background: #FEFEFF;
     border-radius: 8px;
     justify-content: center;
     align-content: center;
     text-align: center;
     margin: 0  auto;
+    min-height: 100%;
 }
 
 .TableWrapper {
@@ -21,7 +22,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: 638px;
+    min-height: 100%;
 }
 
 .ariaA {
@@ -38,7 +39,6 @@
     align-content: start;
     width: 243px;
     align-self: start;
-
     background: #e5ecff;
 
 }
