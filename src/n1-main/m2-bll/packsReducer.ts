@@ -8,6 +8,7 @@ import {
     PacksPostRequestType
 } from "../m3-dal/packs-api";
 import {responseErrorAC, ResponseErrorACType} from "./errorReducer";
+import {ThunkType} from "./store";
 
 
 export type statePacksType = {
@@ -92,7 +93,7 @@ export const showAddPackAC = (isShownAddPack: boolean) => (
 export const showDeletePackAC = (isShownDeletePack: boolean) => (
     {type: 'SHOW_DELETE_PACK', isShownDeletePack}) as const
 
-export const setCurrentPage = (currentPage: number) => (
+export const setCurrentPageAC = (currentPage: number) => (
     {type: 'SET_CURRENT_PAGE', currentPage}) as const
 
 export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: Dispatch<PacksReducerType>) => {
@@ -100,6 +101,7 @@ export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: 
     packsAPI.setPacks(packsRequest)
         .then((res) => {
             dispatch(setPacksDataAC(res.data))
+            console.log(res.data)
         })
         .catch((err) => {
             dispatch(responseErrorAC(true, 'setPacks', err.response?.data.error))
@@ -114,9 +116,20 @@ export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: 
 
 }
 
+export const setCurrentPageTC = (pageNumber: number): ThunkType =>
+    (dispatch, getState) => {
+    dispatch(setCurrentPageAC(pageNumber))
+    dispatch(setPacksDataTC({
+        params: {
+            page: pageNumber,
+            pageCount: getState().packs.packsData.pageCount
+        }
+    }))
+}
+
 export const addPacksTC = (pack: PacksPostRequestType) => (dispatch: Dispatch<PacksReducerType>) => {
     dispatch(loadingAC('loading'))
-    console.log(pack)
+    // console.log(pack)
     packsAPI.postPacks(pack)
         .then((res) => {
             console.log(res)
@@ -168,7 +181,7 @@ type showAddPackACType = ReturnType<typeof showAddPackAC>
 type showDeletePackACType = ReturnType<typeof showDeletePackAC>
 type pickEditPackACType = ReturnType<typeof pickEditPackAC>
 type pickDeletePackACType = ReturnType<typeof pickDeletePackAC>
-type setCurrentPageACType = ReturnType<typeof setCurrentPage>
+type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 
 export type PacksReducerType = SetPacksDataACType
     | LoadingACType

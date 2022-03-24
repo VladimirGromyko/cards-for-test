@@ -14,7 +14,7 @@ import {
     addPacksTC,
     editPackTC,
     pickDeletePackAC,
-    pickEditPackAC, setCurrentPage,
+    pickEditPackAC, setCurrentPageTC,
     setPacksDataTC,
     showAddPackAC, showDeletePackAC,
     showEditPackAC
@@ -133,7 +133,7 @@ export const ProfilePacksPage = () => {
 
     const onPageChanged = (pageNumber: number) => {
         console.log("pageNumber: ", pageNumber)
-        dispatch(setCurrentPage(pageNumber))
+        dispatch(setCurrentPageTC(pageNumber))
     }
 
     return (
@@ -152,7 +152,6 @@ export const ProfilePacksPage = () => {
             {/*    </ul>*/}
             {/*</nav>*/}
 
-            {/*ПРАВАЯ СТОРОНА*/}
             {/*ЛЕВАЯ СТОРОНА*/}
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>
