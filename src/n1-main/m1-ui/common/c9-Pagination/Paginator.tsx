@@ -34,7 +34,6 @@ let Paginator = ({
     // let pageCount = Math.ceil(cardPacksTotalCount / pageSize)
 
     let pages = []
-    debugger
     for (let i = 1; i <= cardPacksTotalCount/pageCount; i++) {
         pages.push(i)
     }
