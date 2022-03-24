@@ -5,7 +5,7 @@ import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../../m2-bll/store";
 import {changeUserNameTC} from "../../../../m2-bll/auth-reducer";
-import {Navigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 import {PATH} from "../../../routes/Paths";
 
 
@@ -15,6 +15,13 @@ export const EditProfilePage = () => {
     const isLoggedIn = useSelector<AppStoreType, boolean>(state => state.login.isLoggedIn)
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate(PATH.LOGIN)
+        }
+                else return
+    }, [])
 
     const [nameFromInput, setNameFromInput] = useState<string>('')
 
@@ -24,11 +31,9 @@ export const EditProfilePage = () => {
 
     useEffect(() => {
         userName && setNameFromInput(userName)
+
     }, [userName])
 
-    if (!isLoggedIn) {
-        return <Navigate to={PATH.LOGIN}/>
-    }
 
     return (<div className={s.superWrapper}>
             <div className={s.wrapper}>

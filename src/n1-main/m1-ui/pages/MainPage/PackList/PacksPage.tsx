@@ -1,4 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
+import {NavLink, useNavigate} from "react-router-dom";
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
 import { useNavigate} from "react-router-dom";
 import React, {useCallback, useState} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
@@ -10,8 +12,8 @@ import {HeaderPacks} from "./HeaderPacks";
 import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {
-    addPacksTC,
-    editPackTC,
+    addPacksTC, deletePackTC,
+    editPackTC, getSearchPackByNameTC,
     pickDeletePackAC,
     pickEditPackAC, setCurrentPageTC,
     setPacksDataTC,
@@ -22,14 +24,18 @@ import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
+import useDebounce from "../../../../../n2-features/f1-hooks/useDebounce";
+import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
+import {initializeMainTC} from "../../../../m2-bll/loginReducer";
 
 
 export const PacksPage = () => {
 
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
-    // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
+    const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+    const searchRX = useSelector<AppStoreType, string | undefined>(state => state.packs.packName)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     // const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     const user = useSelector<AppStoreType>(state => state.login.user)
@@ -55,18 +61,42 @@ export const PacksPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const [search, setSearch] = useState('')
+    const [isSearching, setIsSearching] = useState(false);
+
+    const debouncedValue = useDebounce(search, 1500);
+
+    useEffect(() => {
+          if (debouncedValue !== searchRX) {
+            setIsSearching(true);
+                dispatch(getSearchPackByNameTC(search))
+          }
+        },
+        [debouncedValue]
+      );
+
+    const onSearchHandler = (e:ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.currentTarget.value)
+    }
+
     const onSetAllPressHandler = useCallback(() => {
+        if (!isLoggedIn) {
+            navigate(PATH.LOGIN)
+        }
         setSelectedAll(true)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
                 packName: '',
-                pageCount: 100
+                pageCount: 20,
             }
         }))
     }, [dispatch])
 
     const onSetMyPressHandler = useCallback(() => {
+        if (!isLoggedIn) {
+            navigate(PATH.LOGIN)
+        }
         setSelectedAll(false)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
@@ -103,6 +133,7 @@ export const PacksPage = () => {
     const deletePack = useCallback((packName: string, packId: string) => {
         // console.log("Удалить колоду:", packName, " с Id: ", packId)
         // dispatch()
+        dispatch(deletePackTC({params:{id: packId}}))
     }, [])
     const hideDeletePack = () => {
         dispatch(showDeletePackAC(false))
@@ -128,6 +159,9 @@ export const PacksPage = () => {
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(setCurrentPageTC(pageNumber))
+    }
+    if (!isLoggedIn) {
+        navigate(PATH.LOGIN)
     }
 
     return (
@@ -160,7 +194,7 @@ export const PacksPage = () => {
                 <span className={commonPacksStyle.content}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}>Packs list</div>
                     <div className={commonPacksStyle.inputPlusButton}>
-                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching'/>
+                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching' onChange={onSearchHandler}/>
                         <span>
                                     <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
 

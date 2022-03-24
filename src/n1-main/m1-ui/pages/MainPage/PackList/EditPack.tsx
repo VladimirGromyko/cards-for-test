@@ -7,18 +7,21 @@ import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import s from '../../p3-pass-recovery/PassRecovery.module.css';
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import l from "../../../common/c7-Loading/loader07.module.css";
-import { LoadingStatusType } from '../../../../m2-bll/loadingReducer';
+import {LoadingStatusType} from '../../../../m2-bll/loadingReducer';
+import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
+import {confirmResponse} from "../../../../../n2-features/f0-test/confirmResponse";
 
 type EditPackType = {
     editPack: (packId: string, namePack: string) => void
     packId: string
-    packName:string
-    hideEditPack : () => void
-    isLoading : LoadingStatusType
+    packName: string
+    hideEditPack: () => void
+    isLoading: LoadingStatusType
 }
 
 const EditPack = ({editPack, packId, packName, hideEditPack, isLoading}: EditPackType) => {
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
+    const confirmRes = useSelector<AppStoreType, ResponseConfirmStateType>(state => state.confirm)
 
     const [newPackName, setNewPackName] = useState<string>('')
 
@@ -50,6 +53,12 @@ const EditPack = ({editPack, packId, packName, hideEditPack, isLoading}: EditPac
             />
             <SuperButton onClick={OnCancelClick}>Cancel</SuperButton>
             <SuperButton onClick={onKeyPressHandler}>Save</SuperButton>
+            {confirmRes.isResponseConfirm && <div style={{color: 'blue'}}>
+                {confirmResponse(confirmRes, 'editPack')}
+            </div>}
+            {/*{errorRes.isResponseError && <div style={{color: 'red'}}>*/}
+            {/*    {errorResponse(errorRes, 'editPack')}*/}
+            {/*</div>}*/}
         </div>
     )
 }

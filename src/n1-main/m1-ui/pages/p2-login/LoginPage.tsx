@@ -34,8 +34,8 @@ const LoginPage = () => {
     useEffect(() => {
         if (isLoggedIn) {
             navigate(PATH.MAIN)
-        }
-    }, [isLoggedIn, navigate])
+        } else return
+    }, [navigate, isLoggedIn])
 
 
     return (<div className={s.superWrapper}>

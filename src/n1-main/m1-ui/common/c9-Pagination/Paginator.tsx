@@ -32,8 +32,9 @@ let Paginator = ({
                      portionSize = 10
                  }: PaginatorPropsType) => {
     // let pageCount = Math.ceil(cardPacksTotalCount / pageSize)
+
     let pages = []
-    for (let i = 1; i <= pageCount; i++) {
+    for (let i = 1; i <= cardPacksTotalCount/pageCount; i++) {
         pages.push(i)
     }
     let portionCount = Math.ceil(pageCount / portionSize)
@@ -54,13 +55,16 @@ let Paginator = ({
                 {'...'}
             </>
         )}
-        {portionNumber > 1 && <button onClick={() => setPortionNumber(portionNumber - 1)}>{'<'}</button>}
+        {portionNumber > 1 && <button onClick={() => setPortionNumber(portionNumber - 1)}
+                                      className={styles.arrow}>{'<'}</button>}
+
         {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
             .map(p => paginatorSpan(currentPage, p, onPageChanged))
         }
         {portionCount > portionNumber && (
             <>
-                <button onClick={() => setPortionNumber(portionNumber + 1)}>{'>'}</button>
+                <button onClick={() => setPortionNumber(portionNumber + 1)}
+                        className={styles.arrow}>{'>'}</button>
                 <>
                     {'...'}
                     {paginatorSpan(currentPage, pageCount, onPageChanged)}

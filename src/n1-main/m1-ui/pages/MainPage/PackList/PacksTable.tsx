@@ -32,7 +32,7 @@ export const PacksTable = ({
                                deletePack, deletePackList, hideDeletePack, deletePackId,
                                deletePackName, editPack, editPackList, hideEditPack,
                                packId, packName, learnPack, packs, isLoading,
-                               isShownEditPack, isShownDeletePack, //currentPage,
+                               isShownEditPack, isShownDeletePack, currentPage,
                                onPageChanged
                            }: PacksTableType) => {
 
@@ -56,12 +56,6 @@ export const PacksTable = ({
                 isLoading={isLoading}/>)}
             {!isShownEditPack && !isShownDeletePack &&
             (<>
-                <Paginator cardPacksTotalCount={packs.cardPacksTotalCount}
-                           pageCount={packs.pageCount}
-                           pageSize={10}
-                           currentPage={packs.page}
-                           onPageChanged={onPageChanged}
-                           portionSize={undefined}/>
 
                 {packs.cardPacks.map((pack) => {
                         return (
@@ -75,6 +69,12 @@ export const PacksTable = ({
                         )
                     }
                 )}
+                <Paginator cardPacksTotalCount={packs.cardPacksTotalCount}
+                           pageCount={packs.pageCount}
+                           pageSize={10}
+                           currentPage={packs.page}
+                           onPageChanged={onPageChanged}
+                           portionSize={undefined}/>
             </>)
             }
         </div>
