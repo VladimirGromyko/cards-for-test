@@ -58,15 +58,6 @@ export const ProfilePacksPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    // const onSetAllPressHandler = useCallback(() => {
-    //     dispatch(setPacksDataTC({
-    //         // briefly hardcoded 1 Cards request
-    //         params: {
-    //             packName: '',
-    //             pageCount: 100
-    //         }
-    //     }))
-    // }, [dispatch])
 
     const onSetMyPressHandler = useCallback(() => {
         dispatch(setPacksDataTC({
@@ -138,19 +129,6 @@ export const ProfilePacksPage = () => {
 
     return (
         <div className={commonPacksStyle.wrapper}>
-            {/*<nav>*/}
-            {/*    <ul className={s.menu}>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
-            {/*        </li>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.TEST} className={''}>Profile</NavLink>*/}
-            {/*        </li>*/}
-            {/*        /!*<li>*!/*/}
-            {/*        /!*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*!/*/}
-            {/*        /!*</li>*!/*/}
-            {/*    </ul>*/}
-            {/*</nav>*/}
 
             {/*ЛЕВАЯ СТОРОНА*/}
             <div className={commonPacksStyle.TableWrapper}>

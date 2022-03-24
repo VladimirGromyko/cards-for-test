@@ -142,7 +142,7 @@ export const PacksPage = () => {
                 <div className={commonPacksStyle.ariaA}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}
                          className={commonPacksStyle.contentAllMy}>
-                        <p>Show Packs cards</p>
+                        <h3>Show Packs cards</h3>
                         <div className={commonPacksStyle.allMyWrapper}>
                             <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
                             <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
