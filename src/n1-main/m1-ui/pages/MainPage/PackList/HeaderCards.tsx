@@ -59,6 +59,7 @@ export const HeaderCards = ({ getCards, packId, ...props }: CardsTablePropsType)
                         onClick={() => sortCards(0, 'grade')}>
                             <div className={s.triangle_down}></div></button>
                 </div>
+                {/*<div className={s.header_tableItem}>Actions</div>*/}
             </div>
         </div>
     )

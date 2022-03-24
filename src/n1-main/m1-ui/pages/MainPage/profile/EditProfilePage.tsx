@@ -30,27 +30,28 @@ export const EditProfilePage = () => {
         return <Navigate to={PATH.LOGIN}/>
     }
 
-    return (
-        <div className={s.wrapper}>
-            <div className={s.container}>
-                <h3>Personal Information</h3>
-                <img className={s.photo}
-                     src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
-                     alt="UserPhoto"/>
-                <div className={s.containerForEmail}>
-                    <div className={s.textField}>Nickname</div>
-                    <div>
-                        <SuperInputText
-                            value={nameFromInput}
-                            onChangeText={setNameFromInput}
-                        />
+    return (<div className={s.superWrapper}>
+            <div className={s.wrapper}>
+                <div className={s.container}>
+                    <h3>Personal Information</h3>
+                    <img className={s.photo}
+                         src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c7/c7caa60f60d75f36e2b2567904bba2cca3cbf48c_full.jpg"
+                         alt="UserPhoto"/>
+                    <div className={s.containerForEmail}>
+                        <div className={s.textField}>Nickname</div>
+                        <div>
+                            <SuperInputText
+                                value={nameFromInput}
+                                onChangeText={setNameFromInput}
+                            />
+                        </div>
                     </div>
+                    <div className={s.containerForPassword}>
+                        <div className={s.textField}>Email</div>
+                        <div><SuperInputText value={userEmail}/></div>
+                    </div>
+                    <div className={s.button}><SuperButton onClick={onChangeNameHandler}>SAVE</SuperButton></div>
                 </div>
-                <div className={s.containerForPassword}>
-                    <div className={s.textField}>Email</div>
-                    <div><SuperInputText value={userEmail}/></div>
-                </div>
-                <div className={s.button}><SuperButton onClick={onChangeNameHandler}>SAVE</SuperButton></div>
             </div>
         </div>
     )
