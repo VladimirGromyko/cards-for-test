@@ -25,6 +25,7 @@ import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
+import {LearnPage} from "../../learn/LearnPage";
 
 
 export const PacksPage = () => {
@@ -123,7 +124,7 @@ export const PacksPage = () => {
 
     const learnPack = useCallback((packId: string) => {
         // navigate('/packs/' + packId)
-        navigate(PATH.PACK_LIST_LEARN)
+        navigate(PATH.PACK_LIST_LEARN + packId)
     }, [navigate])
 
     const onPageChanged = (pageNumber: number) => {

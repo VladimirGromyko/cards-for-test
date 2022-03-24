@@ -8,13 +8,13 @@ import {PATH} from "../../routes/Paths"
 
 export const LearnCard = ({
                          currentCard,
-                         isChecked,
-                         setIsChecked,
+                              isShowed,
+                              setIsShowed,
                          nextCardHandler,
                      }: CardPropsType) => {
     const navigate = useNavigate()
 
-    const buttonValues = ["Did not know", "A lot of thought", "Knew the answer"]
+    const radioValues = ["Did not know", "A lot of thought", "Knew the answer"]
     const [option, setOption] = useState("Did not know")
 
     const handleNext = () => {
@@ -28,7 +28,7 @@ export const LearnCard = ({
                 <h3>Question:</h3>
                 <p>{currentCard.question}</p>
             </div>
-            {!isChecked && (
+            {!isShowed && (
                 <div className={s.wrapper_button}>
                     <SuperButton
                         className={"primaryButton"}
@@ -38,14 +38,14 @@ export const LearnCard = ({
                     </SuperButton>
                     <SuperButton
                         className={"secondaryButton"}
-                        onClick={() => setIsChecked(!isChecked)}
+                        onClick={() => setIsShowed(!isShowed)}
                     >
                         Show Answer
                     </SuperButton>
                 </div>
             )}
             <div>
-                {isChecked && (
+                {isShowed && (
                     <div className={s.answer}>
                         <div className={`${s.wrapper_answer} ${s.wrapper_text}`}>
                             <h3>Answer:</h3>
@@ -55,14 +55,14 @@ export const LearnCard = ({
                             <div className={s.wrapper_radio}>
                                 <SuperRadio
                                     value={option}
-                                    options={buttonValues}
+                                    options={radioValues}
                                     onChangeOption={setOption}
                                 />
                             </div>
                             <div className={s.wrapper_button}>
                                 <SuperButton
                                     className={"primaryButton"}
-                                    onClick={() => setIsChecked(false)}
+                                    onClick={() => setIsShowed(false)}
                                 >
                                     Back
                                 </SuperButton>
@@ -84,8 +84,8 @@ export const LearnCard = ({
 
 export type CardPropsType = {
     currentCard: cardsType
-    isChecked: boolean
-    setIsChecked: (isChecked: boolean) => void
+    isShowed: boolean
+    setIsShowed: (isChecked: boolean) => void
     nextCardHandler: (grade: number) => void
     navigateBackPage: () => void
 }

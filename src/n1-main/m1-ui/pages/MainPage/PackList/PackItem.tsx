@@ -24,11 +24,12 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
 
     const onLearnPressHandler = useCallback(() => {
         learnPack(pack._id)
+
     }, [learnPack, pack._id])
 
     return (
         <div className={packsStyle.items}>
-            <div style={{cursor: "pointer"}} onClick={() => navigate(PATH.CARDS)}>{pack.name}</div>
+            <div style={{cursor: "pointer"}} onClick={() => navigate(PATH.CARDS + pack._id)}>{pack.name}</div>
 
             <div>{pack.cardsCount}</div>
             <div>{pack.created}</div>
