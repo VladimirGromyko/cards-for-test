@@ -2,13 +2,14 @@
     display: flex;
     position: relative;
     width: 1008px;
-    height: 100%;
+    min-height: 100vh;
     background: #FEFEFF;
     border-radius: 8px;
     justify-content: center;
     align-content: center;
     text-align: center;
     margin: 20px  auto 20px auto;
+    padding: 0 20px;
 }
 
 .TableWrapper {
@@ -29,18 +30,19 @@
     align-content: start;
     width: 243px;
     align-self: start;
-
+    height: 100%;;
     padding: 25px 25px;
     background: #e5ecff;
+
 }
 .ariaAForProfile{
     grid-area: A;
     align-content: start;
     width: 243px;
     align-self: start;
-
+    height: 100%;
     background: #e5ecff;
-
+    padding: 0 10px;
 }
 
 .content {
@@ -121,7 +123,7 @@ img {
 .all {
     width: 97px;
     height: 36px;
-    background-color: white;
+    background-color: #a1b9ff;
     text-align: center;
     cursor: pointer;
     font-size: 22px;
@@ -137,9 +139,13 @@ img {
     width: 97px;
     height: 36px;
    background-color: #a1b9ff;
+    background-color: white;
     text-align: center;
     cursor: pointer;
     color: black;
     font-size: 22px;
     justify-content: center;
+}
+p{
+    padding-top: 5px;
 }

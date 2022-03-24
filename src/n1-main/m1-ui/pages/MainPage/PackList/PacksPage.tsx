@@ -144,8 +144,8 @@ export const PacksPage = () => {
                          className={commonPacksStyle.contentAllMy}>
                         <p>Show Packs cards</p>
                         <div className={commonPacksStyle.allMyWrapper}>
-                            <div className={ !selectedAll ? commonPacksStyle.my : commonPacksStyle.all} onClick={onSetMyPressHandler}>My</div>
-                            <div className={ selectedAll ? commonPacksStyle.my : commonPacksStyle.all} onClick={onSetAllPressHandler}>All</div>
+                            <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
+                            <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
                             </div>
                         <div style={{color: 'red'}}>
                             {errorResponse(errorRes, 'setPacks')}
