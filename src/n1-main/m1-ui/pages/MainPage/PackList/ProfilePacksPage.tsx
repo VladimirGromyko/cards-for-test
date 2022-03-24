@@ -152,7 +152,6 @@ export const ProfilePacksPage = () => {
             {/*    </ul>*/}
             {/*</nav>*/}
 
-            {/*ПРАВАЯ СТОРОНА*/}
             {/*ЛЕВАЯ СТОРОНА*/}
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>
