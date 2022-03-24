@@ -1,5 +1,8 @@
-.loginForm {
-    display: flex;
+.superWrapper{
+    min-height: 100vh;
+    margin: 0 auto;
+    displey: flex;
+    padding: 10px;
 }
 .wrapper {
     display: flex;
@@ -12,12 +15,13 @@
     padding: 20px;
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
     background: rgb(245 246 250);
-    height: 600px;
-    width: 413px;
+   max-height: 600px;
+    max-width: 413px;
     /*margin-top: 60px;*/
 }
 .container{
     margin: 78px 13px 37px 13px;
+
 }
 .containerForEmail{
     margin-top: 38px;

@@ -38,52 +38,53 @@ const LoginPage = () => {
     }, [isLoggedIn, navigate])
 
 
-    return (<div className={`${s.wrapper}`}>
-            <div style={{width: '100%'}}>
-                {isLoading === "loading" && <div className={l.loader07}></div>}
+    return (<div className={s.superWrapper}>
+            <div className={s.wrapper}>
+                <div style={{width: '100%'}}>
+                    {isLoading === "loading" && <div className={l.loader07}></div>}
+                </div>
+                <div className={s.container}>
+                    <h4>SIGN IN</h4>
+                    <div className={s.containerForEmail}>
+                        <div className={s.textField}>
+                            <div className={s.label}>Email</div>
+                        </div>
+                        <SuperInputText type={'email'}
+                                        value={email}
+                                        placeholder={'Enter email'}
+                                        onChangeText={changeEmail}
+                        />
+                    </div>
+                    <div className={s.containerForPassword}>
+                        <div className={s.textField}>
+                            <div className={s.label}>Password</div>
+                        </div>
+
+                        <SuperInputText type={'password'}
+                                        value={password}
+                                        placeholder={'Password'}
+                                        onChangeText={setPassword}
+                        />
+                    </div>
+
+                    {/*<div className={s.wrapper_submit_checkbox}>*/}
+                    {/*    <SuperCheckbox onChangeChecked={setRememberMe}>Remember me</SuperCheckbox>*/}
+                    {/*</div>*/}
+                    {/*<div className={s.helpText}>Forgot password ?</div>*/}
+                    <div className={s.helpTextForgotPasswordContainer}>
+                        <NavLink to={PATH.PASSWORD_RECOVERY} className={s.helpTextForgotPassword}>Forgot
+                            Password</NavLink>
+                    </div>
+                    <div>
+                        <div className={s.wrapper_submit_button}>
+                            <SuperButton onClick={logInHandler} disabled={isLoggedIn}>Submit</SuperButton>
+                        </div>
+                    </div>
+                    {/*<div className={s.helpText}>Don't have an account?</div>*/}
+                    <div className={s.helpText}>Don't have an account?</div>
+                    <NavLink to={PATH.REGISTRATION} className={s.helpTextBold}>Sign Up</NavLink>
+                </div>
             </div>
-            <div className={s.container}>
-                <h4>SIGN IN</h4>
-                <div className={s.containerForEmail}>
-                    <div className={s.textField}>
-                        <div className={s.label}>Email</div>
-                    </div>
-                    <SuperInputText type={'email'}
-                                    value={email}
-                                    placeholder={'Enter email'}
-                                    onChangeText={changeEmail}
-                    />
-                </div>
-                <div className={s.containerForPassword}>
-                    <div className={s.textField}>
-                        <div className={s.label}>Password</div>
-                    </div>
-
-                    <SuperInputText type={'password'}
-                                    value={password}
-                                    placeholder={'Password'}
-                                    onChangeText={setPassword}
-                    />
-                </div>
-
-                {/*<div className={s.wrapper_submit_checkbox}>*/}
-                {/*    <SuperCheckbox onChangeChecked={setRememberMe}>Remember me</SuperCheckbox>*/}
-                {/*</div>*/}
-                {/*<div className={s.helpText}>Forgot password ?</div>*/}
-                <div className={s.helpTextForgotPasswordContainer}>
-                    <NavLink to={PATH.PASSWORD_RECOVERY} className={s.helpTextForgotPassword}>Forgot Password</NavLink>
-                </div>
-                <div>
-                    <div className={s.wrapper_submit_button}>
-                        <SuperButton onClick={logInHandler} disabled={isLoggedIn}>Submit</SuperButton>
-                    </div>
-                </div>
-                {/*<div className={s.helpText}>Don't have an account?</div>*/}
-                <div className={s.helpText}>Don't have an account?</div>
-                <NavLink to={PATH.REGISTRATION} className={s.helpTextBold}>Sign Up</NavLink>
-            </div>
-
-
         </div>
     );
 }
