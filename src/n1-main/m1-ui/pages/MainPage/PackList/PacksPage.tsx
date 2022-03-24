@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, useNavigate} from "react-router-dom";
-import React, {useCallback, useEffect} from "react";
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import {PacksTable} from "./PacksTable";
@@ -12,7 +12,7 @@ import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {
     addPacksTC, deletePackTC,
-    editPackTC,
+    editPackTC, getSearchPackByNameTC,
     pickDeletePackAC,
     pickEditPackAC, setCurrentPageTC,
     setPacksDataTC,
@@ -25,6 +25,7 @@ import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
+import useDebounce from "../../../../../n2-features/f1-hooks/useDebounce";
 import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
 import {initializeMainTC} from "../../../../m2-bll/loginReducer";
 
@@ -35,6 +36,7 @@ export const PacksPage = () => {
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+    const searchRX = useSelector<AppStoreType, string | undefined>(state => state.packs.packName)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     const user = useSelector<AppStoreType>(state => state.login.user)
@@ -59,14 +61,23 @@ export const PacksPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    // useEffect(()=>{
-    //     dispatch(initializeMainTC())
-    // },[])
-    // useEffect(()=>{
-        if (!isLoggedIn) {
-            navigate(PATH.LOGIN)
-        }
-    // },[])
+    const [search, setSearch] = useState('')
+    const [isSearching, setIsSearching] = useState(false);
+
+    const debouncedValue = useDebounce(search, 1500);
+
+    useEffect(() => {
+          if (debouncedValue !== searchRX) {
+            setIsSearching(true);
+                dispatch(getSearchPackByNameTC(search))
+          }
+        },
+        [debouncedValue]
+      );
+
+    const onSearchHandler = (e:ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.currentTarget.value)
+    }
 
     const onSetAllPressHandler = useCallback(() => {
         if (!isLoggedIn) {
@@ -76,7 +87,7 @@ export const PacksPage = () => {
             // briefly hardcoded 1 Cards request
             params: {
                 packName: '',
-                pageCount: 15
+                pageCount: 20,
             }
         }))
     }, [dispatch])
@@ -132,6 +143,7 @@ export const PacksPage = () => {
 
     const editPack = useCallback((packId: string, namePack: string) => {
         dispatch(editPackTC({cardsPack: {_id: packId, name: namePack}}))
+        // dispatch(showEditPackAC(true))
     }, [dispatch])
 
     const hideEditPack = useCallback(() => {
@@ -146,23 +158,12 @@ export const PacksPage = () => {
     const onPageChanged = (pageNumber: number) => {
         dispatch(setCurrentPageTC(pageNumber))
     }
+    if (!isLoggedIn) {
+        navigate(PATH.LOGIN)
+    }
 
     return (
         <div className={commonPacksStyle.wrapper}>
-
-            {/*<nav>*/}
-            {/*    <ul className={s.menu}>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
-            {/*        </li>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.TEST} className={''}>Profile</NavLink>*/}
-            {/*        </li>*/}
-            {/*        /!*<li>*!/*/}
-            {/*        /!*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*!/*/}
-            {/*        /!*</li>*!/*/}
-            {/*    </ul>*/}
-            {/*</nav>*/}
 
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>
@@ -190,7 +191,7 @@ export const PacksPage = () => {
                 <span className={commonPacksStyle.content}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}>Packs list</div>
                     <div className={commonPacksStyle.inputPlusButton}>
-                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching'/>
+                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching' onChange={onSearchHandler}/>
                         <span>
                                     <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
 
