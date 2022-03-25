@@ -1,6 +1,6 @@
 import {statePacksType} from "./packsReducer";
 import {Dispatch} from "redux";
-import {cardsAPI, GetCardsPayload} from "../m3-dal/cards-api";
+import {cardsAPI} from "../m3-dal/cards-api";
 
 const initState: stateCardsType = {
     cards: [{
@@ -73,7 +73,7 @@ type findCardACType = ReturnType<typeof findCardAC>
 
 export const fetchCardsTC =
     (packId: string) => (dispatch: Dispatch) => {
-        const payload: GetCardsPayload = {
+        const payload: any = {
             cardAnswer: "",
             cardQuestion: "",
             cardsPack_id: packId,

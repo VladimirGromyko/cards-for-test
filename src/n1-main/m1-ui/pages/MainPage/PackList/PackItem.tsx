@@ -29,7 +29,7 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
 
     return (
         <div className={packsStyle.items}>
-            <div style={{cursor: "pointer"}} onClick={() => navigate(PATH.CARDS + pack._id)}>{pack.name}</div>
+            <div style={{cursor: "pointer"}} onClick={() => navigate('/main/packs/' + pack._id)}>{pack.name}</div>
 
             <div>{pack.cardsCount}</div>
             <div>{pack.created}</div>

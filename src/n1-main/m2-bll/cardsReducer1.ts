@@ -149,14 +149,14 @@ export const gradeCardTC =
 
         const payload: GradeCardPayload = {
             grade,
-            cardId: cardId,
+            card_id: cardId,
         };
 
         cardsAPI
             .gradeCard(payload)
-            .then(() => {
+            .then((res) => {
                 dispatch(loadingAC('succeeded'));
-                dispatch(setCardGradeAC(grade, cardId));
+                dispatch(setCardGradeAC(res.data.updatedGrade.grade, res.data.updatedGrade.card_id));
             })
             .catch((err) => {
                 dispatch(loadingAC('succeeded'))

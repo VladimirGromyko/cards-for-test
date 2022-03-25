@@ -1,25 +1,54 @@
 import React, { useState } from "react"
-import {cardsType} from "../../../m2-bll/cardsReducer"
+import { cardsType } from "../../../m2-bll/cardsReducer"
 import { useNavigate } from "react-router-dom"
 import SuperRadio from "../../../m1-ui/common/c4-SuperRadio/SuperRadio"
 import s from "./Card.module.css"
 import SuperButton from "../../../m1-ui/common/c1-SuperButton/SuperButton"
-import {PATH} from "../../routes/Paths"
+import { PATH } from "../../routes/Paths"
+import { useDispatch } from "react-redux"
+import { gradeCardTC } from "../../../m2-bll/cardsReducer1"
 
 export const LearnCard = ({
-                         currentCard,
-                              isShowed,
-                              setIsShowed,
-                         nextCardHandler,
-                     }: CardPropsType) => {
+    currentCard,
+    nextCardHandler,
+}: CardPropsType) => {
     const navigate = useNavigate()
 
-    const radioValues = ["Did not know", "A lot of thought", "Knew the answer"]
+    const dispatch = useDispatch()
+
+    const [isShowed, setIsShowed] = useState(false)
+    const radioValues = ["Did not know (1)",
+        "A lot of thought (2)",
+        "Knew the answer (3)",
+        "Knew the answer (4)",
+        "Knew the answer (5)",]
+    let grade = 0
     const [option, setOption] = useState("Did not know")
+
+    if (option === 'Did not know (1)') {
+        grade = 1
+        }
+        if (option === 'A lot of thought (2)') {
+            grade = 2
+        }
+        if (option === 'Knew the answer (3)') {
+            grade = 3
+        }
+        if (option === 'Knew the answer (4)') {
+            grade = 4
+        }
+        if (option === 'Knew the answer (5)') {
+            grade = 5
+        }
+       
 
     const handleNext = () => {
         setOption("Did not know")
-
+        console.log(option)
+        if (currentCard._id) {
+            dispatch(gradeCardTC(grade, currentCard._id))
+            setIsShowed(false)
+        }
     };
 
     return (
@@ -84,8 +113,6 @@ export const LearnCard = ({
 
 export type CardPropsType = {
     currentCard: cardsType
-    isShowed: boolean
-    setIsShowed: (isChecked: boolean) => void
     nextCardHandler: (grade: number) => void
     navigateBackPage: () => void
 }

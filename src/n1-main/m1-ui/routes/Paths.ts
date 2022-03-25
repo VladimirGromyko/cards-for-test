@@ -10,7 +10,7 @@ export const PATH = {
     TEST: '/test',
     CHANGE_PASSWORD: '/change-pass/:token',
     PASSWORD_RECOVERY: '/pass-recovery',
-    CARDS: '/main/cards-list/:packId',
+    CARDS: '/main/packs/:id',
     PACKS: '/main/packs',
-    PACK_LIST_LEARN: '/main/packs-learn/:packId',
+    PACK_LIST_LEARN: '/main/packs-learn/:id',
 }

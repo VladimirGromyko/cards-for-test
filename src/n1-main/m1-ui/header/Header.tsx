@@ -19,7 +19,7 @@ function Header() {
                     {/*    <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>*/}
                     {/*</li>*/}
                     <li className={``}>
-                        <NavLink to={PATH.PACK_LIST} className={''}>Pack list</NavLink>
+                        <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
                     </li>
                     <li className={``}>
                         <NavLink to={PATH.TEST} className={''}>Profile</NavLink>

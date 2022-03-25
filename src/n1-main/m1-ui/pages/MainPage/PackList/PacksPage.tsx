@@ -124,7 +124,7 @@ export const PacksPage = () => {
 
     const learnPack = useCallback((packId: string) => {
         // navigate('/packs/' + packId)
-        navigate(PATH.PACK_LIST_LEARN + packId)
+        navigate('/main/packs-learn/'+ packId)
     }, [navigate])
 
     const onPageChanged = (pageNumber: number) => {
