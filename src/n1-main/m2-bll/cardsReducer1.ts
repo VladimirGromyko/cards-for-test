@@ -132,6 +132,16 @@ export const deleteCardTC = (cardId:string):ThunkType => (dispatch, getState) =>
     })
 }
 
+export const editCardTC = (cardId:string, newQuestion:string):ThunkType => (dispatch, getState) => {
+    dispatch(loadingAC('loading'))
+    cardsAPI.updateCard({cardId, newQuestion}).then(res=>{
+        dispatch(getCardsTC({packId:getState().cards1.cards[0].cardsPack_id}))
+    }).catch((err) => {
+        dispatch(loadingAC('succeeded'))
+
+    })
+}
+
 
 type GetAllCardActionType = ReturnType<typeof getAllCardAC>
 type SortCardsActionType = ReturnType<typeof sortCardsAC>
