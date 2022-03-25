@@ -13,13 +13,18 @@ import {confirmResponse} from "../../../../../n2-features/f0-test/confirmRespons
 
 type EditPackType = {
     editPack: (packId: string, namePack: string) => void
-    packId: string
-    packName: string
-    hideEditPack: () => void
+    editPackId: string
+    editPackName: string
     isLoading: LoadingStatusType
+    setFalse: () => void
 }
 
-const EditPack = ({editPack, packId, packName, hideEditPack, isLoading}: EditPackType) => {
+const EditPack = ({
+                      editPack, editPackId, editPackName,
+                      // hideEditPack,
+                      isLoading,
+                      setFalse
+                  }: EditPackType) => {
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const confirmRes = useSelector<AppStoreType, ResponseConfirmStateType>(state => state.confirm)
 
@@ -27,12 +32,12 @@ const EditPack = ({editPack, packId, packName, hideEditPack, isLoading}: EditPac
 
     const onKeyPressHandler = useCallback(() => {
         let trimNewPackName = newPackName.trim()
-        editPack(packId, trimNewPackName)
-    }, [editPack, packId, newPackName])
+        editPack(editPackId, trimNewPackName)
+    }, [editPack, editPackId, newPackName])
 
     const OnCancelClick = useCallback(() => {
-        hideEditPack()
-    }, [hideEditPack])
+        setFalse()
+    }, [setFalse])
 
     return (
         <div className={s.wrapper}>
@@ -41,18 +46,19 @@ const EditPack = ({editPack, packId, packName, hideEditPack, isLoading}: EditPac
             </div>
             <h3>Packs info</h3>
             <div>
-                Edit name of pack {packName}?
+                Edit name of pack {editPackName}?
             </div>
             <br/>
             <SuperInputText value={newPackName}
                             onChangeText={setNewPackName}
                             onEnter={onKeyPressHandler}
-                            placeholder={'Enter new pack name'}
+                            placeholder={editPackName}
                             error={errorResponse(errorRes, 'editPack')}
                             spanClassName={s.inputError}
             />
-            <SuperButton onClick={OnCancelClick}>Cancel</SuperButton>
             <SuperButton onClick={onKeyPressHandler}>Save</SuperButton>
+            <SuperButton onClick={OnCancelClick}>Cancel</SuperButton>
+
             {confirmRes.isResponseConfirm && <div style={{color: 'blue'}}>
                 {confirmResponse(confirmRes, 'editPack')}
             </div>}

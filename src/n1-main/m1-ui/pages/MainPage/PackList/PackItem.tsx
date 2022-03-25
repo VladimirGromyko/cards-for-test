@@ -28,7 +28,6 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
     return (
         <div className={packsStyle.items}>
             <div style={{cursor: "pointer"}} onClick={onLearnPressHandler}>{pack.name}</div>
-
             <div>{pack.cardsCount}</div>
             <div>{changeDateView(pack.created)}</div>
             <div>{pack.user_name}</div>

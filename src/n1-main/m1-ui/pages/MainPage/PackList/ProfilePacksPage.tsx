@@ -177,25 +177,25 @@ export const ProfilePacksPage = () => {
                     {/*    // hideAddPack={hideAddPack}*/}
                     {/*    isLoading={isLoading}/>}*/}
                     <HeaderPacks/>
-                    {packs && !isShownAddPack && <PacksTable
-                        deletePack={deletePack}
-                        deletePackList={deletePackList}
-                        hideDeletePack={hideDeletePack}
-                        deletePackId={pickedDeletePack.packId}
-                        deletePackName={pickedDeletePack.packName}
-                        editPack={editPack}
-                        editPackList={editPackList}
-                        hideEditPack={hideEditPack}
-                        packId={pickedEditPack.packId}
-                        packName={pickedEditPack.packName}
-                        learnPack={learnPack}
-                        packs={packs}
-                        isLoading={isLoading}
-                        isShownEditPack={isShownEditPack}
-                        isShownDeletePack={isShownDeletePack}
-                        currentPage={currentPage}
-                        onPageChanged={onPageChanged}
-                    />}
+                    {/*{packs && !isShownAddPack && <PacksTable*/}
+                    {/*    deletePack={deletePack}*/}
+                    {/*    deletePackList={deletePackList}*/}
+                    {/*    hideDeletePack={hideDeletePack}*/}
+                    {/*    deletePackId={pickedDeletePack.packId}*/}
+                    {/*    deletePackName={pickedDeletePack.packName}*/}
+                    {/*    editPack={editPack}*/}
+                    {/*    editPackList={editPackList}*/}
+                    {/*    hideEditPack={hideEditPack}*/}
+                    {/*    packId={pickedEditPack.packId}*/}
+                    {/*    packName={pickedEditPack.packName}*/}
+                    {/*    learnPack={learnPack}*/}
+                    {/*    packs={packs}*/}
+                    {/*    isLoading={isLoading}*/}
+                    {/*    isShownEditPack={isShownEditPack}*/}
+                    {/*    isShownDeletePack={isShownDeletePack}*/}
+                    {/*    currentPage={currentPage}*/}
+                    {/*    onPageChanged={onPageChanged}*/}
+                    {/*/>}*/}
                 </span>
             </div>
         </div>

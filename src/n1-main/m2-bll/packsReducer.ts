@@ -1,4 +1,3 @@
-import {Dispatch} from "redux";
 import {loadingAC, LoadingACType} from "./loadingReducer";
 import {
     packsAPI,
@@ -10,9 +9,6 @@ import {
 import {responseErrorAC, ResponseErrorACType} from "./errorReducer";
 import {ThunkType} from "./store";
 import {responseConfirmAC, ResponseConfirmACType} from "./answeredReducer";
-import {cardsAPI} from "../m3-dal/cards-api";
-import {getAllCardAC, searchCardsAC} from "./cardsReducer1";
-
 
 export type statePacksType = {
     packsData: PacksGetResponseDataType
@@ -149,7 +145,7 @@ export const setPacksDataTC = (packsRequest: PacksGetRequestType):ThunkType =>
             dispatch(responseErrorAC(true, 'setPacks', err.response?.data.error))
             setTimeout(() => {
                 dispatch(responseErrorAC(false, 'setPacks', err.response?.data.error))
-            }, 3000)
+            }, 1000)
         })
         .finally(() => {
             dispatch(loadingAC('succeeded'))
@@ -242,6 +238,7 @@ export const addPacksTC = (pack: PacksPostRequestType): ThunkType =>
             .finally(() => {
                 dispatch(loadingAC('succeeded'))
                 setTimeout(() => {
+                    // dispatch(showAddPackAC(false))
                     dispatch(showAddPackAC(false))
                     dispatch(responseConfirmAC(false,
                         'addPack', ''))
@@ -255,7 +252,7 @@ export const editPackTC = (param: PacksPutRequestType):ThunkType =>
     dispatch(loadingAC('loading'))
     packsAPI.putPacks(param)
         .then((res) => {
-            dispatch(showEditPackAC(true))
+            // dispatch(showEditPackAC(true))
             // dispatch(editPackAC(res.data.updatedCardsPack))
             dispatch(setPacksDataTC({
                 params: {
@@ -268,7 +265,7 @@ export const editPackTC = (param: PacksPutRequestType):ThunkType =>
                 'editPack', 'Pack name has been successfully changed!'))
         })
         .catch((err) => {
-            dispatch(showEditPackAC(true))
+            // dispatch(showEditPackAC(true))
             dispatch(responseErrorAC(true, 'editPack', err.response?.data.error))
             setTimeout(() => {
             }, 1000)

@@ -10,7 +10,7 @@ import {AppStoreType} from "../../../../m2-bll/store";
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
 import {confirmResponse} from "../../../../../n2-features/f0-test/confirmResponse";
-import ModalQuestionContainer from "../../../../../n2-features/f3-utils/Modal/ModalContainer";
+import ModalAddContainer from "../../../../../n2-features/f3-utils/Modal/ModalAddContainer";
 
 
 type AddPackType = {

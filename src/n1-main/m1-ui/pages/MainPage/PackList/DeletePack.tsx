@@ -13,14 +13,17 @@ import {confirmResponse} from "../../../../../n2-features/f0-test/confirmRespons
 
 type DeletePackType = {
     deletePack: (packName: string, pack: string) => void
-    hideDeletePack: () => void
     deletePackId: string
     deletePackName: string
     isLoading: LoadingStatusType
+    setFalse: () => void
 }
 export const DeletePack = ({
-                               deletePack, hideDeletePack, deletePackId,
-                               deletePackName, isLoading
+                               deletePack,
+                               deletePackId,
+                               deletePackName,
+                               isLoading,
+                               setFalse
                            }: DeletePackType) => {
 
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
@@ -31,9 +34,8 @@ export const DeletePack = ({
     }, [deletePack, deletePackId, deletePackName])
 
     const OnCancelClick = useCallback(() => {
-        hideDeletePack()
-    }, [hideDeletePack])
-
+        setFalse()
+    }, [setFalse])
 
     return (
         <div className={s.wrapper}>
@@ -44,8 +46,9 @@ export const DeletePack = ({
             <div>Do you really want to remove <b>Pack Name - {deletePackName}</b></div>
             <div>All cards well be excluded from this course</div>
 
-            <SuperButton onClick={OnCancelClick}>Cancel</SuperButton>
             <SuperButton onClick={onDeleteClick} red={true}>Delete</SuperButton>
+            <SuperButton onClick={OnCancelClick}>Cancel</SuperButton>
+
             {confirmRes.isResponseConfirm && <div style={{color: 'blue'}}>
                 {confirmResponse(confirmRes, 'deletePack')}
             </div>}
