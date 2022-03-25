@@ -91,7 +91,7 @@ export const PacksPage = () => {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
-        setSelectedAll(true)
+        setSelectedAll(false)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -105,7 +105,7 @@ export const PacksPage = () => {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
-        setSelectedAll(false)
+        setSelectedAll(true)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -185,8 +185,8 @@ export const PacksPage = () => {
                          className={commonPacksStyle.contentAllMy}>
                         <h3>Show Packs cards</h3>
                         <div className={commonPacksStyle.allMyWrapper}>
-                            <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
-                            <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
+                            <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
+                            <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
                             </div>
                         <div style={{color: 'red'}}>
                             {errorResponse(errorRes, 'setPacks')}
