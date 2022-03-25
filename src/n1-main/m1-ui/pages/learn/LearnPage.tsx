@@ -51,8 +51,7 @@ export const LearnPage = () => {
     }, [cards, dispatch, ]);
 
 
-    return (
-        <>
+    return (<div className={s.superWrapper}>
         {isLoading === "loading" && <div className={l.loader07}></div>}
 
             <div className={s.wrapper}>
@@ -62,7 +61,7 @@ export const LearnPage = () => {
                     navigateBackPage={navigateBackPage}
                 />}
             </div>
-        </>
+        </div>
     )
 }
 

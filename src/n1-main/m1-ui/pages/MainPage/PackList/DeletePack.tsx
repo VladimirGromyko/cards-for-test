@@ -11,6 +11,7 @@ import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
 import {confirmResponse} from "../../../../../n2-features/f0-test/confirmResponse";
 
 
+
 type DeletePackType = {
     deletePack: (packName: string, pack: string) => void
     deletePackId: string
