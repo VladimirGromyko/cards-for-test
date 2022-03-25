@@ -57,6 +57,7 @@ const PackList = () => {
     // dispatch()
     const onLearnPressHandler = useCallback(() => {
         // dispatch()
+        navigate(PATH.PACK_LIST_LEARN)
     }, [])
 
 

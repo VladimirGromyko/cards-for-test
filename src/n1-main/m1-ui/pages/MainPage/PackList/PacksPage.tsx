@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import React, {ChangeEvent, useEffect, useCallback, useState} from "react";
+import React, {ChangeEvent, useEffect,useCallback, useState} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import {PacksTable} from "./PacksTable";
@@ -23,6 +23,7 @@ import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import useDebounce from "../../../../../n2-features/f1-hooks/useDebounce";
 import {PATH} from "../../../routes/Paths";
 import {initializeMainTC} from "../../../../m2-bll/loginReducer";
+import {LearnPage} from "../../learn/LearnPage";
 import ModalAddContainer from "../../../../../n2-features/f3-utils/Modal/ModalAddContainer";
 
 
@@ -64,17 +65,23 @@ export const PacksPage = () => {
     const debouncedValue = useDebounce(search, 1500);
 
     useEffect(() => {
-            if (debouncedValue !== searchRX) {
-                setIsSearching(true);
+          if (debouncedValue !== searchRX) {
+            setIsSearching(true);
                 dispatch(getSearchPackByNameTC(search))
-            }
+          }
         },
         [debouncedValue]
-    );
+      );
 
-    const onSearchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const onSearchHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setSearch(e.currentTarget.value)
     }
+    // useEffect(()=>{
+    //     dispatch(initializeMainTC())
+    // },[])
+    // useEffect(()=>{
+
+    // },[])
 
     const onSetAllPressHandler = useCallback(() => {
         if (!isLoggedIn) {
@@ -149,8 +156,8 @@ export const PacksPage = () => {
 //-------------
 
     const learnPack = useCallback((packId: string) => {
-        navigate('/packs/' + packId)
-        // navigate(PATH.CARDS+packId)
+        // navigate('/packs/' + packId)
+        navigate('/main/packs-learn/'+ packId)
     }, [navigate])
 
     const onPageChanged = (pageNumber: number) => {
@@ -174,11 +181,9 @@ export const PacksPage = () => {
                          className={commonPacksStyle.contentAllMy}>
                         <h3>Show Packs cards</h3>
                         <div className={commonPacksStyle.allMyWrapper}>
-                            <div className={!selectedAll ? commonPacksStyle.all : commonPacksStyle.my}
-                                 onClick={onSetMyPressHandler}><p>My</p></div>
-                            <div className={selectedAll ? commonPacksStyle.all : commonPacksStyle.my}
-                                 onClick={onSetAllPressHandler}><p>All</p></div>
-                        </div>
+                            <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
+                            <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
+                            </div>
                         <div style={{color: 'red'}}>
                             {errorResponse(errorRes, 'setPacks')}
                         </div>

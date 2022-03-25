@@ -2,6 +2,8 @@ import React, {useCallback} from 'react'
 import packsStyle from './PacksTable.module.css'
 import SuperButton from '../../../common/c1-SuperButton/SuperButton'
 import {CardPacksType} from "../../../../m3-dal/packs-api";
+import {PATH} from "../../../routes/Paths";
+import {useNavigate} from "react-router-dom";
 import {changeDateView} from "../../../../../n2-features/f3-utils/changeDateView";
 
 type TableItemPropsType = {
@@ -12,7 +14,7 @@ type TableItemPropsType = {
 }
 
 export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableItemPropsType) => {
-
+    const navigate = useNavigate()
     const onDeletePressHandler = useCallback(() => {
         deletePackList(pack.name, pack._id)
     }, [deletePackList, pack.name, pack._id])
@@ -27,7 +29,8 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
 
     return (
         <div className={packsStyle.items}>
-            <div style={{cursor: "pointer"}} onClick={onLearnPressHandler}>{pack.name}</div>
+            <div style={{cursor: "pointer"}} onClick={() => navigate('/main/packs/' + pack._id)}>{pack.name}</div>
+
             <div>{pack.cardsCount}</div>
             <div>{changeDateView(pack.created)}</div>
             <div>{pack.user_name}</div>

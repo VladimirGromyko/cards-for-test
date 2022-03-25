@@ -13,7 +13,6 @@ import l from "../../common/c7-Loading/loader07.module.css";
 // import {useNavigate} from "react-router-dom";
 
 const LoginPage = () => {
-
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const isLoggedIn = useSelector<AppStoreType, boolean>(state => state.login.isLoggedIn)
     const dispatch = useDispatch()
