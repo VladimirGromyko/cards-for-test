@@ -11,6 +11,7 @@ import { cardsType } from "../../../m2-bll/cardsReducer"
 
 
 export const LearnPage = () => {
+
     const isLoading = useSelector<AppStoreType>(state => state.loading.isLoading);
     const cards = useSelector<AppStoreType, CardType[]>(state => state.cards1.cards)
 
@@ -20,7 +21,9 @@ export const LearnPage = () => {
     const packId = params.id
     const [first, setFirst] = useState(true);
 
-    const [currentCard, setCurrentCard] = useState<cardsType>({}) //
+    const [currentCard, setCurrentCard] = useState<cardsType>({
+
+    }) //
 
     const navigateBackPage = () => navigate(PATH.PACKS)
 
@@ -51,12 +54,13 @@ export const LearnPage = () => {
     return (
         <>
         {isLoading === "loading" && <div className={l.loader07}></div>}
+
             <div className={s.wrapper}>
-                <LearnCard
+                {currentCard && <LearnCard
                     currentCard={currentCard}
                     nextCardHandler={nextCardHandler}
                     navigateBackPage={navigateBackPage}
-                />
+                />}
             </div>
         </>
     )
