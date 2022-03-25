@@ -10,6 +10,9 @@ import {
 import {responseErrorAC, ResponseErrorACType} from "./errorReducer";
 import {ThunkType} from "./store";
 import {responseConfirmAC, ResponseConfirmACType} from "./answeredReducer";
+import {cardsAPI} from "../m3-dal/cards-api";
+import {getAllCardAC, searchCardsAC} from "./cardsReducer1";
+
 
 export type statePacksType = {
     packsData: PacksGetResponseDataType
@@ -21,6 +24,11 @@ export type statePacksType = {
     pickedEditPack: { packName: string, packId: string }
     pickedDeletePack: { packName: string, packId: string }
     currentPage: number
+    sort?: string,
+    max?: number,
+    min?: number,
+    packName?: string,
+
 }
 
 const initState = {
@@ -32,7 +40,10 @@ const initState = {
     isShownDeletePack: false,
     pickedEditPack: {packName: '', packId: ''},
     pickedDeletePack: {packName: '', packId: ''},
-    currentPage: 1
+    currentPage: 1,
+    max: 100,
+    min: 0,
+    packName: '',
 } as statePacksType
 
 export const packsReducer = (state: statePacksType = initState,
@@ -40,6 +51,15 @@ export const packsReducer = (state: statePacksType = initState,
     switch (action.type) {
         case "SET_PACKS_DATA": {
             return {...state, packsData: action.packsData}
+        }
+        case "SORT-PACKS" : {
+            return {...state, sort: action.sort}
+        }
+        case "MIN-MAX-PACKS":{
+            return {...state, max: action.max, min:action.min}
+        }
+        case "SEARCH-PACK":{
+            return {...state, packName: action.packName}
         }
         case "SHOW_MAIN_PAGE": {
             return {...state, isShownMainPage: action.isShownMainPage}
@@ -72,6 +92,16 @@ export const packsReducer = (state: statePacksType = initState,
 
 export const setPacksDataAC = (packsData: PacksGetResponseDataType) => (
     {type: 'SET_PACKS_DATA', packsData}) as const
+
+export const sortPacksAC = (sort?: string) => (
+    {type: 'SORT-PACKS', sort}) as const
+
+export const getMinMaxPacksAC = (min?: number, max?: number) => (
+    {type: 'MIN-MAX-PACKS', min, max}) as const
+
+export const searchPackAC = (packName:string) => (
+    {type: 'SEARCH-PACK', packName}) as const
+
 export const editPackAC = (updatedCardsPack: {}) => (
     {type: 'EDIT_PACK', updatedCardsPack}) as const
 
@@ -96,10 +126,22 @@ export const showDeletePackAC = (isShownDeletePack: boolean) => (
 export const setCurrentPageAC = (currentPage: number) => (
     {type: 'SET_CURRENT_PAGE', currentPage}) as const
 
-export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: Dispatch<PacksReducerType>) => {
+export const setPacksDataTC = (packsRequest: PacksGetRequestType):ThunkType =>
+    (dispatch, getState) => {
     dispatch(loadingAC('loading'))
-    packsAPI.setPacks(packsRequest)
+    packsAPI.setPacks({
+        params:{
+            pageCount:packsRequest.params.pageCount,
+            packName: getState().packs.packName,
+            page:getState().packs.currentPage,
+            sortPacks: packsRequest.params.sortPacks,
+            max: getState().packs.max,
+            min: getState().packs.min,
+            user_id: packsRequest.params.user_id,
+        }
+    })
         .then((res) => {
+            dispatch(sortPacksAC(packsRequest.params.sortPacks))
             dispatch(setPacksDataAC(res.data))
 
         })
@@ -113,18 +155,71 @@ export const setPacksDataTC = (packsRequest: PacksGetRequestType) => (dispatch: 
             dispatch(loadingAC('succeeded'))
             dispatch(showMainPageAC(false))
         })
+
 }
+
+export const getPacksByMinMaxTC = (min:number, max:number):ThunkType =>
+    (dispatch, getState) => {
+    dispatch(loadingAC('loading'))
+        packsAPI.setPacks({
+            params:{
+                pageCount:getState().packs.packsData.pageCount,
+                sortPacks: getState().packs.sort,
+                packName: getState().packs.packName,
+                page:getState().packs.currentPage,
+                max: max,
+                min: min,
+            }
+        }).then(res => {
+            dispatch(getMinMaxPacksAC(min,max))
+            dispatch(setPacksDataAC(res.data))
+    }).catch((err) => {
+        dispatch(loadingAC('succeeded'))
+    })
+        .finally(() => {
+            dispatch(loadingAC('succeeded'))
+
+        })
+}
+
+export const getSearchPackByNameTC = (packName:string):ThunkType =>
+    (dispatch, getState) => {
+        dispatch(loadingAC('loading'))
+        packsAPI.setPacks({
+            params:{
+                pageCount:getState().packs.packsData.pageCount,
+                sortPacks: getState().packs.sort,
+                max: getState().packs.max,
+                min: getState().packs.min,
+                page:getState().packs.currentPage,
+                packName: packName,
+            }
+        }).then(res => {
+            dispatch(searchPackAC(packName))
+            dispatch(setPacksDataAC(res.data))
+        }).catch((err) => {
+            dispatch(loadingAC('succeeded'))
+        })
+            .finally(() => {
+                dispatch(loadingAC('succeeded'))
+
+            })
+    }
 
 export const setCurrentPageTC = (pageNumber: number): ThunkType =>
     (dispatch, getState) => {
-        dispatch(setCurrentPageAC(pageNumber))
-        dispatch(setPacksDataTC({
-            params: {
-                page: pageNumber,
-                pageCount: getState().packs.packsData.pageCount
-            }
-        }))
-    }
+    dispatch(setCurrentPageAC(pageNumber))
+    dispatch(setPacksDataTC({
+        params: {
+            page: pageNumber,
+            pageCount: getState().packs.packsData.pageCount,
+            sortPacks: getState().packs.sort,
+            max: getState().packs.max,
+            min: getState().packs.min,
+            packName: getState().packs.packName,
+        }
+    }))
+}
 
 export const addPacksTC = (pack: PacksPostRequestType): ThunkType =>
     (dispatch, getState) => {
@@ -227,6 +322,9 @@ type showDeletePackACType = ReturnType<typeof showDeletePackAC>
 type pickEditPackACType = ReturnType<typeof pickEditPackAC>
 type pickDeletePackACType = ReturnType<typeof pickDeletePackAC>
 type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+type setSortPacksACType = ReturnType<typeof sortPacksAC>
+type getMinMaxPacksACType = ReturnType<typeof getMinMaxPacksAC>
+type searchPackACType = ReturnType<typeof searchPackAC>
 
 export type PacksReducerType = SetPacksDataACType
     | LoadingACType
@@ -240,3 +338,6 @@ export type PacksReducerType = SetPacksDataACType
     | showDeletePackACType
     | pickDeletePackACType
     | setCurrentPageACType
+    | setSortPacksACType
+    | getMinMaxPacksACType
+    | searchPackACType

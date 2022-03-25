@@ -29,7 +29,7 @@ function Header() {
     const onProfileHandler = () => {
         if (!isLoggedIn) {
             return PATH.LOGIN
-        } else return PATH.PROFILE
+        } else return PATH.TEST
     }
 
     return (

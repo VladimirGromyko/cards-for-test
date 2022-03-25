@@ -32,8 +32,9 @@ let Paginator = ({
                      portionSize = 10
                  }: PaginatorPropsType) => {
     // let pageCount = Math.ceil(cardPacksTotalCount / pageSize)
+
     let pages = []
-    for (let i = 1; i <= pageCount; i++) {
+    for (let i = 1; i <= cardPacksTotalCount/pageCount; i++) {
         pages.push(i)
     }
     let portionCount = Math.ceil(pageCount / portionSize)

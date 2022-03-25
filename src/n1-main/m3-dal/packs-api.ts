@@ -7,6 +7,9 @@ export const packsAPI = {
         return instance.get <PacksGetRequestType, AxiosResponse<PacksGetResponseDataType>>(`cards/pack`,
             param);
     },
+    setSortPacks( sortPackNumber: SortPackNumberType, sortPackName: SortPackNameType) {
+        return instance.get(`cards/pack?sortPacks=${sortPackNumber}${sortPackName}&pageCount=20`);
+    },
     postPacks(pack: PacksPostRequestType) {
         return instance.post <PacksPostRequestType, AxiosResponse<PacksPostResponseType>>('cards/pack',
             pack);
@@ -32,12 +35,15 @@ type PacksGetRequestDataType = {
     pageCount?: number, // не обязательно
     user_id?: string  // не обязательно
 }
+export type SortPackNumberType = 0 | 1 
+export type SortPackNameType = 'name' | 'cardsCount' | 'updated' | 'user_name'
 
 export type PacksGetResponseDataType = {
     cardPacks:
         [{
             _id: string
             user_id: string
+            user_name:string
             name: string
             cardsCount: number
             created: string
@@ -53,7 +59,7 @@ export type PacksGetResponseDataType = {
 export type CardPacksType = {
     _id: string
     user_id: string
-
+    user_name:string
     name: string
     cardsCount: number
     created: string

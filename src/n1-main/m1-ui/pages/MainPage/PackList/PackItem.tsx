@@ -31,9 +31,9 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
 
             <div>{pack.cardsCount}</div>
             <div>{changeDateView(pack.created)}</div>
-            <div>{pack.user_id}</div>
+            <div>{pack.user_name}</div>
             <div>
-                <SuperButton style={{minWidth: "47px"}}onClick={onDeletePressHandler}>Delete</SuperButton>
+                <SuperButton style={{minWidth: "47px",backgroundColor:'red'}}onClick={onDeletePressHandler}>Delete</SuperButton>
                 <SuperButton style={{minWidth: "47px"}} onClick={onEditPressHandler}>Edit</SuperButton>
                 <SuperButton style={{minWidth: "47px"}} onClick={onLearnPressHandler}>Learn</SuperButton>
             </div>

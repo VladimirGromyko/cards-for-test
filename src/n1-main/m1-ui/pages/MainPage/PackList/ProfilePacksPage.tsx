@@ -140,21 +140,7 @@ export const ProfilePacksPage = () => {
 
     return (
         <div className={commonPacksStyle.wrapper}>
-            {/*<nav>*/}
-            {/*    <ul className={s.menu}>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
-            {/*        </li>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.TEST} className={''}>Profile</NavLink>*/}
-            {/*        </li>*/}
-            {/*        /!*<li>*!/*/}
-            {/*        /!*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*!/*/}
-            {/*        /!*</li>*!/*/}
-            {/*    </ul>*/}
-            {/*</nav>*/}
 
-            {/*ПРАВАЯ СТОРОНА*/}
             {/*ЛЕВАЯ СТОРОНА*/}
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>

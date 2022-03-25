@@ -1,18 +1,17 @@
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink, useNavigate} from "react-router-dom";
-import React, {useCallback, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import React, {ChangeEvent, useEffect,useCallback, useState} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import {PacksTable} from "./PacksTable";
 import {AppStoreType} from "../../../../m2-bll/store";
 import Sidebar from "./Sidebar";
 import {HeaderPacks} from "./HeaderPacks";
-import {PATH} from "../../../routes/Paths";
 import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {
     addPacksTC, deletePackTC,
-    editPackTC,
+    editPackTC, getSearchPackByNameTC,
     pickDeletePackAC,
     pickEditPackAC, setCurrentPageTC,
     setPacksDataTC,
@@ -20,11 +19,12 @@ import {
     showEditPackAC
 } from "../../../../m2-bll/packsReducer";
 import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
-import {CardPacksType} from "../../../../m3-dal/packs-api";
-import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
 import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
+import useDebounce from "../../../../../n2-features/f1-hooks/useDebounce";
+import {PATH} from "../../../routes/Paths";
+
 import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
 import {initializeMainTC} from "../../../../m2-bll/loginReducer";
 import ModalQuestionContainer from "../../../../../n2-features/f3-utils/Modal/ModalContainer";
@@ -36,10 +36,12 @@ export const PacksPage = () => {
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
+    const searchRX = useSelector<AppStoreType, string | undefined>(state => state.packs.packName)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
-    const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
+    // const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     const user = useSelector<AppStoreType>(state => state.login.user)
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
+    const [selectedAll, setSelectedAll]=useState<boolean>(false)
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
         state.packs.isShownAddPack)
@@ -60,24 +62,40 @@ export const PacksPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const [search, setSearch] = useState('')
+    const [isSearching, setIsSearching] = useState(false);
+
+    const debouncedValue = useDebounce(search, 1500);
+
+    useEffect(() => {
+          if (debouncedValue !== searchRX) {
+            setIsSearching(true);
+                dispatch(getSearchPackByNameTC(search))
+          }
+        },
+        [debouncedValue]
+      );
+
+    const onSearchHandler = (e:ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.currentTarget.value)
+    }
     // useEffect(()=>{
     //     dispatch(initializeMainTC())
     // },[])
     // useEffect(()=>{
-    if (!isLoggedIn) {
-        navigate(PATH.LOGIN)
-    }
+
     // },[])
 
     const onSetAllPressHandler = useCallback(() => {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
+        setSelectedAll(true)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
                 packName: '',
-                pageCount: 15
+                pageCount: 20,
             }
         }))
     }, [dispatch])
@@ -86,6 +104,7 @@ export const PacksPage = () => {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
+        setSelectedAll(false)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -112,9 +131,6 @@ export const PacksPage = () => {
     const hideAddPack = (value:boolean) => {
         dispatch(showAddPackAC(value))
     }
-    // const hideAddPack = () => {
-    //     dispatch(showAddPackAC(false))
-    // }
     const deletePackList = useCallback((packName: string, packId: string) => {
         dispatch(pickDeletePackAC(packName, packId))
         dispatch(showDeletePackAC(true))
@@ -124,7 +140,7 @@ export const PacksPage = () => {
     const deletePack = useCallback((packName: string, packId: string) => {
         // console.log("Удалить колоду:", packName, " с Id: ", packId)
         // dispatch()
-        dispatch(deletePackTC({params: {id: packId}}))
+        dispatch(deletePackTC({params:{id: packId}}))
     }, [])
     const hideDeletePack = () => {
         dispatch(showDeletePackAC(false))
@@ -150,23 +166,13 @@ export const PacksPage = () => {
     const onPageChanged = (pageNumber: number) => {
         dispatch(setCurrentPageTC(pageNumber))
     }
+    if (!isLoggedIn) {
+        navigate(PATH.LOGIN)
+    }
 
     return (
         <div className={commonPacksStyle.wrapper}>
 
-            {/*<nav>*/}
-            {/*    <ul className={s.menu}>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
-            {/*        </li>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.TEST} className={''}>Profile</NavLink>*/}
-            {/*        </li>*/}
-            {/*        /!*<li>*!/*/}
-            {/*        /!*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*!/*/}
-            {/*        /!*</li>*!/*/}
-            {/*    </ul>*/}
-            {/*</nav>*/}
 
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>
@@ -176,11 +182,11 @@ export const PacksPage = () => {
                 <div className={commonPacksStyle.ariaA}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}
                          className={commonPacksStyle.contentAllMy}>
-                        <p>Show Packs cards</p>
+                        <h3>Show Packs cards</h3>
                         <div className={commonPacksStyle.allMyWrapper}>
-                            <div className={commonPacksStyle.my} onClick={onSetMyPressHandler}>My</div>
-                            <div className={commonPacksStyle.all} onClick={onSetAllPressHandler}>All</div>
-                        </div>
+                            <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
+                            <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
+                            </div>
                         <div style={{color: 'red'}}>
                             {errorResponse(errorRes, 'setPacks')}
                         </div>
@@ -194,7 +200,7 @@ export const PacksPage = () => {
                 <span className={commonPacksStyle.content}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}>Packs list</div>
                     <div className={commonPacksStyle.inputPlusButton}>
-                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching'/>
+                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching' onChange={onSearchHandler}/>
                         <span>
                               <div>
                                   <ModalQuestionContainer
