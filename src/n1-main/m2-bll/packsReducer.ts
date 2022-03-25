@@ -308,7 +308,7 @@ export const deletePackTC = (param: PacksDeleteRequestType): ThunkType =>
                     dispatch(showDeletePackAC(false))
                     dispatch(responseConfirmAC(false, 'deletePack', ''))
                     dispatch(responseErrorAC(false, 'deletePack', ''))
-                }, 3000)
+                }, 1000)
             })
 
     }
