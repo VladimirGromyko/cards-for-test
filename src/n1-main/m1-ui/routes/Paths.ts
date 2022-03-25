@@ -5,7 +5,6 @@ export const PATH = {
     EDIT_PROFILE:'/edit',
     PROFILE: '/',
     MAIN: '/main',
-    PACK_LIST: '/pack-list',
     EDIT_PACK: '/main/pack-list/edit-pack',
     TEST: '/test',
     CHANGE_PASSWORD: '/change-pass/:token',
