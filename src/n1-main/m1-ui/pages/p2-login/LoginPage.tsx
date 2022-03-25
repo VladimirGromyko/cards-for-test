@@ -6,9 +6,9 @@ import s from './LoginPage.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
 import {PATH} from "../../routes/Paths";
-import {NavLink, useNavigate} from 'react-router-dom';
 import {getAuthUserDataTC} from "../../../m2-bll/loginReducer";
 import l from "../../common/c7-Loading/loader07.module.css";
+import {NavLink, useNavigate} from 'react-router-dom';
 
 // import {useNavigate} from "react-router-dom";
 

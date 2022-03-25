@@ -11,6 +11,7 @@ import {LoadingStatusType} from '../../../../m2-bll/loadingReducer';
 import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
 import {confirmResponse} from "../../../../../n2-features/f0-test/confirmResponse";
 
+
 type EditPackType = {
     editPack: (packId: string, namePack: string) => void
     packId: string
