@@ -14,7 +14,6 @@ export const cardsAPI = {
         return instance.get(`/cards/card?cardsPack_id=${params.cardsPackId}&pageCount=${params.pageCount}&sortCards=${params.sortNumber}${params.sortName}&cardQuestion=${params.search}`);
     },
     addCard(params:{cardsPack_id: string, question: string, answer:string}){
-        debugger
         return  instance.post(`/cards/card`, {card: {cardsPack_id:params.cardsPack_id, question:params.question, answer:params.answer}})
     },
     deleteCard(params:{cardId: string}){
