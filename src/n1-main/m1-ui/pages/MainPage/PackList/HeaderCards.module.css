@@ -2,12 +2,11 @@
     background-color: #e5ecff;
     border-radius: 5px;
 }
-/*пробуем дизайн*/
+
 .wrapper_header_table {
     display: grid;
     grid-template-areas: "1 2 3 4 5";
-    grid-template-columns:17% 19% 20% 20% 20%;
-    /*grid-template-columns:17% 19% 20% 20% 20%;*/
+    grid-template-columns:20% 20% 20% 20%;
     gap: 1%;
     height: 48px;
     text-decoration: none;
