@@ -28,6 +28,7 @@ import {PATH} from "../../../routes/Paths";
 import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
 import {initializeMainTC} from "../../../../m2-bll/loginReducer";
 import ModalQuestionContainer from "../../../../../n2-features/f3-utils/Modal/ModalContainer";
+import {LearnPage} from "../../learn/LearnPage";
 
 
 export const PacksPage = () => {
@@ -159,8 +160,8 @@ export const PacksPage = () => {
     }, [dispatch])
 
     const learnPack = useCallback((packId: string) => {
-        navigate('/packs/' + packId)
-        // navigate(PATH.CARDS+packId)
+        // navigate('/packs/' + packId)
+        navigate('/main/packs-learn/'+ packId)
     }, [navigate])
 
     const onPageChanged = (pageNumber: number) => {

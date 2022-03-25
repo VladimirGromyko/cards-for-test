@@ -65,7 +65,7 @@ const MainPage = () => {
                         </div>
                     </div>
                 )
-                : (<Navigate to={PATH.PACKS}/>)
+                : (<Navigate to={PATH.PACK_LIST}/>)
             }
         </div>
     )
