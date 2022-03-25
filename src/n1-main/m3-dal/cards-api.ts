@@ -14,7 +14,6 @@ export const cardsAPI = {
         return instance.get(`/cards/card?cardsPack_id=${params.cardsPackId}&pageCount=${params.pageCount}&sortCards=${params.sortNumber}${params.sortName}&cardQuestion=${params.search}`);
     },
     addCard(params:{cardsPack_id: string, question: string, answer:string}){
-        debugger
         return  instance.post(`/cards/card`, {card: {cardsPack_id:params.cardsPack_id, question:params.question, answer:params.answer}})
     },
     deleteCard(params:{cardId: string}){
@@ -23,7 +22,16 @@ export const cardsAPI = {
     updateCard(params:{cardId: string, newQuestion?: string}){
         return instance.put(`/cards/card`, {card: {_id:params.cardId, question:params.newQuestion}})
     },
+    gradeCard: (payload: GradeCardPayload) => {
+        return instance.put("/cards/grade", { ...payload });
+    },
 }
 
 export type SortNumberType = 0 | 1 
 export type SortNameType = 'question' | 'answer' | 'updated' | 'grade'
+
+
+export type GradeCardPayload = {
+    grade: number;
+    card_id: string;
+};

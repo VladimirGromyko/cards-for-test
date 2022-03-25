@@ -12,6 +12,8 @@ import CardsPage from '../pages/MainPage/PackList/Cards/CardsPage';
 import Registration from "../pages/p1-registration/Registration";
 import LoginPage from "../pages/p2-login/LoginPage";
 import {ProfilePacksPage} from "../pages/MainPage/PackList/ProfilePacksPage";
+import { LearnPage } from '../pages/learn/LearnPage';
+
 
 const MainRoutes = () => {
     return (
@@ -31,6 +33,7 @@ const MainRoutes = () => {
                        element={<h2 style={{textAlign: "center"}}><PasswordRecoveryPage/></h2>}/>
                 <Route path={PATH.PACKS} element={<h2 style={{textAlign: "center"}}><PacksPage/></h2>}/>
                 <Route path={PATH.CARDS} element={<h2 style={{textAlign: "center"}}><CardsPage/></h2>}/>
+                <Route path={PATH.PACK_LIST_LEARN} element={<h2 style={{textAlign: "center"}}><LearnPage/></h2>}/>
                 <Route path={'/404'} element={<h2 style={{textAlign: "center"}}><Error404/></h2>}/>
                 <Route path='*' element={<Navigate to={'/404'}/>}/>
 

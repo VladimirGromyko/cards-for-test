@@ -1,5 +1,6 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
+import React, {ChangeEvent, CSSProperties, useCallback, useEffect, useState} from 'react'
 import cardsStyle from './CardsTable.module.css'
+import s from "../../../p3-pass-recovery/PassRecovery.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {cardsAPI, SortNameType, SortNumberType} from "../../../../../m3-dal/cards-api";
 import {AppStoreType} from "../../../../../m2-bll/store";
@@ -7,6 +8,7 @@ import {addCardTC, CardType, deleteCardTC} from "../../../../../m2-bll/cardsRedu
 import {CardItem} from "../CardItem";
 import SuperInputText from "../../../../common/c2-SuperInput/SuperInputText";
 import SuperButton from "../../../../common/c1-SuperButton/SuperButton";
+import {AddCardModal} from "../../../../../../n2-features/f2-modals/AddCardModal";
 
 export type CardsTablePropsType = {
     getCards: (packId:string, sortNumber?:SortNumberType, sortName?: SortNameType)=> void
@@ -18,8 +20,10 @@ const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
     const cardsIsGot = useSelector<AppStoreType, CardType[]>(state => state.cards1.cards)
     const dispatch = useDispatch()
 
-    const [quest, setQuest] = useState('')
-    const [answer, setAnswerer] = useState('')
+    
+    const [show, setShow] = useState(false);
+    const [deleteShow, setDeleteShow] = useState(false)
+    const [editShow, setEditShow] = useState(false)
 
     const getCards = useCallback((sortNumber?:SortNumberType, sortName?: SortNameType) => {
         if (packId) {
@@ -30,37 +34,34 @@ const CardsTable = ({packId, ...props}: CardsTablePropsType) => {
     const onClickGetCards = () => {
         getCards()
     }
-    const onClickAddCards = () => {
-        if (packId) {
-            dispatch(addCardTC({packId, quest, answer}))
-        }
-    }
 
-    const onClickDeleteCards = (cardId: string) => {
-            dispatch(deleteCardTC(cardId))
-    }
 
-    const onQuestionInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setQuest(e.currentTarget.value)
-    }
-    const onAnswerInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setAnswerer(e.currentTarget.value)
-    }
+
+
+
 
     return (
         <div className={cardsStyle.container}>
             {
                 cardsIsGot.map(card => {
-                    return <CardItem card={card} 
-                    onClickDeleteCards={onClickDeleteCards}/>
+                    return <CardItem
+                        card={card}
+                        show={deleteShow}
+                        setShow={setDeleteShow}
+                        editShow={editShow}
+                        setEditShow={setEditShow}/>
                 })
             }
-            <SuperInputText type='text' onChange={onQuestionInputChange}/>
-            <SuperInputText type='text' onChange={onAnswerInputChange}/>
+            
             <SuperButton onClick={onClickGetCards}>get card</SuperButton>
-            <SuperButton onClick={onClickAddCards}>add card</SuperButton>
+            <AddCardModal show={show} setShow={setShow} packId={packId}/>
         </div>
     );
 };
 
 export default CardsTable;
+
+
+
+
+

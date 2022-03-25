@@ -25,6 +25,10 @@ import {AddPack} from "./AddPack";
 import useDebounce from "../../../../../n2-features/f1-hooks/useDebounce";
 import {PATH} from "../../../routes/Paths";
 
+import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
+import {initializeMainTC} from "../../../../m2-bll/loginReducer";
+import ModalQuestionContainer from "../../../../../n2-features/f3-utils/Modal/ModalContainer";
+import {LearnPage} from "../../learn/LearnPage";
 
 
 export const PacksPage = () => {
@@ -76,6 +80,12 @@ export const PacksPage = () => {
     const onSearchHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setSearch(e.currentTarget.value)
     }
+    // useEffect(()=>{
+    //     dispatch(initializeMainTC())
+    // },[])
+    // useEffect(()=>{
+
+    // },[])
 
     const onSetAllPressHandler = useCallback(() => {
         if (!isLoggedIn) {
@@ -109,9 +119,9 @@ export const PacksPage = () => {
 
     }, [dispatch,])
 
-    const addPackList = useCallback(() => {
-        dispatch(showAddPackAC(true))
-    }, [dispatch])
+    // const addPackList = useCallback(() => {
+    //     dispatch(showAddPackAC(true))
+    // }, [dispatch])
 
     const addPack = useCallback((pack: string) => {
         dispatch(addPacksTC({cardsPack: {name: pack}}))
@@ -119,8 +129,8 @@ export const PacksPage = () => {
         // console.log('New pack: ', pack)
     }, [dispatch,])
 
-    const hideAddPack = () => {
-        dispatch(showAddPackAC(false))
+    const hideAddPack = (value:boolean) => {
+        dispatch(showAddPackAC(value))
     }
     const deletePackList = useCallback((packName: string, packId: string) => {
         dispatch(pickDeletePackAC(packName, packId))
@@ -143,7 +153,6 @@ export const PacksPage = () => {
 
     const editPack = useCallback((packId: string, namePack: string) => {
         dispatch(editPackTC({cardsPack: {_id: packId, name: namePack}}))
-        // dispatch(showEditPackAC(true))
     }, [dispatch])
 
     const hideEditPack = useCallback(() => {
@@ -151,8 +160,8 @@ export const PacksPage = () => {
     }, [dispatch])
 
     const learnPack = useCallback((packId: string) => {
-        navigate('/packs/' + packId)
-        // navigate(PATH.CARDS+packId)
+        // navigate('/packs/' + packId)
+        navigate('/main/packs-learn/'+ packId)
     }, [navigate])
 
     const onPageChanged = (pageNumber: number) => {
@@ -194,16 +203,27 @@ export const PacksPage = () => {
                     <div className={commonPacksStyle.inputPlusButton}>
                         <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching' onChange={onSearchHandler}/>
                         <span>
-                                    <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
+                              <div>
+                                  <ModalQuestionContainer
+                                      addPack={addPack}
+                                      hideAddPack={hideAddPack}
+                                      isLoading={isLoading}
+                                      isShownAddPack ={isShownAddPack}
+                                  />
 
-                </span>
+                                  {/*<SuperButton onClick={addPackList}>Add new pack</SuperButton>*/}
+                              </div>
+                        </span>
                     </div>
-                    {isShownAddPack && <AddPack
-                        addPack={addPack}
-                        hideAddPack={hideAddPack}
-                        isLoading={isLoading}/>}
+                    {/*{isShownAddPack &&*/}
+                    {/*<AddPack*/}
+                    {/*    addPack={addPack}*/}
+                    {/*    hideAddPack={hideAddPack}*/}
+                    {/*    isLoading={isLoading}/>}*/}
                     <HeaderPacks/>
-                    {packs && !isShownAddPack && <PacksTable
+
+                    {/*{packs && !isShownAddPack && <PacksTable*/}
+                    {packs && <PacksTable
                         deletePack={deletePack}
                         deletePackList={deletePackList}
                         hideDeletePack={hideDeletePack}
