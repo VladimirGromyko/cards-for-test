@@ -1,7 +1,7 @@
 .wrapper_header {
     background-color: #e5ecff;
 }
-
+/*пробуем дизайн*/
 .wrapper_header_table {
     display: grid;
     grid-template-areas: "1 2 3 4 5";
