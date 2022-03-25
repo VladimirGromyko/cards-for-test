@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     position: relative;
-    width: 1008px;
+    min-width: 1008px;
     height: 100%;
     background: #FEFEFF;
     border-radius: 8px;

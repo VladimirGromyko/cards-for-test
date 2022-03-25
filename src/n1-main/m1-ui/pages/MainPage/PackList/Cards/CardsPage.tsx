@@ -67,7 +67,7 @@ const CardsPage = () => {
                 <div style={{width: '100%'}}>
                     {isLoading === "loading" && <div className={l.loader07}></div>}
                 </div>
-                <div>
+                <div style={{width: '1008px'}}>
                     <h3>Pack name</h3>
                     <div className={packsStyle.search}>
                         <SuperInputText onChange={onSearchInputChange}
