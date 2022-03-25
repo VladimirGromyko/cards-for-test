@@ -27,6 +27,7 @@ import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
 import {AddPack} from "./AddPack";
 import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
 import {initializeMainTC} from "../../../../m2-bll/loginReducer";
+import ModalQuestionContainer from "../../../../../n2-features/f3-utils/Modal/ModalContainer";
 
 
 export const PacksPage = () => {
@@ -63,9 +64,9 @@ export const PacksPage = () => {
     //     dispatch(initializeMainTC())
     // },[])
     // useEffect(()=>{
-        if (!isLoggedIn) {
-            navigate(PATH.LOGIN)
-        }
+    if (!isLoggedIn) {
+        navigate(PATH.LOGIN)
+    }
     // },[])
 
     const onSetAllPressHandler = useCallback(() => {
@@ -98,9 +99,9 @@ export const PacksPage = () => {
 
     }, [dispatch,])
 
-    const addPackList = useCallback(() => {
-        dispatch(showAddPackAC(true))
-    }, [dispatch])
+    // const addPackList = useCallback(() => {
+    //     dispatch(showAddPackAC(true))
+    // }, [dispatch])
 
     const addPack = useCallback((pack: string) => {
         dispatch(addPacksTC({cardsPack: {name: pack}}))
@@ -108,9 +109,12 @@ export const PacksPage = () => {
         // console.log('New pack: ', pack)
     }, [dispatch,])
 
-    const hideAddPack = () => {
-        dispatch(showAddPackAC(false))
+    const hideAddPack = (value:boolean) => {
+        dispatch(showAddPackAC(value))
     }
+    // const hideAddPack = () => {
+    //     dispatch(showAddPackAC(false))
+    // }
     const deletePackList = useCallback((packName: string, packId: string) => {
         dispatch(pickDeletePackAC(packName, packId))
         dispatch(showDeletePackAC(true))
@@ -120,7 +124,7 @@ export const PacksPage = () => {
     const deletePack = useCallback((packName: string, packId: string) => {
         // console.log("Удалить колоду:", packName, " с Id: ", packId)
         // dispatch()
-        dispatch(deletePackTC({params:{id: packId}}))
+        dispatch(deletePackTC({params: {id: packId}}))
     }, [])
     const hideDeletePack = () => {
         dispatch(showDeletePackAC(false))
@@ -172,7 +176,7 @@ export const PacksPage = () => {
                 <div className={commonPacksStyle.ariaA}>
                     <div style={{textAlign: 'start', marginBottom: '7px'}}
                          className={commonPacksStyle.contentAllMy}>
-                       <p>Show Packs cards</p>
+                        <p>Show Packs cards</p>
                         <div className={commonPacksStyle.allMyWrapper}>
                             <div className={commonPacksStyle.my} onClick={onSetMyPressHandler}>My</div>
                             <div className={commonPacksStyle.all} onClick={onSetAllPressHandler}>All</div>
@@ -192,16 +196,27 @@ export const PacksPage = () => {
                     <div className={commonPacksStyle.inputPlusButton}>
                         <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching'/>
                         <span>
-                                    <div><SuperButton onClick={addPackList}>Add new pack</SuperButton></div>
+                              <div>
+                                  <ModalQuestionContainer
+                                      addPack={addPack}
+                                      hideAddPack={hideAddPack}
+                                      isLoading={isLoading}
+                                      isShownAddPack ={isShownAddPack}
+                                  />
 
-                </span>
+                                  {/*<SuperButton onClick={addPackList}>Add new pack</SuperButton>*/}
+                              </div>
+                        </span>
                     </div>
-                    {isShownAddPack && <AddPack
-                        addPack={addPack}
-                        hideAddPack={hideAddPack}
-                        isLoading={isLoading}/>}
+                    {/*{isShownAddPack &&*/}
+                    {/*<AddPack*/}
+                    {/*    addPack={addPack}*/}
+                    {/*    hideAddPack={hideAddPack}*/}
+                    {/*    isLoading={isLoading}/>}*/}
                     <HeaderPacks/>
-                    {packs && !isShownAddPack && <PacksTable
+
+                    {/*{packs && !isShownAddPack && <PacksTable*/}
+                    {packs && <PacksTable
                         deletePack={deletePack}
                         deletePackList={deletePackList}
                         hideDeletePack={hideDeletePack}

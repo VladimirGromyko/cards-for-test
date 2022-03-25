@@ -186,10 +186,10 @@ export const ProfilePacksPage = () => {
                     <div className={commonPacksStyle.inputPlusButton}>
                         <SuperInputText style={{width: '100%'}} placeholder='Enter cardPacks name for searching'/>
                     </div>
-                    {isShownAddPack && <AddPack
-                        addPack={addPack}
-                        hideAddPack={hideAddPack}
-                        isLoading={isLoading}/>}
+                    {/*{isShownAddPack && <AddPack*/}
+                    {/*    addPack={addPack}*/}
+                    {/*    // hideAddPack={hideAddPack}*/}
+                    {/*    isLoading={isLoading}/>}*/}
                     <HeaderPacks/>
                     {packs && !isShownAddPack && <PacksTable
                         deletePack={deletePack}
