@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {RegisterActionType, registerReducer} from './registerReducer';
-import thunkMiddleware, { ThunkAction } from 'redux-thunk'
+import thunkMiddleware, {ThunkAction} from 'redux-thunk'
 import {themeReducer} from "./themeReducer";
 import {cardsReducer} from "./cardsReducer";
 import {LoginActionsType, loginReducer} from "./loginReducer";
@@ -13,7 +13,7 @@ import {packsReducer, PacksReducerType} from "./packsReducer";
 
 const reducers = combineReducers({
     cards: cardsReducer,
-    cards1:cardsReducer1,
+    cards1: cardsReducer1,
     theme: themeReducer,
     register: registerReducer,
     login: loginReducer,
@@ -21,8 +21,7 @@ const reducers = combineReducers({
     auth1: authReducer1,
     loading: loadingReducer,
     error: errorReducer,
-    packs: packsReducer,
-
+    packs: packsReducer
 })
 const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 export default store
@@ -36,7 +35,6 @@ export type AppActionType = CardsActionType
     | ResponseErrorACType
     | authReducerType
     | NewPassActionsType
-
 
 
 export type ThunkType = ThunkAction<void, AppStoreType, unknown, AppActionType>

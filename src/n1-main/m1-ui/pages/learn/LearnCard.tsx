@@ -1,17 +1,16 @@
-import React, { useState } from "react"
-import { cardsType } from "../../../m2-bll/cardsReducer"
-import { useNavigate } from "react-router-dom"
+import React, {useState} from "react"
+import {cardsType} from "../../../m2-bll/cardsReducer"
+import {useNavigate} from "react-router-dom"
 import SuperRadio from "../../../m1-ui/common/c4-SuperRadio/SuperRadio"
 import s from "./Card.module.css"
 import SuperButton from "../../../m1-ui/common/c1-SuperButton/SuperButton"
-import { PATH } from "../../routes/Paths"
-import { useDispatch } from "react-redux"
-import { gradeCardTC } from "../../../m2-bll/cardsReducer1"
+import {PATH} from "../../routes/Paths"
+import {useDispatch} from "react-redux"
+import {gradeCardTC} from "../../../m2-bll/cardsReducer1"
 
 export const LearnCard = ({
-    currentCard,
-    nextCardHandler,
-}: CardPropsType) => {
+                              currentCard
+                          }: CardPropsType) => {
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
@@ -27,20 +26,20 @@ export const LearnCard = ({
 
     if (option === 'Did not know') {
         grade = 1
-        }
-        if (option === 'Forgot') {
-            grade = 2
-        }
-        if (option === 'A lot of thought') {
-            grade = 3
-        }
-        if (option === 'Confused') {
-            grade = 4
-        }
-        if (option === 'Knew the answer') {
-            grade = 5
-        }
-       
+    }
+    if (option === 'Forgot') {
+        grade = 2
+    }
+    if (option === 'A lot of thought') {
+        grade = 3
+    }
+    if (option === 'Confused') {
+        grade = 4
+    }
+    if (option === 'Knew the answer') {
+        grade = 5
+    }
+
 
     const handleNext = () => {
         setOption("Did not know")
@@ -53,7 +52,7 @@ export const LearnCard = ({
     return (
         <div className={s.card}>
             <div className={s.wrapper_text}>
-                <h3>Question:</h3>
+                <h4>Question:</h4>
                 <p>{currentCard.question}</p>
             </div>
             {!isShowed && (
@@ -76,7 +75,7 @@ export const LearnCard = ({
                 {isShowed && (
                     <div className={s.answer}>
                         <div className={`${s.wrapper_answer} ${s.wrapper_text}`}>
-                            <h3>Answer:</h3>
+                            <h4>Answer:</h4>
                             <p>{currentCard.answer}</p>
                         </div>
                         <div>
@@ -106,12 +105,12 @@ export const LearnCard = ({
                 )}
             </div>
         </div>
+
     )
 }
 
 
 export type CardPropsType = {
     currentCard: cardsType
-    nextCardHandler: (grade: number) => void
     navigateBackPage: () => void
 }

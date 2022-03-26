@@ -33,7 +33,7 @@ const initState: CardsStateType = {
 
 
 export const cardsReducer1 = (state = initState,
-                             action: CardsActionType): CardsStateType => {
+                              action: CardsActionType): CardsStateType => {
     switch (action.type) {
         case "GET-ALL-CARD":{
             return  {...state, cards: action.cards}
@@ -107,7 +107,7 @@ export const getCardsBySearchTC = (params:{packId:string,search:string }):ThunkT
     dispatch(loadingAC('loading'))
     cardsAPI.getAllCards({
         cardsPackId: params.packId,
-        pageCount: '1000', 
+        pageCount: '1000',
         search: params.search,
         sortNumber: getState().cards1.sortNumber,
         sortName: getState().cards1.sortName
@@ -126,11 +126,11 @@ export const getCardsBySearchTC = (params:{packId:string,search:string }):ThunkT
 export const addCardTC = (params:{packId:string, quest:string, answer:string}):ThunkType => (dispatch, getState) => {
     dispatch(loadingAC('loading'))
     cardsAPI.addCard({cardsPack_id:params.packId, question: params.quest, answer:params.answer}).then(res => {
-        dispatch(getCardsTC({packId:params.packId}))
+            dispatch(getCardsTC({packId:params.packId}))
         }
     ).catch((err) => {
         dispatch(loadingAC('succeeded'))
-        
+
     })
 }
 export const deleteCardTC = (cardId:string):ThunkType => (dispatch, getState) => {
@@ -139,7 +139,17 @@ export const deleteCardTC = (cardId:string):ThunkType => (dispatch, getState) =>
         dispatch(getCardsTC({packId:getState().cards1.cards[0].cardsPack_id}))
     }).catch((err) => {
         dispatch(loadingAC('succeeded'))
-        
+
+    })
+}
+
+export const editCardTC = (cardId:string, newQuestion:string):ThunkType => (dispatch, getState) => {
+    dispatch(loadingAC('loading'))
+    cardsAPI.updateCard({cardId, newQuestion}).then(res=>{
+        dispatch(getCardsTC({packId:getState().cards1.cards[0].cardsPack_id}))
+    }).catch((err) => {
+        dispatch(loadingAC('succeeded'))
+
     })
 }
 
@@ -171,9 +181,9 @@ type AddCardActionType = ReturnType<typeof addCardAC>
 type DeleteCardACActionType = ReturnType<typeof deleteCardAC>
 type setCardGradeType = ReturnType<typeof setCardGradeAC>
 
-export type CardsActionType = GetAllCardActionType 
-| AddCardActionType 
-| DeleteCardACActionType 
-| SortCardsActionType 
-| SearchCardsActionType
-| setCardGradeType
+export type CardsActionType = GetAllCardActionType
+    | AddCardActionType
+    | DeleteCardACActionType
+    | SortCardsActionType
+    | SearchCardsActionType
+    | setCardGradeType
