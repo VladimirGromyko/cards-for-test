@@ -12,13 +12,15 @@ function Header() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const logOutHandler = () => {
-        dispatch(logoutUserTC())
-    }
-    useEffect(() => {
-        if (!isLoggedIn) {
-            navigate(PATH.LOGIN)
+        if (isLoggedIn) {
+            dispatch(logoutUserTC())
         }
-    }, [isLoggedIn, navigate])
+    }
+    // useEffect(() => {
+    //     if (!isLoggedIn) {
+    //         navigate(PATH.LOGIN)
+    //     }
+    // }, [isLoggedIn, navigate])
 
     const onPackListHandler = () => {
         if (!isLoggedIn) {
@@ -29,7 +31,7 @@ function Header() {
     const onProfileHandler = () => {
         if (!isLoggedIn) {
             return PATH.LOGIN
-        } else return PATH.TEST
+        } else return PATH.PROFILE
     }
 
     return (
@@ -63,7 +65,7 @@ function Header() {
                     {/*    <NavLink to={PATH.REGISTRATION} className={''}>Registration</NavLink>*/}
                     {/*</li>*/}
                     <li className={``}>
-                        <NavLink to={''} className={''} onClick={logOutHandler}>LogOut</NavLink>
+                        <NavLink to={PATH.LOGIN} className={''} onClick={logOutHandler}>LogOut</NavLink>
                     </li>
                     {/*<li className={``}>*/}
                     {/*    <NavLink to={PATH.PACKS} className={''}>Packs</NavLink>*/}

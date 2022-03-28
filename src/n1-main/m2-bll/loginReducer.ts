@@ -74,6 +74,7 @@ export const getAuthUserDataTC = (email: string, password: string, rememberMe: b
 }
 
 export const logoutUserTC = () => (dispatch: Dispatch) => {
+    dispatch(loadingAC('loading'))
     authAPI.logout()
         .then(response => {
                 console.log(response.data)
@@ -82,6 +83,8 @@ export const logoutUserTC = () => (dispatch: Dispatch) => {
         ).catch((e) => {
         const error = e.response ? e.response.data.error : (e.message + ", more details in the console")
         console.log(error)
+    }).finally(() => {
+        dispatch(loadingAC('succeeded'))
     })
 }
 export const initializeMainTC = () => (dispatch: Dispatch<LoginActionsType>) => {
