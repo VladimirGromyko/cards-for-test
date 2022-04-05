@@ -10,6 +10,7 @@ import {errorReducer, ResponseErrorACType} from "./errorReducer";
 import {authReducer1, authReducerType} from "./authReducer1";
 import {CardsActionType, cardsReducer1} from "./cardsReducer1";
 import {packsReducer, PacksReducerType} from "./packsReducer";
+import {answeredReducer, ResponseConfirmACType} from "./answeredReducer";
 
 const reducers = combineReducers({
     cards: cardsReducer,
@@ -21,7 +22,8 @@ const reducers = combineReducers({
     auth1: authReducer1,
     loading: loadingReducer,
     error: errorReducer,
-    packs: packsReducer
+    packs: packsReducer,
+    confirm: answeredReducer,
 })
 const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 export default store
@@ -35,6 +37,7 @@ export type AppActionType = CardsActionType
     | ResponseErrorACType
     | authReducerType
     | NewPassActionsType
+    | ResponseConfirmACType
 
 
 export type ThunkType = ThunkAction<void, AppStoreType, unknown, AppActionType>

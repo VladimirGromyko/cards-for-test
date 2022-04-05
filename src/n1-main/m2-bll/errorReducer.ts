@@ -1,9 +1,9 @@
-export type PageOfResponseError = 'changePas' | 'passwordRec' | 'setPacks'
+export type PageOfResponse = 'changePas' | 'passwordRec' | 'setPacks'
     | 'editPack' | 'addPack' | 'deletePack' |''
 
 const initState = {
     isResponseError: false,
-    pageOfError: '' as PageOfResponseError,
+    pageOfError: '' as PageOfResponse,
     errorMessage: ''
 }
 export type ResponseErrorStateType = typeof initState
@@ -24,7 +24,7 @@ export const errorReducer = (state = initState,
 }
 
 export const responseErrorAC = (isResponseError: boolean,
-                                pageOfError: PageOfResponseError,
+                                pageOfError: PageOfResponse,
                                 errorMessage: string) =>
     ({type: 'RESPONSE-ERROR', isResponseError, pageOfError, errorMessage} as const)
 

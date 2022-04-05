@@ -4,6 +4,7 @@ import SuperButton from '../../../common/c1-SuperButton/SuperButton'
 import {CardPacksType} from "../../../../m3-dal/packs-api";
 import {PATH} from "../../../routes/Paths";
 import {useNavigate} from "react-router-dom";
+import {changeDateView} from "../../../../../n2-features/f3-utils/changeDateView";
 
 type TableItemPropsType = {
     deletePackList: (packName: string, packId: string) => void
@@ -24,7 +25,6 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
 
     const onLearnPressHandler = useCallback(() => {
         learnPack(pack._id)
-
     }, [learnPack, pack._id])
 
     return (
@@ -32,10 +32,10 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
             <div style={{cursor: "pointer"}} onClick={() => navigate('/main/packs/' + pack._id)}>{pack.name}</div>
 
             <div>{pack.cardsCount}</div>
-            <div>{pack.created}</div>
-            <div>{pack.user_id}</div>
+            <div>{changeDateView(pack.created)}</div>
+            <div>{pack.user_name}</div>
             <div>
-                <SuperButton style={{minWidth: "47px"}}onClick={onDeletePressHandler}>Delete</SuperButton>
+                <SuperButton style={{minWidth: "47px",backgroundColor:'red'}}onClick={onDeletePressHandler}>Delete</SuperButton>
                 <SuperButton style={{minWidth: "47px"}} onClick={onEditPressHandler}>Edit</SuperButton>
                 <SuperButton style={{minWidth: "47px"}} onClick={onLearnPressHandler}>Learn</SuperButton>
             </div>

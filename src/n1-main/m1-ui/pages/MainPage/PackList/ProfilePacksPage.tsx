@@ -31,13 +31,14 @@ export const ProfilePacksPage = () => {
 
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
-    // const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
+    const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const packs = useSelector<AppStoreType, PacksGetResponseDataType>(state => state.packs.packsData)
     const currentPage = useSelector<AppStoreType, number>(state => state.packs.currentPage)
     const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     const user = useSelector<AppStoreType, string | undefined>(state => state.login.user?.name)
 
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
+
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
         state.packs.isShownAddPack)
@@ -57,6 +58,7 @@ export const ProfilePacksPage = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
 
     // const onSetAllPressHandler = useCallback(() => {
     //     dispatch(setPacksDataTC({
@@ -132,27 +134,13 @@ export const ProfilePacksPage = () => {
     }
 
     const onPageChanged = (pageNumber: number) => {
-        console.log("pageNumber: ", pageNumber)
+        // console.log("pageNumber: ", pageNumber)
         dispatch(setCurrentPageTC(pageNumber))
     }
 
     return (
         <div className={commonPacksStyle.wrapper}>
-            {/*<nav>*/}
-            {/*    <ul className={s.menu}>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
-            {/*        </li>*/}
-            {/*        <li className={``}>*/}
-            {/*            <NavLink to={PATH.TEST} className={''}>Profile</NavLink>*/}
-            {/*        </li>*/}
-            {/*        /!*<li>*!/*/}
-            {/*        /!*    <NavLink to={`/packs/623056734348a50004eb4dc3`}>cards</NavLink>*!/*/}
-            {/*        /!*</li>*!/*/}
-            {/*    </ul>*/}
-            {/*</nav>*/}
 
-            {/*ПРАВАЯ СТОРОНА*/}
             {/*ЛЕВАЯ СТОРОНА*/}
             <div className={commonPacksStyle.TableWrapper}>
                 <div style={{width: '100%'}}>
@@ -184,30 +172,30 @@ export const ProfilePacksPage = () => {
                     <div className={commonPacksStyle.inputPlusButton}>
                         <SuperInputText style={{width: '100%'}} placeholder='Enter cardPacks name for searching'/>
                     </div>
-                    {isShownAddPack && <AddPack
-                        addPack={addPack}
-                        hideAddPack={hideAddPack}
-                        isLoading={isLoading}/>}
+                    {/*{isShownAddPack && <AddPack*/}
+                    {/*    addPack={addPack}*/}
+                    {/*    // hideAddPack={hideAddPack}*/}
+                    {/*    isLoading={isLoading}/>}*/}
                     <HeaderPacks/>
-                    {packs && !isShownAddPack && <PacksTable
-                        deletePack={deletePack}
-                        deletePackList={deletePackList}
-                        hideDeletePack={hideDeletePack}
-                        deletePackId={pickedDeletePack.packId}
-                        deletePackName={pickedDeletePack.packName}
-                        editPack={editPack}
-                        editPackList={editPackList}
-                        hideEditPack={hideEditPack}
-                        packId={pickedEditPack.packId}
-                        packName={pickedEditPack.packName}
-                        learnPack={learnPack}
-                        packs={packs}
-                        isLoading={isLoading}
-                        isShownEditPack={isShownEditPack}
-                        isShownDeletePack={isShownDeletePack}
-                        currentPage={currentPage}
-                        onPageChanged={onPageChanged}
-                    />}
+                    {/*{packs && !isShownAddPack && <PacksTable*/}
+                    {/*    deletePack={deletePack}*/}
+                    {/*    deletePackList={deletePackList}*/}
+                    {/*    hideDeletePack={hideDeletePack}*/}
+                    {/*    deletePackId={pickedDeletePack.packId}*/}
+                    {/*    deletePackName={pickedDeletePack.packName}*/}
+                    {/*    editPack={editPack}*/}
+                    {/*    editPackList={editPackList}*/}
+                    {/*    hideEditPack={hideEditPack}*/}
+                    {/*    packId={pickedEditPack.packId}*/}
+                    {/*    packName={pickedEditPack.packName}*/}
+                    {/*    learnPack={learnPack}*/}
+                    {/*    packs={packs}*/}
+                    {/*    isLoading={isLoading}*/}
+                    {/*    isShownEditPack={isShownEditPack}*/}
+                    {/*    isShownDeletePack={isShownDeletePack}*/}
+                    {/*    currentPage={currentPage}*/}
+                    {/*    onPageChanged={onPageChanged}*/}
+                    {/*/>}*/}
                 </span>
             </div>
         </div>

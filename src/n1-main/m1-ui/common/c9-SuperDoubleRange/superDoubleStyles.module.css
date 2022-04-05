@@ -1,10 +1,11 @@
 .wrapper{
     position: relative;
-    width: 90%;
+    width: 100%;
     background-color: #e5ecff;
     padding: 10px;
     border-radius: 10px;
 }
+
 .container{
     position: relative;
     width: 100%;
@@ -105,10 +106,12 @@ input.range:active::-webkit-slider-thumb{
 }
 
 .mainWrapper{
-    display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
-    justify-items: center;
-    padding: 10px;
+    justify-content: space-between;
+}
+.numbersWrapper{
+    display: flex;
+    width: 100%;
+ justify-content: space-between;
 }
 .title{
     font-size: 20px;

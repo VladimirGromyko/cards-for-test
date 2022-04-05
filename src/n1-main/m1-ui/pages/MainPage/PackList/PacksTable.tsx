@@ -2,22 +2,22 @@ import React from "react";
 import {PackItem} from "./PackItem";
 import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
 import l from "../../../common/c7-Loading/loader07.module.css";
-import EditPack from "./EditPack";
 import {LoadingStatusType} from "../../../../m2-bll/loadingReducer";
-import {DeletePack} from "./DeletePack";
 import Paginator from "../../../common/c9-Pagination/Paginator";
+import ModalDeleteContainer from "../../../../../n2-features/f3-utils/Modal/ModalDeleteContainer";
+import ModalEditContainer from "../../../../../n2-features/f3-utils/Modal/ModalEditContainer";
 
 type PacksTableType = {
     deletePack: (packName: string, pack: string) => void
     deletePackList: (packName: string, packId: string) => void
-    hideDeletePack: () => void
+    showDeletePack: (value: boolean) => void
     deletePackId: string
     deletePackName: string
     editPack: (packId: string, namePack: string) => void
     editPackList: (packName: string, packId: string) => void
-    hideEditPack: () => void
-    packId: string
-    packName: string
+    showEditPack: (value: boolean) => void
+    editPackId: string
+    editPackName: string
     learnPack: (packId: string) => void
     packs: PacksGetResponseDataType
     isLoading: LoadingStatusType
@@ -29,39 +29,37 @@ type PacksTableType = {
 
 
 export const PacksTable = ({
-                               deletePack, deletePackList, hideDeletePack, deletePackId,
-                               deletePackName, editPack, editPackList, hideEditPack,
-                               packId, packName, learnPack, packs, isLoading,
-                               isShownEditPack, isShownDeletePack, //currentPage,
-                               onPageChanged
+                               deletePack, deletePackList, showDeletePack,
+                               deletePackId,
+                               deletePackName, editPack, editPackList, showEditPack,
+                               editPackId, editPackName, learnPack, packs, isLoading,
+                               isShownEditPack, isShownDeletePack,
+                               currentPage, onPageChanged
                            }: PacksTableType) => {
 
     return (
         <div>
             {isLoading === "loading" && <div className={l.loader07}></div>}
-            {isShownEditPack && !isShownDeletePack && (
-                <EditPack
-                    editPack={editPack}
-                    packId={packId}
-                    packName={packName}
-                    hideEditPack={hideEditPack}
-                    isLoading={isLoading}
-                />)}
-            {isShownDeletePack && !isShownEditPack &&
-            (<DeletePack
+
+            <ModalEditContainer
+                editPack={editPack}
+                editPackId={editPackId}
+                editPackName={editPackName}
+                showPack={showEditPack}
+                isLoading={isLoading}
+                isShownPack={isShownEditPack}
+            />
+
+            <ModalDeleteContainer
                 deletePack={deletePack}
-                hideDeletePack={hideDeletePack}
                 deletePackId={deletePackId}
                 deletePackName={deletePackName}
-                isLoading={isLoading}/>)}
-            {!isShownEditPack && !isShownDeletePack &&
-            (<>
-                <Paginator cardPacksTotalCount={packs.cardPacksTotalCount}
-                           pageCount={packs.pageCount}
-                           pageSize={10}
-                           currentPage={packs.page}
-                           onPageChanged={onPageChanged}
-                           portionSize={undefined}/>
+                showPack={showDeletePack}
+                isLoading={isLoading}
+                isShownPack={isShownDeletePack}
+            />
+
+            <>
 
                 {packs.cardPacks.map((pack) => {
                         return (
@@ -75,8 +73,13 @@ export const PacksTable = ({
                         )
                     }
                 )}
-            </>)
-            }
+                <Paginator cardPacksTotalCount={packs.cardPacksTotalCount}
+                           pageCount={packs.pageCount}
+                           pageSize={10}
+                           currentPage={packs.page}
+                           onPageChanged={onPageChanged}
+                           portionSize={undefined}/>
+            </>
         </div>
     )
 }

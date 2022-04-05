@@ -8,17 +8,23 @@ import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {useSelector} from "react-redux";
 import {AppStoreType} from "../../../../m2-bll/store";
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
-
+import {ResponseConfirmStateType} from "../../../../m2-bll/answeredReducer";
+import {confirmResponse} from "../../../../../n2-features/f0-test/confirmResponse";
+import ModalAddContainer from "../../../../../n2-features/f3-utils/Modal/ModalAddContainer";
 
 
 type AddPackType = {
-    addPack: (pack:string) => void
-    hideAddPack: () => void
-    isLoading: LoadingStatusType
+    addPack: (pack: string) => void
+    // hideAddPack: () => void
+    // hideAddPack: () => void
+    isLoading: LoadingStatusType,
+    setFalse: () => void
 }
-export const AddPack = ({addPack, hideAddPack, isLoading}: AddPackType) => {
+export const AddPack = ({addPack, isLoading, setFalse}: AddPackType) => {
+// export const AddPack = ({addPack, hideAddPack, isLoading}: AddPackType) => {
 
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
+    const confirmRes = useSelector<AppStoreType, ResponseConfirmStateType>(state => state.confirm)
 
     const [newPack, setNewPack] = useState<string>('')
 
@@ -27,9 +33,13 @@ export const AddPack = ({addPack, hideAddPack, isLoading}: AddPackType) => {
         addPack(trimNewPack)
     }, [addPack, newPack])
 
+
     const OnCancelClick = useCallback(() => {
-        hideAddPack()
-    }, [hideAddPack])
+        setFalse()
+    }, [setFalse])
+    // const OnCancelClick = useCallback(() => {
+    //     hideAddPack()
+    // }, [hideAddPack])
 
 
     return (
@@ -39,6 +49,7 @@ export const AddPack = ({addPack, hideAddPack, isLoading}: AddPackType) => {
             </div>
             <div>Add pack element</div>
             <div>Name pack</div>
+
             <SuperInputText value={newPack}
                             onChangeText={setNewPack}
                             onEnter={onSaveClick}
@@ -48,6 +59,12 @@ export const AddPack = ({addPack, hideAddPack, isLoading}: AddPackType) => {
             />
             <SuperButton onClick={OnCancelClick}>Cancel</SuperButton>
             <SuperButton onClick={onSaveClick}>Save</SuperButton>
+            {confirmRes.isResponseConfirm && <div style={{color: 'blue'}}>
+                {confirmResponse(confirmRes, 'addPack')}
+            </div>}
+            {/*{errorRes.isResponseError && <div style={{color: 'red'}}>*/}
+            {/*    {errorResponse(errorRes, 'addPack')}*/}
+            {/*</div>}*/}
         </div>
     )
 }

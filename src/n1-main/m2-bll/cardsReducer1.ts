@@ -153,6 +153,16 @@ export const editCardTC = (cardId:string, newQuestion:string):ThunkType => (disp
     })
 }
 
+export const editCardTC = (cardId:string, newQuestion:string):ThunkType => (dispatch, getState) => {
+    dispatch(loadingAC('loading'))
+    cardsAPI.updateCard({cardId, newQuestion}).then(res=>{
+        dispatch(getCardsTC({packId:getState().cards1.cards[0].cardsPack_id}))
+    }).catch((err) => {
+        dispatch(loadingAC('succeeded'))
+
+    })
+}
+
 export const gradeCardTC =
     (grade: number, cardId: string) => (dispatch: Dispatch) => {
         dispatch(loadingAC('loading'));

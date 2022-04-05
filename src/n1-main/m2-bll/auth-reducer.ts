@@ -25,7 +25,7 @@ export const changeUserNameAC = (name: string) =>
 export const changeUserNameTC = (name: string) => (dispatch: Dispatch<NewPassActionsType>) => {
 authAPI.updateUser(name)
     .then((res) => {
-        console.log('res updateUserNameTC: ', res.data)
+        // console.log('res updateUserNameTC: ', res.data)
         dispatch(changeUserNameAC(name))
     })
 }

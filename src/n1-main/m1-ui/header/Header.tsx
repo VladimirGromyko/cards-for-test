@@ -1,14 +1,37 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, {useEffect} from 'react'
+import {NavLink, useNavigate} from 'react-router-dom'
 import {PATH} from "../routes/Paths";
 import s from '../header/header.module.css'
 import {logoutUserTC} from "../../m2-bll/loginReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStoreType} from "../../m2-bll/store";
+import SuperButton from "../common/c1-SuperButton/SuperButton";
 
 function Header() {
+    const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const logOutHandler = () => {
-        dispatch(logoutUserTC())
+        if (isLoggedIn) {
+            dispatch(logoutUserTC())
+        }
+    }
+    // useEffect(() => {
+    //     if (!isLoggedIn) {
+    //         navigate(PATH.LOGIN)
+    //     }
+    // }, [isLoggedIn, navigate])
+
+    const onPackListHandler = () => {
+        if (!isLoggedIn) {
+            return PATH.LOGIN
+        } else return PATH.PACKS
+    }
+
+    const onProfileHandler = () => {
+        if (!isLoggedIn) {
+            return PATH.LOGIN
+        } else return PATH.PROFILE
     }
 
     return (
@@ -19,10 +42,11 @@ function Header() {
                     {/*    <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>*/}
                     {/*</li>*/}
                     <li className={``}>
-                        <NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>
+                        <NavLink to={onPackListHandler()} className={''}>Pack list</NavLink>
+                        {/*<NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
                     </li>
                     <li className={``}>
-                        <NavLink to={PATH.TEST} className={''}>Profile</NavLink>
+                        <NavLink to={onProfileHandler()} className={''}>Profile</NavLink>
                     </li>
 
                     {/*<li className={``}>*/}
@@ -41,7 +65,7 @@ function Header() {
                     {/*    <NavLink to={PATH.REGISTRATION} className={''}>Registration</NavLink>*/}
                     {/*</li>*/}
                     <li className={``}>
-                        <NavLink to={''} className={''} onClick={logOutHandler}>LogOut</NavLink>
+                        <NavLink to={PATH.LOGIN} className={''} onClick={logOutHandler}>LogOut</NavLink>
                     </li>
                     {/*<li className={``}>*/}
                     {/*    <NavLink to={PATH.PACKS} className={''}>Packs</NavLink>*/}
