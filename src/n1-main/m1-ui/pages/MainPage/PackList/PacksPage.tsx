@@ -29,7 +29,6 @@ import ModalAddContainer from "../../../../../n2-features/f3-utils/Modal/ModalAd
 
 export const PacksPage = () => {
 
-    debugger
 
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
@@ -41,6 +40,7 @@ export const PacksPage = () => {
     const user = useSelector<AppStoreType>(state => state.login.user)
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
     const [selectedAll, setSelectedAll] = useState<boolean>(true)
+    const [selectedMy, setSelectedMy] = useState<boolean>(false)
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
         state.packs.isShownAddPack)
@@ -89,7 +89,8 @@ export const PacksPage = () => {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
-        setSelectedAll(false)
+        setSelectedAll(true)
+        setSelectedMy(false)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -103,7 +104,8 @@ export const PacksPage = () => {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
-        setSelectedAll(true)
+        setSelectedMy(true)
+        setSelectedAll(false)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -183,8 +185,8 @@ export const PacksPage = () => {
                          className={commonPacksStyle.contentAllMy}>
                         <h3>Show Packs cards</h3>
                         <div className={commonPacksStyle.allMyWrapper}>
-                            <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
-                            <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
+                            <div className={ selectedMy ? `${commonPacksStyle.button_show_pack} ${commonPacksStyle.checked}` :  commonPacksStyle.button_show_pack} onClick={onSetMyPressHandler}><p>My</p></div>
+                            <div className={ selectedAll ? `${commonPacksStyle.button_show_pack} ${commonPacksStyle.checked}` :  commonPacksStyle.button_show_pack} onClick={onSetAllPressHandler}><p>All</p></div>
                             </div>
                         <div style={{color: 'red'}}>
                             {errorResponse(errorRes, 'setPacks')}

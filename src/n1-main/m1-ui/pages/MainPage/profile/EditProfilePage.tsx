@@ -75,14 +75,16 @@ export const EditProfilePage = () => {
                          src={avatar}
                          alt="UserPhoto"/>
 
-                    <input type="file" accept=".jpg, .jpeg, .png" multiple/>
-                    <input
-                        ref={inRef}
-                        type={'file'}
-                        style={{display: 'none'}}
-                        onChange={upload}
-                    />
-                    <button onClick={send}>send</button>
+                    {/*<input type="file" accept=".jpg, .jpeg, .png" multiple/>*/}
+                    {/*<input*/}
+                    {/*    ref={inRef}*/}
+                    {/*    type={'file'}*/}
+                    {/*    style={{display: 'none'}}*/}
+                    {/*    onChange={upload}*/}
+                    {/*/>*/}
+                    {/*<button onClick={send}>send</button>*/}
+
+
                     <div className={s.containerForEmail}>
                         <div className={s.textField}>Nickname</div>
                         <div>
