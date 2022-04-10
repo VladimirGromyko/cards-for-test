@@ -167,9 +167,13 @@ export const PacksPage = () => {
     const onPageChanged = (pageNumber: number) => {
         dispatch(setCurrentPageTC(pageNumber))
     }
+
     if (!isLoggedIn) {
         navigate(PATH.LOGIN)
     }
+
+
+
 
     return (
         <div className={commonPacksStyle.wrapper}>

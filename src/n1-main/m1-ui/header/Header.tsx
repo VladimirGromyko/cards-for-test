@@ -1,16 +1,21 @@
 import React, {useEffect} from 'react'
+// @ts-ignore
 import {NavLink, useNavigate} from 'react-router-dom'
 import {PATH} from "../routes/Paths";
 import s from '../header/header.module.css'
 import {logoutUserTC} from "../../m2-bll/loginReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../m2-bll/store";
-import SuperButton from "../common/c1-SuperButton/SuperButton";
+
+
 
 function Header() {
     const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const currentURL = window.location.href.split('#')
+
     const logOutHandler = () => {
         if (isLoggedIn) {
             dispatch(logoutUserTC())
@@ -34,6 +39,11 @@ function Header() {
         } else return PATH.PROFILE
     }
 
+
+
+
+
+
     return (
         <div>
             <nav>
@@ -41,10 +51,11 @@ function Header() {
                     {/*<li className={``}>*/}
                     {/*    <NavLink to={PATH.PROFILE} className={''}>ProfilePage</NavLink>*/}
                     {/*</li>*/}
-                    <li className={``}>
+                    {!(currentURL[1] === '/main/packs') ? (<li className={``}>
                         <NavLink to={onPackListHandler()} className={''}>Pack list</NavLink>
                         {/*<NavLink to={PATH.PACKS} className={''}>Pack list</NavLink>*/}
-                    </li>
+                    </li>) : <div></div>}
+
                     <li className={``}>
                         <NavLink to={onProfileHandler()} className={''}>Profile</NavLink>
                     </li>
@@ -65,9 +76,9 @@ function Header() {
                     {/*<li className={``}>*/}
                     {/*    <NavLink to={PATH.REGISTRATION} className={''}>Registration</NavLink>*/}
                     {/*</li>*/}
-                    <li className={``}>
+                    {isLoggedIn ? (<li className={``}>
                         <NavLink to={PATH.LOGIN} className={''} onClick={logOutHandler}>LogOut</NavLink>
-                    </li>
+                    </li>) : <div></div>}
                     {/*<li className={``}>*/}
                     {/*    <NavLink to={PATH.PACKS} className={''}>Packs</NavLink>*/}
                     {/*</li>*/}

@@ -37,12 +37,8 @@ const LoginPage = () => {
                 // briefly hardcoded 1 Cards request
                 params: {packName: '', pageCount: 15}
             }))
-            navigate(PATH.MAIN)
+            navigate(PATH.PACKS)
         } else return
-
-
-
-
 
 
     }, [navigate, isLoggedIn, dispatch])

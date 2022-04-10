@@ -4,7 +4,7 @@ export const PATH = {
     ERROR: '/404',
     EDIT_PROFILE:'/edit',
     PROFILE: '/',
-    MAIN: '/main',
+    // MAIN: '/main',
     EDIT_PACK: '/main/pack-list/edit-pack',
     TEST: '/test',
     CHANGE_PASSWORD: '/change-pass/:token',
