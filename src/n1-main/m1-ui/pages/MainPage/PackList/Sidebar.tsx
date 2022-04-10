@@ -32,7 +32,7 @@ const Sidebar = () => {
             <div className={s.title}>Number of cards</div>
             <div className={s.numbersWrapper}>
                 <div className={s.title}>{value[0]}</div>
-                <div     className={s.title}>{value[1]}</div>
+                <div className={s.title}>{value[1]}</div>
             </div>
             <div className={s.mainWrapper}>
                 <SuperDoubleRange setValue={setValue} min={value[0]} max={value[1]}/>

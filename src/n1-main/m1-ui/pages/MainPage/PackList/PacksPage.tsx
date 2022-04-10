@@ -29,6 +29,8 @@ import ModalAddContainer from "../../../../../n2-features/f3-utils/Modal/ModalAd
 
 export const PacksPage = () => {
 
+    debugger
+
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
@@ -38,7 +40,7 @@ export const PacksPage = () => {
     // const cardPacks = useSelector<AppStoreType, CardPacksType[]>(state => state.packs.packsData.cardPacks)
     const user = useSelector<AppStoreType>(state => state.login.user)
     // const updatedCardsPack = useSelector<AppStoreType, {}>(state => state.packs.updatedCardsPack)
-    const [selectedAll, setSelectedAll] = useState<boolean>(false)
+    const [selectedAll, setSelectedAll] = useState<boolean>(true)
 
     const isShownAddPack = useSelector<AppStoreType, boolean>((state: AppStoreType) =>
         state.packs.isShownAddPack)

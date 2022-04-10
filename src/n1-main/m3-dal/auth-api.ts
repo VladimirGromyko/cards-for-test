@@ -40,6 +40,9 @@ export const authAPI = {
     registrationUser(email: string, password: string) {
         return instance.post(`auth/register`, {email, password});
     },
+    changeAvatar(fileData: string) {
+        return instance.post('/file', fileData)
+    },
 }
 export type RecoverPassResponseType = {
     info: string

@@ -9,6 +9,7 @@ import {PATH} from "../../routes/Paths";
 import {getAuthUserDataTC} from "../../../m2-bll/loginReducer";
 import l from "../../common/c7-Loading/loader07.module.css";
 import {NavLink, useNavigate} from 'react-router-dom';
+import {setPacksDataTC} from "../../../m2-bll/packsReducer";
 
 // import {useNavigate} from "react-router-dom";
 
@@ -32,9 +33,19 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
+            dispatch(setPacksDataTC({
+                // briefly hardcoded 1 Cards request
+                params: {packName: '', pageCount: 15}
+            }))
             navigate(PATH.MAIN)
         } else return
-    }, [navigate, isLoggedIn])
+
+
+
+
+
+
+    }, [navigate, isLoggedIn, dispatch])
 
 
     return (<div className={s.superWrapper}>

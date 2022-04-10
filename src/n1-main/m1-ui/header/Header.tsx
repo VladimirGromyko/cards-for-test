@@ -52,9 +52,10 @@ function Header() {
                     {/*<li className={``}>*/}
                     {/*    <NavLink to={PATH.MAIN} className={''}>Main</NavLink>*/}
                     {/*</li>*/}
-                    <li className={``}>
+                    {!isLoggedIn ? (<li className={``}>
                         <NavLink to={PATH.LOGIN} className={''}>Login</NavLink>
-                    </li>
+                    </li>) : <div></div>}
+
                     {/*<li className={``}>*/}
                     {/*    <NavLink to={PATH.CHANGE_PASSWORD} className={''}>Change Password</NavLink>*/}
                     {/*</li>*/}

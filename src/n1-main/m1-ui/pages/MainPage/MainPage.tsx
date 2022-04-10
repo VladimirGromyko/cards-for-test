@@ -28,12 +28,13 @@ const MainPage = () => {
             navigate(PATH.LOGIN)
         } else return
     }, [])
-    const onSetPressHandler = useCallback(() => {
-        dispatch(setPacksDataTC({
 
-            // briefly hardcoded 1 Cards request
-            params: {packName: '', pageCount: 15}
-        }))
+    const onSetPressHandler = useCallback(() => {
+        // dispatch(setPacksDataTC({
+        //
+        //     // briefly hardcoded 1 Cards request
+        //     params: {packName: '', pageCount: 15}
+        // }))
     }, [dispatch])
 
     const onProfilePressHandler = useCallback(() => {
