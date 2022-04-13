@@ -39,11 +39,6 @@ function Header() {
         } else return PATH.PROFILE
     }
 
-
-
-
-
-
     return (
         <div>
             <nav>
