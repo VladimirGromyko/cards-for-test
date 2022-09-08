@@ -7,20 +7,20 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     border: 1px solid #bdbdbd;
     border-radius: 8px;
-    /*width: 300px;*/
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 70px 0 50px;
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
     background: rgb(245 246 250);
-   max-height: 600px;
-    max-width: 413px;
+    max-height: 600px;
+    max-width: 400px;
 }
 .container{
     margin: 78px 13px 37px 13px;
-
+}
+.title, .helpText{
+    text-align: center;
 }
 .containerForEmail{
     margin-top: 38px;
@@ -29,7 +29,7 @@
     margin-top: 24px;
 }
 .textField {
-    align-items:start;
+    /*align-items:start;*/
 }
 .helpText {
     font-size: 14px;
@@ -56,6 +56,7 @@
     margin: 2% 3% 2% 3%;
     font-weight: 400;
     text-decoration: none;
+    text-align: center;
 }
 .label {
     display: block;
@@ -74,4 +75,23 @@
 .wrapper_submit_button {
     display: inline-block;
     margin-top: 40px;
+    width: 100%;
+    text-align: center;
+}
+.passView{
+    width: 20px;
+    height: 20px;
+    color: #4a5651;
+}
+.passwordField{
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+}
+.viewImage{
+    position: relative;
+    right: 25px;
+    top: 5px;
+    width: 0;
+    height: 0;
 }

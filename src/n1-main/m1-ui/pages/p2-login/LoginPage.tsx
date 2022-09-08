@@ -9,6 +9,8 @@ import {PATH} from "../../routes/Paths";
 import {getAuthUserDataTC} from "../../../m2-bll/loginReducer";
 import l from "../../common/c7-Loading/loader07.module.css";
 import {NavLink, useNavigate} from 'react-router-dom';
+import eye_open from './eye_open.png'
+import eye_close from './eye_close.png'
 
 // import {useNavigate} from "react-router-dom";
 
@@ -18,6 +20,7 @@ const LoginPage = () => {
     const dispatch = useDispatch()
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [type, setType] = useState<string>('password')
     const [rememberMe, setRememberMe] = useState<boolean>(false)
 
     const navigate = useNavigate()
@@ -29,6 +32,11 @@ const LoginPage = () => {
     const changeEmail = (e: string) => {
         setEmail(e)
     }
+    const togglePassInput = () => {
+        if (type === 'password') {
+            setType('text')
+        } else setType('password')
+    }
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -37,13 +45,14 @@ const LoginPage = () => {
     }, [navigate, isLoggedIn])
 
 
-    return (<div className={s.superWrapper}>
+    return (
+            <div className={s.superWrapper}>
             <div className={s.wrapper}>
                 <div style={{width: '100%'}}>
                     {isLoading === "loading" && <div className={l.loader07}></div>}
                 </div>
                 <div className={s.container}>
-                    <h4>SIGN IN</h4>
+                    <h4 className={s.title}>SIGN IN</h4>
                     <div className={s.containerForEmail}>
                         <div className={s.textField}>
                             <div className={s.label}>Email</div>
@@ -58,12 +67,20 @@ const LoginPage = () => {
                         <div className={s.textField}>
                             <div className={s.label}>Password</div>
                         </div>
+                        <div className={s.passwordField}>
+                            <SuperInputText type={type}
+                                            value={password}
+                                            placeholder={'Password'}
+                                            onChangeText={setPassword}
+                            />
+                            <div onClick={togglePassInput} className={s.viewImage}>
+                                {type === 'password'
+                                    ? (<img src={eye_close} alt='eye_close' className={s.passView}/>)
+                                    : (<img src={eye_open} alt='eye_open' className={s.passView}/>)
+                                }
+                            </div>
+                        </div>
 
-                        <SuperInputText type={'password'}
-                                        value={password}
-                                        placeholder={'Password'}
-                                        onChangeText={setPassword}
-                        />
                     </div>
 
                     {/*<div className={s.wrapper_submit_checkbox}>*/}
@@ -79,9 +96,8 @@ const LoginPage = () => {
                             <SuperButton onClick={logInHandler} disabled={isLoggedIn}>Submit</SuperButton>
                         </div>
                     </div>
-                    {/*<div className={s.helpText}>Don't have an account?</div>*/}
                     <div className={s.helpText}>Don't have an account?</div>
-                    <NavLink to={PATH.REGISTRATION} className={s.helpTextBold}>Sign Up</NavLink>
+                    <div  className={s.helpTextBold}><NavLink to={PATH.REGISTRATION}>Sign Up</NavLink></div>
                 </div>
             </div>
         </div>

@@ -18,53 +18,35 @@
     display: flex;
 }
 
-/*.superInput {
-
-
-    display: block;
-    width: 10%;
-    padding: 2px 16px;
-    line-height: 20px;
-    font-size: 14px;
-    !*font-weight: 500;*!
-    !*font-family: inherit;*!
-    border-radius: 6px;
-    !*-webkit-appearance: none;*!
-    color: var(--input-color);
-    border: 1px solid var(--input-border);
-    background: var(--input-background);
-    transition: border .3s ease;
-}*/
-
 .superInput {
 
-    width: 347px;
+    width: 90%;
     /*box-sizing: border-box;*/
 
     border: 1px solid var(--input-border);
     border-radius: 4px;
     font-size: 16px;
-    background-color: white;
+    /*background-color: white;*/
     /*background-image: url('./pen.png');*/
-    background-position: 0 3px;
-    background-repeat: no-repeat;
+    /*background-position: 0 3px;*/
+    /*background-repeat: no-repeat;*/
     padding: 5px 15px 5px 15px;
     -webkit-transition: width 0.4s ease-in-out;
+    /*transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;*/
     transition: width 0.4s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    transition-duration: 0.5s;
-    margin-bottom: 0px;
+    /*transition-duration: 0.5s;*/
+    /*margin-bottom: 0px;*/
 }
 
 .superInput::placeholder {
     color: #212529;
     opacity: 0.4;
-    transition: width 0.4s ease-in-out;
-    //box-shadow: 0 0 10px rgb(0, 0, 0.2);
-    margin-bottom: 7px;
+    /*transition: width 0.9s ease-in-out;*/
+    /*margin-bottom: 7px;*/
 }
 
 .superInput:focus {
-    width: 70%;
+    width: 100%;
     border-color: rgba(103, 142, 254, 0.9);
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgba(103, 142, 254, 0.9);
