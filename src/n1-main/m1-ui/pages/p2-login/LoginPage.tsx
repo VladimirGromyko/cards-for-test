@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import SuperButton from "../../common/c1-SuperButton/SuperButton";
 import SuperInputText from "../../common/c2-SuperInput/SuperInputText";
-import SuperCheckbox from "../../common/c3-SuperCheckbox/SuperCheckbox";
 import s from './LoginPage.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {AppStoreType} from "../../../m2-bll/store";
@@ -9,10 +8,8 @@ import {PATH} from "../../routes/Paths";
 import {getAuthUserDataTC} from "../../../m2-bll/loginReducer";
 import l from "../../common/c7-Loading/loader07.module.css";
 import {NavLink, useNavigate} from 'react-router-dom';
-import eye_open from './eye_open.png'
-import eye_close from './eye_close.png'
-
-// import {useNavigate} from "react-router-dom";
+import eye_open from '../p4_utils/eye_open.png'
+import eye_close from '../p4_utils/eye_close.png'
 
 const LoginPage = () => {
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
@@ -35,6 +32,9 @@ const LoginPage = () => {
     const togglePassInput = () => {
         if (type === 'password') {
             setType('text')
+            setTimeout(() => {
+                setType('password')
+            }, 2000);
         } else setType('password')
     }
 
@@ -46,7 +46,7 @@ const LoginPage = () => {
 
 
     return (
-            <div className={s.superWrapper}>
+        <div className={s.superWrapper}>
             <div className={s.wrapper}>
                 <div style={{width: '100%'}}>
                     {isLoading === "loading" && <div className={l.loader07}></div>}
@@ -97,7 +97,7 @@ const LoginPage = () => {
                         </div>
                     </div>
                     <div className={s.helpText}>Don't have an account?</div>
-                    <div  className={s.helpTextBold}><NavLink to={PATH.REGISTRATION}>Sign Up</NavLink></div>
+                    <div className={s.helpTextBold}><NavLink to={PATH.REGISTRATION}>Sign Up</NavLink></div>
                 </div>
             </div>
         </div>

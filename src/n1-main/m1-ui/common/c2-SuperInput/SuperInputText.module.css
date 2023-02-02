@@ -30,7 +30,7 @@
     /*background-image: url('./pen.png');*/
     /*background-position: 0 3px;*/
     /*background-repeat: no-repeat;*/
-    padding: 5px 15px 5px 15px;
+    padding: 5px 30px 5px 15px;
     -webkit-transition: width 0.4s ease-in-out;
     /*transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;*/
     transition: width 0.4s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -64,9 +64,8 @@
     font-palette: dark;
     background-color: white;
     background-image: url('./pen.png');
-    background-position: 0px 3px;
+    background-position: 0 3px;
     background-repeat: no-repeat;
-    /*margin-outside: 30px;*/
     padding: 6px 20px 6px 30px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;

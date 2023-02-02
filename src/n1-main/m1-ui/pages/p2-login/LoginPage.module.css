@@ -1,14 +1,14 @@
 .superWrapper{
     min-height: 100vh;
     margin: 0 auto;
-    displey: flex;
+    display: flex;
     padding: 10px;
 }
 .wrapper {
     display: flex;
     flex-direction: column;
     border: 1px solid #bdbdbd;
-    border-radius: 8px;
+    border-radius: 15px;
     margin: 0 auto;
     padding: 0 70px 0 50px;
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
@@ -39,7 +39,7 @@
     text-decoration: none;
 }
 .helpTextForgotPasswordContainer{
-    margin: 28px 0px 0px 0px;
+    margin: 28px 0 0 0;
     /*width :101px;*/
     /*height: 17px;*/
     text-align: end

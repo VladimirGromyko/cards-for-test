@@ -3,7 +3,6 @@ import {Navigate, Route, Routes} from 'react-router-dom';
 import Error404 from "../pages/Error404";
 import {PATH} from "./Paths";
 import MainPage from "../pages/MainPage/MainPage";
-import TestPage from "../pages/TestPage";
 import ChangePasswordPage from "../pages/p3-pass-recovery/ChangePasswordPage";
 import PasswordRecoveryPage from "../pages/p3-pass-recovery/PasswordRecoveryPage";
 import {EditProfilePage} from "../pages/MainPage/profile/EditProfilePage";
@@ -20,8 +19,8 @@ const MainRoutes = () => {
         <div>
             <Routes>
 
-                <Route path={PATH.REGISTRATION}
-                       element={<h2 style={{textAlign: "center"}}><Registration/></h2>}/>
+                <Route path={PATH.REGISTRATION} element={<Registration/>}/>
+                       {/*element={<h2 style={{textAlign: "center"}}><Registration/></h2>}/>*/}
                 <Route path={PATH.LOGIN} element={<LoginPage/>}/>
                 <Route path={PATH.PROFILE} element={<h2 style={{textAlign: "center"}}><EditProfilePage/></h2>}/>
                 <Route path={PATH.EDIT_PROFILE} element={<h2 style={{textAlign: "center"}}><EditProfilePage/></h2>}/>
