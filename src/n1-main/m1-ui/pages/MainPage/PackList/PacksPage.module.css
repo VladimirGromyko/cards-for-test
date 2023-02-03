@@ -1,34 +1,37 @@
 .wrapper {
     display: flex;
-    position: relative;
-    width: 1008px;
-    min-height: 100vh;
-    background: #FEFEFF;
-    border-radius: 8px;
+    /*position: relative;*/
+    /*width: 1008px;*/
+    /*min-height: 100vh;*/
+    /*background: #FEFEFF;*/
+    /*border-radius: 8px;*/
     justify-content: center;
-    align-content: center;
+    /*align-content: center;*/
     text-align: center;
-    margin: 20px  auto 20px auto;
-    padding: 0 20px;
+    /*margin: 20px  auto 20px auto;*/
+    /*padding: 0 20px;*/
 }
 
 .TableWrapper {
-    display: grid;
-    grid-template-areas:
-            'A  B B B B B B '
-            'A  B B B B B B';
+    display: flex;
+    /*display: grid;*/
+    /*grid-template-areas:*/
+    /*        'A'*/
+    /*        'B';*/
+            /*'A  B B B B B B '*/
+            /*'A  B B B B B B';*/
     /*background: linear-gradient(180deg, #678efe0a, #678efe8f); !*изменила фон таблицы*!*/
     background: #678efe0a;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*width: 100%;*/
     min-height: 638px;
 }
 
 .ariaA {
     grid-area: A;
     align-content: start;
-    width: 243px;
+    /*width: 243px;*/
     align-self: start;
     height: 100%;;
     padding: 25px 25px;
@@ -44,14 +47,32 @@
     background: #e5ecff;
     padding: 0 10px;
 }
+.headerBlock{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 3ch;
+}
+.searchCards{
+    display: grid;
 
+    grid-template-columns: 8fr 3fr 5fr 1fr;
+    grid-column-gap: 1em;
+    grid-row-gap: 0.5em;
+    width: 100%;
+}
+.searchCards span {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
 .content {
-    grid-area: B;
-    padding: 25px 48px;
+    /*grid-area: B;*/
+    padding: 25px 30px;
     background-color: white;
     border-radius: 5px;
-    width: 765px;
-    height: 100%;
+    width: 85vw;
+    /*width: 765px;*/
+    /*height: 100%;*/
 }
 
 .contentAllMy {
@@ -113,6 +134,7 @@ img {
 .inputPlusButton {
     display: flex;
     text-align: start;
+
 }
 
 .allMyWrapper {

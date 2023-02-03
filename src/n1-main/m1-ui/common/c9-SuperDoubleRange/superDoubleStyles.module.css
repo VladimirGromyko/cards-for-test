@@ -106,6 +106,7 @@ input.range:active::-webkit-slider-thumb{
 }
 
 .mainWrapper{
+    max-width: 300px;
     justify-content: space-between;
 }
 .numbersWrapper{

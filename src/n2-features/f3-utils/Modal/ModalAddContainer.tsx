@@ -44,12 +44,19 @@ const ModalAddContainer: React.FC<ModalAddContainerType> = (
 
     return (
         <>
-            <div>
-                <SuperButton onClick={() => showPack(true)}>Add new pack</SuperButton>
+            {/*<div>*/}
+                <SuperButton onClick={() => showPack(true)}
+                             style={{color: "white",
+                                     width: "20ch",
+                                     fontWeight: "200",
+                                     border: "none"
+                             }}
+                >Add new pack
+                </SuperButton>
                 {/*<SuperButton onClick={() => hideAddPack(true)}>Add new pack</SuperButton>*/}
                 {/*<SuperButton onClick={() => setShow(true)}>Add new pack</SuperButton>*/}
                 {/*{answer ? <span>Yes</span> : <span>No</span>}*/}
-            </div>
+            {/*</div>*/}
 
             <ModalQuestion
                 show={isShownPack}

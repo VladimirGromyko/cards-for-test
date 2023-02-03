@@ -29,7 +29,7 @@ const Sidebar = () => {
     );
     return (
         <div>
-            <div className={s.title}>Number of cards</div>
+            {/*<div className={s.title}>Number of cards</div>*/}
             <div className={s.numbersWrapper}>
                 <div className={s.title}>{value[0]}</div>
                 <div     className={s.title}>{value[1]}</div>

@@ -172,43 +172,62 @@ export const PacksPage = () => {
 
 
             <div className={commonPacksStyle.TableWrapper}>
-                <div style={{width: '100%'}}>
+                {/*<div style={{width: '100%'}}>*/}
                     {isLoading === "loading" && <div className={l.loader07}></div>}
-                </div>
-                {/*ЛЕВАЯ СТОРОНА*/}
-                <div className={commonPacksStyle.ariaA}>
-                    <div style={{textAlign: 'start', marginBottom: '7px'}}
-                         className={commonPacksStyle.contentAllMy}>
-                        <h3>Show Packs cards</h3>
-                        <div className={commonPacksStyle.allMyWrapper}>
-                            <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
-                            <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
-                            </div>
-                        <div style={{color: 'red'}}>
-                            {errorResponse(errorRes, 'setPacks')}
-                        </div>
-                    </div>
-                    <div>
-                        <Sidebar/>
-                    </div>
-                </div>
+                {/*</div>*/}
+
                 {/*ПРАВАЯ СТОРОНА*/}
 
                 <span className={commonPacksStyle.content}>
-                    <div style={{textAlign: 'start', marginBottom: '7px'}}>Packs list</div>
+
+                     <span className={commonPacksStyle.headerBlock}>
+                         <div ><h3>Packs list</h3></div>
+                         <ModalAddContainer
+                             addPack={addPack}
+                             showPack={showAddPack}
+                             isLoading={isLoading}
+                             isShownPack={isShownAddPack}
+                         />
+                     </span>
+
+
                     <div className={commonPacksStyle.inputPlusButton}>
-                        <SuperInputText style={{width: '76%'}} placeholder='Enter cardPacks name for searching'
-                                        onChange={onSearchHandler}/>
-                        <span>
-                              <div>
-                                  <ModalAddContainer
-                                      addPack={addPack}
-                                      showPack={showAddPack}
-                                      isLoading={isLoading}
-                                      isShownPack={isShownAddPack}
-                                  />
-                              </div>
-                        </span>
+                        <div className={commonPacksStyle.searchCards}>
+                            <span className={commonPacksStyle.searchCardsHeader}>Search</span>
+                            <span className={commonPacksStyle.searchCardsHeader}>Show Packs cards</span>
+                            <span className={commonPacksStyle.searchCardsHeader}>Number of cards</span>
+                            <span></span>
+                            <SuperInputText
+                                            placeholder='Enter cardPacks name for searching'
+                                            onChange={onSearchHandler}
+                                            style={{borderRadius: "20px"}}
+                            />
+                            <div style={{textAlign: 'start', marginBottom: '7px'}}
+                                 className={commonPacksStyle.contentAllMy}>
+                                <div className={commonPacksStyle.allMyWrapper}>
+                                    <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
+                                    <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
+                                    </div>
+                                <div style={{color: 'red'}}>
+                                    {errorResponse(errorRes, 'setPacks')}
+                                </div>
+                            </div>
+                            <div>
+                                <Sidebar/>
+                            </div>
+                            <div>Filter</div>
+
+                        </div>
+
+
+
+
+                        {/*<div className={commonPacksStyle.ariaA}>*/}
+
+                        {/*</div>*/}
+
+
+
                     </div>
 
                     <HeaderPacks/>
