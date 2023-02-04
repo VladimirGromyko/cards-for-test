@@ -200,7 +200,7 @@ export const PacksPage = () => {
                             <SuperInputText
                                             placeholder='Enter cardPacks name for searching'
                                             onChange={onSearchHandler}
-                                            style={{borderRadius: "20px"}}
+                                            style={{height: '35px'}}
                             />
                             <div style={{textAlign: 'start', marginBottom: '7px'}}
                                  className={commonPacksStyle.contentAllMy}>
@@ -212,9 +212,9 @@ export const PacksPage = () => {
                                     {errorResponse(errorRes, 'setPacks')}
                                 </div>
                             </div>
-                            <div>
+                            {/*<div>*/}
                                 <Sidebar/>
-                            </div>
+                            {/*</div>*/}
                             <div>Filter</div>
 
                         </div>

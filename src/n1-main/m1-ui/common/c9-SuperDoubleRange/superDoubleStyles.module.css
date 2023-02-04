@@ -1,14 +1,17 @@
 .wrapper{
     position: relative;
-    width: 100%;
-    background-color: #e5ecff;
-    padding: 10px;
-    border-radius: 10px;
+    /*width: 100%;*/
+    /*background-color: #e5ecff;*/
+    /*align-items: center;*/
+    /*!*padding: 10px;*!*/
+    /*!*border-radius: 10px;*!*/
+    /*padding: 10px 5px 0 5px;*/
 }
 
 .container{
     position: relative;
     width: 100%;
+    padding: 15px 5px 0 5px;
 }
 input.range{
     -webkit-appearance: none;
@@ -22,7 +25,7 @@ input.range{
     pointer-events: none;
 }
 .sliderTrack{
-    width: 100%;
+    width: 96%;
     height: 5px;
     position: absolute;
     margin: auto;
@@ -106,15 +109,21 @@ input.range:active::-webkit-slider-thumb{
 }
 
 .mainWrapper{
-    max-width: 300px;
-    justify-content: space-between;
+    min-width: 200px;
+    /*justify-content: space-between;*/
 }
 .numbersWrapper{
     display: flex;
-    width: 100%;
+    /*width: 100%;*/
  justify-content: space-between;
 }
 .title{
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    /*margin-bottom: 10px;*/
+    padding-top: 5px;
+    border: 1px solid #737171;
+    border-radius: 2px;
+    width: 40px;
+    text-align: center;
 }
