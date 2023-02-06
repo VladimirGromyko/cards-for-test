@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import React, {ChangeEvent, useEffect,useCallback, useState} from "react";
-import commonPacksStyle from "./PacksPage.module.css"
+import cps from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
 import {PacksTable} from "./PacksTable";
 import {AppStoreType} from "../../../../m2-bll/store";
@@ -25,6 +25,7 @@ import {PATH} from "../../../routes/Paths";
 import {initializeMainTC} from "../../../../m2-bll/loginReducer";
 import {LearnPage} from "../../learn/LearnPage";
 import ModalAddContainer from "../../../../../n2-features/f3-utils/Modal/ModalAddContainer";
+import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 
 
 export const PacksPage = () => {
@@ -87,7 +88,7 @@ export const PacksPage = () => {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
-        setSelectedAll(false)
+        setSelectedAll(true)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -101,7 +102,7 @@ export const PacksPage = () => {
         if (!isLoggedIn) {
             navigate(PATH.LOGIN)
         }
-        setSelectedAll(true)
+        setSelectedAll(false)
         dispatch(setPacksDataTC({
             // briefly hardcoded 1 Cards request
             params: {
@@ -163,24 +164,30 @@ export const PacksPage = () => {
     const onPageChanged = (pageNumber: number) => {
         dispatch(setCurrentPageTC(pageNumber))
     }
+    const allMyClickStyle = (style: string) => {
+        return cps.allMyClick + ' ' +style
+    }
+    const allMyStyle = (style: string) => {
+        return cps.allMy + ' ' +style
+    }
     if (!isLoggedIn) {
         navigate(PATH.LOGIN)
     }
 
     return (
-        <div className={commonPacksStyle.wrapper}>
+        <div className={cps.wrapper}>
 
 
-            <div className={commonPacksStyle.TableWrapper}>
+            <div className={cps.TableWrapper}>
                 {/*<div style={{width: '100%'}}>*/}
                     {isLoading === "loading" && <div className={l.loader07}></div>}
                 {/*</div>*/}
 
                 {/*ПРАВАЯ СТОРОНА*/}
 
-                <span className={commonPacksStyle.content}>
+                <span className={cps.content}>
 
-                     <span className={commonPacksStyle.headerBlock}>
+                     <span className={cps.headerBlock}>
                          <div ><h3>Packs list</h3></div>
                          <ModalAddContainer
                              addPack={addPack}
@@ -191,22 +198,30 @@ export const PacksPage = () => {
                      </span>
 
 
-                    <div className={commonPacksStyle.inputPlusButton}>
-                        <div className={commonPacksStyle.searchCards}>
-                            <span className={commonPacksStyle.searchCardsHeader}>Search</span>
-                            <span className={commonPacksStyle.searchCardsHeader}>Show Packs cards</span>
-                            <span className={commonPacksStyle.searchCardsHeader}>Number of cards</span>
+                    <div className={cps.inputPlusButton}>
+                        <div className={cps.searchCards}>
+                            <span className={cps.searchCardsHeader}>Search</span>
+                            <span className={cps.searchCardsHeader}>Show Packs cards</span>
+                            <span className={cps.searchCardsHeader}>Number of cards</span>
                             <span></span>
                             <SuperInputText
                                             placeholder='Enter cardPacks name for searching'
                                             onChange={onSearchHandler}
-                                            style={{height: '35px'}}
+
                             />
-                            <div style={{textAlign: 'start', marginBottom: '7px'}}
-                                 className={commonPacksStyle.contentAllMy}>
-                                <div className={commonPacksStyle.allMyWrapper}>
-                                    <div className={ selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetMyPressHandler}><p>My</p></div>
-                                    <div className={ !selectedAll ? commonPacksStyle.all :  commonPacksStyle.my} onClick={onSetAllPressHandler}><p>All</p></div>
+                            <div style={{textAlign: 'start'}}
+                                 className={cps.contentAllMy}>
+                                <div className={cps.allMyWrapper}>
+                                    <SuperButton
+                                        className={ !selectedAll ? allMyClickStyle(cps.myClick) : allMyStyle(cps.myClick)}
+                                        onClick={onSetMyPressHandler}
+                                    >My
+                                    </SuperButton>
+                                    <SuperButton className={ selectedAll ? allMyClickStyle(cps.allClick) : allMyStyle(cps.allClick)}
+                                                 onClick={onSetAllPressHandler}
+                                    >All
+                                    </SuperButton>
+
                                     </div>
                                 <div style={{color: 'red'}}>
                                     {errorResponse(errorRes, 'setPacks')}

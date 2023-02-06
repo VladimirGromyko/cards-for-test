@@ -52,37 +52,40 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 3ch;
+    background: #F9F9FE;
 }
 .searchCards{
     display: grid;
-
+    background: #F9F9FE;
     grid-template-columns: 8fr 3fr 5fr 1fr;
     grid-column-gap: 1em;
     grid-row-gap: 0.5em;
     width: 100%;
+    margin-bottom: 5px;
 }
 .searchCards span {
     font-size: 18px;
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
 }
 .content {
     /*grid-area: B;*/
-    padding: 25px 30px;
-    background-color: white;
+    /*padding: 25px 30px;*/
+    background: #F9F9FE;
     border-radius: 5px;
-    width: 85vw;
+
+    /*width: 85vw;*/
     /*width: 765px;*/
     /*height: 100%;*/
 }
 
 .contentAllMy {
     border-radius: 5px;
-    align-items: center;
+    /*align-items: center;*/
     background-color: #e5ecff;
     font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
+    font-weight: 400;
+    /*font-size: 16px;*/
+    /*line-height: 19px;*/
 }
 
 .pagination {
@@ -139,36 +142,65 @@ img {
 
 .allMyWrapper {
     display: inline-flex;
-
+    text-align: center;
 }
 
 .all {
     width: 97px;
-    height: 36px;
-    background-color: #a1b9ff;
-    text-align: center;
     cursor: pointer;
-    font-size: 22px;
-    justify-content: center;
+    font-size: 21px;
+    font-weight: 400;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    color: var(--input-background);
 }
 
-.all:hover, .my:hover {
-    border: #212529 1px solid;
+/*.all:hover, */
+.my:hover {
+    /*border: #212529 1px solid;*/
+    border: 1px solid var(--input-border-focus);
+    box-shadow: 0 0 0 0.15rem rgba(103, 142, 254, 0.9);
+    outline: 0;
     align-items: center;
 }
 
-.my {
-    width: 97px;
-    height: 36px;
-    background-color: white;
-    text-align: center;
-    cursor: pointer;
-    color: black;
-    font-size: 22px;
-    justify-content: center;
+/*.my {*/
+/*    width: 97px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 4px 0 0 4px;*/
+/*    font-size: 21px;*/
+/*    font-weight: 400;*/
+/*    border: 1px solid var(--input-border);*/
+/*    background: var(--input-background);*/
+/*}*/
+.myClick{
+    border-radius: 4px 0 0 4px;
 }
-p{
-    padding-top: 5px;
+.allClick{
+    border-radius: 0 4px 4px 0;
+}
+.allMy{
+    width: 97px;
+    cursor: pointer;
+    font-size: 21px;
+    font-weight: 400;
+    border: 1px solid var(--input-border);
+    background: var(--input-background);
+}
+.allMy:hover{
+    border: 1px solid var(--input-border-focus);
+    box-shadow: 0 0 0 0.15rem rgba(103, 142, 254, 0.9);
+    outline: none;
+    align-items: center;
+    transition: box-shadow 0.1s ease-in-out;
+}
+
+.allMyClick{
+    border: none;
+    font-size: 21px;
+    font-weight: 400;
+    color: var(--input-background);
+    background: var(--group-background-focus)
 }
 h3{
     margin-bottom: 20px;

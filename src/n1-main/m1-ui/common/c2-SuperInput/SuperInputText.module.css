@@ -46,7 +46,6 @@
 }
 
 .superInput:focus {
-    width: 100%;
     border-color: rgba(103, 142, 254, 0.9);
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgba(103, 142, 254, 0.9);
