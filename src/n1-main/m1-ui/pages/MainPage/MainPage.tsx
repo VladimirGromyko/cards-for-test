@@ -32,7 +32,7 @@ const MainPage = () => {
         dispatch(setPacksDataTC({
 
             // briefly hardcoded 1 Cards request
-            params: {packName: '', pageCount: 15}
+            params: {packName: '', pageCount: 40}
         }))
     }, [dispatch])
 

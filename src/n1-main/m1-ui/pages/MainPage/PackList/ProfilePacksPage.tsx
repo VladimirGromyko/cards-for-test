@@ -1,13 +1,13 @@
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink, useNavigate} from "react-router-dom";
-import React, {useCallback, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import React, {useCallback} from "react";
 import commonPacksStyle from "./PacksPage.module.css"
 import SuperInputText from "../../../common/c2-SuperInput/SuperInputText";
-import {PacksTable} from "./PacksTable";
+
 import {AppStoreType} from "../../../../m2-bll/store";
 import Sidebar from "./Sidebar";
 import {HeaderPacks} from "./HeaderPacks";
-import {PATH} from "../../../routes/Paths";
+
 import l from "../../../common/c7-Loading/loader07.module.css";
 import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 import {
@@ -23,8 +23,7 @@ import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
 import {CardPacksType} from "../../../../m3-dal/packs-api";
 import s from '../../../header/header.module.css';
 import {ResponseErrorStateType} from "../../../../m2-bll/errorReducer";
-import {errorResponse} from "../../../../../n2-features/f0-test/errorResponse";
-import {AddPack} from "./AddPack";
+
 
 
 export const ProfilePacksPage = () => {
@@ -133,9 +132,9 @@ export const ProfilePacksPage = () => {
         navigate('/edit')
     }
 
-    const onPageChanged = (pageNumber: number) => {
+    const onPageChanged = (page: number) => {
         // console.log("pageNumber: ", pageNumber)
-        dispatch(setCurrentPageTC(pageNumber))
+        dispatch(setCurrentPageTC({page, pageCount: 0}))
     }
 
     return (

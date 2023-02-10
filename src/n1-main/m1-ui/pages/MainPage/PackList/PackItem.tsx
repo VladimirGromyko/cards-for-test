@@ -29,15 +29,27 @@ export const PackItem = ({deletePackList, editPackList, learnPack, pack}: TableI
 
     return (
         <div className={packsStyle.items}>
-            <div style={{cursor: "pointer"}} onClick={() => navigate('/main/packs/' + pack._id)}>{pack.name}</div>
+            <div className={packsStyle.item} style={{cursor: "pointer"}} onClick={() => navigate('/main/packs/' + pack._id)}>{pack.name}</div>
 
-            <div>{pack.cardsCount}</div>
-            <div>{changeDateView(pack.created)}</div>
-            <div>{pack.user_name}</div>
-            <div>
-                <SuperButton style={{minWidth: "47px",backgroundColor:'red'}}onClick={onDeletePressHandler}>Delete</SuperButton>
-                <SuperButton style={{minWidth: "47px"}} onClick={onEditPressHandler}>Edit</SuperButton>
-                <SuperButton style={{minWidth: "47px"}} onClick={onLearnPressHandler}>Learn</SuperButton>
+            <div className={packsStyle.item}>{pack.cardsCount}</div>
+            <div className={packsStyle.item}>{changeDateView(pack.created)}</div>
+            <div className={packsStyle.item}>{pack.user_name}</div>
+            <div className={packsStyle.itemAction}>
+                <SuperButton onClick={onLearnPressHandler}
+                             icon="learn"
+                             style={{borderWidth: 0}}
+                >Learn
+                </SuperButton>
+                <SuperButton onClick={onEditPressHandler}
+                             icon="edit"
+                             style={{borderWidth: 0}}
+                >Edit
+                </SuperButton>
+                <SuperButton icon="delete"
+                             style={{borderWidth: 0}}
+                             onClick={onDeletePressHandler}
+                >Delete
+                </SuperButton>
             </div>
 
         </div>

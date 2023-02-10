@@ -41,23 +41,23 @@ export const HeaderPacks = () => {
 
 
     return (
-        <div className={s.wrapper_header}>
+        // <div className={s.wrapper_header}>
 
-            <div className={s.wrapper_header_table} >
-                <div className={s.header_tableItem} onClick={() => sortingPack('name')}>Card name
+            <div className={s.wrapper_header} >
+                <div className={s.header_tableItem} onClick={() => sortingPack('name')}>Name
                     <SuperSorting sort={sort} sorting={'name'}/>
                 </div>
                 <div className={s.header_tableItem} onClick={() => sortingPack('cardsCount')}>Cards
                 <SuperSorting sort={sort} sorting={'cardsCount'}/>
                 </div>
-                <div className={s.header_tableItem} onClick={() => sortingPack('updated')}>Updated
+                <div className={s.header_tableItem} onClick={() => sortingPack('updated')}>Last Updated
                 <SuperSorting sort={sort} sorting={'updated'}/>
                 </div>
-                <div className={s.header_tableItem} onClick={() => sortingPack('user_name')}>Creator
+                <div className={s.header_tableItem} onClick={() => sortingPack('user_name')}>Created by
                 <SuperSorting sort={sort} sorting={'user_name'}/>
                 </div>
                 <div className={s.header_tableItem}>Actions</div>
             </div>
-        </div>
+        // </div>
     )
 }

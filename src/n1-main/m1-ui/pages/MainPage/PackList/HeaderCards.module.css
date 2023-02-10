@@ -1,23 +1,20 @@
-.wrapper_header {
-    background-color: #e5ecff;
-    border-radius: 5px;
-}
 
-.wrapper_header_table {
+.wrapper_header {
+    background-color: #eeeeee;
     display: grid;
     grid-template-areas: "1 2 3 4 5";
-    grid-template-columns:20% 20% 20% 20%;
+    grid-template-columns: 30% 10% 20% 24%;
     gap: 1%;
     height: 48px;
     text-decoration: none;
-    margin-top: 20px;
     align-self : center;
-    font-weight: 700;
-    /*font-size: 13px;*/
+    font-weight: 600;
+    align-content: center;
 }
 
 .header_tableItem {
-    padding: 6px;
+    padding: 6px 0 6px 20px;
+
 }
 
 .button{

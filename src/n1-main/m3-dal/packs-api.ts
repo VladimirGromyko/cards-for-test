@@ -35,7 +35,7 @@ type PacksGetRequestDataType = {
     pageCount?: number, // не обязательно
     user_id?: string  // не обязательно
 }
-export type SortPackNumberType = 0 | 1 
+export type SortPackNumberType = 0 | 1
 export type SortPackNameType = 'name' | 'cardsCount' | 'updated' | 'user_name'
 
 export type PacksGetResponseDataType = {

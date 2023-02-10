@@ -202,13 +202,13 @@ export const getSearchPackByNameTC = (packName:string):ThunkType =>
             })
     }
 
-export const setCurrentPageTC = (pageNumber: number): ThunkType =>
+export const setCurrentPageTC = (payload: {page: number, pageCount: number}): ThunkType =>
     (dispatch, getState) => {
-    dispatch(setCurrentPageAC(pageNumber))
+    dispatch(setCurrentPageAC(payload.page))
     dispatch(setPacksDataTC({
         params: {
-            page: pageNumber,
-            pageCount: getState().packs.packsData.pageCount,
+            page: payload.page,
+            pageCount: payload.pageCount ? payload.pageCount : getState().packs.packsData.pageCount,
             sortPacks: getState().packs.sort,
             max: getState().packs.max,
             min: getState().packs.min,

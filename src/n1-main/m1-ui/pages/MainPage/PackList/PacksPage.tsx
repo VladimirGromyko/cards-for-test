@@ -29,7 +29,6 @@ import SuperButton from "../../../common/c1-SuperButton/SuperButton";
 
 
 export const PacksPage = () => {
-
     const isLoading = useSelector((state: AppStoreType) => state.loading.isLoading);
     const errorRes = useSelector<AppStoreType, ResponseErrorStateType>(state => state.error)
     const isLoggedIn = useSelector((state: AppStoreType) => state.login.isLoggedIn);
@@ -161,9 +160,21 @@ export const PacksPage = () => {
         navigate('/main/packs-learn/'+ packId)
     }, [navigate])
 
-    const onPageChanged = (pageNumber: number) => {
-        dispatch(setCurrentPageTC(pageNumber))
+    const onPageChanged = (page: number) => {
+        dispatch(setCurrentPageTC({page, pageCount: 0}))
     }
+    const changePackListSize =  useCallback((pageCount: number, page: number) => {
+        dispatch(setCurrentPageTC({
+            // briefly hardcoded 1 Cards request
+            // params: {
+                page,
+                // packName: '',
+                pageCount
+            // }
+        }))
+
+        // dispatch(setCurrentPageTC(value))
+    }, [dispatch])
     const allMyClickStyle = (style: string) => {
         return cps.allMyClick + ' ' +style
     }
@@ -244,27 +255,30 @@ export const PacksPage = () => {
 
 
                     </div>
+                    <div className={cps.tableBlock}>
+                        <HeaderPacks/>
+                        {packs && <PacksTable
+                            deletePack={deletePack}
+                            deletePackList={deletePackList}
+                            showDeletePack={showDeletePack}
+                            deletePackId={pickedDeletePack.packId}
+                            deletePackName={pickedDeletePack.packName}
+                            editPack={editPack}
+                            editPackList={editPackList}
+                            showEditPack={showEditPack}
+                            editPackId={pickedEditPack.packId}
+                            editPackName={pickedEditPack.packName}
+                            learnPack={learnPack}
+                            packs={packs}
+                            isLoading={isLoading}
+                            isShownEditPack={isShownEditPack}
+                            isShownDeletePack={isShownDeletePack}
+                            currentPage={currentPage}
+                            onPageChanged={onPageChanged}
+                            changePackListSize={changePackListSize}
+                        />}
+                    </div>
 
-                    <HeaderPacks/>
-                    {packs && <PacksTable
-                        deletePack={deletePack}
-                        deletePackList={deletePackList}
-                        showDeletePack={showDeletePack}
-                        deletePackId={pickedDeletePack.packId}
-                        deletePackName={pickedDeletePack.packName}
-                        editPack={editPack}
-                        editPackList={editPackList}
-                        showEditPack={showEditPack}
-                        editPackId={pickedEditPack.packId}
-                        editPackName={pickedEditPack.packName}
-                        learnPack={learnPack}
-                        packs={packs}
-                        isLoading={isLoading}
-                        isShownEditPack={isShownEditPack}
-                        isShownDeletePack={isShownDeletePack}
-                        currentPage={currentPage}
-                        onPageChanged={onPageChanged}
-                    />}
                 </span>
             </div>
         </div>
