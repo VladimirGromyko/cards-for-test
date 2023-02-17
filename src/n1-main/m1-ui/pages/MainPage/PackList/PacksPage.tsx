@@ -12,7 +12,7 @@ import {
     addPacksTC, deletePackTC,
     editPackTC, getSearchPackByNameTC,
     pickDeletePackAC,
-    pickEditPackAC, setCurrentPageTC,
+    pickEditPackAC, setCurrentPageTC, setPacksDataAC,
     setPacksDataTC,
     showAddPackAC, showDeletePackAC,
     showEditPackAC,
@@ -161,6 +161,7 @@ export const PacksPage = () => {
     }, [navigate])
 
     const onPageChanged = (page: number) => {
+        // dispatch(setPacksDataAC({page: {currentPage: }}))
         dispatch(setCurrentPageTC({page, pageCount: 0}))
     }
     const changePackListSize =  useCallback((pageCount: number, page: number) => {

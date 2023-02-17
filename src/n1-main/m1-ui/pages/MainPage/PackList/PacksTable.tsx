@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {PackItem} from "./PackItem";
 import {PacksGetResponseDataType} from "../../../../m3-dal/packs-api";
 import l from "../../../common/c7-Loading/loader07.module.css";
@@ -39,9 +39,29 @@ export const PacksTable = ({
                                isShownEditPack, isShownDeletePack,
                                currentPage, onPageChanged, changePackListSize
                            }: PacksTableType) => {
+    // const onScroll = (e:  React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    //     debugger
+    //     console.log(e)
+    // }
+    // const [scroll, setScroll] = useState(0);
+    // const onScroll = useCallback(() => setScroll(Math.round(window.scrollY)), []);
+    // useEffect(() => {
+    //     onScroll();
+    //     window.addEventListener("scroll", onScroll);
+    //     debugger
+    //     console.log(scroll)
+    //     return () => window.removeEventListener("scroll", onScroll);
+    // }, [onScroll]);
+    // useEffect(() => window.scrollTo(0, 1000), []);
+    //
+    // // @ts-ignore
+    // useEffect(() => setTimeout(() => window.scrollTo(0, 1000), 2000), []);
 
     return (
-        <div>
+        <div
+            // onMouseUp={(e) => onScroll(e)}
+            // onMouseDown={(e) => onScroll(e)}
+        >
             {isLoading === "loading" && <div className={l.loader07}></div>}
 
             <ModalEditContainer
@@ -64,7 +84,7 @@ export const PacksTable = ({
 
             <>
 
-                {packs.cardPacks.map((pack) => {
+                {packs?.cardPacks && packs.cardPacks.map((pack) => {
                         return (
 
                             <PackItem key={pack._id}
@@ -79,7 +99,6 @@ export const PacksTable = ({
                 <div className={styles.paginationWrapper}>
                     <Paginator cardPacksTotalCount={packs.cardPacksTotalCount}
                                pageCount={packs.pageCount}
-                               pageSize={10}
                                currentPage={packs.page}
                                onPageChanged={onPageChanged}
                                portionSize={undefined}

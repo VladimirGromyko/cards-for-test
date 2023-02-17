@@ -39,6 +39,7 @@ const LoginPage = () => {
     }
 
     useEffect(() => {
+        debugger
         if (isLoggedIn) {
             navigate(PATH.MAIN)
         } else return

@@ -41,8 +41,6 @@ export const HeaderPacks = () => {
 
 
     return (
-        // <div className={s.wrapper_header}>
-
             <div className={s.wrapper_header} >
                 <div className={s.header_tableItem} onClick={() => sortingPack('name')}>Name
                     <SuperSorting sort={sort} sorting={'name'}/>
@@ -58,6 +56,5 @@ export const HeaderPacks = () => {
                 </div>
                 <div className={s.header_tableItem}>Actions</div>
             </div>
-        // </div>
     )
 }

@@ -62,7 +62,6 @@ export const getAuthUserDataTC = (email: string, password: string, rememberMe: b
     dispatch(loadingAC('loading'))
     authAPI.login(email, password, rememberMe)
         .then(response => {
-                console.log(response.data)
                 dispatch(setAuthUserDataAC(response.data))
             }
         ).catch((e) => {

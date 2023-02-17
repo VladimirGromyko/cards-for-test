@@ -9,9 +9,9 @@ type PackListSizeType = {
 export const PackListSize = ({changePackListSize, currentPage, pageCount, onPageChanged}:PackListSizeType) => {
     const options = [
         {value: '10'},
+        {value: '15'},
         {value: '20'},
         {value: '30'},
-        {value: '40'},
         {value: '50'},
     ];
 
