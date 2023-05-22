@@ -37,3 +37,7 @@
     align-items: center;
     justify-items: center;
 }
+.headerCardsWrapper{
+    display: flex;
+    justify-content: space-between;
+}

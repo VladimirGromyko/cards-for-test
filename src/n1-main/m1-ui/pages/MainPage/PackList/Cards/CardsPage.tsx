@@ -64,21 +64,24 @@ const CardsPage = () => {
 
     return (
         <div className={packsStyle.wrapper}>
-                <div className={commonPacksStyle.TableWrapper}>
-                    <div style={{width: '100%'}}>
+                {/*<div className={commonPacksStyle.TableWrapper}>*/}
+                {/*    <div style={{width: '100%'}}>*/}
                         {isLoading === "loading" && <div className={l.loader07}></div>}
-                    </div>
+                    {/*</div>*/}
                     <div style={{width: '1008px'}}>
-                        <h3>Pack name</h3>
-                        <div className={packsStyle.search}>
-                            <SuperInputText onChange={onSearchInputChange}
-                                            placeholder='Enter cards name for searching'/>
+                        <div className={packsStyle.headerCardsWrapper}>
+                            <h3>Pack name</h3>
+                            <div className={packsStyle.search}>
+                                <SuperInputText onChange={onSearchInputChange}
+                                                placeholder='Enter cards name for searching'/>
+                            </div>
                         </div>
+
                         <HeaderCards getCards={getCards} packId={packId}/>
                         <CardsTable getCards={getCards} packId={packId}/>
 
                     </div>
-                </div>
+                {/*</div>*/}
         </div>
     );
 };

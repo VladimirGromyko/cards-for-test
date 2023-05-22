@@ -15,9 +15,9 @@ export const HeaderCards = ({ getCards, packId, ...props }: CardsTablePropsType)
 
     return (
         <div className={s.wrapper_header}>
-            <div className={s.wrapper_header_table}>
+            {/*<div className={s.wrapper_header_table}>*/}
                 <div className={s.header_tableItem}>Question
-                    <button 
+                    <button
                         className={s.button}
                         onClick={() => sortCards(1, 'question')}>
                             <div className={s.triangle_up}></div>
@@ -30,37 +30,37 @@ export const HeaderCards = ({ getCards, packId, ...props }: CardsTablePropsType)
                 </div>
 
                 <div className={s.header_tableItem}>Answer
-                    <button 
+                    <button
                         className={s.button}
                         onClick={() => sortCards(1, 'answer')}>
                             <div className={s.triangle_up}></div></button>
-                    <button 
+                    <button
                         className={s.button}
                         onClick={() => sortCards(0, 'answer')}>
                             <div className={s.triangle_down}></div></button>
                 </div>
                 <div className={s.header_tableItem}>Updated
-                    <button 
+                    <button
                         className={s.button}
                         onClick={() => sortCards(1, 'updated')}>
                             <div className={s.triangle_up}></div></button>
-                    <button 
+                    <button
                         className={s.button}
                         onClick={() => sortCards(0, 'updated')}>
                             <div className={s.triangle_down}></div></button>
                 </div>
                 <div className={s.header_tableItem}>Grade
-                    <button 
+                    <button
                         className={s.button}
                         onClick={() => sortCards(1, 'grade')}>
                             <div className={s.triangle_up}></div></button>
-                    <button 
+                    <button
                         className={s.button}
                         onClick={() => sortCards(0, 'grade')}>
                             <div className={s.triangle_down}></div></button>
                 </div>
                 <div className={s.header_tableItem}>Actions</div>
-            </div>
+            {/*</div>*/}
         </div>
     )
 }
